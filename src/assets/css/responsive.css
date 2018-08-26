@@ -1,0 +1,605 @@
+@media only screen and (min-width :768px) {
+
+
+
+.signup-sec{ text-align:left; width:270px; margin:0 auto;}
+
+.top-form{ width:350px; margin:6% auto; text-align:center;}
+
+
+.landng-row-content-second ul{ width:85%;}
+
+.people-img{ width:240px;}
+
+.bot-btn-sec{ margin-top:50px;}
+
+.event-left ul li{ text-align:center; padding:30px 0;}
+
+.event-right ul li{ text-align:center; padding:30px 0;}
+
+.event-left{ padding-right:30px; border-right:1px solid #9a9a9e; }
+
+.event-right{ padding-left:30px; border-left:1px solid #9a9a9e; margin-left:-31px; }
+
+.event-img{ width:77px; display:block; margin:0 auto 20px;}
+
+.event-text{ display:inline-block; vertical-align:top;}
+
+.footer ul li a{ font-size:12px;}
+
+/**********************Signup************************/
+
+.input-box-sml{ width:109px;}
+
+/**********************Common-sec************************/
+
+.logo{ text-align:left;}
+
+.top-nav-icon a{ margin:0 7px;}
+
+.top-nav-icon{ text-align:right;}
+
+.header-icon-left{ border-right:1px solid #e4e4e4; padding-right:10px; border-bottom:none; padding-bottom:0;}
+
+.header-icon-left ul li{display:inline-block; vertical-align:middle; border-left:1px solid #e4e4e4; padding:0 7px; margin:0 -4px 0 0; width:auto;}
+
+.header-icon-right{ border-left:1px solid #e4e4e4; margin-left:-31px; padding-left:10px; margin-top:0;}
+
+/**********************Photo and video************************/
+
+.photo-row ul li{ width:22.3%;}
+
+.owl-theme .owl-controls .owl-buttons div{ margin:0 -70px;}
+
+.photo-save-area{ width:280px;}
+
+.photo-slider-sec .owl-prev{ width:55px; height:55px; background-size:100% auto;}
+
+.photo-slider-sec .owl-prev:hover{ width:55px; height:55px;}
+
+.photo-slider-sec .owl-next{ width:55px; height:55px; background-size:100% auto;}
+
+.photo-slider-sec .owl-next:hover{ width:55px; height:55px;}
+
+.private-btn, .save-btn{ width:130px;}
+
+.photo-row ul{ display:block !important;}
+
+.downarrow-mobile{ display:none;}
+
+.edit-popup-photo-vid{ left:-84px; top:-90px;}
+
+.save-btn{ margin-left:5px;}
+
+/********************Photo-upload***************************/
+
+.photo-upload-sec{ width:60%; margin:0 auto 10px;}
+
+
+/**********************Latest-Personal-Details************************/
+
+.cancel-btn{ margin-bottom:0; margin-right:8px;}
+
+/********************Latest-Personal-Details-Tab1***************************/
+
+.personal-detail-medium-box{ width:125px; margin-right:6px; margin-bottom:0;}
+
+.personal-detail-big-box{ width:285px; margin-bottom:0;}
+
+.select-box select{ font-size:12px;}
+
+.personal-bigradio-sec{ width:344px; margin-right:35px; display:inline-block; vertical-align:top; margin-bottom:0; margin-top:10px;}
+
+.personal-radio-outer{ display:inline-block; margin-right:12px; width:auto; margin-bottom:15px;}
+
+.personal-detail-sml-box{width:80px; margin-right:6px; margin-bottom:0;}
+
+.personal-detail-tab-butn-row{ text-align:left;}
+
+/********************Settings***************************/
+
+.general-tab-top-outer ul li{ display:inline-block; vertical-align:top; margin:0 5px;}
+
+.general-tab-top-outer ul li:first-child{ margin-left:0;}
+
+.general-tab-top-outer ul li.pages_active a{ border:none; background:#f4f4f4; border-bottom-left-radius:0; border-bottom-right-radius:0; padding-bottom:15px; border:1px solid #f4f4f4;}
+
+.setting-bot-tab-content .personal-radio-title{ width:auto; vertical-align:middle;}
+
+.setting-bot-tab-content .instruction-title{vertical-align:middle; width:90%;}
+
+.setting-bot-tab-content .personal-radio-btn{ vertical-align:middle;}
+
+.update-btn{ width:355px; margin-left:0;}
+
+.advance-bottom-text .personal-radio-btn{ vertical-align:top;}
+
+.advance-bottom-text .personal-radio-title{ vertical-align:middle;}
+
+/********************Friends***************************/
+
+.friends-sml-img{ width:55px; display:inline-block; margin-bottom:0;}
+
+.friends-sml-text{ width:220px; display:inline-block; vertical-align:top; text-align:left; margin-left:15px;}
+
+/********************Online-user***************************/
+
+.online-user-sml-text{ width:260px;}
+
+.online-user-right-box{ margin-top:40px;}
+
+.online-user-big-select-box{ width:230px;}
+
+/*********************User-Activity**************************/
+
+.user-right-animated-circle-sec{ margin-top:40px;}
+
+.user-activity-prof-img{ display:inline-block; vertical-align:top; margin-right:20px; margin-bottom:0;}
+
+.user-activity-text-sec{ display:inline-block; vertical-align:top; width:85%;}
+
+/*********************Message**************************/
+
+.message-bot-row{ padding:25px;}
+
+.msg-user-img{ display:inline-block; vertical-align:top; margin-right:15px; margin-bottom:0;}
+
+.msg-top-text{ display:inline-block; vertical-align:top; text-align:left;}
+
+.msg-action-drop{ width:160px; margin-left:10px;}
+
+.msg-butn-area{ text-align:right;}
+
+.msg-butn-area a{ margin-top:0;}
+
+/*********************profile**************************/
+
+.profile-left-img{ display:inline-block; vertical-align:top;}
+
+.profile-top-text{ text-align:left; display:inline-block; vertical-align:top; padding-left:20px; width:65%;}
+
+.profile-left-photouploadsec{ text-align:center;}
+
+.profile-photoupload{margin:0 30px 0 30px;}
+
+.profile-photoupload strong{ width:80px; height:80px; line-height:80px;}
+
+.profile-edit-box{ margin:0 30px;}
+
+.profile-input-outer{ width:79%;} 
+
+.profile-input-text{ width:76%;}
+
+.profile-input-btn{ margin:0 0 0 10px;}
+
+.profile-post-btn{width:28%;}
+
+.profile-content-btn{width:28%;}
+
+.profile-img-btn{ width:28%;}
+
+.profile-setting-btn{ width:9%;}
+
+.profile-post-row ul li{ text-align:center;}
+
+.profile-post-img{ border-radius:100%; display:inline-block; margin-bottom:0; vertical-align:top;}
+
+.profile-post-text{ width:78%; display:inline-block; vertical-align:top; padding-left:15px; text-align:left;}
+
+.profile-post-row ul ul{ margin-left:24%;}
+
+.profile-comment-img{ margin-bottom:0;}
+
+.profile-comment-box .profile-input-outer{ width:81%;}
+
+.interested-sec ul{ text-align:center;  padding:0;}
+
+.interested-sec ul li{ display:inline-block; vertical-align:middle; margin:0 3px;}
+
+.interested-sec ul li p{ font-size:18px;} 
+
+.profile-hotlist-sec ul{ text-align:center; margin:0; padding:0; text-align:center;}
+
+.hotlist-box{ width:48%; margin:0 3px 10px;}
+
+.profile-hotlist-sec .friends-sml-text{ width:200px; text-align:left; margin:0 10px 0 10px;}
+
+.profile-hotlist-sec .online-user-icon-sec{ width:auto;}
+
+.profile-post-btn{ width:28%; vertical-align:middle;}
+
+.interested-gallery-outer{ min-height:268px;}
+
+.profile-sml-post-text{ width:100%;}
+
+.user-timeline-textinput-left{ width:100%;}
+
+/*************************User-Timeline******************************/
+
+.similar-prof-sec ul li {
+  width:17.5%;
+}
+
+.user-timeline-left-btn{ margin:3px; padding:8px 23px;}
+
+.usertimeline-send-btn{ width:127px;}
+
+.visit-user{ width:auto; text-align:left;}
+
+.modal-body{ padding:0;}
+
+.modal-dialog{ width:750px;}
+
+.modal-left{ width:428px;}
+
+.modal-right{ width:319px; border-top-right-radius: 10px; margin-left:-3px;  border-bottom-right-radius: 10px; border-bottom-left-radius: 0;}
+
+.modal-top-text-icon{ width:66%; padding-left:10px;}
+
+.modal-row .profile-post-text{ width:66%; padding-left:8px;}
+
+.modal-left-image-outer{border-top-left-radius: 10px; border-bottom-left-radius: 10px;}
+
+.modal-left-image-outer img{border-top-left-radius: 10px; border-bottom-left-radius: 10px;}
+
+/**********************************Message-Friend-sec***********************************/
+
+.msg-frnd-txtareaouter{ width:455px;}
+
+/**********************************Search***********************************/
+
+.search-detail-tab-rowlst-row .save-btn{ width:350px; margin-top:5px;}
+
+.search-user-input-outer{ width:350px; display:inline-block; vertical-align:top;}
+
+.search-medium-search-outer{ width:210px; margin-right:8px; margin-bottom:10px;}
+
+/*********************nearby-popup********************************/
+
+.near-by-pop-outer{ left:-65px;}
+
+
+/*********************Message-Chat********************************/
+
+.msg-chat-user{ display:inline-block; vertical-align:top;}
+
+.msg-text-outer{ width:85%; display:inline-block; vertical-align:top;}
+
+.msg-chat-type-sec{ display:inline-block; vertical-align:top; width:84%; display:inline-block; vertical-align:top;}
+
+.msg-type-textarea{ width:90%; margin:0;}
+
+.msg-box-sec .save-btn{ display:inline-block; vertical-align:top; margin-left:8px; margin-top:0; width:90px; height:130px;}
+
+/*********************Event-Selected********************************/
+
+.event-select-icon-sec ul li{ width:auto; margin:0 25px;}
+
+.event-select-comment-row .profile-input-outer{ width:82%;}
+
+}
+
+@media only screen and (min-width :992px) {
+
+
+.landing-row{display:-webkit-flex;
+    display:-webkit-box;
+    display:-moz-flex;
+    display:-moz-box;
+    display:-ms-flexbox;
+    display:flex;
+    flex-direction:row;}
+
+.landng-row-content-first{ padding:30px 0 90px;}
+
+.landng-row-content{ float:none; margin:0; padding:0; -webkit-flex:1;
+    -webkit-box-flex:1;
+    -moz-flex:1;
+    -moz-box-flex:1;
+    -ms-flex:1;
+    flex:1; width:50%;}
+
+
+.landing-row-image{float:none; margin:0; padding:0; -webkit-flex:1;
+    -webkit-box-flex:1;
+    -moz-flex:1;
+    -moz-box-flex:1;
+    -ms-flex:1;
+    flex:1; width:50%;
+	 }
+
+.landing-row-first-bg{ background:url(../images/landing-first-bg.jpg) left top no-repeat; -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; min-height:630px;}
+
+.landing-row-second-bg{background:url(../images/landing-second-bg.jpg) left top no-repeat; -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; min-height:630px;}
+
+
+.landing-row-image-bg{ display:none;}
+
+.signup-sec{ text-align:left; width:270px; margin-left:25%;}
+
+.top-form{ width:350px; margin:14% 0 0 10%; text-align:center;}
+
+.landng-row-content ul{ width:75%;}
+
+.join-btn{ left:30%;}
+
+.people-sec h3{ margin:0 34px 30px;}
+
+.people-box{ width:197px; margin:0 auto; text-align:left;}
+
+.people-img{ width:145px;}
+
+.event-left ul li{ text-align:center; padding:30px 0;}
+
+.event-right ul li{ text-align:center; padding:30px 0;}
+
+.event-left{ padding-right:50px; border-right:1px solid #9a9a9e; }
+
+.event-right{ padding-left:50px; border-left:1px solid #9a9a9e; margin-left:-31px; }
+
+.footer ul li a{ font-size:14px;}
+
+/**********************have-Account************************/
+
+.have-account-sec{width:350px; margin:30px 0 0 0; text-align:center; text-align:center;}
+
+
+/**********************Common-sec************************/
+
+.header-icon-left ul li{ padding:0 10px;}
+
+.header-icon-right{ padding-left:50px;}
+
+
+/**********************Event************************/
+
+.pignose-calendar .pignose-calendar-unit a{ width:2.2em; height:2.2em; line-height:2.2em;}
+
+.pignose-calendar .pignose-calendar-body{ padding:1.2em;}
+
+.event-img-calendar{ display:inline-block; vertical-align:top; margin:0 20px 0 0; display:inline-block; vertical-align:top;}
+
+.event-text-calendar{ width:80%; display:inline-block; vertical-align:top;}
+
+/**********************Photo and video************************/
+
+.photo-row ul li{ width:22.8%;}
+
+.edit-popup-photo-vid{ left:-84px; top:-70px;}
+
+/********************Photo-upload***************************/
+
+.photo-upload-sec{ width:70%; margin:0 auto 10px;}
+
+/********************Latest-Personal-Details-Tab1***************************/
+
+.latest-personal-detail-row{ text-align:left;}
+
+.personal-detail-big-box{ width:350px;}
+
+.personal-detail-medium-box{ width:150px;}
+
+.select-box select{ font-size:15px;}
+
+.personal-bigradio-sec, .personal-radio-outer{ margin-bottom:0;}
+
+/********************Setting***************************/
+
+.setting-bot-tab-content{ padding:25px;}
+
+.generaltab-mid{ min-height:666px;}
+
+.generaltab-right{ margin:0;}
+
+.general-tab-row h5{ margin-bottom:20px;}
+
+/********************Friends***************************/
+
+.friends-tab-content, .addevent-tab-content{ padding:25px;}
+
+/********************Online-User***************************/
+
+.online-user-big-select-box{ width:190px;}
+
+/********************User-Activity***************************/
+
+.user-activity-text-sec{ width:81%;}
+
+/********************My Profile***************************/
+
+.profile-left-img{ display:block; margin:0 auto 15px;}
+
+.profile-top-text{ text-align:center; display:block; width:100%; padding:0;}
+
+.profile-left-photouploadsec{ text-align:left;}
+
+.profile-photoupload{margin: 0 30px 0 50px;}
+
+.profile-input-outer{ width:67%;} 
+
+.profile-hotlist-sec .friends-sml-text{ width:116px; text-align:left; margin:0 10px 0 10px;}
+
+.profile-right-photo-vid-sec{ display:block;}
+
+.interested-gallery-outer{ min-height:178px;}
+
+.user-timeline-textinput-left{ width:100%;}
+
+.hotlist-box{ width:100%;}
+
+.profile-hotlist-sec .friends-sml-text{ width:280px;}
+
+/********************User Timeline***************************/
+
+.similar-prof-sec ul li {
+  width:21.5%;
+}
+
+.visit-user{ width:100%; text-align:center;}
+
+.modal-dialog{ width:900px;}
+
+.modal-right{ padding:20px 20px 0 20px;  }
+
+.modal-left{ width:514px;}
+
+.modal-left-video-outer{ border-bottom-left-radius: 10px;}
+
+.modal-right{ width:383px; margin-left:-3px; min-height:452px;}
+
+.modal-top-text-icon{ width:66%; padding-left:10px; text-align:left;}
+
+.modal-row .profile-post-text{ width:70%; padding-left:10px;}
+
+/**********************************Message-Friend-sec***********************************/
+
+.msg-frnd-txtareaouter{ width:655px;}
+
+/**********************************Search***********************************/
+
+.search-detail-tab-row .personal-bigradio-sec{ margin-bottom:14px;}
+
+/*********************nearby-popup********************************/
+
+.near-by-pop-outer{ left:-5px;}
+
+.msg-text-outer{ width:88%;}
+
+/*********************Message-Chat********************************/
+
+.msg-chat-type-sec{ width:89%;}
+
+
+/**********************************Event-Select***********************************/
+
+.event-select-icon-sec ul li{ width:35%; margin: 0 21px 25px;}
+
+}
+
+
+ @media only screen and (min-width :1300px) {
+
+.event-left ul li{ text-align:left; padding:15px 0;}
+
+.event-right ul li{ text-align:left; padding:15px 0;}
+
+.event-img{ display:inline-block; vertical-align:middle; margin-right:20px; margin-bottom:0;}
+
+.event-left{ padding-right:80px;}
+
+.event-right{ padding-left:80px;}
+
+/**********************Common-sec************************/
+
+.inner-footer-sec ul{ text-align:left;}
+
+.inner-footer-sec ul li:nth-child(7){ border:none;}
+
+
+/**********************Event************************/
+
+.pignose-calendar .pignose-calendar-unit a{ width:2.6em; height:2.6em; line-height:2.6em;}
+
+.inner-footer-sec p{ text-align:left; padding:0 10px;}
+
+/**********************Photo and video************************/
+
+.photo-row ul li{ width:18.3%;}
+
+/********************Latest-Personal-Details-Tab1***************************/
+
+.personal-detail-medium-box{ width:180px;}
+
+/********************Setting general***************************/
+
+.generaltab-left{ padding-right:19px;  border-right:1px solid #e1e1e1; min-height:700px;}
+
+/*.generaltab-mid{  margin-left:-10px; }*/
+
+.generaltab-right{ padding-left:19px; border-left:1px solid #e1e1e1; min-height:700px;}
+
+.generaltab-left .personal-radio-outer{ margin-right:8px;}
+
+.setting-medium-drop{ width:155px;}
+
+.setting-medium-drop-right{ margin:0 0 0 9px;}
+
+/***************************Add-Events**************************************/
+
+.addevent-left-sec{ width:458px;}
+
+.addevent-right-sec{ width:458px; margin:0; padding-left:15px;}
+
+/***************************Online-user**************************************/
+
+.online-user-big-select-box{ width:230px;}
+
+/********************User-Activity***************************/
+
+.user-activity-text-sec{ width:85%;}
+
+/********************My Profile***************************/
+
+.profile-left-img{ display:inline-block; vertical-align:top;}
+
+.profile-top-text{ text-align:left; display:inline-block; vertical-align:top; padding-left:20px; width:65%;}
+
+.profile-input-outer{ width:73%;}
+
+.interested-gallery-outer{ min-height:209px;}
+
+.user-timeline-textinput-left{ width:100%;}
+
+.hotlist-box{ width:48%;}
+
+.profile-hotlist-sec .friends-sml-text{ width:116px;}
+
+/********************User Timeline***************************/
+
+.similar-prof-sec ul li {
+  width:17.5%;
+}
+
+.user-timeline-left-btn{ margin:0; padding:8px 12px;}
+
+.visit-user{ width:auto; text-align:left;}
+
+.modal-dialog{ width:1100px;}
+
+.modal-left{ width:724px;}
+
+.modal-right {
+  min-height: 637px;
+  width: 373px;
+  padding-top:70px;
+}
+
+/**********************************Message-Friend-sec***********************************/
+
+.msg-frnd-txtareaouter{ width:855px;}
+
+/**********************************Search***********************************/
+
+.search-detail-tab-row .personal-bigradio-sec{ margin-bottom:0; }
+
+.search-fourth-item{ margin-top:20px;}
+
+.search-medium-search-outer{ width:170px; margin-bottom:0;}
+
+/**********************************Message-Chat***********************************/
+
+.msg-text-outer{ width:90%;}
+
+.msg-type-textarea{ width:94%;}
+
+/**********************************Event-Select***********************************/
+
+.event-select-icon-sec ul li{ width:auto; margin:0 25px;}
+
+}
