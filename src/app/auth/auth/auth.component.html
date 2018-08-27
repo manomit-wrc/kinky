@@ -43,43 +43,70 @@
       <div class="next-div">
         <div class="top-form">
           <h5>Sign Up</h5>
-          <div class="main-form-row">
-            <label>Username</label>
-            <div class="input-box">
-              <input type="text" class="input-form" placeholder="John Doe">
-              <i class="fa fa-check" aria-hidden="true"></i> </div>
-          </div>
-          <div class="main-form-row">
-            <label>Password</label>
-            <div class="input-box">
-              <input type="password" class="input-form" value="Lorem">
-              <i class="fa fa-check" aria-hidden="true"></i> </div>
-          </div>
-          <div class="main-form-row">
-            <label>Email</label>
-            <div class="input-box">
-              <input type="text" class="input-form" placeholder="example@mail.com">
-              <i class="fa fa-check" aria-hidden="true"></i> </div>
-          </div>
-          <div class="main-form-row">
-            <label>Date of Birth</label>
-            <div class="input-box-sml">
-              <input type="text" class="input-form" placeholder="DD">
+          <form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
+            <div class="main-form-row">
+              <label>Username</label>
+              <div class="input-box">
+                <input type="text" class="input-form" 
+                  formControlName="username" placeholder="Username">
+                  <i *ngIf="signupSubmitted && !signup.username.errors && signup.username.valid" class="fa fa-check" aria-hidden="true"></i>
+                  <i *ngIf="signupSubmitted && signup.username.errors && signup.username.invalid" class="fa fa-times" aria-hidden="true"></i>
+              </div>
+              <div *ngIf="signupSubmitted && signup.username.errors" class="invalid-feedback">
+                  <span *ngIf="signup.username.errors.required">Username is required</span>
+              </div>  
+             
             </div>
-            <div class="input-box-sml">
-              <input type="text" class="input-form" placeholder="MM">
+            <div class="main-form-row">
+              <label>Password</label>
+              <div class="input-box">
+                <input type="password" class="input-form" 
+                  placeholder="Password" formControlName="password">
+                  <i *ngIf="signupSubmitted && !signup.password.errors && signup.password.valid" class="fa fa-check" aria-hidden="true"></i>
+                  <i *ngIf="signupSubmitted && signup.password.errors && signup.password.invalid" class="fa fa-times" aria-hidden="true"></i>
+              </div>
+              <div *ngIf="signupSubmitted && signup.password.errors" class="invalid-feedback">
+                  <span *ngIf="signup.password.errors.required">Password is required</span>
+              </div> 
             </div>
-            <div class="input-box-sml">
-              <input type="text" class="input-form" placeholder="YYYY">
+            <div class="main-form-row">
+              <label>Email</label>
+              <div class="input-box">
+                <input type="text" class="input-form" 
+                  placeholder="example@mail.com"
+                  formControlName="email"
+                  >
+                  <i *ngIf="signupSubmitted && !signup.email.errors && signup.email.valid" class="fa fa-check" aria-hidden="true"></i>
+                  <i *ngIf="signupSubmitted && signup.email.errors && signup.email.invalid" class="fa fa-times" aria-hidden="true"></i>
+              </div>
+              <div *ngIf="signupSubmitted && signup.email.errors" class="invalid-feedback">
+                  <span *ngIf="signup.email.errors.required">Email is required</span>
+              </div> 
+              <div *ngIf="signupSubmitted && signup.email.errors" class="invalid-feedback">
+                  <span *ngIf="signup.email.errors.email">Invalid email</span>
+              </div> 
             </div>
-          </div>
-          <div class=" signup-creat-btn">
-            <!--<input class="form-submit-btn" value="Create Account" type="submit">-->
-            <a href="settings.html" class="form-submit-btn">Create Account</a>
-          </div>
-          <div class="agree-checkbox">
-            <input type="checkbox" class="checkbtn-agree" value="">
-            <span>I agree to the <a href="#">terms & conditions</a></span> </div>
+            <div class="main-form-row">
+              <label>Date of Birth</label>
+              <div class="input-box-sml">
+                <input type="number" class="input-form" placeholder="1" formControlName="DD">
+              </div>
+              <div class="input-box-sml">
+                <input type="number" class="input-form" placeholder="1" formControlName="MM">
+              </div>
+              <div class="input-box-sml">
+                <input type="number" class="input-form" placeholder="YYYY" formControlName="YYYY">
+              </div>
+            </div>
+            <div class=" signup-creat-btn">
+              <!--<input class="form-submit-btn" value="Create Account" type="submit">-->
+              <button [disabled]="signupLoading" class="form-submit-btn">Create Account</button>
+            </div>
+            <div class="agree-checkbox">
+              <input type="checkbox" class="checkbtn-agree" value="">
+              <span>I agree to the <a href="#">terms & conditions</a></span> 
+            </div>
+          </form>
         </div>
       </div>
     </div>

@@ -12,8 +12,11 @@ import { Router } from '@angular/router';
 export class AuthComponent implements OnInit {
 
   loginForm: FormGroup;
+  signupForm: FormGroup;
   loading = false;
+  signupLoading = false;
   submitted = false;
+  signupSubmitted = false;
   error = '';
 
   constructor( 
@@ -27,9 +30,19 @@ export class AuthComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.signupForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      DD: ['', Validators.compose([Validators.required, Validators.maxLength(2), Validators.min(1), Validators.max(31)])],
+      MM: ['', Validators.compose([Validators.required, Validators.maxLength(2), Validators.min(1), Validators.max(12)])],
+      YYYY: ['', Validators.compose([Validators.required, Validators.maxLength(4)])]
+    })
   }
 
   get f() { return this.loginForm.controls; }
+
+  get signup() { return this.signupForm.controls; }
 
   onLoginSubmit() {
     this.submitted = true;
@@ -44,6 +57,14 @@ export class AuthComponent implements OnInit {
     .subscribe(data => {
       this.router.navigate(['/settings']);
     })
+  }
+
+  onSignupSubmit() {
+    this.signupSubmitted = true;
+    if(this.signupForm.invalid) {
+      console.log(this.signupForm);
+      return;
+    }
   }
 
 }
