@@ -29,9 +29,9 @@
               <button>CD/TV/TS</button>
             </div>
           </div>
-          
-          
-          
+
+
+
         </div>
         <button class="next form-submit-btn">Next</button>
         <div class="have-account-sec">
@@ -116,22 +116,23 @@
         <div class="signin-outer">
           <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
               <div class="main-form-row">
+                  <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
                 <label>Username</label>
                 <div class="form-group"
                 [ngClass]="{ 'has-error': submitted && f.username.errors || f.username.invalid && f.username.dirty,
                               'has-success': submitted && !f.username.errors || f.username.valid }"
                 >
                   <input type="text" formControlName="username"
-                     class="form-control" 
+                     class="form-control"
                      placeholder="Username"
-                     
+
                   >
                   <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                       <div *ngIf="f.username.errors.required">Username is required</div>
                   </div>
-                  <span *ngIf="f.username.errors && f.username.dirty" class="glyphicon glyphicon-remove form-control-feedback"></span> 
-                  <span *ngIf="!f.username.errors && f.username.dirty" class="glyphicon glyphicon-ok form-control-feedback"></span> 
-                  
+                  <span *ngIf="f.username.errors && f.username.dirty" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                  <span *ngIf="!f.username.errors && f.username.dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+
                 </div>
               </div>
               <div class="main-form-row">
@@ -141,14 +142,14 @@
                               'has-success': submitted && !f.password.errors || f.password.valid }"
                 >
                   <input type="password" formControlName="password"
-                     class="form-control" 
+                     class="form-control"
                      placeholder="Password"
                   >
                   <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                       <div *ngIf="f.password.errors.required">Password is required</div>
                   </div>
-                  <span *ngIf="f.password.errors && f.password.dirty" class="glyphicon glyphicon-remove form-control-feedback"></span> 
-                  <span *ngIf="!f.password.errors && f.password.dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>  
+                  <span *ngIf="f.password.errors && f.password.dirty" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                  <span *ngIf="!f.password.errors && f.password.dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
               </div>
                 <div class="forgot-pass-row">
                   <ul class="form-tab">
@@ -163,7 +164,7 @@
           </form>
 
         </div>
-        
+
       </div>
     </div>
     <div id="password">

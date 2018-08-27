@@ -18,11 +18,13 @@ export class AuthComponent implements OnInit {
   submitted = false;
   signupSubmitted = false;
   error = '';
+  errorMsg:any;
+  closeAlert = false;
 
-  constructor( 
-    private formBuilder: FormBuilder, 
+  constructor(
+    private formBuilder: FormBuilder,
     private auth: AuthenticationService,
-    private router: Router 
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -38,6 +40,8 @@ export class AuthComponent implements OnInit {
       MM: ['', Validators.compose([Validators.required, Validators.maxLength(2), Validators.min(1), Validators.max(12)])],
       YYYY: ['', Validators.compose([Validators.required, Validators.maxLength(4)])]
     })
+
+
   }
 
   get f() { return this.loginForm.controls; }
@@ -55,7 +59,19 @@ export class AuthComponent implements OnInit {
     this.auth.login(this.f.username.value, this.f.password.value)
     .pipe(first())
     .subscribe(data => {
-      this.router.navigate(['/settings']);
+      if(data.code!='200'){
+        this.loading = false;
+          this.errorMsg = data.message;
+          setTimeout(() => {
+            this.closeAlert = true;
+            this.errorMsg ="";
+            console.log(this.closeAlert);
+           },1500);
+           this.closeAlert = false;
+
+      }else{
+        this.router.navigate(['/settings']);
+      }
     })
   }
 
