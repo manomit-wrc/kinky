@@ -1934,3 +1934,5 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', end
 .event-select-btn span{display:inline-block; vertical-align:middle; margin-left:6px;}
 
 .event-select-btn:hover{ color:#872345; border:1px solid #872345;}
+
+.invalid-feedback { color: #a94442; font-size: 14px; font-weight: bold; }
