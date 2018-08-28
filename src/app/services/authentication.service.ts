@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import {AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -31,12 +33,10 @@ export class AuthenticationService {
 
     }
 
-    user_details() {
+    user_details(): Observable<any> {
       return this.http.post<any>(`http://localhost:9000/api/users/user-details`, {})
       .pipe(map(user => {
-          // login successful if there's a jwt token in the response
-
-          return user;
+          return of(user); // create own observable
       }));
     }
 

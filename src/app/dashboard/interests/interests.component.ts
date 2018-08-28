@@ -7,11 +7,14 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class InterestsComponent implements OnInit {
   @Input() userObj: any ;
+  email: string = '';
   constructor() { }
 
   ngOnInit() {
-    alert("In Child component");
-    console.log(this.userObj);
+    this.userObj.subscribe(data => {
+      
+      this.email = data.value.info.email;
+    })
   }
 
 }

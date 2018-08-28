@@ -2,6 +2,7 @@ import { Component,  OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -9,26 +10,17 @@ import { Router } from '@angular/router';
 })
 export class SettingsComponent implements OnInit {
 
-  details: any;
-  userObj: any;
+  details$: Observable<any>;
+  
   constructor(
     private auth: AuthenticationService,
     private router: Router
   ) { }
 
-  ngOnInit() {
-    this.userObj = {
-      key: 'value'
-    };
-    alert("In Parent Component");
-
-    this.auth.user_details()
-    .subscribe(data => {
-     this.details = data.info;
-
-    });
-
-
+  async ngOnInit() {
+   
+    this.details$ = this.auth.user_details();
+    
   }
 
 }
