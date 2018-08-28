@@ -8,10 +8,10 @@
       <ul class="form-tab">
         <li><a href="#signup"><img src="/assets/images/signup-icon.png" alt=""><span>Sign Up</span></a>|</li>
         <li class="pages_active"><a href="#signin"><span>Sign In</span></a> </li>
-        <li><a href="#password" class="forgot">Forgotten details</a></li>
+        <li><a href="#password"  class="forgot">Forgotten details</a></li>
       </ul>
     </div>
-    <div id="signup">
+    <div id="signup" style="display:none;">
       <div class="top-form"
       [ngStyle]="{'display': isShow ? 'none' : 'block'}"
       >
@@ -121,7 +121,7 @@
       </div>
     </div>
     <div id="signin">
-      <div class="top-form">
+      <div class="top-form" >
         <h5>Sign in</h5>
         <div class="signin-outer">
           <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">

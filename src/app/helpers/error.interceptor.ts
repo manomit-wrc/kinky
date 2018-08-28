@@ -14,7 +14,6 @@ export class ErrorInterceptor implements HttpInterceptor {
             if (err.status === 401) {
                 
                 this.authenticationService.logout();
-                location.reload(true);
             }
             
             const error = err.error.message || err.statusText;
@@ -22,5 +21,5 @@ export class ErrorInterceptor implements HttpInterceptor {
         }))
 
     }
-    }
 }
+

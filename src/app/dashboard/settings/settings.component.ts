@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class SettingsComponent implements OnInit {
 
   details$: Observable<any>;
+  tab: string = 'tab1';
   
   constructor(
     private auth: AuthenticationService,
@@ -21,6 +22,10 @@ export class SettingsComponent implements OnInit {
    
     this.details$ = this.auth.user_details();
     
+  }
+
+  displayTab(value) {
+    this.tab = value;
   }
 
 }

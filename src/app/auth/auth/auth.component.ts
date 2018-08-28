@@ -4,6 +4,7 @@ import { AuthenticationService } from '../../services';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AlertsService } from 'angular-alert-module';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-auth',
@@ -32,6 +33,7 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -44,8 +46,16 @@ export class AuthComponent implements OnInit {
       MM: ['', Validators.compose([Validators.required, Validators.maxLength(2), Validators.min(1), Validators.max(12)])],
       YYYY: ['', Validators.compose([Validators.required, Validators.maxLength(4), Validators.max(2018)])]
     })
+    try {
+      const decoded = jwt_decode(localStorage.getItem('token'));
+      if(decoded) {
+        this.router.navigate(['settings']);
+      }
+    }
+    catch(error) {
 
-
+    }
+    
   }
 
   get f() { return this.loginForm.controls; }
@@ -89,7 +99,7 @@ export class AuthComponent implements OnInit {
            this.closeAlert = false;
 
       } else {
-        this.router.navigate(['/settings']);
+        this.router.navigate(['settings']);
       }
     });
   }

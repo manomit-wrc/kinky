@@ -27,13 +27,10 @@ $(function() {
 
 
 /***************Tab***********************/
-
 $(document).ready(function () {
-				$('.form-tab').tabify();
-			
-			});
+    $('.form-tab').tabify();
 
-
+});
 
 
 /***************Scroll***********************/
