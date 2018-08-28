@@ -15,223 +15,31 @@
             <div class="row">
               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="generaltab-left">
-                  <div class="general-tab-row">
-                    <h5>Your Interests</h5>
-                  </div>
-                  <div class="general-tab-row">
-                    <label>I am primarily looking for</label>
-                    <div>
-                      <div class="personal-radio-outer">
-                        <input class="personal-radio-btn" value="" name="lookingfor" type="radio">
-                        <span class="personal-radio-title">Male</span></div>
-                      <div class="personal-radio-outer">
-                        <input class="personal-radio-btn" value="" name="lookingfor" type="radio">
-                        <span class="personal-radio-title">Female</span></div>
-                      <div class="personal-radio-outer">
-                        <input class="personal-radio-btn" value="" name="lookingfor" type="radio">
-                        <span class="personal-radio-title">Couple</span></div>
-                      <div class="personal-radio-outer">
-                        <input class="personal-radio-btn" value="" name="lookingfor" type="radio">
-                        <span class="personal-radio-title">CD / TV / TS</span></div>
-                    </div>
-                  </div>
-                  <div class="general-tab-row">
-                    <label>Age Range</label>
-                    <div class="setting-sml-drop select-box">
-                      <select>
-                        <option>18</option>
-                      </select>
-                    </div>
-                    <div class="to">To</div>
-                    <div class="setting-sml-drop select-box">
-                      <select>
-                        <option>18</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="general-tab-row">
-                    <label>Within</label>
-                    <div class="general-dropdown">
-                      <select>
-                        <option>10miles\16km</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="general-tab-row">
-                    <label>Of</label>
-                    <div class="setting-medium-drop select-box">
-                      <select>
-                        <option>USA</option>
-                      </select>
-                    </div>
-                    <div class="setting-medium-drop setting-medium-drop-right select-box">
-                      <select>
-                        <option>Tucson, Arizona</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="general-tab-row">
-                    <label>Prevent contact from members who</label>
-                  </div>
-                  <div class="general-tab-row">
-                    <div class="personal-full-with-area">
-                      <input class="personal-radio-btn" value="" name="contactmember" type="radio">
-                      <span class="personal-radio-title"><strong>Don't match my interests</strong></span> </div>
-                    <div class="personal-full-with-area">
-                      <input class="personal-radio-btn" value="" name="contactmember" type="radio">
-                      <span class="personal-radio-title"><strong>Live in another country</strong></span> </div>
-                    <div class="personal-full-with-area">
-                      <input class="personal-radio-btn" value="" name="contactmember" type="radio">
-                      <span class="personal-radio-title"><strong>Offer Paid Services</strong></span> </div>
-                  </div>
-                  <!--<div class="general-tab-row">
-                    <input class="save-btn update-btn" value="Update" type="submit">
-                  </div>-->
-                  <div class="general-tab-row">
-                    <label>Site Appearance</label>
-                  </div>
-                  <div class="general-tab-row">
-                    <div class="personal-full-with-area">
-                      <input class="personal-radio-btn" value="" type="radio" checked>
-                      <span class="personal-radio-title"><strong>Allow explicit content</strong></span> </div>
-                  </div>
-                  <div class="general-tab-row">
-                    <input class="save-btn update-btn" value="Update" type="submit">
-                  </div>
+                 <app-interests></app-interests>
                 </div>
               </div>
               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="generaltab-mid">
-                  <div class="general-tab-row">
-                    <label>Site language</label>
-                    <div class="general-dropdown">
-                      <select>
-                        <option>English</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="general-tab-row">
-                    <label>Time Zone</label>
-                    <div class="general-dropdown">
-                      <select>
-                        <option>UTC +7:00</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="general-tab-row">
-                    <label>Email</label>
-                    <div class="general-tick">
-                      <input type="text" class="general-tab-text" value="maninactionscript@gmail.com"  disabled>
-                    </div>
-                  </div>
-                  <div class="general-tab-row">
-                    <label>(Phone number is optional and will not be visible on your profile)</label>
-                    <div class="general-cross">
-                      <input type="text" class="general-tab-text" value="">
-                    </div>
-                  </div>
-                  <div class="general-tab-row">
-                    <input class="save-btn update-btn" value="Update" type="submit">
-                  </div>
-                  <div class="general-tab-row change-pass-heading">
-                    <h5>Change Password</h5>
-                  </div>
-                  <div class="general-tab-row">
-                    <label>(Must be between 5 and 20 characters long)</label>
-                    <div class="general-textarea">
-                      <input class="general-tab-text" value="Lorem" type="password">
-                    </div>
-                  </div>
-                  <div class="general-tab-row">
-                    <label>Retype new password</label>
-                    <div class="general-textarea">
-                      <input class="general-tab-text" value="Lorem" type="password">
-                    </div>
-                  </div>
-                  <div class="general-tab-row">
-                    <input class="save-btn update-btn" value="Change Password" type="submit">
-                  </div>
+                  <app-siteconfigure></app-siteconfigure>
+                  <app-change-password></app-change-password>
                 </div>
               </div>
               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="generaltab-right">
-                  <div class="general-tab-row"> <strong>Switch account</strong><br>
-                    <span>(Only for applicable for couple accounts)</span> </div>
-                  <div class="general-tab-row">
-                    <div class="personal-full-with-area">
-                      <input class="personal-radio-btn" value="" name="switchaccount" type="radio">
-                      <span class="personal-radio-title"><strong>You want use as Single female ?</strong></span> </div>
-                    <div class="personal-full-with-area">
-                      <input class="personal-radio-btn" value="" name="switchaccount" type="radio">
-                      <span class="personal-radio-title"><strong>You want use as Single male ?</strong></span> </div>
-                  </div>
-                  <div class="general-tab-row">
-                    <input class="save-btn update-btn" value="Update" type="submit">
-                  </div>
-                  <div class="general-tab-row"> <strong>Delete account</strong><br>
-                    <span>Why you want to delete account ?</span> </div>
-                  <div class="general-tab-row">
-                    <div class="personal-full-with-area">
-                      <input class="personal-radio-btn" value="" name="deleteaccount" type="radio">
-                      <span class="personal-radio-title"><strong>You unable for find your match people?</strong></span> </div>
-                    <div class="personal-full-with-area">
-                      <input class="personal-radio-btn" value="" name="deleteaccount" type="radio">
-                      <span class="personal-radio-title"><strong>You aren't anymore like this lifestyle?</strong></span> </div>
-                    <div class="personal-full-with-area">
-                      <input class="personal-radio-btn" value="" name="deleteaccount" type="radio">
-                      <span class="personal-radio-title"><strong>Other Reason</strong></span> </div>
-                  </div>
-                  <div class="general-tab-row">
-                    <textarea class="general-tab-textarea"></textarea>
-                  </div>
-                  <div class="general-tab-row">
-                    <input class="cancel-btn" value="Delete My Account" type="submit">
-                  </div>
+               <app-switchaccount></app-switchaccount>
+                 <app-deleteaccount></app-deleteaccount>
                 </div>
               </div>
             </div>
           </div>
           <div id="tab2">
-            <h4>Alerts</h4>
-            <div class="personal-full-with-area">
-              <input class="personal-radio-btn" value="" type="radio">
-              <span class="personal-radio-title"><strong>Please email me discounts, weekly newsletter and important updates about the site.</strong></span> </div>
-            <div class="personal-full-with-area">
-              <input class="personal-radio-btn" value="" type="radio">
-              <span class="personal-radio-title"><strong>Please email me when I receive a new message.</strong></span> </div>
-            <div class="personal-full-with-area">
-              <input class="personal-radio-btn" value="" type="radio">
-              <span class="personal-radio-title"><strong>Please notify me of activity from users with Promotions enabled.</strong></span> </div>
-            <input type="submit" class="save-btn update-btn" value="Update">
+           <app-alerts></app-alerts>
           </div>
           <div id="tab3">
             <h4>Advanced</h4>
             <div class="more-setting-top">
-              <div class="setting-row">
-                <h5>Introduction Message</h5>
-                <label>My preferred introduction message to sent to people that match my interests</label>
-                <textarea class="setting-advance-textarea">Heya how are you? Heya, I'm nearby, send me a message back! </textarea>
-                <label>Or write your own below</label>
-                <textarea class="setting-advance-textarea">Hi there We could be a good match, send me over a message! </textarea>
-                <input type="submit" class="save-btn update-btn" value="Update">
-              </div>
-              <div class="setting-row">
-                <h5>Profile Protection</h5>
-                <div class="personal-full-with-area">
-                  <input class="personal-radio-btn" value="" type="radio">
-                  <span class="personal-radio-title"><strong>Open</strong></span>
-                  <p class="setting-sml-text">Allow my profile to be visible to unregistered members. This may include search engines like Google.</p>
-                </div>
-                <div class="personal-full-with-area">
-                  <input class="personal-radio-btn" value="" type="radio">
-                  <span class="personal-radio-title"><strong>Restricted</strong></span>
-                  <p class="setting-sml-text">Block acces to my profile from unregistered members including search engines like Google.</p>
-                </div>
-                <div class="personal-full-with-area">
-                  <p class="setting-sml-text">When enabled, all further changes to you profile will be protected but due to the caching of pages by search engines your exisiting profile may be visible online for a short while.</p>
-                  <input class="save-btn update-btn" value="Update" type="submit">
-                </div>
-              </div>
+              <app-introduction-message></app-introduction-message>
+             <app-profile-protection></app-profile-protection>
             </div>
             <div class="more-setting-outer"><a href="#"><span>Manage More Settings</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
             <div class="more-setting-bot">
@@ -325,7 +133,7 @@
                     <li>Do not send any introduction messages on my behalf</li>
                   </ul>
                 </div>
-               
+
                 <div class="personal-full-with-area advance-bottom-text">
                   <input class="personal-radio-btn" value="" type="radio">
                   <span class="personal-radio-title instruction-title"><strong>Please mail me member introductions. Member Introductions are promotional messages marked with this symbol  in your mailbox and have been sent to you and other recipients in accordance with the senders Promotional settings.
