@@ -21,6 +21,13 @@ export class AuthenticationService {
             }));
     }
 
+    signup(username: string, password: string, email: string, dd: number, mm: number, yyyy: number, gender: string) {
+        return this.http.post<any>(`http://localhost:9000/api/users/signup`, { username, password, email, dd, mm, yyyy, gender })
+            .pipe(map(data => {
+                return data;
+            }))
+    }
+
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('token');

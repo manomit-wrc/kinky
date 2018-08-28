@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AlertsService } from 'angular-alert-module';
 
 @Component({
   selector: 'app-auth',
@@ -20,11 +21,14 @@ export class AuthComponent implements OnInit {
   error = '';
   errorMsg:any;
   closeAlert = false;
+  gender: string = '';
+  isShow: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private alerts: AlertsService
   ) { }
 
   ngOnInit() {
@@ -38,7 +42,7 @@ export class AuthComponent implements OnInit {
       email: ['', Validators.compose([Validators.required, Validators.email])],
       DD: ['', Validators.compose([Validators.required, Validators.maxLength(2), Validators.min(1), Validators.max(31)])],
       MM: ['', Validators.compose([Validators.required, Validators.maxLength(2), Validators.min(1), Validators.max(12)])],
-      YYYY: ['', Validators.compose([Validators.required, Validators.maxLength(4)])]
+      YYYY: ['', Validators.compose([Validators.required, Validators.maxLength(4), Validators.max(2018)])]
     })
 
 
@@ -47,6 +51,20 @@ export class AuthComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   get signup() { return this.signupForm.controls; }
+
+  getSex(value) {
+    this.gender = value;
+    
+  }
+  nextForm() {
+    
+    if(this.gender === '') {
+      this.alerts.setMessage('Please select your gender!','error');
+    }
+    else {
+      this.isShow = true;
+    }
+  }
 
   onLoginSubmit() {
     this.submitted = true;
@@ -78,9 +96,21 @@ export class AuthComponent implements OnInit {
   onSignupSubmit() {
     this.signupSubmitted = true;
     if(this.signupForm.invalid) {
-      console.log(this.signupForm);
+      
       return;
     }
+    this.signupLoading = true;
+    this.auth.signup(
+      this.signup.username.value, 
+      this.signup.password.value, 
+      this.signup.email.value, 
+      this.signup.DD.value,
+      this.signup.MM.value,
+      this.signup.YYYY.value,
+      this.gender)
+    .subscribe(data => {
+      console.log(data);
+    })
   }
 
 }

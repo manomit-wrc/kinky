@@ -12,38 +12,42 @@
       </ul>
     </div>
     <div id="signup">
-      <div class="top-form">
+      <div class="top-form"
+      [ngStyle]="{'display': isShow ? 'none' : 'block'}"
+      >
         <div class="first-div">
+          <app-alerts></app-alerts>
           <h5>Select Your Gender</h5>
           <div class="signup-outer">
             <div class="right-form-row gender-btn">
-              <button><i class="fa fa-mars"></i> Male</button>
+              <button (click)="getSex('M')"><i class="fa fa-mars"></i> Male</button>
             </div>
             <div class="right-form-row gender-btn">
-              <button><i class="fa fa-venus"></i> Female</button>
+              <button (click)="getSex('F')"><i class="fa fa-venus"></i> Female</button>
             </div>
             <div class="right-form-row gender-btn">
-              <button><i class="fa fa-venus-mars"></i> Couple</button>
+              <button (click)="getSex('C')"><i class="fa fa-venus-mars"></i> Couple</button>
             </div>
             <div class="right-form-row gender-btn">
-              <button>CD/TV/TS</button>
+              <button (click)="getSex('CTT')">CD/TV/TS</button>
             </div>
           </div>
 
 
 
         </div>
-        <button class="next form-submit-btn">Next</button>
+        <button class="next form-submit-btn" (click)="nextForm()">Next</button>
         <div class="have-account-sec">
           <ul class="form-tab">
             <li class="pages_active"><a href="#signin">Have an account? <span>Click here</span></a></li>
           </ul>
         </div>
       </div>
-      <div class="next-div">
+      <div class="next-div" [ngStyle]="{'display': isShow ? 'block' : 'none'}">
         <div class="top-form">
           <h5>Sign Up</h5>
           <form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
+            <app-alerts></app-alerts>
             <div class="main-form-row">
               <label>Username</label>
               <div class="input-box">
@@ -88,23 +92,29 @@
             </div>
             <div class="main-form-row">
               <label>Date of Birth</label>
-              <div class="input-box-sml">
-                <input type="number" class="input-form" placeholder="1" formControlName="DD">
+              <div class="input-box-sml" 
+              [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.DD.errors }"
+              >
+                <input type="number" class="input-form" placeholder="1" formControlName="DD" max="31">
+                
               </div>
-              <div class="input-box-sml">
-                <input type="number" class="input-form" placeholder="1" formControlName="MM">
+              
+              <div class="input-box-sml" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.MM.errors }">
+                <input type="number" class="input-form" placeholder="1" formControlName="MM" max="12">
               </div>
-              <div class="input-box-sml">
-                <input type="number" class="input-form" placeholder="YYYY" formControlName="YYYY">
+              <div class="input-box-sml" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.YYYY.errors }">
+                <input type="number" class="input-form" placeholder="YYYY" formControlName="YYYY" max="2018">
               </div>
             </div>
             <div class=" signup-creat-btn">
               <!--<input class="form-submit-btn" value="Create Account" type="submit">-->
               <button [disabled]="signupLoading" class="form-submit-btn">Create Account</button>
+              <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
             </div>
             <div class="agree-checkbox">
               <input type="checkbox" class="checkbtn-agree" value="">
               <span>I agree to the <a href="#">terms & conditions</a></span> 
+              
             </div>
           </form>
         </div>
@@ -119,8 +129,7 @@
                   <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
                 <label>Username</label>
                 <div class="form-group"
-                [ngClass]="{ 'has-error': submitted && f.username.errors || f.username.invalid && f.username.dirty,
-                              'has-success': submitted && !f.username.errors || f.username.valid }"
+                
                 >
                   <input type="text" formControlName="username"
                      class="form-control"
@@ -138,8 +147,6 @@
               <div class="main-form-row">
                 <label>Password</label>
                 <div class="form-group"
-                [ngClass]="{ 'has-error': submitted && f.password.errors || f.password.invalid && f.password.dirty,
-                              'has-success': submitted && !f.password.errors || f.password.valid }"
                 >
                   <input type="password" formControlName="password"
                      class="form-control"
