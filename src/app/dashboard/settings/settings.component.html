@@ -15,7 +15,8 @@
             <div class="row">
               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="generaltab-left">
-                 <app-interests></app-interests>
+                 <app-interests [userObj]="details"></app-interests>
+                 {{details?.details._id}}
                 </div>
               </div>
               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
@@ -26,7 +27,7 @@
               </div>
               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="generaltab-right">
-               <app-switchaccount></app-switchaccount>
+                 <app-switchaccount></app-switchaccount>
                  <app-deleteaccount></app-deleteaccount>
                 </div>
               </div>
@@ -39,7 +40,7 @@
             <h4>Advanced</h4>
             <div class="more-setting-top">
               <app-introduction-message></app-introduction-message>
-             <app-profile-protection></app-profile-protection>
+              <app-profile-protection></app-profile-protection>
             </div>
             <div class="more-setting-outer"><a href="#"><span>Manage More Settings</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
             <div class="more-setting-bot">
