@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
   selector: 'app-interests',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./interests.component.css']
 })
 export class InterestsComponent implements OnInit {
-
+  @Input() userObj: any ;
   constructor() { }
 
   ngOnInit() {
+    alert("In Child component");
+    console.log(this.userObj);
   }
 
 }

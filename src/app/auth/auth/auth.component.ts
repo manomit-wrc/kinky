@@ -39,7 +39,7 @@ export class AuthComponent implements OnInit {
       DD: ['', Validators.compose([Validators.required, Validators.maxLength(2), Validators.min(1), Validators.max(31)])],
       MM: ['', Validators.compose([Validators.required, Validators.maxLength(2), Validators.min(1), Validators.max(12)])],
       YYYY: ['', Validators.compose([Validators.required, Validators.maxLength(4)])]
-    })
+    });
 
 
   }
@@ -59,25 +59,26 @@ export class AuthComponent implements OnInit {
     this.auth.login(this.f.username.value, this.f.password.value)
     .pipe(first())
     .subscribe(data => {
-      if(data.code!='200'){
+      localStorage.setItem('token', data.token);
+      if ( data.code !== 200) {
         this.loading = false;
           this.errorMsg = data.message;
           setTimeout(() => {
             this.closeAlert = true;
-            this.errorMsg ="";
+            this.errorMsg = '';
             console.log(this.closeAlert);
-           },1500);
+           }, 1500);
            this.closeAlert = false;
 
-      }else{
+      } else {
         this.router.navigate(['/settings']);
       }
-    })
+    });
   }
 
   onSignupSubmit() {
     this.signupSubmitted = true;
-    if(this.signupForm.invalid) {
+    if (this.signupForm.invalid) {
       console.log(this.signupForm);
       return;
     }
