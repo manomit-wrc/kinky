@@ -20,7 +20,7 @@ export class SettingsComponent implements OnInit {
     this.userObj = {
       key: 'value'
     };
-    alert("In Parent Component");
+    alert(' In Parent Component ');
 
     this.auth.user_details()
     .subscribe(data => {

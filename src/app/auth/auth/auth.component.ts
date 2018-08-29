@@ -18,7 +18,7 @@ export class AuthComponent implements OnInit {
   submitted = false;
   signupSubmitted = false;
   error = '';
-  errorMsg:any;
+  errorMsg: any;
   closeAlert = false;
 
   constructor(
