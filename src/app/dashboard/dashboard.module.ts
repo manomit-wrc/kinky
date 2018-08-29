@@ -6,7 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SettingsComponent } from './settings/settings.component';
 import { DashBoardRoutingModule } from './dashboard-routing.module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { SwitchaccountComponent } from './switchaccount/switchaccount.component';
 import { DeleteaccountComponent } from './deleteaccount/deleteaccount.component';
 import { SiteconfigureComponent } from './siteconfigure/siteconfigure.component';
@@ -21,7 +21,8 @@ import { IntroductionMessageComponent } from './introduction-message/introductio
   imports: [
     CommonModule,
     DashBoardRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [
     LayoutComponent,

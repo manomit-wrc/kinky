@@ -5,51 +5,57 @@
   <label>I am primarily looking for</label>
   <div>
     <div class="personal-radio-outer">
-      <input class="personal-radio-btn" value="" name="lookingfor" type="radio">
+      <input class="personal-radio-btn" value="M" [(ngModel)]="gender" type="radio" [checked]="gender =='M'">
       <span class="personal-radio-title">Male</span></div>
     <div class="personal-radio-outer">
-      <input class="personal-radio-btn" value="" name="lookingfor" type="radio">
+      <input class="personal-radio-btn" value="F" [(ngModel)]="gender" type="radio" [checked]="gender =='F'">
       <span class="personal-radio-title">Female</span></div>
     <div class="personal-radio-outer">
-      <input class="personal-radio-btn" value="" name="lookingfor" type="radio">
+      <input class="personal-radio-btn" value="C" [(ngModel)]="gender" type="radio" [checked]="gender =='C'">
       <span class="personal-radio-title">Couple</span></div>
     <div class="personal-radio-outer">
-      <input class="personal-radio-btn" value="" name="lookingfor" type="radio">
+      <input class="personal-radio-btn" value="O" [(ngModel)]="gender" type="radio" [checked]="gender =='O'">
       <span class="personal-radio-title">CD / TV / TS</span></div>
   </div>
 </div>
 <div class="general-tab-row">
   <label>Age Range</label>
   <div class="setting-sml-drop select-box">
-    <select>
-      <option>18</option>
+    <select [(ngModel)]="from_age">
+      <option value="1">18</option>
+      <option value="2">35</option>
+      <option value="3">54</option>
     </select>
   </div>
   <div class="to">To</div>
   <div class="setting-sml-drop select-box">
-    <select>
-      <option>18</option>
+    <select [(ngModel)]="to_age">
+      <option value="1">18</option>
+      <option value="2">35</option>
+      <option value="3">54</option>
     </select>
   </div>
 </div>
 <div class="general-tab-row">
   <label>Within</label>
   <div class="general-dropdown">
-    <select>
-      <option>10miles\16km</option>
+    <select [(ngModel)]="distance">
+      <option value="1">10miles\16km</option>
+      <option value="2">20miles\32km</option>
+      <option value="3">30miles\48km</option>
     </select>
   </div>
 </div>
 <div class="general-tab-row">
   <label>Of</label>
   <div class="setting-medium-drop select-box">
-    <select>
-      <option>USA</option>
+    <select  (change)="onItemChange($event.target.value)">
+      <option [value]="count._id" *ngFor="let count of country">{{count.name}}</option>
     </select>
   </div>
   <div class="setting-medium-drop setting-medium-drop-right select-box">
     <select>
-      <option>Tucson, Arizona</option>
+      <option [value]="st._id" *ngFor="let st of state">{{st.name}}</option>
     </select>
   </div>
 </div>
@@ -75,7 +81,7 @@
 </div>
 <div class="general-tab-row">
   <div class="personal-full-with-area">
-    <input class="personal-radio-btn" value="" type="radio" checked>
+    <input class="personal-radio-btn" [(ngModel)]="explicit_content" type="checkbox">
     <span class="personal-radio-title"><strong>Allow explicit content</strong></span> </div>
 </div>
 <div class="general-tab-row">

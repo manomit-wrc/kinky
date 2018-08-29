@@ -1,17 +1,19 @@
 <div class="setting-row">
   <h5>Profile Protection</h5>
+  <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
+   <div *ngIf="successMsg" class="alert alert-success alert-dismissible" [ngClass]="{'fade out':closeAlert1}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{successMsg}}</div>
   <div class="personal-full-with-area">
-    <input class="personal-radio-btn" value="" type="radio">
+    <input class="personal-radio-btn" value="1" type="radio" [(ngModel)]="radiogroup">
     <span class="personal-radio-title"><strong>Open</strong></span>
     <p class="setting-sml-text">Allow my profile to be visible to unregistered members. This may include search engines like Google.</p>
   </div>
   <div class="personal-full-with-area">
-    <input class="personal-radio-btn" value="" type="radio">
+    <input class="personal-radio-btn" value="2" type="radio" [(ngModel)]="radiogroup">
     <span class="personal-radio-title"><strong>Restricted</strong></span>
     <p class="setting-sml-text">Block acces to my profile from unregistered members including search engines like Google.</p>
   </div>
   <div class="personal-full-with-area">
     <p class="setting-sml-text">When enabled, all further changes to you profile will be protected but due to the caching of pages by search engines your exisiting profile may be visible online for a short while.</p>
-    <input class="save-btn update-btn" value="Update" type="submit">
+    <input class="save-btn update-btn" value="Update" type="submit" (click)="update(radiogroup)">
   </div>
 </div>

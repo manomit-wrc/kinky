@@ -3,44 +3,44 @@
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="general-tab-top-outer">
-          <ul class="form-tab">
-            <li class="pages_active"><a href="#tab1"><img src="/assets/images/setting-icon.png" alt=""><span>General</span></a></li>
-            <li><a href="#tab2"><img src="/assets/images/alert-icon.png" alt=""><span>Alerts</span></a></li>
-            <li><a href="#tab3"><img src="/assets/images/advance-icon.png" alt=""><span>Advanced</span></a></li>
+          <ul class="form-tab-1">
+            <li [ngClass]="{ 'pages_active': tab === 'tab1' }"><a [routerLink]="" (click)="displayTab('tab1')"><img src="/assets/images/setting-icon.png" alt=""><span>General</span></a></li>
+            <li [ngClass]="{ 'pages_active': tab === 'tab2' }"><a [routerLink]="" (click)="displayTab('tab2')"><img src="/assets/images/alert-icon.png" alt=""><span>Alerts</span></a></li>
+            <li [ngClass]="{ 'pages_active': tab === 'tab3' }"><a [routerLink]="" (click)="displayTab('tab3')"><img src="/assets/images/advance-icon.png" alt=""><span>Advanced</span></a></li>
           </ul>
         </div>
         <div class="setting-bot-tab-content">
-          <div id="tab1">
+          <div id="tab1" [ngStyle]="{'display': tab === 'tab1' ? 'block' : 'none'}">
             <h4>General Settings</h4>
             <div class="row">
               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="generaltab-left">
-                 <app-interests [userObj]="details"></app-interests>
+                 <app-interests [userObj]="details$"></app-interests>
 
                 </div>
               </div>
               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="generaltab-mid">
-                  <app-siteconfigure></app-siteconfigure>
-                  <app-change-password></app-change-password>
+                  <app-siteconfigure [userObj]="details$"></app-siteconfigure>
+                  <app-change-password ></app-change-password>
                 </div>
               </div>
               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="generaltab-right">
-                 <app-switchaccount></app-switchaccount>
-                 <app-deleteaccount></app-deleteaccount>
+                 <app-switchaccount [userObj]="details$"></app-switchaccount>
+                 <app-deleteaccount [userObj]="details$"></app-deleteaccount>
                 </div>
               </div>
             </div>
           </div>
-          <div id="tab2">
-           <app-alerts></app-alerts>
+          <div id="tab2" [ngStyle]="{'display': tab === 'tab2' ? 'block' : 'none'}">
+           <app-alerts [userObj]="details$"></app-alerts>
           </div>
-          <div id="tab3">
+          <div id="tab3" [ngStyle]="{'display': tab === 'tab3' ? 'block' : 'none'}">
             <h4>Advanced</h4>
             <div class="more-setting-top">
-              <app-introduction-message></app-introduction-message>
-              <app-profile-protection></app-profile-protection>
+              <app-introduction-message [userObj]="details$"></app-introduction-message>
+              <app-profile-protection [userObj]="details$"></app-profile-protection>
             </div>
             <div class="more-setting-outer"><a href="#"><span>Manage More Settings</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
             <div class="more-setting-bot">

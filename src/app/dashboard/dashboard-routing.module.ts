@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SettingsComponent } from './settings/settings.component';
 import { LayoutComponent } from './layout/layout.component';
+import { AuthGuard } from '../guards';
 
 const authRoutes: Routes = [
     
@@ -11,7 +12,7 @@ const authRoutes: Routes = [
         path: '', 
         component: LayoutComponent,
         children: [
-          { path: 'settings', component: SettingsComponent, pathMatch: 'full'}
+          { path: 'settings', component: SettingsComponent, pathMatch: 'full', canActivate: [AuthGuard]}
         ]
     }
 ];

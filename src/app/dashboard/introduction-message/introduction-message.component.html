@@ -1,8 +1,10 @@
 <div class="setting-row">
   <h5>Introduction Message</h5>
+  <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
+  <div *ngIf="successMsg" class="alert alert-success alert-dismissible" [ngClass]="{'fade out':closeAlert1}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{successMsg}}</div>
   <label>My preferred introduction message to sent to people that match my interests</label>
-  <textarea class="setting-advance-textarea">Heya how are you? Heya, I'm nearby, send me a message back! </textarea>
+  <textarea class="setting-advance-textarea" [(ngModel)]="preferred_introduction">Heya how are you? Heya, I'm nearby, send me a message back! </textarea>
   <label>Or write your own below</label>
-  <textarea class="setting-advance-textarea">Hi there We could be a good match, send me over a message! </textarea>
-  <input type="submit" class="save-btn update-btn" value="Update">
+  <textarea class="setting-advance-textarea" [(ngModel)]="own_introduction">Hi there We could be a good match, send me over a message! </textarea>
+  <input type="submit" class="save-btn update-btn" value="Update" (click)="update()">
 </div>

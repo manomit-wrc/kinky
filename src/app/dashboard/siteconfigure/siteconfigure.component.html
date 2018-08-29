@@ -1,31 +1,41 @@
 <div class="general-tab-row">
   <label>Site language</label>
+  <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
+  <div *ngIf="successMsg" class="alert alert-success alert-dismissible" [ngClass]="{'fade out':closeAlert1}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{successMsg}}</div>
   <div class="general-dropdown">
-    <select>
-      <option>English</option>
+    <select [(ngModel)]="language">
+      <option value="en">English</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+      <option value="es">Spanish</option>
     </select>
   </div>
 </div>
 <div class="general-tab-row">
   <label>Time Zone</label>
   <div class="general-dropdown">
-    <select>
-      <option>UTC +7:00</option>
+    <select [(ngModel)]="timezone">
+      <option value="1">UTC +4:00</option>
+      <option value="2">UTC +5:00</option>
+      <option value="3">UTC +6:00</option>
+      <option value="4">UTC +7:00</option>
+      <option value="5">UTC +8:00</option>
+      <option value="6">UTC +10:00</option>
     </select>
   </div>
 </div>
 <div class="general-tab-row">
   <label>Email</label>
   <div class="general-tick">
-    <input type="text" class="general-tab-text" value="maninactionscript@gmail.com"  disabled>
+    <input type="text" class="general-tab-text" [(ngModel)]="email"  disabled>
   </div>
 </div>
 <div class="general-tab-row">
   <label>(Phone number is optional and will not be visible on your profile)</label>
   <div class="general-cross">
-    <input type="text" class="general-tab-text" value="">
+    <input type="number" class="general-tab-text" [(ngModel)]="mobile">
   </div>
 </div>
 <div class="general-tab-row">
-  <input class="save-btn update-btn" value="Update" type="submit">
+  <input class="save-btn update-btn" value="Update" type="submit" (click)= "update()">
 </div>

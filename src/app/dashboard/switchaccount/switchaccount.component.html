@@ -1,13 +1,16 @@
+
 <div class="general-tab-row"> <strong>Switch account</strong><br>
+  <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
+  <div *ngIf="successMsg" class="alert alert-success alert-dismissible" [ngClass]="{'fade out':closeAlert1}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{successMsg}}</div>
   <span>(Only for applicable for couple accounts)</span> </div>
 <div class="general-tab-row">
   <div class="personal-full-with-area">
-    <input class="personal-radio-btn" value="" name="switchaccount" type="radio">
+    <input class="personal-radio-btn" value="1" [(ngModel)]="switch_account" type="radio">
     <span class="personal-radio-title"><strong>You want use as Single female ?</strong></span> </div>
   <div class="personal-full-with-area">
-    <input class="personal-radio-btn" value="" name="switchaccount" type="radio">
+    <input class="personal-radio-btn" value="2" [(ngModel)]="switch_account" type="radio">
     <span class="personal-radio-title"><strong>You want use as Single male ?</strong></span> </div>
 </div>
 <div class="general-tab-row">
-  <input class="save-btn update-btn" value="Update" type="submit">
+  <input class="save-btn update-btn" value="Update" type="submit" (click)="update(switch_account)">
 </div>
