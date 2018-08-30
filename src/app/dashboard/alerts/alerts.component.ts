@@ -20,7 +20,7 @@ export class AlertsComponent implements OnInit {
 
   ngOnInit() {
     this.userObj.subscribe(data => {
-      this.radiogroup = data.value.info.alert_setting.toString();
+      this.radiogroup = data.value.info.alert_setting ? data.value.info.alert_setting.toString(): '';
       console.log(this.radiogroup);
 
     });

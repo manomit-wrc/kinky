@@ -25,12 +25,12 @@ export class InterestsComponent implements OnInit {
   ngOnInit() {
     this.userObj.subscribe(data => {
       this.gender = data.value.info.gender;
-      this.from_age = data.value.info.from_age.toString();
-      this.to_age = data.value.info.to_age.toString();
-      this.distance = data.value.info.distance.toString();
+      this.from_age = data.value.info.from_age ? data.value.info.from_age.toString() : '';
+      this.to_age = data.value.info.to_age ? data.value.info.to_age.toString() : '';
+      this.distance = data.value.info.distance ? data.value.info.distance.toString(): '';
       this.count = data.value.info.country;
       this.st = data.value.info.state;
-      this.contactmember = data.value.info.contactmember.toString();
+      this.contactmember = data.value.info.contactmember ? data.value.info.contactmember.toString(): '';
       this.explicit_content = data.value.info.explicit_content;
     });
 
