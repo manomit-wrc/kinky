@@ -6,6 +6,7 @@ import { AuthComponent } from './auth/auth.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthFooterComponent } from './auth-footer/auth-footer.component';
+import { VerifyAccountComponent } from './verify-account/verify-account.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { AuthFooterComponent } from './auth-footer/auth-footer.component';
     ReactiveFormsModule,
     AuthRoutingModule
   ],
-  declarations: [AuthComponent, LayoutComponent, AuthFooterComponent]
+  declarations: [AuthComponent, LayoutComponent, AuthFooterComponent, VerifyAccountComponent]
 })
 export class AuthModule { }

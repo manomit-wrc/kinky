@@ -117,6 +117,7 @@ export class AuthenticationService {
 
     }
 
+
  interest_update
  (gender: any, from_age: any, to_age: any, distance: any, country: any, state: any, contactmember: any, explicit_content: any) {
       return this.http.post<any>
@@ -128,6 +129,20 @@ export class AuthenticationService {
           return user; //for interest update
       }));
 
+    }
+
+    checkActivation(link: any) {
+      return this.http.post<any>(`http://localhost:9000/api/users/check-account`, { link })
+        .pipe(map(data => {
+          return data;
+        }));
+    }
+
+    activateAccount(link: any) {
+      return this.http.post<any>(`http://localhost:9000/api/users/activate-account`, { link })
+        .pipe(map(data => {
+          return data;
+      }));
     }
 
 
@@ -144,4 +159,4 @@ export class AuthenticationService {
        }
    }
 
-}
+  }
