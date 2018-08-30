@@ -20,8 +20,8 @@ export class DeleteaccountComponent implements OnInit {
 
   ngOnInit() {
     this.userObj.subscribe(data => {
-      this.delete_account = data.value.info.delete_account.toString();
-      this.other_delete_reason = data.value.info.other_delete_reason;
+      this.delete_account = data.value.info.delete_account ? data.value.info.delete_account.toString(): '';
+      this.other_delete_reason = data.value.info.other_delete_reason ? data.value.info.other_delete_reason : '';
     });
   }
 

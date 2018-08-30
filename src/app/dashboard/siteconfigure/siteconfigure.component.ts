@@ -27,7 +27,7 @@ export class SiteconfigureComponent implements OnInit {
       this.email = data.value.info.email;
       this.language = data.value.info.language;
       this.timezone = data.value.info.timezone;
-      this.mobile = data.value.info.mobile.toString();
+      this.mobile = data.value.info.mobile ? data.value.info.mobile.toString(): '';
     });
   }
 

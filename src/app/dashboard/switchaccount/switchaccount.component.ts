@@ -19,7 +19,8 @@ export class SwitchaccountComponent implements OnInit {
 
   ngOnInit() {
     this.userObj.subscribe(data => {
-      this.switch_account = data.value.info.switch_account.toString();
+      
+      this.switch_account = data.value.info.switch_account ? data.value.info.switch_account.toString(): '';
     });
   }
 
