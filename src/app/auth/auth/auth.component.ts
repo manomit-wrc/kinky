@@ -24,6 +24,7 @@ export class AuthComponent implements OnInit {
   closeAlert = false;
   gender: string = '';
   isShow: boolean = false;
+  termsConditions = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -104,12 +105,26 @@ export class AuthComponent implements OnInit {
     });
   }
 
+  terms(e) {
+    if(e.target.checked) {
+      this.termsConditions = true;
+    }
+    else {
+      this.termsConditions = false;
+    }
+  }
+
   onSignupSubmit() {
     this.signupSubmitted = true;
     if(this.signupForm.invalid) {
       
       return;
     }
+    if(!this.termsConditions) {
+      this.alerts.setMessage("Please checked terms and conditions",'error');
+      return;
+    }
+    window.scrollTo(0, 0);
     this.signupLoading = true;
     this.auth.signup(
       this.signup.username.value, 
@@ -120,7 +135,14 @@ export class AuthComponent implements OnInit {
       this.signup.YYYY.value,
       this.gender)
     .subscribe(data => {
-      console.log(data);
+      this.signupLoading = false;
+      if(data.code === 200) {
+        this.alerts.setMessage(data.message,'success');
+      }
+      else {
+        this.alerts.setMessage(data.message,'error');
+      }
+      
     })
   }
 

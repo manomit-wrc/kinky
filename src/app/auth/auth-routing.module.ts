@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthComponent } from './auth/auth.component';
 import { LayoutComponent } from './layout/layout.component';
+import { VerifyAccountComponent } from './verify-account/verify-account.component';
 
 const authRoutes: Routes = [
     
@@ -11,7 +12,8 @@ const authRoutes: Routes = [
         path: '', 
         component: LayoutComponent,
         children: [
-          { path: '', component: AuthComponent, pathMatch: 'full'}
+          { path: '', component: AuthComponent, pathMatch: 'full'},
+          { path: 'verify/:link', component: VerifyAccountComponent, pathMatch: 'full'}
         ]
     }
 ];
