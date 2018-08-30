@@ -23,6 +23,7 @@ export class InterestsComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    
     this.userObj.subscribe(data => {
       this.gender = data.value.info.gender;
       this.from_age = data.value.info.from_age ? data.value.info.from_age.toString() : '';

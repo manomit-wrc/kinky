@@ -19,6 +19,7 @@ export class SettingsComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+ 
  this.details$ = this.auth.user_details();
  this.auth.user_details()
  .pipe(first())
