@@ -169,7 +169,7 @@ export class AuthComponent implements OnInit {
       } else {
 
         this.alerts.setMessage('Please check your email for change your passowrd', 'success');
-        this.router.navigate(['/']);
+        this.forgotForm.reset();
       }
     });
   }
