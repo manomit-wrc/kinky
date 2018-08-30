@@ -3,12 +3,12 @@
   <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
    <div *ngIf="successMsg" class="alert alert-success alert-dismissible" [ngClass]="{'fade out':closeAlert1}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{successMsg}}</div>
   <div class="personal-full-with-area">
-    <input class="personal-radio-btn" value="1" type="radio" [(ngModel)]="radiogroup">
+    <input class="personal-radio-btn" value="1" name="protection" type="radio" [(ngModel)]="radiogroup">
     <span class="personal-radio-title"><strong>Open</strong></span>
     <p class="setting-sml-text">Allow my profile to be visible to unregistered members. This may include search engines like Google.</p>
   </div>
   <div class="personal-full-with-area">
-    <input class="personal-radio-btn" value="2" type="radio" [(ngModel)]="radiogroup">
+    <input class="personal-radio-btn" value="2" name="protection"  type="radio" [(ngModel)]="radiogroup">
     <span class="personal-radio-title"><strong>Restricted</strong></span>
     <p class="setting-sml-text">Block acces to my profile from unregistered members including search engines like Google.</p>
   </div>

@@ -12,7 +12,7 @@ export class SettingsComponent implements OnInit {
 
   details$: Observable<any>;
   tab: string = 'tab1';
-
+  switch: any;
   constructor(
     private auth: AuthenticationService,
     private router: Router
@@ -20,6 +20,13 @@ export class SettingsComponent implements OnInit {
 
   async ngOnInit() {
  this.details$ = this.auth.user_details();
+ this.auth.user_details()
+ .pipe(first())
+ .subscribe(data => {
+
+this.switch = data.value.info.gender;
+
+ });
 
   }
 

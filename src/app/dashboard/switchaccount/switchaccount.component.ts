@@ -28,7 +28,7 @@ export class SwitchaccountComponent implements OnInit {
     .pipe(first())
     .subscribe(data => {
       if (data.code !== 200) {
-
+        this.closeAlert = false;
         this.errorMsg = data.message;
         setTimeout(() => {
           this.closeAlert = true;
@@ -38,7 +38,7 @@ export class SwitchaccountComponent implements OnInit {
          this.closeAlert = false;
 
     } else {
-
+      this.closeAlert1 = false;
       this.successMsg = data.message;
       setTimeout(() => {
         this.closeAlert1 = true;

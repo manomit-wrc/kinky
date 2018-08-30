@@ -47,36 +47,35 @@
         <div class="top-form">
           <h5>Sign Up</h5>
           <form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
-            <app-alerts></app-alerts>
             <div class="main-form-row">
               <label>Username</label>
               <div class="input-box">
-                <input type="text" class="input-form" 
+                <input type="text" class="input-form"
                   formControlName="username" placeholder="Username">
                   <i *ngIf="signupSubmitted && !signup.username.errors && signup.username.valid" class="fa fa-check" aria-hidden="true"></i>
                   <i *ngIf="signupSubmitted && signup.username.errors && signup.username.invalid" class="fa fa-times" aria-hidden="true"></i>
               </div>
               <div *ngIf="signupSubmitted && signup.username.errors" class="invalid-feedback">
                   <span *ngIf="signup.username.errors.required">Username is required</span>
-              </div>  
-             
+              </div>
+
             </div>
             <div class="main-form-row">
               <label>Password</label>
               <div class="input-box">
-                <input type="password" class="input-form" 
+                <input type="password" class="input-form"
                   placeholder="Password" formControlName="password">
                   <i *ngIf="signupSubmitted && !signup.password.errors && signup.password.valid" class="fa fa-check" aria-hidden="true"></i>
                   <i *ngIf="signupSubmitted && signup.password.errors && signup.password.invalid" class="fa fa-times" aria-hidden="true"></i>
               </div>
               <div *ngIf="signupSubmitted && signup.password.errors" class="invalid-feedback">
                   <span *ngIf="signup.password.errors.required">Password is required</span>
-              </div> 
+              </div>
             </div>
             <div class="main-form-row">
               <label>Email</label>
               <div class="input-box">
-                <input type="text" class="input-form" 
+                <input type="text" class="input-form"
                   placeholder="example@mail.com"
                   formControlName="email"
                   >
@@ -85,20 +84,20 @@
               </div>
               <div *ngIf="signupSubmitted && signup.email.errors" class="invalid-feedback">
                   <span *ngIf="signup.email.errors.required">Email is required</span>
-              </div> 
+              </div>
               <div *ngIf="signupSubmitted && signup.email.errors" class="invalid-feedback">
                   <span *ngIf="signup.email.errors.email">Invalid email</span>
-              </div> 
+              </div>
             </div>
             <div class="main-form-row">
               <label>Date of Birth</label>
-              <div class="input-box-sml" 
+              <div class="input-box-sml"
               [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.DD.errors }"
               >
                 <input type="number" class="input-form" placeholder="1" formControlName="DD" max="31">
-                
+
               </div>
-              
+
               <div class="input-box-sml" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.MM.errors }">
                 <input type="number" class="input-form" placeholder="1" formControlName="MM" max="12">
               </div>
@@ -113,8 +112,8 @@
             </div>
             <div class="agree-checkbox">
               <input type="checkbox" class="checkbtn-agree" value="">
-              <span>I agree to the <a href="#">terms & conditions</a></span> 
-              
+              <span>I agree to the <a href="#">terms & conditions</a></span>
+
             </div>
           </form>
         </div>
@@ -129,7 +128,7 @@
                   <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
                 <label>Username</label>
                 <div class="form-group"
-                
+
                 >
                   <input type="text" formControlName="username"
                      class="form-control"
@@ -175,19 +174,34 @@
       </div>
     </div>
     <div id="password">
-      <div class="top-form">
+      <div class="top-form" [ngStyle]="{'display': isShow ? 'none' : 'block'}">
         <h5>Password Reminder</h5>
+        <form [formGroup]="forgotForm" (ngSubmit)="onForgotSubmit()">
         <div class="main-form-row">
+
           <label>Username or Email </label>
           <div class="input-box">
-            <input class="input-form" placeholder="John Doe" type="Text">
-            <i class="fa fa-check" aria-hidden="true"></i> </div>
+              <input type="text" class="input-form"
+                placeholder="John Doe/example@mail.com"
+                formControlName="email"
+                >
+                <i *ngIf="forgotSubmitted && !forgotpassword.email.errors && forgotpassword.email.valid" class="fa fa-check" aria-hidden="true"></i>
+                <i *ngIf="forgotSubmitted && forgotpassword.email.errors && forgotpassword.email.invalid" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div *ngIf="forgotSubmitted && forgotpassword.email.errors" class="invalid-feedback">
+                <span *ngIf="forgotpassword.email.errors.required">Email is required</span>
+            </div>
+            <div *ngIf="forgotSubmitted && forgotpassword.email.errors" class="invalid-feedback">
+                <span *ngIf="forgotpassword.email.errors.email">Invalid email</span>
+            </div>
           <div class="password-text">If you do not see an email from kinkypeople in your inbox<br>
-please read the <a href="#">following instructions</a> | <a href="#">Contact Us</a></div>
+           please read the <a href="#">following instructions</a> | <a href="#">Contact Us</a></div>
         </div>
         <div class="main-form-row">
-          <input type="submit" class="form-submit-btn" value="Send Email">
+          <input type="submit" class="form-submit-btn" value="Send Email" [disabled]="loading">
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         </div>
+      </form>
         <div class="have-account-sec">
           <ul class="form-tab">
             <li class="pages_active"><a href="#signin">Have an account? <span>Click here</span></a></li>

@@ -2,12 +2,12 @@
 <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
 <div *ngIf="successMsg" class="alert alert-success alert-dismissible" [ngClass]="{'fade out':closeAlert1}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{successMsg}}</div>
 <div class="personal-full-with-area">
-  <input class="personal-radio-btn" [(ngModel)]="radiogroup"  value="1" type="radio">
+  <input class="personal-radio-btn" [(ngModel)]="radiogroup" name="alert"  value="1" type="radio">
   <span class="personal-radio-title"><strong>Please email me discounts, weekly newsletter and important updates about the site.</strong></span> </div>
 <div class="personal-full-with-area">
-  <input class="personal-radio-btn" value="2" [(ngModel)]="radiogroup" type="radio">
+  <input class="personal-radio-btn" value="2" [(ngModel)]="radiogroup" name="alert" type="radio">
   <span class="personal-radio-title"><strong>Please email me when I receive a new message.</strong></span> </div>
 <div class="personal-full-with-area">
-  <input class="personal-radio-btn" value="3" [(ngModel)]="radiogroup" type="radio">
+  <input class="personal-radio-btn" value="3" [(ngModel)]="radiogroup" name="alert" type="radio">
   <span class="personal-radio-title"><strong>Please notify me of activity from users with Promotions enabled.</strong></span> </div>
 <input type="submit" class="save-btn update-btn" value="Update" (click) = "update(radiogroup)">
