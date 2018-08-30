@@ -27,7 +27,7 @@
               </div>
               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="generaltab-right">
-                 <app-switchaccount [userObj]="details$"></app-switchaccount>
+                 <app-switchaccount [userObj]="details$" *ngIf="switch =='C'"></app-switchaccount>
                  <app-deleteaccount [userObj]="details$"></app-deleteaccount>
                 </div>
               </div>

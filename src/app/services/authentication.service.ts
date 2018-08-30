@@ -25,6 +25,12 @@ export class AuthenticationService {
                 return data;
             }));
     }
+    forgot_password(email: string) {
+        return this.http.post<any>(`http://localhost:9000/api/users/forgot-password`, { email })
+            .pipe(map(data => {
+                return data;
+            }));
+    }
 
     logout() {
         // remove user from local storage to log user out
@@ -52,8 +58,8 @@ export class AuthenticationService {
         return user;
       }));
     }
-    delete_account(delete_account: string) {
-      return this.http.post<any>(`http://localhost:9000/api/users/delete-account-update`, { delete_account })
+    delete_account(delete_account: any, other_delete_reason: any) {
+      return this.http.post<any>(`http://localhost:9000/api/users/delete-account-update`, { delete_account, other_delete_reason })
       .pipe(map(user => {
         return user;
       }));
@@ -111,18 +117,32 @@ export class AuthenticationService {
 
     }
 
+
+ interest_update
+ (gender: any, from_age: any, to_age: any, distance: any, country: any, state: any, contactmember: any, explicit_content: any) {
+      return this.http.post<any>
+      (`http://localhost:9000/api/users/interest-update`,
+       { gender, from_age, to_age, distance, country, state, contactmember, explicit_content})
+      .pipe(map(user => {
+          // login successful if there's a jwt token in the response
+
+          return user; //for interest update
+      }));
+
+    }
+
     checkActivation(link: any) {
       return this.http.post<any>(`http://localhost:9000/api/users/check-account`, { link })
         .pipe(map(data => {
           return data;
-        }))
+        }));
     }
 
     activateAccount(link: any) {
       return this.http.post<any>(`http://localhost:9000/api/users/activate-account`, { link })
         .pipe(map(data => {
           return data;
-      }))
+      }));
     }
 
 
@@ -139,4 +159,4 @@ export class AuthenticationService {
        }
    }
 
-}
+  }

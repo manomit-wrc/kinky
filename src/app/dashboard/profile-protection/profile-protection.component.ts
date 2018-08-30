@@ -28,25 +28,25 @@ export class ProfileProtectionComponent implements OnInit {
     .pipe(first())
     .subscribe(data => {
       if (data.code !== 200) {
-
-          this.errorMsg = data.message;
-          setTimeout(() => {
-            this.closeAlert = true;
-            this.errorMsg = '';
-            console.log(this.closeAlert);
-           }, 1500);
-           this.closeAlert = false;
-
-      } else {
-
-        this.successMsg = data.message;
+        this.closeAlert = false;
+        this.errorMsg = data.message;
         setTimeout(() => {
-          this.closeAlert1 = true;
-          this.successMsg = '';
+          this.closeAlert = true;
+          this.errorMsg = '';
           console.log(this.closeAlert);
          }, 1500);
+         this.closeAlert = false;
 
-      }
+    } else {
+      this.closeAlert1 = false;
+      this.successMsg = data.message;
+      setTimeout(() => {
+        this.closeAlert1 = true;
+        this.successMsg = '';
+        console.log(this.closeAlert);
+       }, 1500);
+
+    }
 
     });
   }

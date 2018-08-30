@@ -15,10 +15,12 @@ export class AuthComponent implements OnInit {
 
   loginForm: FormGroup;
   signupForm: FormGroup;
+  forgotForm: FormGroup;
   loading = false;
   signupLoading = false;
   submitted = false;
   signupSubmitted = false;
+  forgotSubmitted = false;
   error = '';
   errorMsg: any;
   closeAlert = false;
@@ -34,7 +36,7 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -46,33 +48,37 @@ export class AuthComponent implements OnInit {
       DD: ['', Validators.compose([Validators.required, Validators.maxLength(2), Validators.min(1), Validators.max(31)])],
       MM: ['', Validators.compose([Validators.required, Validators.maxLength(2), Validators.min(1), Validators.max(12)])],
       YYYY: ['', Validators.compose([Validators.required, Validators.maxLength(4), Validators.max(2018)])]
-    })
+    });
+
+    this.forgotForm = this.formBuilder.group({
+      email: ['', Validators.required],
+    });
+
     try {
       const decoded = jwt_decode(localStorage.getItem('token'));
-      if(decoded) {
+      if (decoded) {
         this.router.navigate(['settings']);
       }
-    }
-    catch(error) {
+    } catch (error) {
 
     }
-    
   }
 
   get f() { return this.loginForm.controls; }
 
   get signup() { return this.signupForm.controls; }
 
+  get forgotpassword() { return this.forgotForm.controls; }
+
   getSex(value) {
     this.gender = value;
-    
+
   }
   nextForm() {
-    
-    if(this.gender === '') {
-      this.alerts.setMessage('Please select your gender!','error');
-    }
-    else {
+
+    if (this.gender === '') {
+      this.alerts.setMessage('Please select your gender!', 'error');
+    } else {
       this.isShow = true;
     }
   }
@@ -116,34 +122,58 @@ export class AuthComponent implements OnInit {
 
   onSignupSubmit() {
     this.signupSubmitted = true;
-    if(this.signupForm.invalid) {
-      
+    if (this.signupForm.invalid) {
+
       return;
     }
-    if(!this.termsConditions) {
+    if (!this.termsConditions) {
       this.alerts.setMessage("Please checked terms and conditions",'error');
       return;
     }
     window.scrollTo(0, 0);
     this.signupLoading = true;
     this.auth.signup(
-      this.signup.username.value, 
-      this.signup.password.value, 
-      this.signup.email.value, 
+      this.signup.username.value,
+      this.signup.password.value,
+      this.signup.email.value,
       this.signup.DD.value,
       this.signup.MM.value,
       this.signup.YYYY.value,
       this.gender)
     .subscribe(data => {
       this.signupLoading = false;
-      if(data.code === 200) {
-        this.alerts.setMessage(data.message,'success');
-      }
-      else {
-        this.alerts.setMessage(data.message,'error');
-      }
-      
-    })
+      if (data.code === 200) {
+        this.alerts.setMessage(data.message, 'success');
+      } else {
+        this.alerts.setMessage(data.message, 'error');
+        }
+    });
   }
+
+  onForgotSubmit() {
+    this.forgotSubmitted = true;
+    if (this.forgotForm.invalid) {
+
+      return;
+    }
+    this.loading = true;
+    this.auth.forgot_password(this.forgotpassword.email.value)
+    .pipe(first())
+    .subscribe(data => {
+      this.loading = false;
+      if ( data.code !== 200) {
+
+
+        this.alerts.setMessage('Please insert correct your email or username!', 'error');
+
+      } else {
+
+        this.alerts.setMessage('Please check your email for change your passowrd', 'success');
+        this.router.navigate(['/']);
+      }
+    });
+  }
+
+
 
 }

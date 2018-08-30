@@ -4,18 +4,18 @@
   <span>Why you want to delete account ?</span> </div>
 <div class="general-tab-row">
   <div class="personal-full-with-area">
-    <input class="personal-radio-btn" value="1" [(ngModel)]="delete_account" type="radio">
+    <input class="personal-radio-btn" value="1" name="delete" [(ngModel)]="delete_account" type="radio">
     <span class="personal-radio-title"><strong>You unable for find your match people?</strong></span> </div>
   <div class="personal-full-with-area">
-    <input class="personal-radio-btn" value="2" [(ngModel)]="delete_account" type="radio">
+    <input class="personal-radio-btn" value="2" name="delete" [(ngModel)]="delete_account" type="radio">
     <span class="personal-radio-title"><strong>You aren't anymore like this lifestyle?</strong></span> </div>
   <div class="personal-full-with-area">
-    <input class="personal-radio-btn" value="3" [(ngModel)]="delete_account" type="radio">
+    <input class="personal-radio-btn" value="3" name="delete" [(ngModel)]="delete_account" type="radio">
     <span class="personal-radio-title"><strong>Other Reason</strong></span> </div>
 </div>
 <div class="general-tab-row">
-  <textarea class="general-tab-textarea"></textarea>
+  <textarea class="general-tab-textarea" [(ngModel)]="other_delete_reason"></textarea>
 </div>
 <div class="general-tab-row">
-  <input class="cancel-btn" value="Delete My Account" type="submit" (click)="update(delete_account)">
+  <input class="cancel-btn" value="Delete My Account" type="submit" (click)="update(delete_account,other_delete_reason)">
 </div>
