@@ -111,6 +111,20 @@ export class AuthenticationService {
 
     }
 
+    checkActivation(link: any) {
+      return this.http.post<any>(`http://localhost:9000/api/users/check-account`, { link })
+        .pipe(map(data => {
+          return data;
+        }))
+    }
+
+    activateAccount(link: any) {
+      return this.http.post<any>(`http://localhost:9000/api/users/activate-account`, { link })
+        .pipe(map(data => {
+          return data;
+      }))
+    }
+
 
 /* Check for password match*/
      MatchPassword(AC: AbstractControl) {
