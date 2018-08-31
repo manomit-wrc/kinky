@@ -29,6 +29,7 @@ export class SiteconfigureComponent implements OnInit {
       this.timezone = data.value.info.timezone;
       this.mobile = data.value.info.mobile ? data.value.info.mobile.toString(): '';
     });
+
   }
 
   update() {

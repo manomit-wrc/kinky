@@ -112,10 +112,9 @@ export class AuthComponent implements OnInit {
   }
 
   terms(e) {
-    if(e.target.checked) {
+    if (e.target.checked) {
       this.termsConditions = true;
-    }
-    else {
+    } else {
       this.termsConditions = false;
     }
   }

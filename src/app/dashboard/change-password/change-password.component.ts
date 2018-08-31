@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services';
 import { first } from 'rxjs/operators';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -20,8 +19,7 @@ export class ChangePasswordComponent implements OnInit {
   gender: any;
   constructor(
     private formBuilder: FormBuilder,
-    private auth: AuthenticationService,
-    private router: Router
+    private auth: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -61,6 +59,7 @@ export class ChangePasswordComponent implements OnInit {
            this.closeAlert = false;
 
       } else {
+        this.submitted = false;
         this.changePassForm.reset();
         this.successMsg = data.message;
         setTimeout(() => {

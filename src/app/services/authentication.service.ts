@@ -5,7 +5,6 @@ import {AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
-
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
@@ -18,6 +17,9 @@ export class AuthenticationService {
                 return user;
             }));
     }
+
+
+
 
     signup(username: string, password: string, email: string, dd: number, mm: number, yyyy: number, gender: string) {
         return this.http.post<any>(`http://localhost:9000/api/users/signup`, { username, password, email, dd, mm, yyyy, gender })

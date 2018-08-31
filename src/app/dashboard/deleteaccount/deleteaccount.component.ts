@@ -20,7 +20,7 @@ export class DeleteaccountComponent implements OnInit {
 
   ngOnInit() {
     this.userObj.subscribe(data => {
-      this.delete_account = data.value.info.delete_account ? data.value.info.delete_account.toString(): '';
+      this.delete_account = data.value.info.delete_account ? data.value.info.delete_account.toString() : '';
       this.other_delete_reason = data.value.info.other_delete_reason ? data.value.info.other_delete_reason : '';
     });
   }
@@ -40,6 +40,7 @@ export class DeleteaccountComponent implements OnInit {
          this.closeAlert = false;
 
     } else {
+      this.auth.logout();
       this.closeAlert1 = false;
       this.successMsg = data.message;
       setTimeout(() => {
@@ -47,7 +48,6 @@ export class DeleteaccountComponent implements OnInit {
         this.successMsg = '';
         console.log(this.closeAlert);
        }, 1500);
-
     }
 
     });
