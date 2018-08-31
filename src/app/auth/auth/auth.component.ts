@@ -36,7 +36,6 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -126,7 +125,8 @@ export class AuthComponent implements OnInit {
       return;
     }
     if (!this.termsConditions) {
-      this.alerts.setMessage("Please checked terms and conditions",'error');
+      window.scrollTo(0, 0);
+      this.alerts.setMessage("Please checked terms and conditions.",'error');
       return;
     }
     window.scrollTo(0, 0);

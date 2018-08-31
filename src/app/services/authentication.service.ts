@@ -82,7 +82,7 @@ export class AuthenticationService {
     }
 
     user_details(): Observable<any> {
-      return this.http.post<any>(`http://localhost:9000/api/users/user-details`, {})
+      return this.http.post<any>(`http://localhost:9000/api/users/user-settings`, {})
       .pipe(map(user => {
           return of(user); // create own observable
       }));
@@ -145,6 +145,12 @@ export class AuthenticationService {
         .pipe(map(data => {
           return data;
       }));
+    }
+    updateInstantMessage(instant_msg: any) {
+      return this.http.post<any>(`http://localhost:9000/api/users/update-instant-message`, { instant_msg })
+        .pipe(map(data => {
+          return data;
+        }))
     }
 
 

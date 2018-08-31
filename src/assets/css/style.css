@@ -2011,3 +2011,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', end
   from{ bottom:-100px; opacity:0 } 
   to{ bottom:0; opacity:1 }
 }
+
+.alertsContainer .alertsRow.success  {
+  height: 70px;
+}
+
+.iconpanel {
+  height: auto !important;
+}

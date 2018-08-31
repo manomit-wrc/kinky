@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { first } from 'rxjs/operators';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-siteconfigure',
@@ -17,18 +18,25 @@ export class SiteconfigureComponent implements OnInit {
   errorMsg: any;
   closeAlert = false;
   closeAlert1 = false;
+  timezones : any;
   constructor(
     public auth: AuthenticationService
   ) { }
 
   ngOnInit() {
+    const decoded = jwt_decode(localStorage.getItem('token'));
+    
     this.userObj.subscribe(data => {
-      console.log(data.value.info.preferred_introduction);
-      this.email = data.value.info.email;
+      
+      this.email = decoded.email;
       this.language = data.value.info.language;
       this.timezone = data.value.info.timezone;
+      this.timezones = data.value.timezones;
+      
       this.mobile = data.value.info.mobile ? data.value.info.mobile.toString(): '';
     });
+
+    
 
   }
 

@@ -42,21 +42,21 @@
               <app-introduction-message [userObj]="details$"></app-introduction-message>
               <app-profile-protection [userObj]="details$"></app-profile-protection>
             </div>
-            <div class="more-setting-outer"><a href="#"><span>Manage More Settings</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
+            <div class="more-setting-outer"><a href="javascript:void(0)"><span>Manage More Settings</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
             <div class="more-setting-bot">
               <div class="setting-row">
                 <h5>Instant Messenger</h5>
                 <div class="personal-full-with-area">
-                  <input class="personal-radio-btn" value="" type="radio">
+                  <input class="personal-radio-btn" name="instant_msg" [(ngModel)]="instant_msg" value="1" type="radio">
                   <span class="personal-radio-title"><strong>ON</strong></span>
                   <p class="setting-sml-text">Allows members to contact you whenever online</p>
                 </div>
                 <div class="personal-full-with-area">
-                  <input class="personal-radio-btn" value="" type="radio">
+                  <input class="personal-radio-btn" value="0" name="instant_msg" [(ngModel)]="instant_msg" type="radio">
                   <span class="personal-radio-title"><strong>OFF</strong></span>
                   <p class="setting-sml-text">OFF - You cannot be contacted via instant messenger</p>
                 </div>
-                <input class="save-btn update-btn" value="Update" type="submit">
+                <input class="save-btn update-btn" value="Update" type="submit" (click)="updateInstantMsg(instant_msg)">
               </div>
               <div class="setting-row">
                 <h5>Auto Reply to Mail Matches</h5>
@@ -74,18 +74,7 @@
                 <input class="save-btn update-btn" value="Update" type="submit">
               </div>
               <div class="setting-row">
-                <h5>Auto Reply to Mail Matches</h5>
-                <div class="personal-full-with-area">
-                  <label>Subject</label>
-                  <input type="text" class="advance-input-text" value="">
-                </div>
-                <div class="personal-full-with-area">
-                  <label>Reply Text</label>
-                  <textarea class="setting-advance-textarea"></textarea>
-                </div>
-                <div class="personal-full-with-area">
-                  <input class="personal-radio-btn" value="" type="radio">
-                  <span class="personal-radio-title"><strong>Enable AutoReply</strong></span> </div>
+                
                 <div class="personal-full-with-area">
                   <h5>Blacklist</h5>
                   <ul>
@@ -93,13 +82,13 @@
                     <li>If you do not wish to receive emails from a member, go to his/her profile view window and click on Add to Blacklist.</li>
                     <li><a href="#">Click here</a> to view already blacklisted members.</li>
                   </ul>
-                  <input class="save-btn update-btn" value="Update" type="submit">
+                  
                 </div>
               </div>
               <div class="setting-row">
                 <h5>Promotion</h5>
                 <div class="personal-full-with-area">
-                  <input class="personal-radio-btn" value="" type="radio">
+                  <input class="personal-radio-btn" value="1" name="promotion" type="radio">
                   <span class="personal-radio-title"><strong>Active Promotion</strong></span> </div>
                 <div class="personal-full-with-area">
                   <ul>
@@ -112,7 +101,7 @@
                   </ul>
                 </div>
                 <div class="personal-full-with-area">
-                  <input class="personal-radio-btn" value="" type="radio">
+                  <input class="personal-radio-btn" value="2" name="promotion" type="radio">
                   <span class="personal-radio-title"><strong>Basic Promotion</strong></span> </div>
                 <div class="personal-full-with-area">
                   <ul>
@@ -125,7 +114,7 @@
                   </ul>
                 </div>
                 <div class="personal-full-with-area">
-                  <input class="personal-radio-btn" value="" type="radio">
+                  <input class="personal-radio-btn" value="3" name="promotion" type="radio">
                   <span class="personal-radio-title"><strong>No Promotion</strong></span> </div>
                 <div class="personal-full-with-area">
                   <ul>
@@ -136,7 +125,7 @@
                 </div>
 
                 <div class="personal-full-with-area advance-bottom-text">
-                  <input class="personal-radio-btn" value="" type="radio">
+                  <input class="personal-radio-btn" value="" type="checkbox">
                   <span class="personal-radio-title instruction-title"><strong>Please mail me member introductions. Member Introductions are promotional messages marked with this symbol  in your mailbox and have been sent to you and other recipients in accordance with the senders Promotional settings.
                   If you have problems with email delivery to your address from the site, please read the <a href="#">following instructions.</a></strong></span> </div>
                 <input class="save-btn update-btn" value="Update" type="submit">

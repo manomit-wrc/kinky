@@ -15,12 +15,8 @@
   <label>Time Zone</label>
   <div class="general-dropdown">
     <select [(ngModel)]="timezone">
-      <option value="1">UTC +4:00</option>
-      <option value="2">UTC +5:00</option>
-      <option value="3">UTC +6:00</option>
-      <option value="4">UTC +7:00</option>
-      <option value="5">UTC +8:00</option>
-      <option value="6">UTC +10:00</option>
+      <option value="tz.label" *ngFor="let tz of timezones">{{tz.name}}</option>
+      
     </select>
   </div>
 </div>

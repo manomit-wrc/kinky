@@ -45,6 +45,7 @@
       </div>
       <div class="next-div" [ngStyle]="{'display': isShow ? 'block' : 'none'}">
         <div class="top-form">
+          <app-alerts></app-alerts>
           <h5>Sign Up</h5>
           <form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
             <div class="main-form-row">

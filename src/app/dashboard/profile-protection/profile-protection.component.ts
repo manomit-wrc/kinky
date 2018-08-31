@@ -19,7 +19,9 @@ export class ProfileProtectionComponent implements OnInit {
 
   ngOnInit() {
     this.userObj.subscribe(data => {
-      this.radiogroup = data.value.info.profile_protection ? data.value.info.profile_protection.toString(): '';
+      
+      this.radiogroup = data.value.info.profile_setting ? data.value.info.profile_setting.toString(): '';
+
     });
   }
 

@@ -25,7 +25,7 @@ export class InterestsComponent implements OnInit {
   ngOnInit() {
     
     this.userObj.subscribe(data => {
-      this.gender = data.value.info.gender;
+      this.gender = data.value.info.gender !== undefined ? data.value.info.gender : '';
       this.from_age = data.value.info.from_age ? data.value.info.from_age.toString() : '';
       this.to_age = data.value.info.to_age ? data.value.info.to_age.toString() : '';
       this.distance = data.value.info.distance ? data.value.info.distance.toString(): '';
