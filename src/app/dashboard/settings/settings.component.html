@@ -34,18 +34,19 @@
             </div>
           </div>
           <div id="tab2" [ngStyle]="{'display': tab === 'tab2' ? 'block' : 'none'}">
-           <app-alerts [userObj]="details$"></app-alerts>
+           <app-alert [userObj]="details$"></app-alert>
           </div>
           <div id="tab3" [ngStyle]="{'display': tab === 'tab3' ? 'block' : 'none'}">
             <h4>Advanced</h4>
-            <div class="more-setting-top">
+            <div class="more-setting-top" [ngStyle]="{'display': !more_settings ? 'block' : 'none'}">
               <app-introduction-message [userObj]="details$"></app-introduction-message>
               <app-profile-protection [userObj]="details$"></app-profile-protection>
             </div>
-            <div class="more-setting-outer"><a href="javascript:void(0)"><span>Manage More Settings</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
-            <div class="more-setting-bot">
+            <div class="more-setting-outer"><a href="javascript:void(0)" (click)="toggleSetting()"><span>Manage More Settings</span> <i class="fa fa-caret-down" [ngClass]="{'fa-caret-up': more_settings}" aria-hidden="true"></i></a></div>
+            <div class="more-setting-bot" [ngStyle]="{'display': more_settings ? 'block' : 'none'}">
               <div class="setting-row">
                 <h5>Instant Messenger</h5>
+                <app-alerts></app-alerts>
                 <div class="personal-full-with-area">
                   <input class="personal-radio-btn" name="instant_msg" [(ngModel)]="instant_msg" value="1" type="radio">
                   <span class="personal-radio-title"><strong>ON</strong></span>
@@ -60,18 +61,29 @@
               </div>
               <div class="setting-row">
                 <h5>Auto Reply to Mail Matches</h5>
-                <div class="personal-full-with-area">
-                  <label>Subject</label>
-                  <input type="text" class="advance-input-text" value="">
-                </div>
-                <div class="personal-full-with-area">
-                  <label>Reply Text</label>
-                  <textarea class="setting-advance-textarea"></textarea>
-                </div>
-                <div class="personal-full-with-area">
-                  <input class="personal-radio-btn" value="" type="radio">
-                  <span class="personal-radio-title"><strong>Enable AutoReply</strong></span> </div>
-                <input class="save-btn update-btn" value="Update" type="submit">
+                <app-alerts></app-alerts>
+                <form [formGroup]="autReplyForm" (ngSubmit)="onAutoReplySubmit()">
+                  <div class="personal-full-with-area">
+                    <label>Subject</label>
+                    <input type="text" class="advance-input-text help-block" [(ngModel)]="auto_reply_subject" formControlName="auto_reply_subject" value="auto_reply_subject">
+                    <div *ngIf="autoReplySubmitted && f.auto_reply_subject.errors" class="invalid-feedback">
+                        <span *ngIf="f.auto_reply_subject.errors.required">Subject is required</span>
+                    </div>
+                  </div>
+                  <div class="personal-full-with-area">
+                    <label>Reply Text</label>
+                    <textarea class="setting-advance-textarea" formControlName="auto_reply_body" [(ngModel)]="auto_reply_body"></textarea>
+                    <div *ngIf="autoReplySubmitted && f.auto_reply_body.errors" class="invalid-feedback">
+                        <span *ngIf="f.auto_reply_body.errors.required">Body is required</span>
+                    </div>
+                  </div>
+                  <div class="personal-full-with-area">
+                    <input class="personal-radio-btn"  type="checkbox" formControlName="enable_auto_reply" [(ngModel)]="enable_auto_reply">
+                    <span class="personal-radio-title"><strong>Enable AutoReply</strong></span> 
+                  </div>
+                  <input [disabled]="autReplyLoading" class="save-btn update-btn" value="Update" type="submit">
+                  <img *ngIf="autReplyLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                </form>
               </div>
               <div class="setting-row">
                 
@@ -87,8 +99,9 @@
               </div>
               <div class="setting-row">
                 <h5>Promotion</h5>
+                <app-alerts></app-alerts>
                 <div class="personal-full-with-area">
-                  <input class="personal-radio-btn" value="1" name="promotion" type="radio">
+                  <input class="personal-radio-btn" value="1" name="promotion" [(ngModel)]="promotion" type="radio">
                   <span class="personal-radio-title"><strong>Active Promotion</strong></span> </div>
                 <div class="personal-full-with-area">
                   <ul>
@@ -101,7 +114,7 @@
                   </ul>
                 </div>
                 <div class="personal-full-with-area">
-                  <input class="personal-radio-btn" value="2" name="promotion" type="radio">
+                  <input class="personal-radio-btn" value="2" name="promotion" [(ngModel)]="promotion" type="radio">
                   <span class="personal-radio-title"><strong>Basic Promotion</strong></span> </div>
                 <div class="personal-full-with-area">
                   <ul>
@@ -114,7 +127,7 @@
                   </ul>
                 </div>
                 <div class="personal-full-with-area">
-                  <input class="personal-radio-btn" value="3" name="promotion" type="radio">
+                  <input class="personal-radio-btn" value="3" name="promotion" [(ngModel)]="promotion" type="radio">
                   <span class="personal-radio-title"><strong>No Promotion</strong></span> </div>
                 <div class="personal-full-with-area">
                   <ul>
@@ -125,10 +138,11 @@
                 </div>
 
                 <div class="personal-full-with-area advance-bottom-text">
-                  <input class="personal-radio-btn" value="" type="checkbox">
+                  <input class="personal-radio-btn" type="checkbox" [(ngModel)]="promotion_chk">
                   <span class="personal-radio-title instruction-title"><strong>Please mail me member introductions. Member Introductions are promotional messages marked with this symbol  in your mailbox and have been sent to you and other recipients in accordance with the senders Promotional settings.
                   If you have problems with email delivery to your address from the site, please read the <a href="#">following instructions.</a></strong></span> </div>
-                <input class="save-btn update-btn" value="Update" type="submit">
+                  <input [disabled]="promotionLoading" class="save-btn update-btn" value="Update" type="submit" (click)="onUpdatePromotion(promotion, promotion_chk)">
+                  <img *ngIf="promotionLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
               </div>
             </div>
           </div>

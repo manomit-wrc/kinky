@@ -153,6 +153,20 @@ export class AuthenticationService {
         }))
     }
 
+    updateAutoReplyEmail(auto_reply_subject: string, auto_reply_body: string, enable_auto_reply: boolean) {
+      return this.http.post<any>(`http://localhost:9000/api/users/update-auto-reply-email`, { auto_reply_subject, auto_reply_body, enable_auto_reply })
+        .pipe(map(data => {
+          return data;
+        }))
+    }
+
+    updatePromotion(promotion: string, promotion_chk: boolean) {
+      return this.http.post<any>(`http://localhost:9000/api/users/update-promotion`, { promotion, promotion_chk })
+        .pipe(map(data => {
+          return data;
+        }))
+    }
+
 
 /* Check for password match*/
      MatchPassword(AC: AbstractControl) {

@@ -145,12 +145,12 @@ $(".personal-detail-tab-row ul li").click(function(){
 						   
 
 /*******************Setting**********************/
-$(document).ready(function() {
-$(".more-setting-outer a").click(function(){
- $(".more-setting-bot, .more-setting-top").toggle();
- $(".fa-caret-down").toggleClass("fa-caret-up");
-});
-});
+// $(document).ready(function() {
+// $(".more-setting-outer a").click(function(){
+//  $(".more-setting-bot, .more-setting-top").toggle();
+//  $(".fa-caret-down").toggleClass("fa-caret-up");
+// });
+// });
 
 
 

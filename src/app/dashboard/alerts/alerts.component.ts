@@ -3,7 +3,7 @@ import { AuthenticationService } from '../../services';
 import { first } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-alerts',
+  selector: 'app-alert',
   templateUrl: './alerts.component.html',
   styleUrls: ['./alerts.component.css']
 })

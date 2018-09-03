@@ -1,0 +1,156 @@
+<div class="inner-main-sec">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="general-tab-top-outer">
+            <ul class="form-tab-1">
+              <li [ngClass]="{ 'pages_active': tab === 'addevent' }"><a [routerLink]="" (click)="displayTab('addevent')"><img src="/assets/images/green-icon-1.png" alt=""><span>Add Event</span></a></li>
+              <li [ngClass]="{ 'pages_active': tab === 'addmeetup' }"><a [routerLink]="" (click)="displayTab('addmeetup')"><img src="/assets/images/green-icon-3.png" alt=""><span>Add Meetup</span></a></li>
+            </ul>
+          </div>
+          <div class="addevent-tab-content">
+            <div id="addevent" [ngStyle]="{'display': tab === 'addevent' ? 'block' : 'none'}">
+              <div class="addevent-row">
+                <label>Event Title</label>
+                <input type="text" class="addevent-textbox">
+              </div>
+              <div class="addevent-row">
+                <label>Event Description</label>
+                <textarea class="addevent-txtarea"></textarea>
+              </div>
+              <div class="addevent-row">
+                <div class="addevent-left-sec">
+                  <label>Start date</label>
+                  <div>
+                    <div class="setting-medium-drop select-box">
+                      <input type="text" id="date" class="datetime-input" placeholder="Date">
+                    </div>
+                    <div class="setting-medium-drop setting-medium-drop-right select-box">
+                      <input type="text" id="time" class="datetime-input" placeholder="Time">
+                    </div>
+                  </div>
+                </div>
+                <div class="addevent-right-sec">
+                  <label>End date</label>
+                  <div>
+                    <div class="setting-medium-drop select-box">
+                      <input type="text" id="date2" class="datetime-input" placeholder="Date">
+                    </div>
+                    <div class="setting-medium-drop setting-medium-drop-right select-box">
+                      <input type="text" id="time2" class="datetime-input" placeholder="Time">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="addevent-row">
+                <div class="addevent-left-sec">
+                  <label>Location</label>
+                  <div>
+                    <div class="setting-medium-drop select-box">
+                      <select>
+                        <option>USA</option>
+                      </select>
+                    </div>
+                    <div class="setting-medium-drop setting-medium-drop-right select-box">
+                      <select>
+                        <option>Tucson, Arizona</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="addevent-row">
+                <label>Area</label>
+                <input class="addevent-textbox" type="text">
+              </div>
+              <div class="addevent-row">
+                <input class="private-btn" value="Free Event" type="submit">
+              </div>
+              <div class="addevent-row">
+                <div class="personal-full-with-area">
+                  <input class="personal-radio-btn" value="" name="deleteaccount" type="checkbox">
+                  <span class="personal-radio-title"><strong>Private (visible for friends only)</strong></span> </div>
+              </div>
+              <div class="personal-detail-tab-butn-row">
+                <input class="cancel-btn" value="Cancel" type="submit">
+                <input class="save-btn" value=" Add Event " type="submit">
+              </div>
+            </div>
+            <div id="addmeetup" [ngStyle]="{'display': tab === 'addmeetup' ? 'block' : 'none'}">
+              <div class="addevent-row">
+                <h4>Meet-ups</h4>
+              </div>
+              <div class="addevent-row">
+                <label>Available day/days</label>
+                <div class="setting-medium-drop select-box">
+                  <input type="text" id="date3" class="datetime-input" placeholder="Date">
+                </div>
+              </div>
+              <div class="addevent-row">
+                <label>I'd like to meet with</label>
+                <div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Gay/Bi Male</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Gay/Bi Female</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Male</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Female </span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Couple</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">CD / TV / TS</span></div>
+                </div>
+              </div>
+              <div class="addevent-row">
+                <label>Somewhere near</label>
+                <div class="setting-medium-drop select-box">
+                  <select>
+                    <option>USA</option>
+                  </select>
+                </div>
+                <div class="setting-medium-drop setting-medium-drop-right select-box">
+                  <select>
+                    <option>Tucson, Arizona</option>
+                  </select>
+                </div>
+              </div>
+              <div class="addevent-row">
+                <label>Area</label>
+                <input class="addevent-textbox" type="text">
+              </div>
+              <div class="addevent-row">
+                <label>I'd like to meet with</label>
+                <div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" name="type" type="radio">
+                    <span class="personal-radio-title">Meet</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" name="type" type="radio">
+                    <span class="personal-radio-title">Social</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" name="type" type="radio">
+                    <span class="personal-radio-title">Holiday</span></div>
+                </div>
+              </div>
+              <div class="addevent-row">
+                <label>Personal Message <span>Note: messages must not contain any contact information</span> </label>
+                <textarea class="addevent-txtarea"></textarea>
+              </div>
+              <div class="personal-detail-tab-butn-row">
+                <input class="cancel-btn" value="Cancel" type="submit">
+                <input class="save-btn" value=" Add Meetup " type="submit">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

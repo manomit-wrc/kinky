@@ -12,19 +12,27 @@ import { DeleteaccountComponent } from './deleteaccount/deleteaccount.component'
 import { SiteconfigureComponent } from './siteconfigure/siteconfigure.component';
 import { InterestsComponent } from './interests/interests.component';
 import { ProfileProtectionComponent } from './profile-protection/profile-protection.component';
-
+import { AlertsModule } from 'angular-alert-module';
 
 import { AlertsComponent } from './alerts/alerts.component';
 
 import { IntroductionMessageComponent } from './introduction-message/introduction-message.component';
 import { MyLatestProfileComponent } from './my-latest-profile/my-latest-profile.component';
+import { EventsComponent } from './events/events.component';
+import { AddEventComponent } from './events/add-events.component';
+
+
+
+
 
 @NgModule({
   imports: [
     CommonModule,
+    AlertsModule.forRoot(),
     DashBoardRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    
   ],
   declarations: [
     LayoutComponent,
@@ -39,7 +47,9 @@ import { MyLatestProfileComponent } from './my-latest-profile/my-latest-profile.
        ProfileProtectionComponent,
        IntroductionMessageComponent,
        AlertsComponent,
-       MyLatestProfileComponent
+       MyLatestProfileComponent,
+       EventsComponent,
+       AddEventComponent
       ]
 })
 export class DashboardModule { }
