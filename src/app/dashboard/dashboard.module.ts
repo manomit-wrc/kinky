@@ -13,7 +13,7 @@ import { SiteconfigureComponent } from './siteconfigure/siteconfigure.component'
 import { InterestsComponent } from './interests/interests.component';
 import { ProfileProtectionComponent } from './profile-protection/profile-protection.component';
 
-
+import { AlertsModule } from 'angular-alert-module';
 import { AlertsComponent } from './alerts/alerts.component';
 
 import { IntroductionMessageComponent } from './introduction-message/introduction-message.component';
@@ -24,7 +24,8 @@ import { MyLatestProfileComponent } from './my-latest-profile/my-latest-profile.
     CommonModule,
     DashBoardRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AlertsModule.forRoot()
   ],
   declarations: [
     LayoutComponent,

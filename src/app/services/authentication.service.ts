@@ -109,12 +109,62 @@ export class AuthenticationService {
 
     }
 
+
     state(e: any) {
       return this.http.post<any>(`http://localhost:9000/api/users/State`, { e })
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
 
           return user; //for state list
+      }));
+
+    }
+
+      ethnicity() {
+      return this.http.get<any>(`http://localhost:9000/api/users/Ethnicity`, {})
+      .pipe(map(user => {
+          // login successful if there's a jwt token in the response
+
+          return user; //for country list
+      }));
+
+    }
+
+      hair() {
+      return this.http.get<any>(`http://localhost:9000/api/users/Hair`, {})
+      .pipe(map(user => {
+          // login successful if there's a jwt token in the response
+
+          return user; //for country list
+      }));
+
+      }
+
+      bodyhair() {
+      return this.http.get<any>(`http://localhost:9000/api/users/BodyHair`, {})
+      .pipe(map(user => {
+          // login successful if there's a jwt token in the response
+
+          return user; //for country list
+      }));
+
+      }
+
+      build() {
+      return this.http.get<any>(`http://localhost:9000/api/users/Build`, {})
+      .pipe(map(user => {
+          // login successful if there's a jwt token in the response
+
+          return user; //for country list
+      }));
+
+      }
+      height() {
+      return this.http.get<any>(`http://localhost:9000/api/users/Height`, {})
+      .pipe(map(user => {
+          // login successful if there's a jwt token in the response
+
+          return user; //for country list
       }));
 
     }
@@ -148,6 +198,13 @@ export class AuthenticationService {
     }
     updateInstantMessage(instant_msg: any) {
       return this.http.post<any>(`http://localhost:9000/api/users/update-instant-message`, { instant_msg })
+        .pipe(map(data => {
+          return data;
+        }))
+    }
+
+    personal_details_save(headline:any, description:any){
+      return this.http.post<any>(`http://localhost:9000/api/users/update-personal-headline`, { headline,description })
         .pipe(map(data => {
           return data;
         }))
