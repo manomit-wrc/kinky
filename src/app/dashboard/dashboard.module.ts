@@ -14,6 +14,8 @@ import { InterestsComponent } from './interests/interests.component';
 import { ProfileProtectionComponent } from './profile-protection/profile-protection.component';
 import { AlertsModule } from 'angular-alert-module';
 
+
+
 import { AlertsComponent } from './alerts/alerts.component';
 
 import { IntroductionMessageComponent } from './introduction-message/introduction-message.component';
@@ -32,7 +34,7 @@ import { AddEventComponent } from './events/add-events.component';
     DashBoardRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    
+    AlertsModule.forRoot()
   ],
   declarations: [
     LayoutComponent,
