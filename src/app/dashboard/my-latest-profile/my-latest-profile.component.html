@@ -1,0 +1,353 @@
+<div class="inner-main-sec">
+  <div class="container">
+    <div class="row latest-personal-detail-outer">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h4><img src="/assets/images/setting-icon.png" alt=""><span>Add at least personal details</span></h4>
+        <div class="latest-personal-details-tab-top">
+          <ul class="form-tab">
+            <li [ngClass]="{ 'pages_active': tab === 'tab1' }"><a [routerLink]="" (click)="displayTab('tab1')">My Details</a></li>
+            <li [ngClass]="{ 'pages_active': tab === 'tab2' }"><a [routerLink]="" (click)="displayTab('tab2')">About Me</a></li>
+          </ul>
+        </div>
+        <div class="latest-personal-details-tab-bot">
+          <div id="tab1" [ngStyle]="{'display': tab === 'tab1' ? 'block' : 'none'}">
+            <div class="personal-detail-tab-row">
+              <div class="personal-detail-medium-box select-box">
+                <label>Location</label>
+                <select name='count_id' (change)="onItemChange($event.target.value)" [(ngModel)]="count">
+                  <option [value]="count._id" *ngFor="let count of country">{{count.name}}</option>
+                </select>
+              </div>
+              <div class="personal-detail-medium-box select-box">
+                <label>&nbsp;</label>
+                <select [(ngModel)]="st" name ="st_id">
+                  <option [value]="st._id" *ngFor="let st of state">{{st.name}}</option>
+                </select>
+              </div>
+              <div class="personal-detail-big-box select-box">
+                <label>Time Zone</label>
+                <select [(ngModel)]="timezone">
+               <option value="tz.label" *ngFor="let tz of timezones">{{tz.name}}</option>
+              </select>
+              </div>
+            </div>
+            <div class="personal-detail-tab-row">
+              <div class="personal-bigradio-sec">
+                <label>I am primarily looking for</label>
+                <div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="M" [(ngModel)]="gender" name="gender" type="radio" [checked]="gender =='M'">
+                    <span class="personal-radio-title">Male</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="F" [(ngModel)]="gender" name="gender" type="radio" [checked]="gender =='F'">
+                    <span class="personal-radio-title">Female</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="C" [(ngModel)]="gender" name="gender" type="radio" [checked]="gender =='C'">
+                    <span class="personal-radio-title">Couple</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="O" [(ngModel)]="gender" name="gender" type="radio" [checked]="gender =='O'">
+                    <span class="personal-radio-title">CD / TV / TS</span></div>
+                </div>
+              </div>
+              <div class="personal-bigradio-sec">
+                <label>Gender</label>
+                <div>
+                  <div class="personal-radio-outer">
+                <div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="M" [(ngModel)]="looking_for" name="gender1" type="radio" [checked]="looking_for =='M'">
+                    <span class="personal-radio-title">Male</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="F" [(ngModel)]="looking_for" name="gender1" type="radio" [checked]="looking_for =='F'">
+                    <span class="personal-radio-title">Female</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="C" [(ngModel)]="looking_for" name="gender1" type="radio" [checked]="looking_for =='C'">
+                    <span class="personal-radio-title">Couple</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="O" [(ngModel)]="looking_for" name="gender1" type="radio" [checked]="looking_for =='O'">
+                    <span class="personal-radio-title">CD / TV / TS</span></div>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="personal-detail-tab-row">
+              <div class="personal-bigradio-sec">
+                <div>
+                  <div class="personal-detail-sml-box select-box">
+                    <label>Date of birth</label>
+                    <select>
+                      <option>{{dd}}</option>
+                    </select>
+                  </div>
+                  <div class="personal-detail-sml-box select-box">
+                    <label>&nbsp;</label>
+                    <select>
+                      <option>{{mm}}</option>
+                    </select>
+                  </div>
+                  <div class="personal-detail-sml-box select-box">
+                    <label>&nbsp;</label>
+                    <select>
+                      <option>{{yyyy}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="personal-bigradio-sec">
+                <label>Sexuality</label>
+                <div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Straight</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Gay</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Bi</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Bi-curious</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="personal-detail-tab-row">
+              <div class="personal-detail-medium-box select-box">
+                <label>Ethnicity</label>
+                <select>
+                  <option>African</option>
+                  <option>Arabic</option>
+                  <option>Asian</option>
+                  <option>Caucasian</option>
+                  <option>Indian</option>
+                  <option>Latino</option>
+                  <option>Oriental</option>
+                  <option>Mixed race</option>
+                  <option>Other</option>
+                  <option>I will tell you later</option>
+                </select>
+              </div>
+              <div class="personal-detail-medium-box select-box">
+                <label>Height</label>
+                <select>
+                  <option>4ft 8in(142cm)</option>
+                  <option>4ft 9in(145cm)</option>
+                  <option>4ft 10in(147cm)</option>
+                  <option>4ft 11in(150cm)</option>
+                  <option>5ft(152cm)</option>
+                  <option>5ft 1in(155cm)</option>
+                  <option>5ft 2in(157cm)</option>
+                  <option>5ft 3in(160cm)</option>
+                  <option>5ft 4in(163cm)</option>
+                  <option>5ft 5in(165cm)</option>
+                  <option>5ft 6in(168cm)</option>
+                  <option>5ft 7in(170cm)</option>
+                  <option>5ft 8in(173cm)</option>
+                </select>
+              </div>
+              <div class="personal-detail-medium-box select-box">
+                <label>Build</label>
+                <select>
+                  <option>Petite</option>
+                  <option>Athletic</option>
+                  <option>Slim</option>
+                  <option>Average</option>
+                  <option>A few extra pound</option>
+                  <option>Big and beautiful</option>
+                  <option>Muscular</option>
+                  <option>I will tell you later</option>
+                </select>
+              </div>
+              <div class="personal-detail-medium-box select-box">
+                <label>Hair</label>
+                <select>
+                  <option>Blonde</option>
+                  <option>Lignt brown</option>
+                  <option>Dark brown</option>
+                  <option>Black</option>
+                  <option>Red</option>
+                  <option>Grey</option>
+                  <option>What hair!</option>
+                  <option>Other</option>
+                  <option>I will tell you later</option>
+                </select>
+              </div>
+              <div class="personal-detail-medium-box select-box">
+                <label>Body hair</label>
+                <select>
+                  <option>Shaved</option>
+                  <option>Smooth</option>
+                  <option>Trimmed</option>
+                  <option>Natural</option>
+                  <option>Wild</option>
+                  <option>I will tell you later</option>
+                </select>
+              </div>
+            </div>
+            <div class="personal-detail-tab-row">
+              <label>Body decoration</label>
+              <div class="personal-full-with-area">
+                <input class="personal-radio-btn" value="" type="radio">
+                <span class="personal-radio-title"><strong>Earrings</strong></span> </div>
+              <div class="personal-full-with-area">
+                <input class="personal-radio-btn" value="" type="radio">
+                <span class="personal-radio-title"><strong>Nose rings</strong></span> </div>
+              <div class="personal-full-with-area">
+                <input class="personal-radio-btn" value="" type="radio">
+                <span class="personal-radio-title"><strong>Body piercing</strong></span> </div>
+              <div class="personal-full-with-area">
+                <input class="personal-radio-btn" value="" type="radio">
+                <span class="personal-radio-title"><strong>Intimate Piercing</strong></span> </div>
+              <div class="personal-full-with-area">
+                <input class="personal-radio-btn" value="" type="radio">
+                <span class="personal-radio-title"><strong>Tattoos</strong></span> </div>
+              <div class="personal-full-with-area">
+                <input class="personal-radio-btn" value="" type="radio">
+                <span class="personal-radio-title"><strong>Other</strong></span> </div>
+              <div class="personal-full-with-area">
+                <input class="personal-radio-btn" value="" type="radio">
+                <span class="personal-radio-title"><strong>Prefer not to say</strong></span> </div>
+            </div>
+            <div class="personal-detail-tab-row">
+              <div class="personal-detail-medium-box select-box">
+                <label>Drink</label>
+                <select>
+                  <option>Never</option>
+                  <option>Socially</option>
+                  <option>Regularly</option>
+                  <option>I live to drink</option>
+                  <option>I will tell you later</option>
+                </select>
+              </div>
+              <div class="personal-detail-medium-box select-box">
+                <label>Smoke</label>
+                <select>
+                  <option>No</option>
+                  <option>Yes</option>
+                  <option>I will tell you later</option>
+                </select>
+              </div>
+              <div class="personal-detail-medium-box select-box">
+                <label>Drugs</label>
+                <select>
+                  <option>None</option>
+                  <option>Some</option>
+                  <option>Heavy</option>
+                  <option>I will tell you later</option>
+                </select>
+              </div>
+              <div class="personal-detail-medium-box select-box">
+                <label>Cock/Breast size</label>
+                <select>
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                  <option>Very large</option>
+                  <option>Prefer not to say</option>
+                </select>
+              </div>
+              <div class="personal-detail-medium-box select-box">
+                <label>Safe sex</label>
+                <select>
+                  <option>Always</option>
+                  <option>Sometimes</option>
+                  <option>Never</option>
+                  <option>I will tell you later</option>
+                </select>
+              </div>
+            </div>
+            <div class="personal-detail-tab-row">
+              <label>I'm interested in <span>(click all that apply)</span></label>
+              <ul>
+                <li><a href="javascript:void(0)">#BBW</a></li>
+                <li><a href="javascript:void(0)">#BDSM</a></li>
+                <li><a href="javascript:void(0)">#Bi-Sexual</a></li>
+                <li><a href="javascript:void(0)">#Cougar</a></li>
+                <li><a href="javascript:void(0)">#Couples</a></li>
+                <li><a href="javascript:void(0)">#Cross Dresser</a></li>
+                <li><a href="javascript:void(0)">#Discreet Meets </a></li>
+                <li><a href="javascript:void(0)">#Dogging</a></li>
+                <li><a href="javascript:void(0)">#Friendship</a></li>
+                <li><a href="javascript:void(0)">#Gay </a></li>
+                <li><a href="javascript:void(0)">#Group Meets</a></li>
+                <li><a href="javascript:void(0)">#Hookups</a></li>
+                <li><a href="javascript:void(0)">#Lesbian</a></li>
+                <li><a href="javascript:void(0)">#Lingerie</a></li>
+                <li><a href="javascript:void(0)">#Long Term Regular Meets</a></li>
+                <li><a href="javascript:void(0)">#Long Term Relationship</a></li>
+                <li><a href="javascript:void(0)">#Mature</a></li>
+                <li><a href="javascript:void(0)">#MILF</a></li>
+                <li><a href="javascript:void(0)">#Online Chat</a></li>
+                <li><a href="javascript:void(0)">#Tatto </a></li>
+                <li><a href="javascript:void(0)">#Threesomes</a></li>
+                <li><a href="javascript:void(0)">#Trans</a></li>
+                <li><a href="javascript:void(0)">#Webcam</a></li>
+              </ul>
+            </div>
+            <div class="personal-detail-tab-row">
+              <label>With people aged<span>(click all that apply)</span></label>
+              <ul>
+                <li><a href="javascript:void(0)">#18 - 30</a></li>
+                <li><a href="javascript:void(0)">30 - 40</a></li>
+                <li><a href="javascript:void(0)">40 - 50</a></li>
+                <li><a href="javascript:void(0)">50 - 60</a></li>
+                <li><a href="javascript:void(0)">60 +</a></li>
+              </ul>
+            </div>
+            <div class="personal-detail-tab-row">
+              <label>Travel arrangements</label>
+              <div>
+                <div class="personal-radio-outer">
+                  <input class="personal-radio-btn" value="" type="radio">
+                  <span class="personal-radio-title">Can accommodate</span></div>
+                <div class="personal-radio-outer">
+                  <input class="personal-radio-btn" value="" type="radio">
+                  <span class="personal-radio-title">Will travel</span></div>
+              </div>
+            </div>
+            <div class="personal-detail-tab-row">
+              <label>I'm here to</label>
+              <div>
+                <div class="personal-radio-outer">
+                  <input class="personal-radio-btn" name="here" value="" type="radio">
+                  <span class="personal-radio-title">Have Fun</span></div>
+                <div class="personal-radio-outer">
+                  <input class="personal-radio-btn" name="here" value="" type="radio">
+                  <span class="personal-radio-title">Promote A Paid Service</span></div>
+              </div>
+              <!--<p class="personal-detail-link"><a href="#">Please contact support to change this option </a></p>-->
+            </div>
+            <div class="personal-detail-tab-butn-row">
+              <input class="cancel-btn" value="Cancel" type="submit">
+              <input class="save-btn" value="Continue " type="submit">
+            </div>
+          </div>
+          <div id="tab2" [ngStyle]="{'display': tab === 'tab2' ? 'block' : 'none'}">
+            <div class="latest-personal-detail-row">
+              <h5>Your Profile Headline</h5>
+              <textarea class="latest-personal-detail-textarea"></textarea>
+            </div>
+            <div class="latest-personal-detail-row">
+              <h5>A bit more about you</h5>
+              <textarea class="latest-personal-detail-textarea"></textarea>
+            </div>
+            <div class="latest-personal-detail-row">
+              <input class="cancel-btn" value="Cancel" type="submit">
+              <input class="save-btn" value="Continue " type="submit">
+            </div>
+            <div class="latest-personal-detail-row">
+              <h5>Don’t include</h5>
+              <ul>
+                <li>* Contact details</li>
+                <li>* Links to websites</li>
+                <li>* Memberships status</li>
+                <li>* Illegal activities</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

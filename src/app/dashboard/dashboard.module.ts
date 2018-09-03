@@ -17,6 +17,7 @@ import { ProfileProtectionComponent } from './profile-protection/profile-protect
 import { AlertsComponent } from './alerts/alerts.component';
 
 import { IntroductionMessageComponent } from './introduction-message/introduction-message.component';
+import { MyLatestProfileComponent } from './my-latest-profile/my-latest-profile.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { IntroductionMessageComponent } from './introduction-message/introductio
        InterestsComponent,
        ProfileProtectionComponent,
        IntroductionMessageComponent,
-       AlertsComponent
+       AlertsComponent,
+       MyLatestProfileComponent
       ]
 })
 export class DashboardModule { }
