@@ -137,10 +137,10 @@ $(document).ready(function() {
 
 /*******************Editopp**********************/
 $(document).ready(function() {
-$(".personal-detail-tab-row ul li").click(function(){
- $(this).toggleClass("detail-active");
+// $(".personal-detail-tab-row ul li").click(function(){
+//  $(this).toggleClass("detail-active");
  
-});
+// });
 });
 						   
 

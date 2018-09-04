@@ -4,7 +4,7 @@
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h4><img src="/assets/images/setting-icon.png" alt=""><span>Add at least personal details</span></h4>
         <div class="latest-personal-details-tab-top">
-          <ul class="form-tab">
+          <ul class="form-tab-1">
             <li [ngClass]="{ 'pages_active': tab === 'tab1' }"><a [routerLink]="" (click)="displayTab('tab1')">My Details</a></li>
             <li [ngClass]="{ 'pages_active': tab === 'tab2' }"><a [routerLink]="" (click)="displayTab('tab2')">About Me</a></li>
           </ul>
@@ -217,39 +217,18 @@
             <div class="personal-detail-tab-row">
               <label>I'm interested in <span>(click all that apply)</span></label>
               <ul>
-                <li><a href="javascript:void(0)">#BBW</a></li>
-                <li><a href="javascript:void(0)">#BDSM</a></li>
-                <li><a href="javascript:void(0)">#Bi-Sexual</a></li>
-                <li><a href="javascript:void(0)">#Cougar</a></li>
-                <li><a href="javascript:void(0)">#Couples</a></li>
-                <li><a href="javascript:void(0)">#Cross Dresser</a></li>
-                <li><a href="javascript:void(0)">#Discreet Meets </a></li>
-                <li><a href="javascript:void(0)">#Dogging</a></li>
-                <li><a href="javascript:void(0)">#Friendship</a></li>
-                <li><a href="javascript:void(0)">#Gay </a></li>
-                <li><a href="javascript:void(0)">#Group Meets</a></li>
-                <li><a href="javascript:void(0)">#Hookups</a></li>
-                <li><a href="javascript:void(0)">#Lesbian</a></li>
-                <li><a href="javascript:void(0)">#Lingerie</a></li>
-                <li><a href="javascript:void(0)">#Long Term Regular Meets</a></li>
-                <li><a href="javascript:void(0)">#Long Term Relationship</a></li>
-                <li><a href="javascript:void(0)">#Mature</a></li>
-                <li><a href="javascript:void(0)">#MILF</a></li>
-                <li><a href="javascript:void(0)">#Online Chat</a></li>
-                <li><a href="javascript:void(0)">#Tatto </a></li>
-                <li><a href="javascript:void(0)">#Threesomes</a></li>
-                <li><a href="javascript:void(0)">#Trans</a></li>
-                <li><a href="javascript:void(0)">#Webcam</a></li>
+                  <li *ngFor="let n of interested_arr" [ngClass]="{'detail-active':(testArr.indexOf(n) > -1)}">
+                      <a href="javascript:void(0)" (click)="setClass($event)">{{n}}</a>
+                  </li>
               </ul>
             </div>
             <div class="personal-detail-tab-row">
               <label>With people aged<span>(click all that apply)</span></label>
               <ul>
-                <li><a href="javascript:void(0)">#18 - 30</a></li>
-                <li><a href="javascript:void(0)">30 - 40</a></li>
-                <li><a href="javascript:void(0)">40 - 50</a></li>
-                <li><a href="javascript:void(0)">50 - 60</a></li>
-                <li><a href="javascript:void(0)">60 +</a></li>
+                  <li *ngFor="let n of people_aged_arr" [ngClass]="{'detail-active':(testArr2.indexOf(n) > -1)}">
+                      <a href="javascript:void(0)" (click)="setClassAged($event)">{{n}}</a>
+                  </li>
+
               </ul>
             </div>
             <div class="personal-detail-tab-row">

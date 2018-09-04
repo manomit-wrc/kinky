@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -47,10 +47,17 @@ export class MyLatestProfileComponent implements OnInit {
   day: any = [];
   month: any = [];
   year: any = [];
+  interested_arr: any = [];
+  people_aged_arr: any = [];
+  testArr: any = [];
+  testArr2: any = [];
+  interested_arr_list: any= [];
+  age_range_list: any= [];
   constructor(
     private auth: AuthenticationService,
     private router: Router,
-    private alerts:AlertsService
+    private alerts:AlertsService,
+    private renderer: Renderer
   ) { }
 
   ngOnInit() {
@@ -66,10 +73,16 @@ export class MyLatestProfileComponent implements OnInit {
     for (let i = 1970; i <=  new Date().getFullYear(); i++) {
       this.year.push(i);
     }
+    this.interested_arr = ['#BBW', '#BDSM', '#Bi-Sexual', '#Cougar', '#Couples', '#Cross Dresser', '#Discreet Meets',
+    '#Dogging', '#Friendship', '#Gay', '#Group Meets', '#Hookups', '#Lesbian', '#Lingerie', '#Long Term Regular Meets',
+    '#Long Term Relationship', '#Mature', '#MILF', '#Online Chat', '#Tatto', '#Threesomes', '#Trans', '#Webcam'];
+
+    this.people_aged_arr = ['#18 - 30', '#30 - 40', '#40 - 50', '#50 - 60', '#60 +'];
 
     this.auth.user_details()
     .pipe(first())
     .subscribe(data => {
+
 /*       this.gender = data.value.user.gender !== undefined ? data.value.user.gender : '';
       this.count = data.value.user.country;
       this.st = data.value.user.state;
@@ -83,6 +96,9 @@ export class MyLatestProfileComponent implements OnInit {
       this.personal_details = data.value.user.description;
       this.data = data.value.user;
       this.timezones = data.value.timezones;
+      this.testArr = data.value.user.interested_in;
+      this.testArr2 = data.value.user.age_range;
+
     });
 
     this.auth.country()
@@ -153,9 +169,13 @@ export class MyLatestProfileComponent implements OnInit {
   }
 
   personal_details_update (data) {
+    data['interested_in'] = this.testArr;
+    data['age_range'] = this.testArr2;
+
   this.auth.personal_info_update(data)
     .pipe(first())
     .subscribe(data => {
+      window.scrollTo(0,0);
       this.alerts.setMessage('Updated Successfull!', 'success');
 
     });
@@ -173,5 +193,44 @@ export class MyLatestProfileComponent implements OnInit {
       this.alerts.setMessage('Please fill the details!', 'error');
     }
   }
+
+  setClass(event) {
+    var target = event.currentTarget;
+
+    if(target.parentElement.className.indexOf("detail-active") === -1) {
+
+     this.testArr.push(event.target.textContent);
+
+      this.renderer.setElementClass(target.parentElement,"detail-active",true);
+    }
+    else {
+
+     var index = this.testArr.indexOf(event.target.textContent);
+
+     if (index > -1) {
+        this.testArr.splice(index, 1);
+     }
+      target.parentElement.classList.remove("detail-active");
+    }
+
+  }
+
+  setClassAged(event) {
+    var target = event.currentTarget;
+
+    if(target.parentElement.className.indexOf("detail-active") === -1) {
+      this.testArr2.push(event.target.textContent);
+      this.renderer.setElementClass(target.parentElement,"detail-active",true);
+    }
+    else {
+      var index = this.testArr2.indexOf(event.target.textContent);
+
+      if (index > -1) {
+         this.testArr2.splice(index, 1);
+      }
+      target.parentElement.classList.remove("detail-active");
+    }
+  }
+
 
 }
