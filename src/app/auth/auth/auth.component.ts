@@ -36,6 +36,7 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.alerts.setDefaults('timeout',5);
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -160,16 +161,7 @@ export class AuthComponent implements OnInit {
     .pipe(first())
     .subscribe(data => {
       this.loading = false;
-      if ( data.code !== 200) {
-
-
-        this.alerts.setMessage('Please insert correct your email or username!', 'error');
-
-      } else {
-
-        this.alerts.setMessage('Please check your email for change your passowrd', 'success');
-        this.forgotForm.reset();
-      }
+      this.alerts.setMessage('If a matching account was found an email was sent to the details you provided, to allow you to reset your password.', 'success');
     });
   }
 

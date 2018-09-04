@@ -224,6 +224,19 @@ export class AuthenticationService {
           return data;
         }))
     }
+    checkForgotPassword(link: string) {
+      return this.http.post<any>(`http://localhost:9000/api/users/check-password-request`, { link })
+        .pipe(map(data => {
+          return data;
+        }))
+    }
+
+    updateForgotPassword(password: string, link: string) {
+      return this.http.post<any>(`http://localhost:9000/api/users/update-password-request`, { password, link })
+        .pipe(map(data => {
+          return data;
+      }))
+    }
 
 
 /* Check for password match*/
@@ -231,10 +244,10 @@ export class AuthenticationService {
      const password = AC.get('password').value; // to get value in input tag
       const c_password = AC.get('c_password').value; // to get value in input tag
        if ( password != c_password ) {
-           console.log('false');
+           
            AC.get('c_password').setErrors( {MatchPassword: true} );
        } else {
-           console.log('true');
+           
            return null;
        }
    }
