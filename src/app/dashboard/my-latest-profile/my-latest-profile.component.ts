@@ -79,7 +79,8 @@ export class MyLatestProfileComponent implements OnInit {
       this.yyyy = data.value.user.yyyy;
       this.timezone = data.value.user.timezone;
       this.timezones = data.value.timezones; */
-
+      this.headline = data.value.user.headline;
+      this.personal_details = data.value.user.description;
       this.data = data.value.user;
       this.timezones = data.value.timezones;
     });
