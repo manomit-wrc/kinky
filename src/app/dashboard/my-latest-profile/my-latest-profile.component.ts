@@ -50,12 +50,9 @@ export class MyLatestProfileComponent implements OnInit {
   interested_arr: any = [];
   people_aged_arr: any = [];
   testArr: any = [];
-<<<<<<< HEAD
   testArr2: any = [];
   interested_arr_list: any= [];
   age_range_list: any= [];
-=======
->>>>>>> e639ee7898ce28214d08c7c257f66f47ec6c4b42
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -76,21 +73,11 @@ export class MyLatestProfileComponent implements OnInit {
     for (let i = 1970; i <=  new Date().getFullYear(); i++) {
       this.year.push(i);
     }
-<<<<<<< HEAD
     this.interested_arr = ['#BBW', '#BDSM', '#Bi-Sexual', '#Cougar', '#Couples', '#Cross Dresser', '#Discreet Meets',
     '#Dogging', '#Friendship', '#Gay', '#Group Meets', '#Hookups', '#Lesbian', '#Lingerie', '#Long Term Regular Meets',
     '#Long Term Relationship', '#Mature', '#MILF', '#Online Chat', '#Tatto', '#Threesomes', '#Trans', '#Webcam'];
 
     this.people_aged_arr = ['#18 - 30', '#30 - 40', '#40 - 50', '#50 - 60', '#60 +'];
-=======
-    this.interested_arr = ['BBW', 'BDSM', 'Bi-Sexual', 'Cougar', 'Couples', 'Cross Dresser', 'Discreet Meets',
-    'Dogging', 'Friendship', 'Gay', 'Group Meets', 'Hookups', 'Lesbian', 'Lingerie', 'Long Term Regular Meets',
-    'Long Term Relationship', 'Mature', 'MILF', 'Online Chat', 'Tatto', 'Threesomes', 'Trans', 'Webcam'];
-
-    this.people_aged_arr = ['18 - 30', '30 - 40', '40 - 50', '50 - 60', '60 +'];
-
-    this.testArr = ['BBW', 'BDSM', 'Webcam']
->>>>>>> e639ee7898ce28214d08c7c257f66f47ec6c4b42
 
     this.auth.user_details()
     .pipe(first())
