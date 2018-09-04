@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -47,10 +47,14 @@ export class MyLatestProfileComponent implements OnInit {
   day: any = [];
   month: any = [];
   year: any = [];
+  interested_arr: any = [];
+  people_aged_arr: any = [];
+  testArr: any = [];
   constructor(
     private auth: AuthenticationService,
     private router: Router,
-    private alerts:AlertsService
+    private alerts:AlertsService,
+    private renderer: Renderer
   ) { }
 
   ngOnInit() {
@@ -66,6 +70,13 @@ export class MyLatestProfileComponent implements OnInit {
     for (let i = 1970; i <=  new Date().getFullYear(); i++) {
       this.year.push(i);
     }
+    this.interested_arr = ['BBW', 'BDSM', 'Bi-Sexual', 'Cougar', 'Couples', 'Cross Dresser', 'Discreet Meets', 
+    'Dogging', 'Friendship', 'Gay', 'Group Meets', 'Hookups', 'Lesbian', 'Lingerie', 'Long Term Regular Meets', 
+    'Long Term Relationship', 'Mature', 'MILF', 'Online Chat', 'Tatto', 'Threesomes', 'Trans', 'Webcam'];
+
+    this.people_aged_arr = ['18 - 30', '30 - 40', '40 - 50', '50 - 60', '60 +'];
+
+    this.testArr = ['BBW', 'BDSM', 'Webcam']
 
     this.auth.user_details()
     .pipe(first())
@@ -172,5 +183,29 @@ export class MyLatestProfileComponent implements OnInit {
       this.alerts.setMessage('Please fill the details!', 'error');
     }
   }
+
+  setClass(event) {
+    var target = event.currentTarget;
+    
+    if(target.parentElement.className.indexOf("detail-active") === -1) {
+      this.renderer.setElementClass(target.parentElement,"detail-active",true);
+    }
+    else {
+      target.parentElement.classList.remove("detail-active");
+    }
+    
+  }
+
+  setClassAged(event) {
+    var target = event.currentTarget;
+    
+    if(target.parentElement.className.indexOf("detail-active") === -1) {
+      this.renderer.setElementClass(target.parentElement,"detail-active",true);
+    }
+    else {
+      target.parentElement.classList.remove("detail-active");
+    }
+  }
+  
 
 }
