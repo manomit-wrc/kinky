@@ -27,3 +27,20 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 https://github.com/cornflourblue/angular-6-jwt-authentication-example
+
+
+## For Schematics
+
+ng config cli.defaultCollection @ngrx/schematics
+
+## create store
+ng g store AppState --root --module app.module.ts
+
+## create action
+ng generate action aut/Auth
+
+## create reducer
+ng g reducer Auth --flat=false --module auth/auth.module.ts
+
+## create effects
+ng g effect auth/Auth --module auth/auth.module.ts
