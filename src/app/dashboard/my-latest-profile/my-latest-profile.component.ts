@@ -12,10 +12,11 @@ import { AlertsService } from 'angular-alert-module';
 export class MyLatestProfileComponent implements OnInit {
   tab: String = 'tab1';
   gender: any;
+  data: any = {};
   count: any;
   st: any;
-  state: any;
-  country: any;
+  states: any;
+  countrys: any;
   looking_for: any;
   dd: any;
   mm: any;
@@ -43,8 +44,9 @@ export class MyLatestProfileComponent implements OnInit {
   build: any;
   hair: any;
   build_hair: any;
-
-
+  day: any = [];
+  month: any = [];
+  year: any = [];
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -52,10 +54,23 @@ export class MyLatestProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.day = [
+
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17',
+     '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'
+    ];
+
+    this.month = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+
+    for (let i = 1970; i <=  new Date().getFullYear(); i++) {
+      this.year.push(i);
+    }
+
     this.auth.user_details()
     .pipe(first())
     .subscribe(data => {
-      this.gender = data.value.user.gender !== undefined ? data.value.user.gender : '';
+/*       this.gender = data.value.user.gender !== undefined ? data.value.user.gender : '';
       this.count = data.value.user.country;
       this.st = data.value.user.state;
       this.looking_for = data.value.user.gender;
@@ -63,18 +78,21 @@ export class MyLatestProfileComponent implements OnInit {
       this.mm = data.value.user.mm;
       this.yyyy = data.value.user.yyyy;
       this.timezone = data.value.user.timezone;
+      this.timezones = data.value.timezones; */
+
+      this.data = data.value.user;
       this.timezones = data.value.timezones;
     });
 
     this.auth.country()
     .pipe(first())
     .subscribe(data => {
-    this.country = data.data;
+    this.countrys = data.data;
     this.count = (this.count) ? this.count : data.data[0]._id;
     this.auth.state(data.data[0]._id)
     .pipe(first())
     .subscribe(datas => {
-    this.state = datas.data;
+    this.states = datas.data;
     this.st = (this.st) ? this.st : datas.data[0]._id;
 
     });
@@ -127,21 +145,19 @@ export class MyLatestProfileComponent implements OnInit {
     this.auth.state(e)
     .pipe(first())
     .subscribe(data => {
-    this.state = data.data;
+    this.states = data.data;
 
 
     });
   }
 
-  personal_details_update () {
-    console.log(this);
-
-  /*   this.auth.personal_info_update(headline,personal_details)
+  personal_details_update (data) {
+  this.auth.personal_info_update(data)
     .pipe(first())
     .subscribe(data => {
       this.alerts.setMessage('Updated Successfull!', 'success');
 
-    }); */
+    });
   }
 
   submit_personal(headline,personal_details) {

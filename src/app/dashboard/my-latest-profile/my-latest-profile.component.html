@@ -13,21 +13,22 @@
           <div id="tab1" [ngStyle]="{'display': tab === 'tab1' ? 'block' : 'none'}">
             <div class="personal-detail-tab-row">
               <div class="personal-detail-medium-box select-box">
+                <app-alerts></app-alerts>
                 <label>Location</label>
-                <select name='count_id' (change)="onItemChange($event.target.value)" [(ngModel)]="count">
-                  <option [value]="count._id" *ngFor="let count of country">{{count.name}}</option>
+                <select name='count_id' (change)="onItemChange($event.target.value)" [(ngModel)]="data.country">
+                  <option [value]="count._id" *ngFor="let count of countrys">{{count.name}}</option>
                 </select>
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>&nbsp;</label>
-                <select [(ngModel)]="st" name ="st_id">
-                  <option [value]="st._id" *ngFor="let st of state">{{st.name}}</option>
+                <select [(ngModel)]="data.state" name ="st_id">
+                  <option [value]="st._id" *ngFor="let st of states">{{st.name}}</option>
                 </select>
               </div>
               <div class="personal-detail-big-box select-box">
                 <label>Time Zone</label>
-                <select [(ngModel)]="timezone">
-               <option value="tz.label" *ngFor="let tz of timezones">{{tz.name}}</option>
+                <select [(ngModel)]="data.timezone">
+               <option [value]="tz.label" *ngFor="let tz of timezones">{{tz.name}}</option>
               </select>
               </div>
             </div>
@@ -36,16 +37,16 @@
                 <label>I am primarily looking for</label>
                 <div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" value="M" [(ngModel)]="looking_for" name="gender" type="radio" [checked]="looking_for =='M'">
+                    <input class="personal-radio-btn" value="M" [(ngModel)]="data.looking_for" name="gender" type="radio" [checked]="data.looking_for =='M'">
                     <span class="personal-radio-title">Male</span></div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" value="F" [(ngModel)]="looking_for" name="gender" type="radio" [checked]="looking_for =='F'">
+                    <input class="personal-radio-btn" value="F" [(ngModel)]="data.looking_for" name="gender" type="radio" [checked]="data.looking_for =='F'">
                     <span class="personal-radio-title">Female</span></div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" value="C" [(ngModel)]="looking_for" name="gender" type="radio" [checked]="looking_for =='C'">
+                    <input class="personal-radio-btn" value="C" [(ngModel)]="data.looking_for" name="gender" type="radio" [checked]="data.looking_for =='C'">
                     <span class="personal-radio-title">Couple</span></div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" value="O" [(ngModel)]="looking_for" name="gender" type="radio" [checked]="looking_for =='O'">
+                    <input class="personal-radio-btn" value="O" [(ngModel)]="data.looking_for" name="gender" type="radio" [checked]="data.looking_for =='O'">
                     <span class="personal-radio-title">CD / TV / TS</span></div>
                 </div>
               </div>
@@ -55,16 +56,16 @@
                   <div class="personal-radio-outer">
                 <div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" value="M" [(ngModel)]="gender" name="gender1" type="radio" [checked]="gender =='M'">
+                    <input class="personal-radio-btn" value="M" [(ngModel)]="data.gender" name="gender1" type="radio" [checked]="data.gender =='M'">
                     <span class="personal-radio-title">Male</span></div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" value="F" [(ngModel)]="gender" name="gender1" type="radio" [checked]="gender =='F'">
+                    <input class="personal-radio-btn" value="F" [(ngModel)]="data.gender" name="gender1" type="radio" [checked]="data.gender =='F'">
                     <span class="personal-radio-title">Female</span></div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" value="C" [(ngModel)]="gender" name="gender1" type="radio" [checked]="gender =='C'">
+                    <input class="personal-radio-btn" value="C" [(ngModel)]="data.gender" name="gender1" type="radio" [checked]="data.gender =='C'">
                     <span class="personal-radio-title">Couple</span></div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" value="O" [(ngModel)]="gender" name="gender1" type="radio" [checked]="gender =='O'">
+                    <input class="personal-radio-btn" value="O" [(ngModel)]="data.gender" name="gender1" type="radio" [checked]="data.gender =='O'">
                     <span class="personal-radio-title">CD / TV / TS</span></div>
                 </div>
                 </div>
@@ -75,20 +76,20 @@
                 <div>
                   <div class="personal-detail-sml-box select-box">
                     <label>Date of birth</label>
-                    <select>
-                      <option>{{dd}}</option>
+                    <select [(ngModel)]="data.dd">
+                      <option [value]="d" *ngFor="let d of day">{{d}}</option>
                     </select>
                   </div>
                   <div class="personal-detail-sml-box select-box">
                     <label>&nbsp;</label>
-                    <select>
-                      <option>{{mm}}</option>
+                    <select [(ngModel)]="data.mm">
+                      <option [value]="m" *ngFor="let m of month">{{m}}</option>
                     </select>
                   </div>
                   <div class="personal-detail-sml-box select-box">
                     <label>&nbsp;</label>
-                    <select>
-                      <option>{{yyyy}}</option>
+                    <select [(ngModel)]="data.yyyy">
+                      <option [value]="y" *ngFor="let y of year">{{y}}</option>
                     </select>
                   </div>
                 </div>
@@ -97,16 +98,16 @@
                 <label>Sexuality</label>
                 <div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="sexuality" value="STRAIGHT" type="radio">
+                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="data.sexuality" value="STRAIGHT" type="radio">
                     <span class="personal-radio-title">Straight</span></div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="sexuality" value="GAY" type="radio">
+                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="data.sexuality" value="GAY" type="radio">
                     <span class="personal-radio-title">Gay</span></div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="sexuality" value="BI" type="radio">
+                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="data.sexuality" value="BI" type="radio">
                     <span class="personal-radio-title">Bi</span></div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="sexuality" value="BICURIOUS" type="radio">
+                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="data.sexuality" value="BICURIOUS" type="radio">
                     <span class="personal-radio-title">Bi-curious</span></div>
                 </div>
               </div>
@@ -114,31 +115,31 @@
             <div class="personal-detail-tab-row">
               <div class="personal-detail-medium-box select-box">
                 <label>Ethnicity</label>
-                 <select name='eth_id' [(ngModel)]="ethnicity">
+                 <select name='eth_id' [(ngModel)]="data.ethnicity">
                   <option [value]="opt._id" *ngFor="let opt of ethnicities">{{opt.name}}</option>
                 </select>
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>Height</label>
-                <select name='height_id'  [(ngModel)]="height">
+                <select name='height_id'  [(ngModel)]="data.height">
                   <option [value]="opt._id" *ngFor="let opt of heights">{{opt.name}}</option>
                 </select>
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>Build</label>
-                 <select name='build_id'  [(ngModel)]="build">
+                 <select name='build_id'  [(ngModel)]="data.build">
                   <option [value]="opt._id" *ngFor="let opt of builds">{{opt.name}}</option>
                 </select>
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>Hair</label>
-                <select name='opt_id'  [(ngModel)]="hair">
+                <select name='opt_id'  [(ngModel)]="data.hair">
                   <option [value]="opt._id" *ngFor="let opt of haircolors">{{opt.name}}</option>
                 </select>
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>Body hair</label>
-                <select name='body_hair_id'  [(ngModel)]="body_hair">
+                <select name='body_hair_id'  [(ngModel)]="data.body_hair">
                   <option [value]="opt._id" *ngFor="let opt of bodyhairs">{{opt.name}}</option>
                 </select>
               </div>
@@ -146,29 +147,29 @@
             <div class="personal-detail-tab-row">
               <label>Body decoration</label>
               <div class="personal-full-with-area">
-                <input class="personal-radio-btn" name="body_deco" [(ngModel)]="body_deco" value="EARNINGS" type="radio">
+                <input class="personal-radio-btn" name="body_deco" [(ngModel)]="data.body_decoration" value="EARNINGS" type="radio">
                 <span class="personal-radio-title"><strong>Earrings</strong></span> </div>
               <div class="personal-full-with-area">
-                <input class="personal-radio-btn" name="body_deco"  [(ngModel)]="body_deco" value="NOSERINGS" type="radio">
+                <input class="personal-radio-btn" name="body_deco"  [(ngModel)]="data.body_decoration" value="NOSERINGS" type="radio">
                 <span class="personal-radio-title"><strong>Nose rings</strong></span> </div>
               <div class="personal-full-with-area">
-                <input class="personal-radio-btn" name="body_deco"  [(ngModel)]="body_deco" value="BODYPIERCING" type="radio">
+                <input class="personal-radio-btn" name="body_deco"  [(ngModel)]="data.body_decoration" value="BODYPIERCING" type="radio">
                 <span class="personal-radio-title"><strong>Body piercing</strong></span> </div>
               <div class="personal-full-with-area">
-                <input class="personal-radio-btn" name="body_deco" [(ngModel)]="body_deco"  value="INTIMATEPIERCING" type="radio">
+                <input class="personal-radio-btn" name="body_deco" [(ngModel)]="data.body_decoration"  value="INTIMATEPIERCING" type="radio">
                 <span class="personal-radio-title"><strong>Intimate Piercing</strong></span> </div>
               <div class="personal-full-with-area">
-                <input class="personal-radio-btn" name="body_deco"  [(ngModel)]="body_deco" value="TATTOOS" type="radio">
+                <input class="personal-radio-btn" name="body_deco"  [(ngModel)]="data.body_decoration" value="TATTOOS" type="radio">
                 <span class="personal-radio-title"><strong>Tattoos</strong></span> </div>
 
               <div class="personal-full-with-area">
-                <input class="personal-radio-btn" name="body_deco" [(ngModel)]="body_deco" value="PREFERNOTTOSAY" type="radio">
+                <input class="personal-radio-btn" name="body_deco" [(ngModel)]="data.body_decoration" value="PREFERNOTTOSAY" type="radio">
                 <span class="personal-radio-title"><strong>Prefer not to say</strong></span> </div>
             </div>
             <div class="personal-detail-tab-row">
               <div class="personal-detail-medium-box select-box">
                 <label>Drink</label>
-                <select  [(ngModel)]="drink">
+                <select  [(ngModel)]="data.drink">
                   <option value="NEVER">Never</option>
                   <option value="SOCIALLY">Socially</option>
                   <option value="REGULARLY">Regularly</option>
@@ -178,7 +179,7 @@
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>Smoke</label>
-                <select [(ngModel)]="smoke">
+                <select [(ngModel)]="data.smoke">
                   <option value="NO">No</option>
                   <option value="YES">Yes</option>
                   <option value="IWILLTELLYOULETTER">I will tell you later</option>
@@ -186,7 +187,7 @@
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>Drugs</label>
-                <select [(ngModel)]="drugs">
+                <select [(ngModel)]="data.drugs">
                   <option value="NONE">None</option>
                   <option value="SOME">Some</option>
                   <option value="HEAVY">Heavy</option>
@@ -195,7 +196,7 @@
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>Cock/Breast size</label>
-                <select [(ngModel)]="cock_breast">
+                <select [(ngModel)]="data.size">
                   <option value="SMALL">Small</option>
                   <option value="MEDIUM">Medium</option>
                   <option value="LARGE">Large</option>
@@ -205,7 +206,7 @@
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>Safe sex</label>
-                <select [(ngModel)]="safesex">
+                <select [(ngModel)]="data.safe_sex">
                   <option value="ALWAYS">Always</option>
                   <option value="SOMETIMES">Sometimes</option>
                   <option value="NEVER">Never</option>
@@ -255,10 +256,10 @@
               <label>Travel arrangements</label>
               <div>
                 <div class="personal-radio-outer">
-                  <input class="personal-radio-btn" name="travel" [(ngModel)]="travel" value="CANACCOMMODATE" type="radio">
+                  <input class="personal-radio-btn" name="travel" [(ngModel)]="data.travel_arrangment" value="CANACCOMMODATE" type="radio">
                   <span class="personal-radio-title">Can accommodate</span></div>
                 <div class="personal-radio-outer">
-                  <input class="personal-radio-btn" name="travel" [(ngModel)]="travel" value="WILLTRAVEL" type="radio">
+                  <input class="personal-radio-btn" name="travel" [(ngModel)]="data.travel_arrangment" value="WILLTRAVEL" type="radio">
                   <span class="personal-radio-title">Will travel</span></div>
               </div>
             </div>
@@ -266,16 +267,16 @@
               <label>I'm here to</label>
               <div>
                 <div class="personal-radio-outer">
-                  <input class="personal-radio-btn" name="here" [(ngModel)]="here" value="HAVEFUN" type="radio">
+                  <input class="personal-radio-btn" name="here" [(ngModel)]="data.purpose" value="HAVEFUN" type="radio">
                   <span class="personal-radio-title">Have Fun</span></div>
                 <div class="personal-radio-outer">
-                  <input class="personal-radio-btn" name="here" [(ngModel)]="here" value="PROMOTEAPAIDSERVICE" type="radio">
+                  <input class="personal-radio-btn" name="here" [(ngModel)]="data.purpose" value="PROMOTEAPAIDSERVICE" type="radio">
                   <span class="personal-radio-title">Promote A Paid Service</span></div>
               </div>
             </div>
             <div class="personal-detail-tab-butn-row">
               <!-- <input class="cancel-btn" value="Cancel" type="submit"> -->
-              <input class="save-btn" value="Save " type="submit" (clcik)="personal_details_update()">
+              <input class="save-btn" value="Save " type="submit" (click)="personal_details_update(data)">
             </div>
           </div>
         </div>
