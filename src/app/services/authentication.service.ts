@@ -87,6 +87,12 @@ export class AuthenticationService {
           return of(user); // create own observable
       }));
     }
+    personal_info_update(data) {
+      return this.http.post<any>(`http://localhost:9000/api/users/personal-details-update`, {data})
+      .pipe(map(user => {
+          return of(user); // create own observable
+      }));
+    }
 
     /* Api for change password */
     change_password(old_password: string , new_password: string) {
@@ -215,7 +221,7 @@ export class AuthenticationService {
         .pipe(map(data => {
           return data;
         }))
-   
+
     }
 
     personal_details_save(headline:any, description:any){

@@ -15,8 +15,8 @@
   <label>Time Zone</label>
   <div class="general-dropdown">
     <select [(ngModel)]="timezone">
-      <option value="tz.label" *ngFor="let tz of timezones">{{tz.name}}</option>
-      
+      <option [value]="tz.label" *ngFor="let tz of timezones">{{tz.name}}</option>
+
     </select>
   </div>
 </div>
