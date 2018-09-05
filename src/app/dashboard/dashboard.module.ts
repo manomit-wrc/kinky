@@ -22,6 +22,10 @@ import { IntroductionMessageComponent } from './introduction-message/introductio
 import { MyLatestProfileComponent } from './my-latest-profile/my-latest-profile.component';
 import { EventsComponent } from './events/events.component';
 import { AddEventComponent } from './events/add-events.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromDashboard from './dashboard.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { DashboardEffects } from './dashboard.effects';
 
 
 
@@ -34,7 +38,9 @@ import { AddEventComponent } from './events/add-events.component';
     DashBoardRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    AlertsModule.forRoot()
+    AlertsModule.forRoot(),
+    StoreModule.forFeature('dashboard', fromDashboard.dashBoardReducer),
+    EffectsModule.forFeature([DashboardEffects])
   ],
   declarations: [
     LayoutComponent,

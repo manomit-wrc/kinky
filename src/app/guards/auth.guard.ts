@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import * as jwt_decode from 'jwt-decode';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../reducers';
+import { isLoggedIn } from '../auth/auth.selectors';
+import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
 
-    constructor(private router: Router) { }
+    constructor(private router: Router, private store: Store<AppState>) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-        try {
-            const decoded = jwt_decode(localStorage.getItem('token'));
-            if(decoded) {
-                return true
-            }
-        }
-        catch(error) {
-            this.router.navigate(['/']);
-            
-        }
+        return this.store
+                .pipe(
+                    select(isLoggedIn),
+                    tap(loggedIn => {
+                        if(!loggedIn) {
+                            this.router.navigateByUrl("/");
+                        }
+                    })
+                )
+
     }
 }

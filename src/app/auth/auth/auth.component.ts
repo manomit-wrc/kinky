@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services';
-import { first } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
+import {noop} from "rxjs";
 import { Router } from '@angular/router';
 import { AlertsService } from 'angular-alert-module';
 import * as jwt_decode from 'jwt-decode';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../reducers';
+import { Login } from '../auth.actions';
 
 @Component({
   selector: 'app-auth',
@@ -32,7 +36,8 @@ export class AuthComponent implements OnInit {
     private formBuilder: FormBuilder,
     private auth: AuthenticationService,
     private router: Router,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
@@ -91,24 +96,51 @@ export class AuthComponent implements OnInit {
     }
 
     this.loading = true;
-    this.auth.login(this.f.username.value, this.f.password.value)
-    .pipe(first())
-    .subscribe(data => {
-      localStorage.setItem('token', data.token);
-      if ( data.code !== 200) {
-        this.loading = false;
-          this.errorMsg = data.message;
-          setTimeout(() => {
-            this.closeAlert = true;
-            this.errorMsg = '';
-            console.log(this.closeAlert);
-           }, 1500);
-           this.closeAlert = false;
+    // this.auth.login(this.f.username.value, this.f.password.value)
+    // .pipe(first())
+    // .subscribe(data => {
+    //   localStorage.setItem('token', data.token);
+    //   if ( data.code !== 200) {
+    //     this.loading = false;
+    //       this.errorMsg = data.message;
+    //       setTimeout(() => {
+    //         this.closeAlert = true;
+    //         this.errorMsg = '';
+    //         console.log(this.closeAlert);
+    //        }, 1500);
+    //        this.closeAlert = false;
 
-      } else {
-        this.router.navigate(['settings']);
-      }
-    });
+    //   } else {
+    //     this.router.navigate(['settings']);
+    //   }
+    // });
+
+    this.auth.login(this.f.username.value, this.f.password.value)
+      .pipe(
+        tap(data => {
+          localStorage.setItem("token", data.token);
+          const info = data.info;
+          if ( data.code !== 200) {
+            this.loading = false;
+              this.errorMsg = data.message;
+              setTimeout(() => {
+                this.closeAlert = true;
+                this.errorMsg = '';
+                console.log(this.closeAlert);
+                }, 1500);
+                this.closeAlert = false;
+    
+          } else {
+            this.store.dispatch(new Login({ info }))
+            this.router.navigateByUrl('/latest-personal-details')
+          }
+        })
+      ).subscribe(
+        noop,
+        () => alert('Login Failed')
+      );
+
+    
   }
 
   terms(e) {

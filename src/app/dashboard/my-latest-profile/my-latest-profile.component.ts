@@ -1,9 +1,12 @@
 import { Component, OnInit, Renderer } from '@angular/core';
 import { AuthenticationService } from '../../services';
-import { first } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, noop } from 'rxjs';
 import { AlertsService } from 'angular-alert-module';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../../reducers';
+import { userDetails } from '../../auth/auth.selectors';
 @Component({
   selector: 'app-my-latest-profile',
   templateUrl: './my-latest-profile.component.html',
@@ -57,7 +60,8 @@ export class MyLatestProfileComponent implements OnInit {
     private auth: AuthenticationService,
     private router: Router,
     private alerts:AlertsService,
-    private renderer: Renderer
+    private renderer: Renderer,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
@@ -79,31 +83,33 @@ export class MyLatestProfileComponent implements OnInit {
 
     this.people_aged_arr = ['#18 - 30', '#30 - 40', '#40 - 50', '#50 - 60', '#60 +'];
 
+    this.store.pipe(
+      select(userDetails),
+      tap(response => {
+        if(response !== undefined) {
+          
+          this.headline = response.headline;
+          this.personal_details = response.description;
+          this.data = response;
+          this.testArr = response.interested_in;
+          this.testArr2 = response.age_range;
+        }
+        
+      })
+    ).subscribe(
+      noop
+    )
+
     this.auth.user_details()
     .pipe(first())
     .subscribe(data => {
-
-/*       this.gender = data.value.user.gender !== undefined ? data.value.user.gender : '';
-      this.count = data.value.user.country;
-      this.st = data.value.user.state;
-      this.looking_for = data.value.user.gender;
-      this.dd = data.value.user.dd;
-      this.mm = data.value.user.mm;
-      this.yyyy = data.value.user.yyyy;
-      this.timezone = data.value.user.timezone;
-      this.timezones = data.value.timezones; */
-      this.headline = data.value.user.headline;
-      this.personal_details = data.value.user.description;
-      this.data = data.value.user;
       this.timezones = data.value.timezones;
-      this.testArr = data.value.user.interested_in;
-      this.testArr2 = data.value.user.age_range;
-
     });
 
     this.auth.country()
     .pipe(first())
     .subscribe(data => {
+    
     this.countrys = data.data;
     this.count = (this.count) ? this.count : data.data[0]._id;
     this.auth.state(data.data[0]._id)

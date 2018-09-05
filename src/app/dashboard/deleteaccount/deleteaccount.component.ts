@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { first } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../reducers';
+import { Logout } from '../../auth/auth.actions';
 @Component({
   selector: 'app-deleteaccount',
   templateUrl: './deleteaccount.component.html',
@@ -15,7 +18,8 @@ export class DeleteaccountComponent implements OnInit {
   closeAlert1 = false;
   other_delete_reason: any;
   constructor(
-    public auth: AuthenticationService
+    private auth: AuthenticationService,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
@@ -40,13 +44,11 @@ export class DeleteaccountComponent implements OnInit {
          this.closeAlert = false;
 
     } else {
-      this.auth.logout();
+      this.store.dispatch(new Logout())
       this.closeAlert1 = false;
       this.successMsg = data.message;
       setTimeout(() => {
-        this.closeAlert1 = true;
-        this.successMsg = '';
-        console.log(this.closeAlert);
+        window.location.href = "/";
        }, 1500);
     }
 

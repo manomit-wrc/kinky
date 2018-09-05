@@ -8,13 +8,19 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthFooterComponent } from './auth-footer/auth-footer.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromAuth from './auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './auth.effects';
 
 @NgModule({
   imports: [
     CommonModule,
     AlertsModule.forRoot(),
     ReactiveFormsModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    StoreModule.forFeature('auth', fromAuth.authReducer),
+    EffectsModule.forFeature([AuthEffects])
   ],
   declarations: [AuthComponent, LayoutComponent, AuthFooterComponent, VerifyAccountComponent, ForgotPasswordComponent]
 })

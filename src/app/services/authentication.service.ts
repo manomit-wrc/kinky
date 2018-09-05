@@ -4,18 +4,26 @@ import { map } from 'rxjs/operators';
 import {AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../reducers';
+import { Logout } from '../auth/auth.actions';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
-    constructor(private http: HttpClient,  private router: Router) { }
+    constructor(private http: HttpClient,  private router: Router, private store: Store<AppState>) { }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`http://localhost:9000/api/users/login`, { username, password })
-            .pipe(map(user => {
-                // login successful if there's a jwt token in the response
-                return user;
-            }));
+    // login(username: string, password: string) {
+    //     return this.http.post<any>(`http://localhost:9000/api/users/login`, { username, password })
+    //         .pipe(map(user => {
+    //             // login successful if there's a jwt token in the response
+    //             return user;
+    //         }));
+    // }
+
+
+    login(username:string, password:string): Observable<any> {
+      return this.http.post<any>(`http://localhost:9000/api/users/login`, { username, password });
     }
 
 
@@ -35,8 +43,7 @@ export class AuthenticationService {
     }
 
     logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem('token');
+        this.store.dispatch(new Logout());
         window.location.href = '/';
 
     }
@@ -109,7 +116,6 @@ export class AuthenticationService {
       return this.http.get<any>(`http://localhost:9000/api/users/Country`, {})
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
-
           return user; //for country list
       }));
 
@@ -120,7 +126,6 @@ export class AuthenticationService {
       return this.http.post<any>(`http://localhost:9000/api/users/State`, { e })
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
-
           return user; //for state list
       }));
 
@@ -130,7 +135,6 @@ export class AuthenticationService {
       return this.http.get<any>(`http://localhost:9000/api/users/Ethnicity`, {})
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
-
           return user; //for country list
       }));
 
@@ -140,7 +144,6 @@ export class AuthenticationService {
       return this.http.get<any>(`http://localhost:9000/api/users/Hair`, {})
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
-
           return user; //for country list
       }));
 
@@ -150,7 +153,6 @@ export class AuthenticationService {
       return this.http.get<any>(`http://localhost:9000/api/users/BodyHair`, {})
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
-
           return user; //for country list
       }));
 
@@ -160,7 +162,6 @@ export class AuthenticationService {
       return this.http.get<any>(`http://localhost:9000/api/users/Build`, {})
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
-
           return user; //for country list
       }));
 
@@ -169,10 +170,14 @@ export class AuthenticationService {
       return this.http.get<any>(`http://localhost:9000/api/users/Height`, {})
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
-
           return user; //for country list
       }));
 
+    }
+
+
+    loadMaster(): Observable<any> {
+      return this.http.post<any>(`http://localhost:9000/api/users/load-masters`, { });
     }
 
 

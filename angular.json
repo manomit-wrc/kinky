@@ -118,5 +118,8 @@
       }
     }
   },
-  "defaultProject": "kinky"
+  "defaultProject": "kinky",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
