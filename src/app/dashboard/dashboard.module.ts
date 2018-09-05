@@ -22,10 +22,15 @@ import { IntroductionMessageComponent } from './introduction-message/introductio
 import { MyLatestProfileComponent } from './my-latest-profile/my-latest-profile.component';
 import { EventsComponent } from './events/events.component';
 import { AddEventComponent } from './events/add-events.component';
+
 import { StoreModule } from '@ngrx/store';
 import * as fromDashboard from './dashboard.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { DashboardEffects } from './dashboard.effects';
+
+import { MyProfileComponent } from './my-profile/my-profile.component';
+import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
+
 
 
 
@@ -57,7 +62,9 @@ import { DashboardEffects } from './dashboard.effects';
        AlertsComponent,
        MyLatestProfileComponent,
        EventsComponent,
-       AddEventComponent
+       AddEventComponent,
+       MyProfileComponent,
+       PhotoUploadComponent
       ]
 })
 export class DashboardModule { }
