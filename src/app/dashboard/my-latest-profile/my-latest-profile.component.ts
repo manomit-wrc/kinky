@@ -82,16 +82,6 @@ export class MyLatestProfileComponent implements OnInit {
     this.auth.user_details()
     .pipe(first())
     .subscribe(data => {
-
-/*       this.gender = data.value.user.gender !== undefined ? data.value.user.gender : '';
-      this.count = data.value.user.country;
-      this.st = data.value.user.state;
-      this.looking_for = data.value.user.gender;
-      this.dd = data.value.user.dd;
-      this.mm = data.value.user.mm;
-      this.yyyy = data.value.user.yyyy;
-      this.timezone = data.value.user.timezone;
-      this.timezones = data.value.timezones; */
       this.headline = data.value.user.headline;
       this.personal_details = data.value.user.description;
       this.data = data.value.user;

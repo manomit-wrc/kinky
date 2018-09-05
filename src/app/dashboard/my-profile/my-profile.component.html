@@ -1,0 +1,529 @@
+<div class="inner-main-sec">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="profile-left-top-box">
+          <div class="profile-left-active">Active Now</div>
+          <div class="profile-left-details-box">
+            <div class="profile-left-img"><img [src]="avatar" alt=""></div>
+            <div class="profile-top-text">
+              <h5><a href="javascript:void(0)">{{name}}</a></h5>
+              <p><i class="fa fa-map-marker"></i>{{address}}</p>
+              <p *ngIf="gender=='M'"><i class="fa fa-mars"></i>{{age}} {{sexuality}}</p>
+              <p *ngIf="gender!='M'"><i class="fa fa-venus"></i>{{age}} {{sexuality}}</p>
+              <p><a href="javascript:void(0)">Reviews 0</a> <strong>|</strong> <a href="javascript:void(0)"><span>Email Verified</span></a></p>
+              <p><em>Seeking {{looking_for}}</em></p>
+              <p><a href="javascript:void(0)">{{interested_in}}</a></p>
+            </div>
+          </div>
+          <div class="profile-left-photouploadsec">
+            <div class="profile-photoupload"> <a href="/my-photo-upload"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add Photo</span></a> </div>
+            <div class="profile-edit-box"> <a href="/latest-personal-details"> <strong><i class="fa fa-pencil-square-o" aria-hidden="true"></i></strong> <span>Edit</span> </a> </div>
+            <div class="profile-edit-box profile-more-btn"> <a href="javascript:void(0)"> <strong><i class="fa fa-toggle-down"></i></strong> <span>More</span> </a> </div>
+            <div class="profile-more-box">
+              <h5>Personal Details</h5>
+              <ul>
+                <li>Gender</li>
+                <li *ngIf="gender=='M'">Male</li>
+                <li *ngIf="gender!='M'">Female</li>
+                <li>Seeking</li>
+                <li>{{looking_for}}</li>
+                <li>Age</li>
+                <li>{{age}}</li>
+                <li>Sexuality</li>
+                <li>{{sexuality}}</li>
+                <li>Location</li>
+                <li>{{address}}</li>
+                <li>Height</li>
+                <li>{{height}}</li>
+                <li>Build</li>
+                <li>{{build}}</li>
+                <li>Hair</li>
+                <li>{{hair}}</li>
+                <li>Body decoration</li>
+                <li>{{body_decoration}}</li>
+                <li>Drink</li>
+                <li>{{drink}}</li>
+                <li>Smoke</li>
+                <li>{{smoke}}</li>
+                <li>Drugs</li>
+                <li>{{drugs}}</li>
+                <li>Cock/Breast size</li>
+                <li>{{size}}</li>
+                <li>Travel</li>
+                <li>{{travel_arrangements}}</li>
+                <li>Paid Services</li>
+                <li *ngIf="purpose=='HAVEFUN'">No </li>
+                <li *ngIf="purpose!='HAVEFUN'">Yes </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="profile-left-text-box">
+          <h4>come and join us,, we are happy to serve you,haha</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit.</p>
+          <p><a href="#"><i class="fa fa-heart-o"></i><span>14 Likes</span></a></p>
+        </div>
+        <div class="profile-left-form-sec">
+          <div class="profile-form-row">
+            <div class="profile-input-outer">
+              <input type="text" class="profile-input-text" placeholder="Whats in your mind...">
+              <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+            <input type="text" class="save-btn profile-input-btn" value="Post">
+          </div>
+          <div class="profile-form-row">
+            <!-- <button class="profile-btn profile-post-btn"><img src="assets/images/profile-btn-icon-1.png" alt=""><span>Posts</span></button>
+            <button class="profile-btn profile-content-btn"><img src="assets/images/profile-btn-icon-2.png" alt=""><span>Content</span></button>
+            <button class="profile-btn profile-img-btn"><img src="assets/images/profile-btn-icon-3.png" alt=""><span>assets/images</span></button>-->
+            <div class="profile-post-btn">
+              <select>
+                <option>Posts</option>
+                <option>Posts from me and selected local members</option>
+                <option>Posts from me and friends</option>
+                <option>Posts from me</option>
+              </select>
+            </div>
+            <div class="profile-post-btn">
+              <select>
+                <option>Content</option>
+                <option>Safe content only</option>
+                <option>All including explicit</option>
+              </select>
+            </div>
+            <div class="profile-post-btn">
+              <select>
+                <option>assets/images</option>
+                <option>Large assets/images</option>
+                <option>Thumbnails only</option>
+              </select>
+            </div>
+            <button class="profile-btn profile-setting-btn"><img src="assets/images/setting-icon.png" alt=""></button>
+          </div>
+        </div>
+        <div class="profile-post-sec">
+          <div class="profile-post-row">
+            <ul>
+              <li>
+                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6><a href="#">LoveAngle2018</a></h6>
+                    <p>Labor Day Fuck, hmmmm..</p>
+                  </div>
+                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a> <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a> <span class="prof-date">4 Minutes ago</span> </div>
+                </div>
+                <ul>
+                  <li>
+                    <div class="profile-post-img"><img src="assets/images/photo-image-1.jpg" alt=""></div>
+                    <div class="profile-post-text">
+                      <div class="prof-text-top">
+                        <h6><a href="#">lola_kemiron</a></h6>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
+                      </div>
+                      <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a><span class="prof-date">4 Minutes ago</span></div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div class="profile-comment-box">
+              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+              <div class="profile-input-outer">
+                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+            </div>
+          </div>
+          <div class="profile-post-row">
+            <ul>
+              <li>
+                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6><a href="#">LoveAngle2018</a></h6>
+                    <p><a href="#">lola_kemiron</a> likes your profile</p>
+                    <div class="activity-list-img"><img src="assets/images/activity-dummy-img.jpg" alt=""></div>
+                  </div>
+                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a> <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a> <span class="prof-date">4 Minutes ago</span> </div>
+                </div>
+              </li>
+            </ul>
+            <div class="profile-comment-box">
+              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+              <div class="profile-input-outer">
+                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+            </div>
+          </div>
+          <div class="profile-post-row">
+            <ul>
+              <li>
+                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6><a href="#">WorshipHere</a></h6>
+                    <p><a href="#">lola_kemiron</a>and <a href="#">3 others</a> have looked at your profile</p>
+                    <div class="activity-list-img"><img src="assets/images/activity-dummy-img.jpg" alt=""></div>
+                  </div>
+                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a> <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a> <span class="prof-date">4 Minutes ago</span> </div>
+                </div>
+              </li>
+            </ul>
+            <div class="profile-comment-box">
+              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+              <div class="profile-input-outer">
+                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+            </div>
+          </div>
+          <div class="profile-post-row">
+            <ul>
+              <li>
+                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6><a href="#">LoveAngle2018</a></h6>
+                    <p>Labor Day Fuck, hmmmm..</p>
+                  </div>
+                  <div class="prof-text-bot">
+                    <!--<a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>
+                  <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a>-->
+                    <span class="prof-date">4 Minutes ago</span> </div>
+                </div>
+                <ul>
+                  <li>
+                    <!--<div class="profile-post-img"><img src="assets/images/photo-image-1.jpg" alt=""></div>-->
+                    <div class="profile-post-text profile-sml-post-text">
+                      <div class="prof-text-top">
+                        <p>Only LoveAngle2018's friends can comment</p>
+                        <p><a href="#">Invite as friends</a> or <a href="#">Send Message</a></p>
+                      </div>
+                      <div class="prof-text-bot">
+                        <!--<a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>-->
+                        <span class="prof-date">4 Minutes ago</span></div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <p><a href="#">LoveAngle2018</a> and <a href="#">1 other</a> have update their profile</p>
+                  </div>
+                  <div class="prof-text-bot">
+                    <!--<a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>
+                   <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a>-->
+                    <span class="prof-date">4 Minutes ago</span> </div>
+                </div>
+              </li>
+            </ul>
+            <div class="profile-comment-box">
+              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+              <div class="profile-input-outer">
+                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+            </div>
+          </div>
+          <div class="profile-post-row">
+            <ul>
+              <li>
+                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <!-- <h6><a href="#">LoveAngle2018</a></h6>-->
+                    <p><a href="#">lola_kemiron</a> likes your profile</p>
+                    <!--<div class="activity-list-img"><img src="assets/images/activity-dummy-img.jpg" alt=""></div>-->
+                  </div>
+                  <div class="prof-text-bot">
+                    <!--<a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>
+                  <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a>-->
+                    <span class="prof-date">4 Minutes ago</span> </div>
+                </div>
+              </li>
+            </ul>
+            <!--<div class="profile-comment-box">
+              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+              <div class="profile-input-outer">
+                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+            </div>-->
+          </div>
+          <div class="profile-post-row">
+            <ul>
+              <li>
+                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <!--<h6><a href="#">WorshipHere</a></h6>-->
+                    <p><a href="#">lola_kemiron</a>and <a href="#">3 others</a> have looked at your profile</p>
+                    <!--<div class="activity-list-img"><img src="assets/images/activity-dummy-img.jpg" alt=""></div>-->
+                  </div>
+                  <div class="prof-text-bot">
+                    <!--<a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>
+                   <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a>-->
+                    <span class="prof-date">4 Minutes ago</span> </div>
+                </div>
+              </li>
+            </ul>
+            <!--<div class="profile-comment-box">
+              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+              <div class="profile-input-outer">
+                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+            </div>-->
+          </div>
+          <p><a href="#" class="form-submit-btn loadmore-btn" id="loadMore-profile">Load More</a></p>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="interested-sec">
+          <h5><img src="assets/images/star-icon.png" alt=""><span>May be you interested</span></h5>
+          <div class="interested-gallery-outer">
+            <div class="owl-carousel">
+              <div><img src="assets/images/interest-img-1.jpg" alt="">
+                <p><a href="#">Supersw01</a></p>
+              </div>
+              <div><img src="assets/images/bot-profile-image-3.jpg" alt="">
+                <p><a href="#">Supersw01</a></p>
+              </div>
+              <div><img src="assets/images/interest-img-1.jpg" alt="">
+                <p><a href="#">Supersw01</a></p>
+              </div>
+              <div><img src="assets/images/interest-img-1.jpg" alt="">
+                <p><a href="#">Supersw01</a></p>
+              </div>
+              <div><img src="assets/images/bot-profile-image-3.jpg" alt="">
+                <p><a href="#">Supersw01</a></p>
+              </div>
+              <div><img src="assets/images/interest-img-1.jpg" alt="">
+                <p><a href="#">Supersw01</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="interested-icon-sec">
+            <ul>
+              <li class="like-popup"><a href="#" class="interested-iocn-1"></a>
+                <div class="prof-pop-icon-sec"> <a href="#" class="profile-pop-icon-1"></a> <a href="#" class="profile-pop-icon-2"></a> </div>
+              </li>
+              <li><a href="#" class="interested-iocn-2"></a></li>
+              <li><a href="#" class="interested-iocn-3"></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="photo-row photo-row1 profile-right-photo-vid-sec">
+          <!--<div class="downarrow-mobile downarrow-mobile1"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>-->
+          <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Photos &amp; Videos</span></h4>
+          <ul>
+            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
+            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
+            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
+            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
+            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
+            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
+            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
+          </ul>
+          <div class="addphoto-icon-sec">
+            <!--<input class="uplod-btn" type="file">-->
+            <a href="photo-video.html"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add Photo or Video</span></a> </div>
+        </div>
+        <div class="friends-tab-content profile-right-friends-sec">
+          <h5><i class="fa fa-handshake-o"></i> <span>Friends</span></h5>
+          <ul id="myList2">
+            <li>
+              <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
+                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                    <div class="event-user-active">&nbsp;</div>
+                  </div>
+                  <div class="friends-sml-text">
+                    <h6><a href="user-timeline.html">oirazor1971</a></h6>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
+                  <div class="friends-icon-sec">
+                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
+                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
+                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                    <div class="event-user-active">&nbsp;</div>
+                  </div>
+                  <div class="friends-sml-text">
+                    <h6><a href="user-timeline.html">oirazor1971</a></h6>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
+                  <div class="friends-icon-sec">
+                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
+                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
+                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                    <div class="event-user-active">&nbsp;</div>
+                  </div>
+                  <div class="friends-sml-text">
+                    <h6><a href="user-timeline.html">oirazor1971</a></h6>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
+                  <div class="friends-icon-sec">
+                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
+                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
+                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                    <div class="event-user-active">&nbsp;</div>
+                  </div>
+                  <div class="friends-sml-text">
+                    <h6><a href="user-timeline.html">oirazor1971</a></h6>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
+                  <div class="friends-icon-sec">
+                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
+                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
+                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                    <div class="event-user-active">&nbsp;</div>
+                  </div>
+                  <div class="friends-sml-text">
+                    <h6><a href="user-timeline.html">oirazor1971</a></h6>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
+                  <div class="friends-icon-sec">
+                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
+                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div id="loadMore2" class="more-setting-outer">More</div>
+        </div>
+        <div class="profile-party-sec">
+          <h5><img src="assets/images/common-icon-1.png" alt=""> <span>Parties</span></h5>
+          <div class="party-form"> You have no events </div>
+          <div class="addphoto-icon-sec"> <a href="events.html"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add Event</span></a> </div>
+        </div>
+        <div class="profile-review-sec">
+          <h5><img src="assets/images/star-icon.png" alt=""><span>Upcoming Parties and Events</span></h5>
+          <ul id="myList">
+            <li>
+              <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+              <div class="profile-post-text">
+                <div class="prof-text-top">
+                  <h6><a href="#">LoveAngle2018</a></h6>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+              <div class="profile-post-text">
+                <div class="prof-text-top">
+                  <h6><a href="#">LoveAngle2018</a></h6>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+              <div class="profile-post-text">
+                <div class="prof-text-top">
+                  <h6><a href="#">LoveAngle2018</a></h6>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+              <div class="profile-post-text">
+                <div class="prof-text-top">
+                  <h6><a href="#">LoveAngle2018</a></h6>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div id="loadMore" class="more-setting-outer">More</div>
+        </div>
+        <div class="profile-hotlist-sec">
+          <h5><i class="fa fa-heart-o"></i> <span>Hotlist</span></h5>
+          <ul id="myList3">
+            <li>
+              <div class="hotlist-box">
+                <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                  <div class="event-user-active">&nbsp;</div>
+                </div>
+                <div class="friends-sml-text online-user-sml-text">
+                  <h6><a href="#">Patrick</a></h6>
+                  <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
+                  <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
+                </div>
+                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+              </div>
+              <div class="hotlist-box">
+                <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                  <div class="event-user-active">&nbsp;</div>
+                </div>
+                <div class="friends-sml-text online-user-sml-text">
+                  <h6><a href="#">Patrick</a></h6>
+                  <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
+                  <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
+                </div>
+                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+              </div>
+            </li>
+            <li>
+              <div class="hotlist-box">
+                <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                  <div class="event-user-active">&nbsp;</div>
+                </div>
+                <div class="friends-sml-text online-user-sml-text">
+                  <h6><a href="#">Patrick</a></h6>
+                  <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
+                  <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
+                </div>
+                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+              </div>
+              <div class="hotlist-box">
+                <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                  <div class="event-user-active">&nbsp;</div>
+                </div>
+                <div class="friends-sml-text online-user-sml-text">
+                  <h6><a href="#">Patrick</a></h6>
+                  <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
+                  <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
+                </div>
+                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+              </div>
+            </li>
+          </ul>
+          <div id="loadMore3" class="more-setting-outer">More</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

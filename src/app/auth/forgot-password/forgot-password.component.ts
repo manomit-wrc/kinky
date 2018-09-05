@@ -29,13 +29,13 @@ export class ForgotPasswordComponent implements OnInit {
       password: ['', Validators.required],
       c_password: ['', Validators.required]
     }, {
-      validator: this.auth.MatchPassword 
+      validator: this.auth.MatchPassword
     });
     this.auth.checkForgotPassword(this.route.snapshot.params.link)
       .subscribe(data => {
         this.success = data.success;
         this.message = data.message;
-      })
+      });
   }
 
   get f() { return this.forgotForm.controls; }
@@ -43,7 +43,6 @@ export class ForgotPasswordComponent implements OnInit {
   onForgotSubmit() {
     this.submitted = true;
     if (this.forgotForm.invalid) {
-      
       return;
     }
     this.loading = true;
@@ -53,7 +52,7 @@ export class ForgotPasswordComponent implements OnInit {
         setTimeout(() => {
           window.location.href = "/";
         }, 3000);
-      })
+      });
   }
 
 }

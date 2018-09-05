@@ -6,8 +6,9 @@ import { MyLatestProfileComponent } from './my-latest-profile/my-latest-profile.
 import { EventsComponent } from './events/events.component';
 import { AddEventComponent } from './events/add-events.component';
 import { LayoutComponent } from './layout/layout.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 import { AuthGuard } from '../guards';
-
+import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
 const authRoutes: Routes = [
 
     //Site routes goes here
@@ -19,7 +20,9 @@ const authRoutes: Routes = [
           { path: 'latest-personal-details', component: MyLatestProfileComponent, pathMatch: 'full', canActivate: [AuthGuard]},
           { path: 'events', component: EventsComponent, pathMatch: 'full', canActivate: [AuthGuard]},
           { path: 'add-event', component: AddEventComponent, pathMatch: 'full', canActivate: [AuthGuard]},
-          { path: 'add-meetup', component: AddEventComponent, pathMatch: 'full', canActivate: [AuthGuard]}
+          { path: 'add-meetup', component: AddEventComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+          { path: 'my-profile', component: MyProfileComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+          { path: 'my-photo-upload', component: PhotoUploadComponent, pathMatch: 'full', canActivate: [AuthGuard]},
         ]
     }
 ];
