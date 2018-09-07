@@ -7,6 +7,7 @@ import { AlertsService } from 'angular-alert-module';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { userDetails } from '../../auth/auth.selectors';
+import { Login } from '../../auth/auth.actions';
 @Component({
   selector: 'app-my-latest-profile',
   templateUrl: './my-latest-profile.component.html',
@@ -179,22 +180,33 @@ export class MyLatestProfileComponent implements OnInit {
     data['age_range'] = this.testArr2;
 
   this.auth.personal_info_update(data)
-    .pipe(first())
-    .subscribe(data => {
-      window.scrollTo(0,0);
-      this.alerts.setMessage('Updated Successfull!', 'success');
-
-    });
+    .pipe(
+      tap(data => {
+        const info = data.info;
+        this.store.dispatch(new Login({ info}))
+        window.scrollTo(0,0);
+        this.alerts.setMessage('Updated Successfull!', 'success');
+      })
+    )
+    .subscribe(
+      noop
+    );
   }
 
   submit_personal(headline,personal_details) {
     if (headline != "" && personal_details != "") {
        this.auth.personal_details_save(headline,personal_details)
-    .pipe(first())
-    .subscribe(data => {
-      this.alerts.setMessage('Updated Successfull!', 'success');
-
-    });
+    .pipe(
+      tap(data => {
+        const info = data.info;
+        this.store.dispatch(new Login({ info}))
+        window.scrollTo(0,0);
+        this.alerts.setMessage('Updated Successfull!', 'success');
+      })
+    )
+    .subscribe(
+      noop
+    );
     } else {
       this.alerts.setMessage('Please fill the details!', 'error');
     }

@@ -95,10 +95,7 @@ export class AuthenticationService {
       }));
     }
     personal_info_update(data) {
-      return this.http.post<any>(`http://localhost:9000/api/users/personal-details-update`, {data})
-      .pipe(map(user => {
-          return of(user); // create own observable
-      }));
+      return this.http.post<any>(`http://localhost:9000/api/users/personal-details-update`, {data});
     }
 
     /* Api for change password */
@@ -231,9 +228,7 @@ export class AuthenticationService {
 
     personal_details_save(headline:any, description:any){
       return this.http.post<any>(`http://localhost:9000/api/users/update-personal-headline`, { headline,description })
-        .pipe(map(data => {
-          return data;
-        }))
+      
     }
     checkForgotPassword(link: string) {
       return this.http.post<any>(`http://localhost:9000/api/users/check-password-request`, { link })
