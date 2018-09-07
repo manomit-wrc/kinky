@@ -11,206 +11,131 @@
         <li><a href="#password"  class="forgot">Forgotten details</a></li>
       </ul>
     </div>
+    
     <div id="signup" style="display:none;">
-      <div class="top-form"
-      [ngStyle]="{'display': isShow ? 'none' : 'block'}"
-      >
-        <div class="first-div">
-          <app-alerts></app-alerts>
-          <h5>Select Your Gender</h5>
-          <div class="signup-outer">
-            <div class="right-form-row gender-btn">
-              <button (click)="getSex('M')"><i class="fa fa-mars"></i> Male</button>
-            </div>
-            <div class="right-form-row gender-btn">
-              <button (click)="getSex('F')"><i class="fa fa-venus"></i> Female</button>
-            </div>
-            <div class="right-form-row gender-btn">
-              <button (click)="getSex('C')"><i class="fa fa-venus-mars"></i> Couple</button>
-            </div>
-            <div class="right-form-row gender-btn">
-              <button (click)="getSex('CTT')">CD/TV/TS</button>
-            </div>
-          </div>
-
-
-
-        </div>
-        <button class="next form-submit-btn" (click)="nextForm()">Next</button>
-        <div class="have-account-sec">
-          <ul class="form-tab">
-            <li class="pages_active"><a href="#signin">Have an account? <span>Click here</span></a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="next-div" [ngStyle]="{'display': isShow ? 'block' : 'none'}">
-        <div class="top-form">
-          <app-alerts></app-alerts>
-          <h5>Sign Up</h5>
-          <form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
-            <div class="main-form-row">
-              <label>Username</label>
-              <div class="input-box">
-                <input type="text" class="input-form"
-                  formControlName="username" placeholder="Username">
-                  <i *ngIf="signupSubmitted && !signup.username.errors && signup.username.valid" class="fa fa-check" aria-hidden="true"></i>
-                  <i *ngIf="signupSubmitted && signup.username.errors && signup.username.invalid" class="fa fa-times" aria-hidden="true"></i>
-              </div>
-              <div *ngIf="signupSubmitted && signup.username.errors" class="invalid-feedback">
-                  <span *ngIf="signup.username.errors.required">Username is required</span>
-              </div>
-
-            </div>
-            <div class="main-form-row">
-              <label>Password</label>
-              <div class="input-box">
-                <input type="password" class="input-form"
-                  placeholder="Password" formControlName="password">
-                  <i *ngIf="signupSubmitted && !signup.password.errors && signup.password.valid" class="fa fa-check" aria-hidden="true"></i>
-                  <i *ngIf="signupSubmitted && signup.password.errors && signup.password.invalid" class="fa fa-times" aria-hidden="true"></i>
-              </div>
-              <div *ngIf="signupSubmitted && signup.password.errors" class="invalid-feedback">
-                  <span *ngIf="signup.password.errors.required">Password is required</span>
-              </div>
-            </div>
-            <div class="main-form-row">
-              <label>Email</label>
-              <div class="input-box">
-                <input type="text" class="input-form"
-                  placeholder="example@mail.com"
-                  formControlName="email"
-                  >
-                  <i *ngIf="signupSubmitted && !signup.email.errors && signup.email.valid" class="fa fa-check" aria-hidden="true"></i>
-                  <i *ngIf="signupSubmitted && signup.email.errors && signup.email.invalid" class="fa fa-times" aria-hidden="true"></i>
-              </div>
-              <div *ngIf="signupSubmitted && signup.email.errors" class="invalid-feedback">
-                  <span *ngIf="signup.email.errors.required">Email is required</span>
-              </div>
-              <div *ngIf="signupSubmitted && signup.email.errors" class="invalid-feedback">
-                  <span *ngIf="signup.email.errors.email">Invalid email</span>
-              </div>
-            </div>
-            <div class="main-form-row">
-              <label>Date of Birth</label>
-              <div class="input-box-sml"
-              [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.DD.errors }"
+        <div class="top-form"
+              [ngStyle]="{'display': isShow ? 'none' : 'block'}"
               >
-                <input type="number" class="input-form" placeholder="1" formControlName="DD" max="31">
-
-              </div>
-
-              <div class="input-box-sml" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.MM.errors }">
-                <input type="number" class="input-form" placeholder="1" formControlName="MM" max="12">
-              </div>
-              <div class="input-box-sml" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.YYYY.errors }">
-                <input type="number" class="input-form" placeholder="YYYY" formControlName="YYYY" max="2018">
-              </div>
-            </div>
-            <div class=" signup-creat-btn">
-              <!--<input class="form-submit-btn" value="Create Account" type="submit">-->
-              <button [disabled]="signupLoading" class="form-submit-btn">Create Account</button>
-              <img *ngIf="signupLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            </div>
-            <div class="agree-checkbox">
-              <input type="checkbox" class="checkbtn-agree" (change)="terms($event)">
-              <span>I agree to the <a href="#">terms & conditions</a></span>
-
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div id="signin">
-      <div class="top-form" >
-        <h5>Sign in</h5>
-        <div class="signin-outer">
-          <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
-              <div class="main-form-row">
-                  <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
-                <label>Username</label>
-                <div class="form-group"
-
-                >
-                  <input type="text" formControlName="username"
-                     class="form-control"
-                     placeholder="Username"
-
-                  >
-                  <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                      <div *ngIf="f.username.errors.required">Username is required</div>
+                <div class="first-div">
+                  
+                  <h5>Select Your Gender</h5>
+                  <div class="alert alert-danger" *ngIf="errorMessage">
+              
+                      <strong>{{ errorMessage }}</strong>
+                    </div>
+                  <div class="signup-outer">
+                    <div class="right-form-row gender-btn">
+                      <button (click)="getSex('M')"><i class="fa fa-mars"></i> Male</button>
+                    </div>
+                    <div class="right-form-row gender-btn">
+                      <button (click)="getSex('F')"><i class="fa fa-venus"></i> Female</button>
+                    </div>
+                    <div class="right-form-row gender-btn">
+                      <button (click)="getSex('C')"><i class="fa fa-venus-mars"></i> Couple</button>
+                    </div>
+                    <div class="right-form-row gender-btn">
+                      <button (click)="getSex('CTT')">CD/TV/TS</button>
+                    </div>
                   </div>
-                  <span *ngIf="f.username.errors && f.username.dirty" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                  <span *ngIf="!f.username.errors && f.username.dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
-
+        
+        
+        
                 </div>
+                <button class="next form-submit-btn" (click)="nextForm()">Next</button>
+                <div class="have-account-sec">
+                  <ul class="form-tab">
+                    <li class="pages_active"><a href="#signin">Have an account? <span>Click here</span></a></li>
+                  </ul>
+                </div>
+        </div>
+        <div class="next-div" [ngStyle]="{'display': isShow ? 'block' : 'none'}">
+          <div class="top-form">
+            
+            <h5>Sign Up</h5>
+            <div class="alert alert-danger" *ngIf="errorMessage">
+        
+                <strong>{{ errorMessage }}</strong>
+              </div>
+          
+              <div class="alert alert-success" *ngIf="successMessage">
+                
+                  <strong>{{ successMessage }}</strong>
+              </div>
+            <form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
+              <div class="main-form-row">
+                <label>Username</label>
+                <div class="input-box">
+                  <input type="text" class="input-form"
+                    formControlName="username" placeholder="Username">
+                    <i *ngIf="signupSubmitted && !signup.username.errors && signup.username.valid" class="fa fa-check" aria-hidden="true"></i>
+                    <i *ngIf="signupSubmitted && signup.username.errors && signup.username.invalid" class="fa fa-times" aria-hidden="true"></i>
+                </div>
+                <div *ngIf="signupSubmitted && signup.username.errors" class="invalid-feedback">
+                    <span *ngIf="signup.username.errors.required">Username is required</span>
+                </div>
+  
               </div>
               <div class="main-form-row">
                 <label>Password</label>
-                <div class="form-group"
-                >
-                  <input type="password" formControlName="password"
-                     class="form-control"
-                     placeholder="Password"
-                  >
-                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                      <div *ngIf="f.password.errors.required">Password is required</div>
-                  </div>
-                  <span *ngIf="f.password.errors && f.password.dirty" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                  <span *ngIf="!f.password.errors && f.password.dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
-              </div>
-                <div class="forgot-pass-row">
-                  <ul class="form-tab">
-                    <li><a href="#password">Forgot password ?</a></li>
-                  </ul>
+                <div class="input-box">
+                  <input type="password" class="input-form"
+                    placeholder="Password" formControlName="password">
+                    <i *ngIf="signupSubmitted && !signup.password.errors && signup.password.valid" class="fa fa-check" aria-hidden="true"></i>
+                    <i *ngIf="signupSubmitted && signup.password.errors && signup.password.invalid" class="fa fa-times" aria-hidden="true"></i>
+                </div>
+                <div *ngIf="signupSubmitted && signup.password.errors" class="invalid-feedback">
+                    <span *ngIf="signup.password.errors.required">Password is required</span>
                 </div>
               </div>
               <div class="main-form-row">
-                <button [disabled]="loading" class="form-submit-btn">Login</button>
-                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                <label>Email</label>
+                <div class="input-box">
+                  <input type="text" class="input-form"
+                    placeholder="example@mail.com"
+                    formControlName="email"
+                    >
+                    <i *ngIf="signupSubmitted && !signup.email.errors && signup.email.valid" class="fa fa-check" aria-hidden="true"></i>
+                    <i *ngIf="signupSubmitted && signup.email.errors && signup.email.invalid" class="fa fa-times" aria-hidden="true"></i>
+                </div>
+                <div *ngIf="signupSubmitted && signup.email.errors" class="invalid-feedback">
+                    <span *ngIf="signup.email.errors.required">Email is required</span>
+                </div>
+                <div *ngIf="signupSubmitted && signup.email.errors" class="invalid-feedback">
+                    <span *ngIf="signup.email.errors.email">Invalid email</span>
+                </div>
               </div>
-          </form>
-
-        </div>
-
-      </div>
-    </div>
-    <div id="password">
-      <div class="top-form">
-        <h5>Password Reminder</h5>
-        <app-alerts></app-alerts>
-        <form [formGroup]="forgotForm" (ngSubmit)="onForgotSubmit()">
-        <div class="main-form-row">
-
-          <label>Username or Email </label>
-          <div class="input-box">
-              <input type="text" class="input-form"
-                placeholder="John Doe/example@mail.com"
-                formControlName="email"
+              <div class="main-form-row">
+                <label>Date of Birth</label>
+                <div class="input-box-sml"
+                [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.DD.errors }"
                 >
-                <i *ngIf="forgotSubmitted && !forgotpassword.email.errors && forgotpassword.email.valid" class="fa fa-check" aria-hidden="true"></i>
-                <i *ngIf="forgotSubmitted && forgotpassword.email.errors && forgotpassword.email.invalid" class="fa fa-times" aria-hidden="true"></i>
-            </div>
-            <div *ngIf="forgotSubmitted && forgotpassword.email.errors" class="invalid-feedback">
-                <span *ngIf="forgotpassword.email.errors.required">Email is required</span>
-            </div>
-            <div *ngIf="forgotSubmitted && forgotpassword.email.errors" class="invalid-feedback">
-                <span *ngIf="forgotpassword.email.errors.email">Invalid email</span>
-            </div>
-          <div class="password-text">If you do not see an email from kinkypeople in your inbox<br>
-           please read the <a href="#">following instructions</a> | <a href="#">Contact Us</a></div>
+                  <input type="number" class="input-form" placeholder="1" formControlName="DD" max="31">
+  
+                </div>
+  
+                <div class="input-box-sml" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.MM.errors }">
+                  <input type="number" class="input-form" placeholder="1" formControlName="MM" max="12">
+                </div>
+                <div class="input-box-sml" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.YYYY.errors }">
+                  <input type="number" class="input-form" placeholder="YYYY" formControlName="YYYY" max="2018">
+                </div>
+              </div>
+              <div class=" signup-creat-btn">
+                <!--<input class="form-submit-btn" value="Create Account" type="submit">-->
+                <button [disabled]="signupLoading" class="form-submit-btn">Create Account</button>
+                <img *ngIf="signupLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              </div>
+              <div class="agree-checkbox">
+                <input type="checkbox" class="checkbtn-agree" (change)="terms($event)">
+                <span>I agree to the <a href="#">terms & conditions</a></span>
+  
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="main-form-row">
-          <input type="submit" class="form-submit-btn" value="Send Email" [disabled]="loading">
-          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-        </div>
-      </form>
-        <div class="have-account-sec">
-          <ul class="form-tab">
-            <li class="pages_active"><a href="#signin">Have an account? <span>Click here</span></a></li>
-          </ul>
-        </div>
-      </div>
     </div>
+    <app-login></app-login>
+    <app-password-reminder></app-password-reminder>
   </div>
 </div>
 <div class="row landing-row grey-landing-row">

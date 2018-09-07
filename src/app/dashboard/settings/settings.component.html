@@ -46,7 +46,7 @@
             <div class="more-setting-bot" [ngStyle]="{'display': more_settings ? 'block' : 'none'}">
               <div class="setting-row">
                 <h5>Instant Messenger</h5>
-                <app-alerts></app-alerts>
+                
                 <div class="personal-full-with-area">
                   <input class="personal-radio-btn" name="instant_msg" [(ngModel)]="instant_msg" value="1" type="radio">
                   <span class="personal-radio-title"><strong>ON</strong></span>
@@ -61,7 +61,7 @@
               </div>
               <div class="setting-row">
                 <h5>Auto Reply to Mail Matches</h5>
-                <app-alerts></app-alerts>
+                
                 <form [formGroup]="autReplyForm" (ngSubmit)="onAutoReplySubmit()">
                   <div class="personal-full-with-area">
                     <label>Subject</label>
@@ -99,7 +99,7 @@
               </div>
               <div class="setting-row">
                 <h5>Promotion</h5>
-                <app-alerts></app-alerts>
+                
                 <div class="personal-full-with-area">
                   <input class="personal-radio-btn" value="1" name="promotion" [(ngModel)]="promotion" type="radio">
                   <span class="personal-radio-title"><strong>Active Promotion</strong></span> </div>

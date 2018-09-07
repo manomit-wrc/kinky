@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services';
-import { first, tap } from 'rxjs/operators';
-import {noop} from "rxjs";
+import { first, tap, debounceTime } from 'rxjs/operators';
+import {noop, Subject} from "rxjs";
+
 import { Router } from '@angular/router';
-import { AlertsService } from 'angular-alert-module';
-import * as jwt_decode from 'jwt-decode';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../reducers';
-import { Login } from '../auth.actions';
 
 @Component({
   selector: 'app-auth',
@@ -16,36 +12,41 @@ import { Login } from '../auth.actions';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-
-  loginForm: FormGroup;
+  private _success = new Subject<string>();
+  private _error = new Subject<string>();
+  successMessage: string;
+  errorMessage: string;
+  
   signupForm: FormGroup;
-  forgotForm: FormGroup;
-  loading = false;
+  
+  
   signupLoading = false;
-  submitted = false;
+  
   signupSubmitted = false;
-  forgotSubmitted = false;
-  error = '';
-  errorMsg: any;
-  closeAlert = false;
+  
+  
   gender: string = '';
   isShow: boolean = false;
   termsConditions = false;
-
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthenticationService,
-    private router: Router,
-    private alerts: AlertsService,
-    private store: Store<AppState>
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.alerts.setDefaults('timeout',5);
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
+
+    this._error.subscribe((message) => this.errorMessage = message);
+    this._error.pipe(
+      debounceTime(2000)
+    ).subscribe(() => this.errorMessage = null);
+
+
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(4000)
+    ).subscribe(() => this.successMessage = null)
+
     this.signupForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -55,26 +56,12 @@ export class AuthComponent implements OnInit {
       YYYY: ['', Validators.compose([Validators.required, Validators.maxLength(4), Validators.max(2018)])]
     });
 
-    this.forgotForm = this.formBuilder.group({
-      email: ['', Validators.required],
-    });
 
-    try {
-      const decoded = jwt_decode(localStorage.getItem('token'));
-      if (decoded) {
-        this.router.navigateByUrl('/my-profile');
-      }
-    } catch (error) {
-
-    }
   }
-
-  get f() { return this.loginForm.controls; }
 
   get signup() { return this.signupForm.controls; }
 
-  get forgotpassword() { return this.forgotForm.controls; }
-
+  
   getSex(value) {
     this.gender = value;
 
@@ -82,48 +69,10 @@ export class AuthComponent implements OnInit {
   nextForm() {
 
     if (this.gender === '') {
-      this.alerts.setMessage('Please select your gender!', 'error');
+      this._error.next('Please choose your sex');
     } else {
       this.isShow = true;
     }
-  }
-
-  onLoginSubmit() {
-    this.submitted = true;
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-        return;
-    }
-
-    this.loading = true;
-
-    this.auth.login(this.f.username.value, this.f.password.value)
-      .pipe(
-        tap(data => {
-          localStorage.setItem("token", data.token);
-          const info = data.info;
-          this.loading = false;
-          if ( data.code !== 200) {
-
-              this.errorMsg = data.message;
-              setTimeout(() => {
-                this.closeAlert = true;
-                this.errorMsg = '';
-                console.log(this.closeAlert);
-                }, 1500);
-                this.closeAlert = false;
-     } else {
-            this.store.dispatch(new Login({ info }));
-            //this.router.navigateByUrl('/my-profile');
-            window.location.href = "/my-profile";
-          }
-        })
-      ).subscribe(
-        noop,
-        () => alert('Login Failed')
-      );
-
-
   }
 
   terms(e) {
@@ -141,11 +90,11 @@ export class AuthComponent implements OnInit {
       return;
     }
     if (!this.termsConditions) {
-      window.scrollTo(0, 0);
-      this.alerts.setMessage("Please checked terms and conditions.",'error');
+      
+      this._error.next('Please select terms and conditions');
       return;
     }
-    window.scrollTo(0, 0);
+    
     this.signupLoading = true;
     this.auth.signup(
       this.signup.username.value,
@@ -158,28 +107,12 @@ export class AuthComponent implements OnInit {
     .subscribe(data => {
       this.signupLoading = false;
       if (data.code === 200) {
-        this.alerts.setMessage(data.message, 'success');
+        this._success.next(data.message);
       } else {
-        this.alerts.setMessage(data.message, 'error');
+        this._error.next(data.message);
         }
     });
   }
-
-  onForgotSubmit() {
-    this.forgotSubmitted = true;
-    if (this.forgotForm.invalid) {
-
-      return;
-    }
-    this.loading = true;
-    this.auth.forgot_password(this.forgotpassword.email.value)
-    .pipe(first())
-    .subscribe(data => {
-      this.loading = false;
-      this.alerts.setMessage('If a matching account was found an email was sent to the details you provided, to allow you to reset your password.', 'success');
-    });
-  }
-
 
 
 }

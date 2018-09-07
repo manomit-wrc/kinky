@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders,NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AlertsModule } from 'angular-alert-module';
 import { AuthComponent } from './auth/auth.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -12,16 +11,27 @@ import { StoreModule } from '@ngrx/store';
 import * as fromAuth from './auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth.effects';
+import { PasswordReminderComponent } from './password-reminder/password-reminder.component';
+import { LoginComponent } from './login/login.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
-    AlertsModule.forRoot(),
     ReactiveFormsModule,
     AuthRoutingModule,
     StoreModule.forFeature('auth', fromAuth.authReducer),
     EffectsModule.forFeature([AuthEffects])
   ],
-  declarations: [AuthComponent, LayoutComponent, AuthFooterComponent, VerifyAccountComponent, ForgotPasswordComponent]
+  declarations: [AuthComponent, LayoutComponent, AuthFooterComponent, VerifyAccountComponent, ForgotPasswordComponent, PasswordReminderComponent, LoginComponent]
 })
-export class AuthModule { }
+
+export class AuthModule {
+  static forRoot(): ModuleWithProviders {
+      return {
+          ngModule: AuthModule,
+          
+      }
+  }
+}
+

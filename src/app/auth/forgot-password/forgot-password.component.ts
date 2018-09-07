@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { AuthenticationService } from '../../services';
-import { AlertsService } from 'angular-alert-module';
+
 
 @Component({
   selector: 'app-forgot-password',
@@ -11,8 +13,10 @@ import { AlertsService } from 'angular-alert-module';
 })
 export class ForgotPasswordComponent implements OnInit {
 
+  private _success = new Subject<string>();
   success: boolean = false;
   message: string = '';
+  successMessage: string;
   forgotForm: FormGroup;
   submitted = false;
   loading = false;
@@ -20,11 +24,19 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private auth: AuthenticationService ,
-    private formBuilder: FormBuilder,
-    private alerts: AlertsService
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
+
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(3000)
+    ).subscribe(() => {
+      this.successMessage = null;
+      window.location.href = "/";
+    })
+
     this.forgotForm = this.formBuilder.group({
       password: ['', Validators.required],
       c_password: ['', Validators.required]
@@ -48,10 +60,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.loading = true;
     this.auth.updateForgotPassword(this.f.password.value, this.route.snapshot.params.link)
       .subscribe(data => {
-        this.alerts.setMessage(data.message, 'success');
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 3000);
+        this._success.next(data.message);
       });
   }
 

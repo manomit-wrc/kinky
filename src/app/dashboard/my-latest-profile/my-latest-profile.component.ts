@@ -1,9 +1,10 @@
 import { Component, OnInit, Renderer } from '@angular/core';
 import { AuthenticationService } from '../../services';
-import { first, tap } from 'rxjs/operators';
+import { first, tap, debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable, noop } from 'rxjs';
-import { AlertsService } from 'angular-alert-module';
+import { Subject } from 'rxjs';
+
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { userDetails } from '../../auth/auth.selectors';
@@ -14,6 +15,8 @@ import { Login } from '../../auth/auth.actions';
   styleUrls: ['./my-latest-profile.component.css']
 })
 export class MyLatestProfileComponent implements OnInit {
+  private _success = new Subject<string>();
+  successMessage: string;
   tab: String = 'tab1';
   gender: any;
   data: any = {};
@@ -61,12 +64,16 @@ export class MyLatestProfileComponent implements OnInit {
   constructor(
     private auth: AuthenticationService,
     private router: Router,
-    private alerts:AlertsService,
     private renderer: Renderer,
     private store: Store<AppState>
   ) { }
 
   ngOnInit() {
+
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(3000)
+    ).subscribe(() => this.successMessage = null)
 
     this.day = [
 
@@ -188,7 +195,8 @@ export class MyLatestProfileComponent implements OnInit {
         const info = data.info;
         this.store.dispatch(new Login({ info}))
         window.scrollTo(0,0);
-        this.alerts.setMessage('Updated Successfull!', 'success');
+        this._success.next('Information updated successfully');
+        
       })
     )
     .subscribe(
@@ -206,7 +214,8 @@ export class MyLatestProfileComponent implements OnInit {
         const info = data.info;
         this.store.dispatch(new Login({ info}))
         window.scrollTo(0,0);
-        this.alerts.setMessage('Updated Successfull!', 'success');
+        this._success.next('Information updated successfully');
+        
       })
     )
     .subscribe(
@@ -214,7 +223,7 @@ export class MyLatestProfileComponent implements OnInit {
     );
     } else {
       this.loading = false;
-      this.alerts.setMessage('Please fill the details!', 'error');
+      //this.alerts.setMessage('Please fill the details!', 'error');
     }
   }
 
