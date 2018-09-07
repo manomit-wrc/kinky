@@ -56,6 +56,7 @@ export class MyLatestProfileComponent implements OnInit {
   testArr2: any = [];
   interested_arr_list: any= [];
   age_range_list: any= [];
+  loading: any = false;
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -87,14 +88,14 @@ export class MyLatestProfileComponent implements OnInit {
       select(userDetails),
       tap(response => {
         if(response !== undefined) {
-          
+
           this.headline = response.headline;
           this.personal_details = response.description;
           this.data = response;
           this.testArr = response.interested_in;
           this.testArr2 = response.age_range;
         }
-        
+
       })
     ).subscribe(
       noop
@@ -109,7 +110,7 @@ export class MyLatestProfileComponent implements OnInit {
     this.auth.country()
     .pipe(first())
     .subscribe(data => {
-    
+
     this.countrys = data.data;
     this.count = (this.count) ? this.count : data.data[0]._id;
     this.auth.state(data.data[0]._id)
@@ -175,12 +176,14 @@ export class MyLatestProfileComponent implements OnInit {
   }
 
   personal_details_update (data) {
+    this.loading = true;
     data['interested_in'] = this.testArr;
     data['age_range'] = this.testArr2;
 
   this.auth.personal_info_update(data)
     .pipe(first())
     .subscribe(data => {
+      this.loading = false;;
       window.scrollTo(0,0);
       this.alerts.setMessage('Updated Successfull!', 'success');
 
@@ -188,14 +191,17 @@ export class MyLatestProfileComponent implements OnInit {
   }
 
   submit_personal(headline,personal_details) {
+    this.loading = true;
     if (headline != "" && personal_details != "") {
        this.auth.personal_details_save(headline,personal_details)
     .pipe(first())
     .subscribe(data => {
+      this.loading = false;
       this.alerts.setMessage('Updated Successfull!', 'success');
 
     });
     } else {
+      this.loading = false;
       this.alerts.setMessage('Please fill the details!', 'error');
     }
   }

@@ -15,6 +15,7 @@ export class IntroductionMessageComponent implements OnInit {
   errorMsg: any;
   closeAlert = false;
   closeAlert1 = false;
+  loading:any = false;
 
   constructor(
     public auth: AuthenticationService
@@ -30,9 +31,11 @@ export class IntroductionMessageComponent implements OnInit {
   }
 
   update() {
+    this.loading = true;
     this.auth.introduction_update(this.preferred_introduction , this.own_introduction)
     .pipe(first())
     .subscribe(data => {
+      this.loading = false;
       if (data.code !== 200) {
         this.closeAlert = false;
         this.errorMsg = data.message;

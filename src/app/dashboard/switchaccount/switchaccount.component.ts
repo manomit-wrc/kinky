@@ -13,21 +13,24 @@ export class SwitchaccountComponent implements OnInit {
   errorMsg: any;
   closeAlert = false;
   closeAlert1 = false;
+  loading: any= false;
   constructor(
     public auth: AuthenticationService
   ) { }
 
   ngOnInit() {
     this.userObj.subscribe(data => {
-      
+
       this.switch_account = data.value.info.switch_account ? data.value.info.switch_account.toString(): '';
     });
   }
 
   update(switchaccount) {
+    this.loading = true;
     this.auth.switch_account(switchaccount)
     .pipe(first())
     .subscribe(data => {
+      this.loading = false;
       if (data.code !== 200) {
         this.closeAlert = false;
         this.errorMsg = data.message;

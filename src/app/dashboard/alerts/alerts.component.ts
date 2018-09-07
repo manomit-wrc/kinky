@@ -14,6 +14,7 @@ export class AlertsComponent implements OnInit {
   errorMsg: any;
   closeAlert = false;
   closeAlert1 = false;
+  loading: any = false;
   constructor(
     public auth: AuthenticationService
   ) { }
@@ -21,15 +22,17 @@ export class AlertsComponent implements OnInit {
   ngOnInit() {
     this.userObj.subscribe(data => {
       this.radiogroup = data.value.info.alert_setting ? data.value.info.alert_setting.toString(): '';
-      
+
 
     });
   }
 
   update(no) {
+    this.loading = true;
     this.auth.alerts_update(no)
     .pipe(first())
     .subscribe(data => {
+      this.loading = false;
       if (data.code !== 200) {
         this.closeAlert = false;
         this.errorMsg = data.message;

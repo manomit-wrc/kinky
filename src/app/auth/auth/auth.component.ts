@@ -96,32 +96,15 @@ export class AuthComponent implements OnInit {
     }
 
     this.loading = true;
-    // this.auth.login(this.f.username.value, this.f.password.value)
-    // .pipe(first())
-    // .subscribe(data => {
-    //   localStorage.setItem('token', data.token);
-    //   if ( data.code !== 200) {
-    //     this.loading = false;
-    //       this.errorMsg = data.message;
-    //       setTimeout(() => {
-    //         this.closeAlert = true;
-    //         this.errorMsg = '';
-    //         console.log(this.closeAlert);
-    //        }, 1500);
-    //        this.closeAlert = false;
-
-    //   } else {
-    //     this.router.navigate(['settings']);
-    //   }
-    // });
 
     this.auth.login(this.f.username.value, this.f.password.value)
       .pipe(
         tap(data => {
           localStorage.setItem("token", data.token);
           const info = data.info;
+          this.loading = false;
           if ( data.code !== 200) {
-            this.loading = false;
+
               this.errorMsg = data.message;
               setTimeout(() => {
                 this.closeAlert = true;
@@ -129,10 +112,9 @@ export class AuthComponent implements OnInit {
                 console.log(this.closeAlert);
                 }, 1500);
                 this.closeAlert = false;
-    
-          } else {
-            this.store.dispatch(new Login({ info }))
-            this.router.navigateByUrl('/latest-personal-details')
+     } else {
+            this.store.dispatch(new Login({ info }));
+            this.router.navigateByUrl('/latest-personal-details');
           }
         })
       ).subscribe(
@@ -140,7 +122,7 @@ export class AuthComponent implements OnInit {
         () => alert('Login Failed')
       );
 
-    
+
   }
 
   terms(e) {

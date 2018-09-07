@@ -17,6 +17,7 @@ export class DeleteaccountComponent implements OnInit {
   closeAlert = false;
   closeAlert1 = false;
   other_delete_reason: any;
+  loading: any = false;
   constructor(
     private auth: AuthenticationService,
     private store: Store<AppState>
@@ -30,9 +31,11 @@ export class DeleteaccountComponent implements OnInit {
   }
 
   update(delete_account, other_delete_reason) {
+    this.loading = true;
     this.auth.delete_account(delete_account, other_delete_reason)
     .pipe(first())
     .subscribe(data => {
+      this.loading = false;
       if (data.code !== 200) {
         this.closeAlert = false;
         this.errorMsg = data.message;
