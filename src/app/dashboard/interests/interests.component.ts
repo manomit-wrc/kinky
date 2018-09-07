@@ -17,13 +17,14 @@ export class InterestsComponent implements OnInit {
   errorMsg: any;
   closeAlert = false;
   closeAlert1 = false;
+  loading: any = false;
   constructor(
     private auth: AuthenticationService,
     private router: Router
     ) { }
 
   ngOnInit() {
-    
+
     this.userObj.subscribe(data => {
       this.gender = data.value.info.gender !== undefined ? data.value.info.gender : '';
       this.from_age = data.value.info.from_age ? data.value.info.from_age.toString() : '';
@@ -65,11 +66,14 @@ export class InterestsComponent implements OnInit {
   }
 
   update(gender, from_age, to_age, distance, country_id, state_id, contactmember, explicit_content) {
+    this.loading = true;
 
  this.auth.interest_update(gender, from_age, to_age, distance, country_id, state_id, contactmember, explicit_content)
     .pipe(first())
     .subscribe(data => {
+      this.loading = false;
       if (data.code !== 200) {
+
         this.closeAlert = false;
         this.errorMsg = data.message;
         setTimeout(() => {

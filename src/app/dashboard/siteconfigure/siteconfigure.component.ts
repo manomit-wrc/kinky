@@ -19,31 +19,35 @@ export class SiteconfigureComponent implements OnInit {
   closeAlert = false;
   closeAlert1 = false;
   timezones : any;
+  loading: any = false;
+
   constructor(
     public auth: AuthenticationService
   ) { }
 
   ngOnInit() {
     const decoded = jwt_decode(localStorage.getItem('token'));
-    
+
     this.userObj.subscribe(data => {
-      
+
       this.email = decoded.email;
       this.language = data.value.info.language;
       this.timezone = data.value.info.timezone;
       this.timezones = data.value.timezones;
-      
+
       this.mobile = data.value.info.mobile ? data.value.info.mobile.toString(): '';
     });
 
-    
+
 
   }
 
   update() {
+    this.loading = true;
     this.auth.site_config_update(this.mobile, this.language, this.timezone)
     .pipe(first())
     .subscribe(data => {
+      this.loading = false;
       if (data.code !== 200) {
         this.closeAlert = false;
         this.errorMsg = data.message;

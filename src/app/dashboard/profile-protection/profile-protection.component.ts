@@ -13,22 +13,25 @@ export class ProfileProtectionComponent implements OnInit {
   errorMsg: any;
   closeAlert = false;
   closeAlert1 = false;
+  loading: any =false;
   constructor(
     public auth: AuthenticationService
   ) { }
 
   ngOnInit() {
     this.userObj.subscribe(data => {
-      
+
       this.radiogroup = data.value.info.profile_setting ? data.value.info.profile_setting.toString(): '';
 
     });
   }
 
   update(no) {
+    this.loading = true;
     this.auth.profile_protect(no)
     .pipe(first())
     .subscribe(data => {
+      this.loading = false;
       if (data.code !== 200) {
         this.closeAlert = false;
         this.errorMsg = data.message;

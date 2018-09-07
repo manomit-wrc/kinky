@@ -10,7 +10,7 @@ import { first } from 'rxjs/operators';
 })
 export class ChangePasswordComponent implements OnInit {
   changePassForm: FormGroup;
-  loading = false;
+  loading: any = false;
   submitted = false;
   successMsg: any;
   errorMsg: any;
@@ -37,13 +37,15 @@ export class ChangePasswordComponent implements OnInit {
   get changePassword() { return this.changePassForm.controls; }
 
   onSubmit() {
+    this.loading = true;
 
     this.submitted = true;
     // stop here if form is invalid
     if (this.changePassForm.invalid) {
+      this.loading = false;
         return;
     }
-    this.loading = true;
+
     this.auth.change_password(this.changePassword.old_password.value, this.changePassword.password.value)
     .pipe(first())
     .subscribe(data => {
