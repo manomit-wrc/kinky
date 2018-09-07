@@ -62,7 +62,7 @@ export class AuthComponent implements OnInit {
     try {
       const decoded = jwt_decode(localStorage.getItem('token'));
       if (decoded) {
-        this.router.navigate(['settings']);
+        this.router.navigateByUrl('/my-profile');
       }
     } catch (error) {
 
@@ -114,7 +114,8 @@ export class AuthComponent implements OnInit {
                 this.closeAlert = false;
      } else {
             this.store.dispatch(new Login({ info }));
-            this.router.navigateByUrl('/latest-personal-details');
+            //this.router.navigateByUrl('/my-profile');
+            window.location.href = "/my-profile";
           }
         })
       ).subscribe(

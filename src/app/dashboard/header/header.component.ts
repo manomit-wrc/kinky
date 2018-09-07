@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../../reducers';
+import { profileImg, userDetails } from '../../auth/auth.selectors';
+import { tap } from 'rxjs/operators';
+import { noop } from '@angular/compiler/src/render3/view/util';
+import { UserService } from '../user.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,9 +13,11 @@ import { AuthenticationService } from '../../services';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private auth: AuthenticationService) { }
+  avatar: string = '';
+  constructor(private auth: AuthenticationService, private avt: UserService) { }
 
   ngOnInit() {
+    this.avt.profileImage.subscribe(img => this.avatar = img);
   }
 
   logout() {

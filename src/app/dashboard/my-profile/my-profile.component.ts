@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services';
-import { first } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserService } from '../user.service';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../../reducers';
+import { userDetails } from '../../auth/auth.selectors';
+import { noop } from '@angular/compiler/src/render3/view/util';
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.component.html',
@@ -29,38 +34,42 @@ travel_arrangements:any;
 purpose:any;
   constructor(
     private auth: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private avt: UserService,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    this.auth.user_details()
-    .pipe(first())
+
+    this.store.select(userDetails)
     .subscribe(data => {
-        this.avatar =data.value.user.avatar;
-        this.name =data.value.user.username;
-        this.address = data.value.user.state.name + "," +data.value.user.country.name ;
-        this.gender = data.value.user.gender;
-        this.sexuality = data.value.user.sexuality;
-        this.age = this.getAge(data.value.user.mm +"/"+data.value.user.dd +"/"+data.value.user.yyyy );
-        if (data.value.user.looking_for =='M') {
+      this.avatar =data.avatar;
+        this.name =data.username;
+        this.address = data.state.name + "," +data.country.name ;
+        this.gender = data.gender;
+        this.sexuality = data.sexuality;
+        this.age = this.getAge(data.mm +"/"+data.dd +"/"+data.yyyy );
+        if (data.looking_for =='M') {
           this.looking_for = "Male";
         }else{
           this.looking_for = "Female";
         }
 
-        this.interested_in = data.value.user.interested_in;
-        this.height = data.value.user.height.name;
-        this.build = data.value.user.build.name;
-        this.hair = data.value.user.hair.name;
-        this.body_decoration = data.value.user.body_decoration;
-        this.drink = data.value.user.drink;
-        this.smoke = data.value.user.smoke;
-        this.drugs = data.value.user.drugs;
-        this.size = data.value.user.size;
-        this.travel_arrangements = data.value.user.travel_arrangment;
-        this.purpose =data.value.user.purpose;
+        this.interested_in = data.interested_in;
+        this.height = data.height.name;
+        this.build = data.build.name;
+        this.hair = data.hair.name;
+        this.body_decoration = data.body_decoration;
+        this.drink = data.drink;
+        this.smoke = data.smoke;
+        this.drugs = data.drugs;
+        this.size = data.size;
+        this.travel_arrangements = data.travel_arrangment;
+        this.purpose =data.purpose;
+    })
 
-    });
+    this.avt.profileImage.subscribe(img => this.avatar = img)
+
   }
 
    getAge(DOB) {

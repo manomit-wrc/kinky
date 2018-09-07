@@ -19,7 +19,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       
       this.renderer.selectRootElement(this.elRef.nativeElement.querySelector('.loader-wrap')).style.display = 'none';
-    }, 3000);
+    }, 1000);
   }
 
 }

@@ -184,6 +184,7 @@ export class MyLatestProfileComponent implements OnInit {
   this.auth.personal_info_update(data)
     .pipe(
       tap(data => {
+        this.loading = false;
         const info = data.info;
         this.store.dispatch(new Login({ info}))
         window.scrollTo(0,0);
@@ -201,6 +202,7 @@ export class MyLatestProfileComponent implements OnInit {
        this.auth.personal_details_save(headline,personal_details)
     .pipe(
       tap(data => {
+        this.loading = false;
         const info = data.info;
         this.store.dispatch(new Login({ info}))
         window.scrollTo(0,0);

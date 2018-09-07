@@ -19,3 +19,8 @@ export const userDetails = createSelector(
   selectAuthState,
   auth => auth.user
 )
+
+export const profileImg = createSelector(
+  selectAuthState,
+  auth => auth.user.avatar
+)
