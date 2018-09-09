@@ -9,12 +9,14 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { userDetails } from '../../auth/auth.selectors';
 import { Login } from '../../auth/auth.actions';
+import { loadAllMasters } from '../dashboard.selectors';
 @Component({
   selector: 'app-my-latest-profile',
   templateUrl: './my-latest-profile.component.html',
   styleUrls: ['./my-latest-profile.component.css']
 })
 export class MyLatestProfileComponent implements OnInit {
+  
   private _success = new Subject<string>();
   successMessage: string;
   tab: String = 'tab1';
@@ -69,6 +71,21 @@ export class MyLatestProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
+    this.store.pipe(
+      select(loadAllMasters),
+      tap(data => {
+        this.countrys = data.country;
+        this.timezones = data.timezones;
+        this.ethnicities = data.ethnicity;
+        this.haircolors = data.hair;
+        this.bodyhairs = data.body_hairs;
+        this.builds = data.build;
+        this.heights = data.height;
+        this.states = data.states;
+        
+      })
+    ).subscribe(noop);
 
     this._success.subscribe((message) => this.successMessage = message);
     this._success.pipe(
@@ -108,65 +125,6 @@ export class MyLatestProfileComponent implements OnInit {
     ).subscribe(
       noop
     )
-
-    this.auth.user_details()
-    .pipe(first())
-    .subscribe(data => {
-      this.timezones = data.value.timezones;
-    });
-
-    this.auth.country()
-    .pipe(first())
-    .subscribe(data => {
-
-    this.countrys = data.data;
-    this.count = (this.count) ? this.count : data.data[0]._id;
-    this.auth.state(data.data[0]._id)
-    .pipe(first())
-    .subscribe(datas => {
-    this.states = datas.data;
-    this.st = (this.st) ? this.st : datas.data[0]._id;
-
-    });
-
-    });
-
-      this.auth.ethnicity()
-    .pipe(first())
-    .subscribe(data => {
-    this.ethnicities = data.data;
-
-
-    });
-      this.auth.hair()
-    .pipe(first())
-    .subscribe(data => {
-    this.haircolors = data.data;
-
-
-    });
-      this.auth.bodyhair()
-    .pipe(first())
-    .subscribe(data => {
-    this.bodyhairs = data.data;
-
-
-    });
-      this.auth.build()
-    .pipe(first())
-    .subscribe(data => {
-    this.builds = data.data;
-
-
-    });
-      this.auth.height()
-    .pipe(first())
-    .subscribe(data => {
-    this.heights = data.data;
-
-
-    });
-
   }
 
   displayTab(value) {

@@ -1,6 +1,11 @@
 import {Component, OnInit, Input} from '@angular/core';
 import { AuthenticationService } from '../../services';
-import { first } from 'rxjs/operators';
+import { first, debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../reducers';
+import { settingDetails } from '../../auth/auth.selectors';
+import { Settings } from '../../auth/auth.actions';
 
 @Component({
   selector: 'app-alert',
@@ -8,23 +13,35 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./alerts.component.css']
 })
 export class AlertsComponent implements OnInit {
-  @Input() userObj: any ;
+  
   radiogroup: string;
-  successMsg: any;
-  errorMsg: any;
-  closeAlert = false;
-  closeAlert1 = false;
+  private _success = new Subject<string>();
+  private _error = new Subject<string>();
+  successMessage: string;
+  errorMessage: string;
   loading: any = false;
   constructor(
-    public auth: AuthenticationService
+    private auth: AuthenticationService,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    this.userObj.subscribe(data => {
-      this.radiogroup = data.value.info.alert_setting ? data.value.info.alert_setting.toString(): '';
+    this._error.subscribe((message) => this.errorMessage = message);
+    this._error.pipe(
+      debounceTime(2000)
+    ).subscribe(() => this.errorMessage = null);
 
 
-    });
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(4000)
+    ).subscribe(() => this.successMessage = null)
+
+    this.store.select(settingDetails)
+      .subscribe(data => {
+        this.radiogroup = data.alert_setting ? data.alert_setting.toString(): '';
+      })
+    
   }
 
   update(no) {
@@ -34,23 +51,12 @@ export class AlertsComponent implements OnInit {
     .subscribe(data => {
       this.loading = false;
       if (data.code !== 200) {
-        this.closeAlert = false;
-        this.errorMsg = data.message;
-        setTimeout(() => {
-          this.closeAlert = true;
-          this.errorMsg = '';
-          console.log(this.closeAlert);
-         }, 1500);
-         this.closeAlert = false;
+        this._error.next(data.message);
 
     } else {
-      this.closeAlert1 = false;
-      this.successMsg = data.message;
-      setTimeout(() => {
-        this.closeAlert1 = true;
-        this.successMsg = '';
-        console.log(this.closeAlert);
-       }, 1500);
+      const settings = data.settings;
+      this.store.dispatch(new Settings({ settings }));
+      this._success.next(data.message);
 
     }
 

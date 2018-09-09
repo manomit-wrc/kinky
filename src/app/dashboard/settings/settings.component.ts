@@ -1,10 +1,15 @@
 import { Component,  OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services';
-import { first } from 'rxjs/operators';
+import { first, tap, debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { AlertsService } from 'angular-alert-module';
 import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../../reducers';
+import { userDetails, settingDetails } from '../../auth/auth.selectors';
+import { Subject } from 'rxjs';
+import { Settings } from '../../auth/auth.actions';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -12,8 +17,11 @@ import { Observable } from 'rxjs';
 })
 export class SettingsComponent implements OnInit {
 
+  private _success = new Subject<string>();
+  private _error = new Subject<string>();
+  
   autReplyForm: FormGroup;
-  details$: Observable<any>;
+  details: any;
   tab: string = 'tab1';
   switch: any;
   instant_msg: any;
@@ -27,33 +35,54 @@ export class SettingsComponent implements OnInit {
   promotion_chk: boolean = false;
   promotion: string = '3';
 
+  successMessage: string;
+  errorMessage: string;
+
   constructor(
     private auth: AuthenticationService,
     private router: Router,
-    private alerts: AlertsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private store: Store<AppState>
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
+
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(4000)
+    ).subscribe(() => this.successMessage = null)
+
     this.autReplyForm = this.formBuilder.group({
       auto_reply_subject: ['', Validators.required],
       auto_reply_body: ['', Validators.required],
       enable_auto_reply: [false, Validators.required]
     });
- this.details$ = this.auth.user_details();
- 
- this.details$
-    .pipe(first())
+
+    this.store.select(settingDetails)
     .subscribe(data => {
+      if(data !== null) {
+        this.details = data;
+        this.switch = data.gender !== undefined ? data.gender : '';
+        this.instant_msg = data.instant_msg !== undefined ? data.instant_msg.toString() : '0';
+        this.auto_reply_subject = data.auto_reply_subject !== undefined ? data.auto_reply_subject: '';
+        this.auto_reply_body = data.auto_reply_body !== undefined ? data.auto_reply_body: '';
+        this.enable_auto_reply = data.enable_auto_reply !== undefined ? data.enable_auto_reply: false;
+        this.promotion = data.promotion !== undefined ? data.promotion : '3';
+        this.promotion_chk = data.promotion_chk !== undefined ? data.promotion_chk : false;
+      }
+      else {
+        
+        this.switch = '';
+        this.instant_msg =  '0';
+        this.auto_reply_subject = '';
+        this.auto_reply_body = '';
+        this.enable_auto_reply = false;
+        this.promotion = '3';
+        this.promotion_chk = false;
+      }
       
-      this.switch = data.value.info.gender !== undefined ? data.value.info.gender : '';
-      this.instant_msg = data.value.info.instant_msg !== undefined ? data.value.info.instant_msg.toString() : '0';
-      this.auto_reply_subject = data.value.info.auto_reply_subject !== undefined ? data.value.info.auto_reply_subject: '';
-      this.auto_reply_body = data.value.info.auto_reply_body !== undefined ? data.value.info.auto_reply_body: '';
-      this.enable_auto_reply = data.value.info.enable_auto_reply !== undefined ? data.value.info.enable_auto_reply: false;
-      this.promotion = data.value.info.promotion !== undefined ? data.value.info.promotion : '3';
-      this.promotion_chk = data.value.info.promotion_chk !== undefined ? data.value.info.promotion_chk : false;
     })
+
  
   }
 
@@ -67,7 +96,10 @@ export class SettingsComponent implements OnInit {
     this.auth.updateInstantMessage(value)
       .subscribe(data => {
         if(data.code === 200) {
-          this.alerts.setMessage('Instant Messenger settings updated successfully', 'success');
+          window.scrollTo(0,0);
+          const settings = data.settings;
+          this.store.dispatch(new Settings({ settings }))
+          this._success.next(data.message);
         }
       })
   }
@@ -81,7 +113,10 @@ export class SettingsComponent implements OnInit {
     this.auth.updateAutoReplyEmail(this.f.auto_reply_subject.value, this.f.auto_reply_body.value, this.f.enable_auto_reply.value)
       .subscribe(data => {
         this.autReplyLoading = false;
-        this.alerts.setMessage('Auto reply email settings updated successfully', 'success');
+        window.scrollTo(0,0);
+        const settings = data.settings;
+        this.store.dispatch(new Settings({ settings }))
+        this._success.next(data.message);
       })
   }
   toggleSetting() {
@@ -93,9 +128,12 @@ export class SettingsComponent implements OnInit {
     this.promotionLoading = true;
     this.auth.updatePromotion(promotion, promotion_chk)
       .subscribe(data => {
-        window.scrollTo(0,0);
+        
         this.promotionLoading = false;
-        this.alerts.setMessage('Promotion settings updated successfully', 'success');
+        window.scrollTo(0,0);
+        const settings = data.settings;
+        this.store.dispatch(new Settings({ settings }))
+        this._success.next(data.message);
       })
   }
 

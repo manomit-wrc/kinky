@@ -21,7 +21,7 @@
                 
                 <label>Location</label>
                 <select name='count_id' (change)="onItemChange($event.target.value)" [(ngModel)]="data.country">
-                  <option [value]="count._id" *ngFor="let count of countrys">{{count.name}}</option>
+                  <option [value]="count._id" *ngFor="let count of countrys ">{{count.name}}</option>
                 </select>
               </div>
               <div class="personal-detail-medium-box select-box">

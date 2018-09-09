@@ -1,31 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import {throwError} from 'rxjs';
-import {catchError, concatMap, exhaustMap, filter, map, mergeMap, withLatestFrom} from "rxjs/operators";
-import * as fromActions from './dashboard.actions';
-import { AuthenticationService } from '../services/authentication.service';
-
-
-
+import {Actions, Effect, ofType} from '@ngrx/effects';
+import {DashboardActionTypes, loadMasters} from './dashboard.actions';
+import {tap} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {defer, of} from 'rxjs';
 
 @Injectable()
 export class DashboardEffects {
-  constructor(
-    private actions$: Actions,
-    private auth: AuthenticationService
-  ) {}      
 
-  @Effect() 
-  loadAllCourses$ = this.actions$
-  .pipe(
-    ofType<fromActions.loadCountries>(fromActions.DashboardActionTypes.LOAD_COUNTRIES),
-    mergeMap(action => this.auth.country()),
-    map(countries => new fromActions.loadCountriesSuccess({countries})),
-    catchError(err => {
-      console.log('error loading course ', err);
-      return throwError(err);
-    })
+  @Effect({dispatch:false})
+  masters$ = this.actions$.pipe(
+    ofType<loadMasters>(DashboardActionTypes.LOAD_MASTERS),
+    tap(action => localStorage.setItem("masters", JSON.stringify(action.payload.masters)))
   );
+
+  @Effect()
+  init$ = defer(() => {
+
+    const masterData = localStorage.getItem("masters");
+
+    if (masterData) {
+       return of(new loadMasters({masters:JSON.parse(masterData)}));
+    }
+    
+
+  });
+
+  constructor(private actions$: Actions, private router:Router) {
+
+
+  }
 
 }

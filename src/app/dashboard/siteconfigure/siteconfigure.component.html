@@ -1,7 +1,14 @@
 <div class="general-tab-row">
   <label>Site language</label>
-  <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
-  <div *ngIf="successMsg" class="alert alert-success alert-dismissible" [ngClass]="{'fade out':closeAlert1}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{successMsg}}</div>
+  <div class="alert alert-danger" *ngIf="errorMessage">
+      
+    <strong>{{ errorMessage }}</strong>
+  </div>
+
+  <div class="alert alert-success" *ngIf="successMessage">
+    
+      <strong>{{ successMessage }}</strong>
+  </div>
   <div class="general-dropdown">
     <select [(ngModel)]="language">
       <option value="en">English</option>

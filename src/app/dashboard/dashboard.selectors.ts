@@ -1,6 +1,8 @@
-import {createFeatureSelector, createSelector} from '@ngrx/store';
-import { DashboardState } from './dashboard.reducer';
-import * as fromDashboard from './dashboard.reducer';
+import { createSelector} from '@ngrx/store';
 
-export const selectDashboardState = createFeatureSelector<DashboardState>("dashboard");
+export const selectDashboardState = state => state.dashboard;
 
+export const loadAllMasters = createSelector(
+    selectDashboardState,
+    dashboard => dashboard !== undefined ? dashboard.masters : null
+);

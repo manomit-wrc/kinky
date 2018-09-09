@@ -23,9 +23,22 @@
               "src/assets"
             ],
             "styles": [
+              
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/jquery-1.9.1.min.js",
+              "src/assets/js/bootstrap.js",
+              "src/assets/js/pignose.calendar.full.min.js",
+              "src/assets/js/calender.js",
+              "src/assets/js/owl.carousel.js",
+              "src/assets/js/jquery.tabify.js",
+              "src/assets/js/moment-with-locales.min.js",
+              "src/assets/js/bootstrap-material-datetimepicker.js",
+              "src/assets/js/jQuery-plugin-progressbar.js",
+              "src/assets/js/jquery.slimscroll.js",
+              "src/assets/js/function.js"
+            ]
           },
           "configurations": {
             "production": {

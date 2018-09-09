@@ -1,7 +1,17 @@
 <div class="general-tab-row"> <strong>Delete account</strong><br>
   <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
   <div *ngIf="successMsg" class="alert alert-success alert-dismissible" [ngClass]="{'fade out':closeAlert1}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{successMsg}}</div>
-  <span>Why you want to delete account ?</span> </div>
+  <span>Why you want to delete account ?</span> 
+</div>
+<div class="alert alert-danger" *ngIf="errorMessage">
+      
+  <strong>{{ errorMessage }}</strong>
+</div>
+
+<div class="alert alert-success" *ngIf="successMessage">
+  
+    <strong>{{ successMessage }}</strong>
+</div>
 <div class="general-tab-row">
   <div class="personal-full-with-area">
     <input class="personal-radio-btn" value="1" name="delete" [(ngModel)]="delete_account" type="radio">

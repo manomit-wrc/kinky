@@ -20,7 +20,12 @@ export const userDetails = createSelector(
   auth => auth.user
 )
 
+export const settingDetails = createSelector(
+  selectAuthState,
+  auth => auth.settings
+)
+
 export const profileImg = createSelector(
   selectAuthState,
-  auth => auth.user.avatar
+  auth => auth.user !== undefined ? auth.user.avatar: null
 )

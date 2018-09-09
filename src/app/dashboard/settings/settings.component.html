@@ -15,36 +15,40 @@
             <div class="row">
               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="generaltab-left">
-                 <app-interests [userObj]="details$"></app-interests>
+                 <app-interests [userObj]="details"></app-interests>
 
                 </div>
               </div>
               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="generaltab-mid">
-                  <app-siteconfigure [userObj]="details$"></app-siteconfigure>
+                  <app-siteconfigure></app-siteconfigure>
                   <app-change-password ></app-change-password>
                 </div>
               </div>
               <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="generaltab-right">
-                 <app-switchaccount [userObj]="details$" *ngIf="switch =='C'"></app-switchaccount>
-                 <app-deleteaccount [userObj]="details$"></app-deleteaccount>
+                 <app-switchaccount *ngIf="switch =='C'"></app-switchaccount>
+                 <app-deleteaccount [userObj]="details"></app-deleteaccount>
                 </div>
               </div>
             </div>
           </div>
           <div id="tab2" [ngStyle]="{'display': tab === 'tab2' ? 'block' : 'none'}">
-           <app-alert [userObj]="details$"></app-alert>
+           <app-alert></app-alert>
           </div>
           <div id="tab3" [ngStyle]="{'display': tab === 'tab3' ? 'block' : 'none'}">
             <h4>Advanced</h4>
             <div class="more-setting-top" [ngStyle]="{'display': !more_settings ? 'block' : 'none'}">
-              <app-introduction-message [userObj]="details$"></app-introduction-message>
-              <app-profile-protection [userObj]="details$"></app-profile-protection>
+              <app-introduction-message></app-introduction-message>
+              <app-profile-protection></app-profile-protection>
             </div>
             <div class="more-setting-outer"><a href="javascript:void(0)" (click)="toggleSetting()"><span>Manage More Settings</span> <i class="fa fa-caret-down" [ngClass]="{'fa-caret-up': more_settings}" aria-hidden="true"></i></a></div>
             <div class="more-setting-bot" [ngStyle]="{'display': more_settings ? 'block' : 'none'}">
               <div class="setting-row">
+                  <div class="alert alert-success" *ngIf="successMessage">
+    
+                      <strong>{{ successMessage }}</strong>
+                  </div>
                 <h5>Instant Messenger</h5>
                 
                 <div class="personal-full-with-area">

@@ -29,6 +29,9 @@ import { DashboardEffects } from './dashboard.effects';
 
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
+import * as fromCountry from './country/country.reducer';
+import { CountryEffects } from './country/country.effects';
+
 
 
 
@@ -42,7 +45,9 @@ import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
     ReactiveFormsModule,
     FormsModule,
     StoreModule.forFeature('dashboard', fromDashboard.dashBoardReducer),
-    EffectsModule.forFeature([DashboardEffects])
+    EffectsModule.forFeature([DashboardEffects, CountryEffects]),
+    StoreModule.forFeature('country', fromCountry.countriesReducer),
+    
   ],
   declarations: [
     LayoutComponent,

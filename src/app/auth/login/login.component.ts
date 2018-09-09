@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
-import { Login } from '../auth.actions';
+import { Login, Settings } from '../auth.actions';
 
 
 @Component({
@@ -70,12 +70,14 @@ export class LoginComponent implements OnInit {
         tap(data => {
           localStorage.setItem("token", data.token);
           const info = data.info;
+          const settings = data.settings;
           this.loading = false;
           if ( data.code !== 200) {
            
             this._error.next(data.message);
      } else {
             this.store.dispatch(new Login({ info }));
+            this.store.dispatch(new Settings({ settings }))
             //this.router.navigateByUrl('/my-profile');
             window.location.href = "/my-profile";
           }

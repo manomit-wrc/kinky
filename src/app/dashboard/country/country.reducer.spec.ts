@@ -1,11 +1,11 @@
-import { dashBoardReducer, initialState } from './dashboard.reducer';
+import { reducer, initialState } from './country.reducer';
 
-describe('Dashboard Reducer', () => {
+describe('Country Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;
 
-      const result = dashBoardReducer(initialState, action);
+      const result = reducer(initialState, action);
 
       expect(result).toBe(initialState);
     });

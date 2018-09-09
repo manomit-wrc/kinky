@@ -1,9 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthenticationService } from '../../services';
-import { first } from 'rxjs/operators';
+import { first, debounceTime } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { Logout } from '../../auth/auth.actions';
+
+import { Subject } from 'rxjs';
+
 @Component({
   selector: 'app-deleteaccount',
   templateUrl: './deleteaccount.component.html',
@@ -11,11 +14,13 @@ import { Logout } from '../../auth/auth.actions';
 })
 export class DeleteaccountComponent implements OnInit {
   @Input() userObj: any ;
+  private _success = new Subject<string>();
+  private _error = new Subject<string>();
+  successMessage: string;
+  errorMessage: string;
+
   delete_account: any;
-  successMsg: any;
-  errorMsg: any;
-  closeAlert = false;
-  closeAlert1 = false;
+  
   other_delete_reason: any;
   loading: any = false;
   constructor(
@@ -24,10 +29,20 @@ export class DeleteaccountComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userObj.subscribe(data => {
-      this.delete_account = data.value.info.delete_account ? data.value.info.delete_account.toString() : '';
-      this.other_delete_reason = data.value.info.other_delete_reason ? data.value.info.other_delete_reason : '';
-    });
+    this._error.subscribe((message) => this.errorMessage = message);
+    this._error.pipe(
+      debounceTime(2000)
+    ).subscribe(() => this.errorMessage = null);
+
+
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(3000)
+    ).subscribe(() => {
+      this.store.dispatch(new Logout());
+      window.location.href = "/";
+    })
+
   }
 
   update(delete_account, other_delete_reason) {
@@ -37,22 +52,10 @@ export class DeleteaccountComponent implements OnInit {
     .subscribe(data => {
       this.loading = false;
       if (data.code !== 200) {
-        this.closeAlert = false;
-        this.errorMsg = data.message;
-        setTimeout(() => {
-          this.closeAlert = true;
-          this.errorMsg = '';
-          console.log(this.closeAlert);
-         }, 1500);
-         this.closeAlert = false;
+        this._error.next(data.message);
 
     } else {
-      this.store.dispatch(new Logout())
-      this.closeAlert1 = false;
-      this.successMsg = data.message;
-      setTimeout(() => {
-        window.location.href = "/";
-       }, 1500);
+      this._success.next(data.message);
     }
 
     });
