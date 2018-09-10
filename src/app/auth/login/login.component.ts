@@ -4,7 +4,7 @@ import { AuthenticationService } from '../../services';
 import { first, tap, debounceTime } from 'rxjs/operators';
 import {noop, Subject} from "rxjs";
 import { Router } from '@angular/router';
-
+import { HttpClient } from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   private _error = new Subject<string>();
   errorMessage: string;
-
+  ipaddress:any='';
   loginForm: FormGroup;
   loading = false;
   submitted = false;
@@ -28,13 +28,14 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private auth: AuthenticationService,
     private router: Router,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private http:HttpClient
   ) { }
 
   ngOnInit() {
-    
+
     this._error.subscribe((message) => this.errorMessage = message);
-    
+
     this._error.pipe(
       debounceTime(2000)
     ).subscribe(() => this.errorMessage = null);
@@ -56,7 +57,7 @@ export class LoginComponent implements OnInit {
 
   get f() { return this.loginForm.controls; }
 
-  onLoginSubmit() {
+   onLoginSubmit() {
     this.submitted = true;
     // stop here if form is invalid
     if (this.loginForm.invalid) {
@@ -64,28 +65,31 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
+     this.http.get<{ip: String}>('https://jsonip.com')
+      .subscribe( datas => {
+        this.ipaddress = datas.ip;
+        this.auth.login(this.f.username.value, this.f.password.value, this.ipaddress)
+          .pipe(
+            tap(data => {
+              alert();
+              localStorage.setItem("token", data.token);
+              const info = data.info;
+              const settings = data.settings;
+              this.loading = false;
+              if ( data.code !== 200) {
 
-    this.auth.login(this.f.username.value, this.f.password.value)
-      .pipe(
-        tap(data => {
-          localStorage.setItem("token", data.token);
-          const info = data.info;
-          const settings = data.settings;
-          this.loading = false;
-          if ( data.code !== 200) {
-           
-            this._error.next(data.message);
-     } else {
-            this.store.dispatch(new Login({ info }));
-            this.store.dispatch(new Settings({ settings }))
-            //this.router.navigateByUrl('/my-profile');
-            window.location.href = "/my-profile";
-          }
-        })
-      ).subscribe(
-        noop,
-        () => alert('Login Failed')
-      );
+                this._error.next(data.message);
+         } else {
+                this.store.dispatch(new Login({ info }));
+                this.store.dispatch(new Settings({ settings }))
+                window.location.href = "/my-profile";
+              }
+            })
+          ).subscribe(
+            noop,
+            () => alert('Login Failed')
+          );
+      });
 
 
   }

@@ -9,8 +9,8 @@
             <div class="profile-top-text">
               <h5><a href="javascript:void(0)">{{name}}</a></h5>
               <p><i class="fa fa-map-marker"></i>{{address}}</p>
-              <p *ngIf="gender=='M'"><i class="fa fa-mars"></i>{{age}} {{sexuality}}</p>
-              <p *ngIf="gender!='M'"><i class="fa fa-venus"></i>{{age}} {{sexuality}}</p>
+              <p *ngIf="gender=='M'"><i class="fa fa-mars"></i>{{age}} {{sexuality |titlecase}}</p>
+              <p *ngIf="gender!='M'"><i class="fa fa-venus"></i>{{age}} {{sexuality|titlecase}}</p>
               <p><a href="javascript:void(0)">Reviews 0</a> <strong>|</strong> <a href="javascript:void(0)"><span>Email Verified</span></a></p>
               <p><em>Seeking {{looking_for}}</em></p>
               <p><a href="javascript:void(0)">{{interested_in}}</a></p>

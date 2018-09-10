@@ -1,14 +1,7 @@
 <div class="setting-row">
   <h5>Profile Protection</h5>
-  <div class="alert alert-danger" *ngIf="errorMessage">
-      
-    <strong>{{ errorMessage }}</strong>
-  </div>
-  
-  <div class="alert alert-success" *ngIf="successMessage">
-    
-      <strong>{{ successMessage }}</strong>
-  </div>
+  <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
+   <div *ngIf="successMsg" class="alert alert-success alert-dismissible" [ngClass]="{'fade out':closeAlert1}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{successMsg}}</div>
   <div class="personal-full-with-area">
     <input class="personal-radio-btn" value="1" name="protection" type="radio" [(ngModel)]="radiogroup">
     <span class="personal-radio-title"><strong>Open</strong></span>
@@ -21,6 +14,7 @@
   </div>
   <div class="personal-full-with-area">
     <p class="setting-sml-text">When enabled, all further changes to you profile will be protected but due to the caching of pages by search engines your exisiting profile may be visible online for a short while.</p>
-    <input class="save-btn update-btn" value="Update" type="submit" (click)="update(radiogroup)">
+    <input [disabled]="loading" class="save-btn update-btn" value="Update" type="submit" (click)="update(radiogroup)">
+    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
   </div>
 </div>
