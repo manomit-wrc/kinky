@@ -31,6 +31,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
 import * as fromCountry from './country/country.reducer';
 import { CountryEffects } from './country/country.effects';
+import { NgProgressModule } from '@ngx-progressbar/core';
 
 
 
@@ -41,6 +42,7 @@ import { CountryEffects } from './country/country.effects';
 @NgModule({
   imports: [
     CommonModule,
+    NgProgressModule.forRoot(),
     DashBoardRoutingModule,
     ReactiveFormsModule,
     FormsModule,
