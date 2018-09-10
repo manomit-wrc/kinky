@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders,NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout/layout.component';
 import { HeaderComponent } from './header/header.component';
@@ -12,7 +12,6 @@ import { DeleteaccountComponent } from './deleteaccount/deleteaccount.component'
 import { SiteconfigureComponent } from './siteconfigure/siteconfigure.component';
 import { InterestsComponent } from './interests/interests.component';
 import { ProfileProtectionComponent } from './profile-protection/profile-protection.component';
-import { AlertsModule } from 'angular-alert-module';
 
 
 
@@ -30,6 +29,9 @@ import { DashboardEffects } from './dashboard.effects';
 
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
+import * as fromCountry from './country/country.reducer';
+import { CountryEffects } from './country/country.effects';
+
 
 
 
@@ -39,13 +41,13 @@ import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
 @NgModule({
   imports: [
     CommonModule,
-    AlertsModule.forRoot(),
     DashBoardRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    AlertsModule.forRoot(),
     StoreModule.forFeature('dashboard', fromDashboard.dashBoardReducer),
-    EffectsModule.forFeature([DashboardEffects])
+    EffectsModule.forFeature([DashboardEffects, CountryEffects]),
+    StoreModule.forFeature('country', fromCountry.countriesReducer),
+    
   ],
   declarations: [
     LayoutComponent,
@@ -67,4 +69,12 @@ import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
        PhotoUploadComponent
       ]
 })
-export class DashboardModule { }
+
+export class DashboardModule {
+  static forRoot(): ModuleWithProviders {
+      return {
+          ngModule: DashboardModule,
+          
+      }
+  }
+}

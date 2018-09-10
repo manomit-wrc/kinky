@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services';
-import { first, tap } from 'rxjs/operators';
+import { first, tap, filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from '../user.service';
@@ -8,6 +8,8 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { userDetails } from '../../auth/auth.selectors';
 import { noop } from '@angular/compiler/src/render3/view/util';
+import { loadAllMasters } from '../dashboard.selectors';
+
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.component.html',
@@ -31,7 +33,10 @@ smoke:any;
 drugs:any;
 size:any;
 travel_arrangements:any;
+country: any;
+states: any;
 purpose:any;
+
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -41,11 +46,26 @@ purpose:any;
 
   ngOnInit() {
 
+    
+
     this.store.select(userDetails)
     .subscribe(data => {
-      this.avatar =data.avatar;
-        this.name =data.username;
-        this.address = data.state.name + "," +data.country.name ;
+      
+      this.avatar = data.avatar !== undefined ? data.avatar: null;
+        this.name = data.username;
+
+        
+
+        this.store.select(loadAllMasters)
+          .subscribe(masters => {
+            if(masters !== undefined) {
+              this.country = masters.country.filter(c => c._id === data.country);
+              this.states = masters.states.filter( s => s._id === data.state );
+              this.address = this.states[0].name + "," + this.country[0].name;
+            }
+              
+          })
+        
         this.gender = data.gender;
         this.sexuality = data.sexuality;
         this.age = this.getAge(data.mm +"/"+data.dd +"/"+data.yyyy );

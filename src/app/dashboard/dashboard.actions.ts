@@ -1,18 +1,13 @@
 import { Action } from '@ngrx/store';
 
 export enum DashboardActionTypes {
-  LOAD_COUNTRIES = '[Load Countries ] Action',
-  LOAD_COUNTRIES_SUCCESS = '[Load Countries Suceess] Action'
+  LOAD_MASTERS = '[Load Masters ] Action'
 }
 
 
-export class loadCountries implements Action {
-  readonly type = DashboardActionTypes.LOAD_COUNTRIES;
+export class loadMasters implements Action {
+  readonly type = DashboardActionTypes.LOAD_MASTERS;
+  constructor ( public payload: { masters: any }) {}
 }
 
-export class loadCountriesSuccess implements Action {
-  readonly type = DashboardActionTypes.LOAD_COUNTRIES_SUCCESS;
-  constructor ( public payload: { countries: any }) {}
-}
-
-export type DashboardActions = loadCountries | loadCountriesSuccess;
+export type DashboardActions = loadMasters;

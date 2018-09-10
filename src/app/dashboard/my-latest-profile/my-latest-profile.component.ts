@@ -1,19 +1,24 @@
 import { Component, OnInit, Renderer } from '@angular/core';
 import { AuthenticationService } from '../../services';
-import { first, tap } from 'rxjs/operators';
+import { first, tap, debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable, noop } from 'rxjs';
-import { AlertsService } from 'angular-alert-module';
+import { Subject } from 'rxjs';
+
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { userDetails } from '../../auth/auth.selectors';
 import { Login } from '../../auth/auth.actions';
+import { loadAllMasters } from '../dashboard.selectors';
 @Component({
   selector: 'app-my-latest-profile',
   templateUrl: './my-latest-profile.component.html',
   styleUrls: ['./my-latest-profile.component.css']
 })
 export class MyLatestProfileComponent implements OnInit {
+  
+  private _success = new Subject<string>();
+  successMessage: string;
   tab: String = 'tab1';
   gender: any;
   data: any = {};
@@ -61,12 +66,31 @@ export class MyLatestProfileComponent implements OnInit {
   constructor(
     private auth: AuthenticationService,
     private router: Router,
-    private alerts:AlertsService,
     private renderer: Renderer,
     private store: Store<AppState>
   ) { }
 
   ngOnInit() {
+    
+    this.store.pipe(
+      select(loadAllMasters),
+      tap(data => {
+        this.countrys = data.country;
+        this.timezones = data.timezones;
+        this.ethnicities = data.ethnicity;
+        this.haircolors = data.hair;
+        this.bodyhairs = data.body_hairs;
+        this.builds = data.build;
+        this.heights = data.height;
+        this.states = data.states;
+        
+      })
+    ).subscribe(noop);
+
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(3000)
+    ).subscribe(() => this.successMessage = null)
 
     this.day = [
 
@@ -101,65 +125,6 @@ export class MyLatestProfileComponent implements OnInit {
     ).subscribe(
       noop
     )
-
-    this.auth.user_details()
-    .pipe(first())
-    .subscribe(data => {
-      this.timezones = data.value.timezones;
-    });
-
-    this.auth.country()
-    .pipe(first())
-    .subscribe(data => {
-
-    this.countrys = data.data;
-    this.count = (this.count) ? this.count : data.data[0]._id;
-    this.auth.state(data.data[0]._id)
-    .pipe(first())
-    .subscribe(datas => {
-    this.states = datas.data;
-    this.st = (this.st) ? this.st : datas.data[0]._id;
-
-    });
-
-    });
-
-      this.auth.ethnicity()
-    .pipe(first())
-    .subscribe(data => {
-    this.ethnicities = data.data;
-
-
-    });
-      this.auth.hair()
-    .pipe(first())
-    .subscribe(data => {
-    this.haircolors = data.data;
-
-
-    });
-      this.auth.bodyhair()
-    .pipe(first())
-    .subscribe(data => {
-    this.bodyhairs = data.data;
-
-
-    });
-      this.auth.build()
-    .pipe(first())
-    .subscribe(data => {
-    this.builds = data.data;
-
-
-    });
-      this.auth.height()
-    .pipe(first())
-    .subscribe(data => {
-    this.heights = data.data;
-
-
-    });
-
   }
 
   displayTab(value) {
@@ -188,7 +153,8 @@ export class MyLatestProfileComponent implements OnInit {
         const info = data.info;
         this.store.dispatch(new Login({ info}))
         window.scrollTo(0,0);
-        this.alerts.setMessage('Updated Successfull!', 'success');
+        this._success.next('Information updated successfully');
+        
       })
     )
     .subscribe(
@@ -206,7 +172,8 @@ export class MyLatestProfileComponent implements OnInit {
         const info = data.info;
         this.store.dispatch(new Login({ info}))
         window.scrollTo(0,0);
-        this.alerts.setMessage('Updated Successfull!', 'success');
+        this._success.next('Information updated successfully');
+        
       })
     )
     .subscribe(
@@ -214,7 +181,7 @@ export class MyLatestProfileComponent implements OnInit {
     );
     } else {
       this.loading = false;
-      this.alerts.setMessage('Please fill the details!', 'error');
+      //this.alerts.setMessage('Please fill the details!', 'error');
     }
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, Renderer2, ElementRef } from '@angular/core';
+
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -19,7 +20,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       
       this.renderer.selectRootElement(this.elRef.nativeElement.querySelector('.loader-wrap')).style.display = 'none';
-    }, 1000);
+    }, 2000);
   }
 
 }

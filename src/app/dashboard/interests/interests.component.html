@@ -2,9 +2,17 @@
   <h5>Your Interests</h5>
 </div>
 <div class="general-tab-row">
-    <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
-    <div *ngIf="successMsg" class="alert alert-success alert-dismissible" [ngClass]="{'fade out':closeAlert1}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{successMsg}}</div>
+    
   <label>I am primarily looking for</label>
+  <div class="alert alert-danger" *ngIf="errorMessage">
+      
+    <strong>{{ errorMessage }}</strong>
+  </div>
+
+  <div class="alert alert-success" *ngIf="successMessage">
+    
+      <strong>{{ successMessage }}</strong>
+  </div>
   <div>
     <div class="personal-radio-outer">
       <input class="personal-radio-btn" value="M" [(ngModel)]="gender" name="gender" type="radio" [checked]="gender =='M'">

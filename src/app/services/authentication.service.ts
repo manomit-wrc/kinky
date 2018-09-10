@@ -5,16 +5,19 @@ import {AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { environment } from '../../environments/environment'
 import { AppState } from '../reducers';
 import { Logout } from '../auth/auth.actions';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
+
+    apiUri = environment.apiUri;
     constructor(private http: HttpClient,  private router: Router, private store: Store<AppState>) { }
 
     // login(username: string, password: string) {
-    //     return this.http.post<any>(`http://localhost:9000/api/users/login`, { username, password })
+    //     return this.http.post<any>(`${this.apiUri}/login`, { username, password })
     //         .pipe(map(user => {
     //             // login successful if there's a jwt token in the response
     //             return user;
@@ -23,20 +26,20 @@ export class AuthenticationService {
     
 
     login(username:string, password:string): Observable<any> {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/login`, { username, password });
+      return this.http.post<any>(`${this.apiUri}/login`, { username, password });
     }
 
 
 
 
     signup(username: string, password: string, email: string, dd: number, mm: number, yyyy: number, gender: string) {
-        return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/signup`, { username, password, email, dd, mm, yyyy, gender })
+        return this.http.post<any>(`${this.apiUri}/signup`, { username, password, email, dd, mm, yyyy, gender })
             .pipe(map(data => {
                 return data;
             }));
     }
     forgot_password(email: string) {
-        return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/forgot-password`, { email })
+        return this.http.post<any>(`${this.apiUri}/forgot-password`, { email })
             .pipe(map(data => {
                 return data;
             }));
@@ -44,44 +47,44 @@ export class AuthenticationService {
 
     logout() {
         this.store.dispatch(new Logout());
-        window.location.href = '/';
+        window.location.href = "/";
 
     }
 
     alerts_update(alert_setting: string) {
-       return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/alert-update`, { alert_setting })
+       return this.http.post<any>(`${this.apiUri}/alert-update`, { alert_setting })
       .pipe(map(user => {
         return user;
       }));
 
     }
     profile_protect(profile_setting: string) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/profile-protect-update`, { profile_setting })
+      return this.http.post<any>(`${this.apiUri}/profile-protect-update`, { profile_setting })
       .pipe(map(user => {
         return user;
       }));
     }
     switch_account(switch_account: string) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/switch-account-update`, { switch_account })
+      return this.http.post<any>(`${this.apiUri}/switch-account-update`, { switch_account })
       .pipe(map(user => {
         return user;
       }));
     }
     delete_account(delete_account: any, other_delete_reason: any) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/delete-account-update`, { delete_account, other_delete_reason })
+      return this.http.post<any>(`${this.apiUri}/delete-account-update`, { delete_account, other_delete_reason })
       .pipe(map(user => {
         return user;
       }));
     }
     site_config_update(mobile: string , language: string, timezone: number) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/site-config-update`, { mobile, language, timezone })
+      return this.http.post<any>(`${this.apiUri}/site-config-update`, { mobile, language, timezone })
       .pipe(map(user => {
         return user;
       }));
     }
 
     introduction_update(preferred_introduction: string , own_introduction: string ) {
-       return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/introduction_update`, { preferred_introduction , own_introduction })
+       return this.http.post<any>(`${this.apiUri}/introduction_update`, { preferred_introduction , own_introduction })
       .pipe(map(user => {
         return user;
       }));
@@ -89,18 +92,18 @@ export class AuthenticationService {
     }
 
     user_details(): Observable<any> {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/user-settings`, {})
+      return this.http.post<any>(`${this.apiUri}/user-settings`, {})
       .pipe(map(user => {
           return of(user); // create own observable
       }));
     }
     personal_info_update(data) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/personal-details-update`, {data});
+      return this.http.post<any>(`${this.apiUri}/personal-details-update`, {data});
     }
 
     /* Api for change password */
     change_password(old_password: string , new_password: string) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/change-password`, { old_password, new_password })
+      return this.http.post<any>(`${this.apiUri}/change-password`, { old_password, new_password })
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
 
@@ -109,18 +112,14 @@ export class AuthenticationService {
 
     }
 
-    country() {
-      return this.http.get<any>(`http://kinky-api.wrctpl.com/api/users/Country`, {})
-      .pipe(map(user => {
-          // login successful if there's a jwt token in the response
-          return user; //for country list
-      }));
+    country(): Observable<any> {
+      return this.http.get<any>(`${this.apiUri}/Country`, {})
 
     }
 
 
     state(e: any) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/State`, { e })
+      return this.http.post<any>(`${this.apiUri}/State`, { e })
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
           return user; //for state list
@@ -129,7 +128,7 @@ export class AuthenticationService {
     }
 
       ethnicity() {
-      return this.http.get<any>(`http://kinky-api.wrctpl.com/api/users/Ethnicity`, {})
+      return this.http.get<any>(`${this.apiUri}/Ethnicity`, {})
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
           return user; //for country list
@@ -138,7 +137,7 @@ export class AuthenticationService {
     }
 
       hair() {
-      return this.http.get<any>(`http://kinky-api.wrctpl.com/api/users/Hair`, {})
+      return this.http.get<any>(`${this.apiUri}/Hair`, {})
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
           return user; //for country list
@@ -147,7 +146,7 @@ export class AuthenticationService {
       }
 
       bodyhair() {
-      return this.http.get<any>(`http://kinky-api.wrctpl.com/api/users/BodyHair`, {})
+      return this.http.get<any>(`${this.apiUri}/BodyHair`, {})
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
           return user; //for country list
@@ -156,7 +155,7 @@ export class AuthenticationService {
       }
 
       build() {
-      return this.http.get<any>(`http://kinky-api.wrctpl.com/api/users/Build`, {})
+      return this.http.get<any>(`${this.apiUri}/Build`, {})
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
           return user; //for country list
@@ -164,7 +163,7 @@ export class AuthenticationService {
 
       }
       height() {
-      return this.http.get<any>(`http://kinky-api.wrctpl.com/api/users/Height`, {})
+      return this.http.get<any>(`${this.apiUri}/Height`, {})
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
           return user; //for country list
@@ -174,14 +173,14 @@ export class AuthenticationService {
 
 
     loadMaster(): Observable<any> {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/load-masters`, { });
+      return this.http.post<any>(`${this.apiUri}/load-masters`, { });
     }
 
 
  interest_update
  (gender: any, from_age: any, to_age: any, distance: any, country: any, state: any, contactmember: any, explicit_content: any) {
       return this.http.post<any>
-      (`http://kinky-api.wrctpl.com/api/users/interest-update`,
+      (`${this.apiUri}/interest-update`,
        { gender, from_age, to_age, distance, country, state, contactmember, explicit_content})
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
@@ -192,34 +191,34 @@ export class AuthenticationService {
     }
 
     checkActivation(link: any) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/check-account`, { link })
+      return this.http.post<any>(`${this.apiUri}/check-account`, { link })
         .pipe(map(data => {
           return data;
         }));
     }
 
     activateAccount(link: any) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/activate-account`, { link })
+      return this.http.post<any>(`${this.apiUri}/activate-account`, { link })
         .pipe(map(data => {
           return data;
       }));
     }
     updateInstantMessage(instant_msg: any) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/update-instant-message`, { instant_msg })
+      return this.http.post<any>(`${this.apiUri}/update-instant-message`, { instant_msg })
         .pipe(map(data => {
           return data;
         }))
     }
 
     updateAutoReplyEmail(auto_reply_subject: string, auto_reply_body: string, enable_auto_reply: boolean) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/update-auto-reply-email`, { auto_reply_subject, auto_reply_body, enable_auto_reply })
+      return this.http.post<any>(`${this.apiUri}/update-auto-reply-email`, { auto_reply_subject, auto_reply_body, enable_auto_reply })
         .pipe(map(data => {
           return data;
         }))
     }
 
     updatePromotion(promotion: string, promotion_chk: boolean) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/update-promotion`, { promotion, promotion_chk })
+      return this.http.post<any>(`${this.apiUri}/update-promotion`, { promotion, promotion_chk })
         .pipe(map(data => {
           return data;
         }))
@@ -227,24 +226,24 @@ export class AuthenticationService {
     }
 
     personal_details_save(headline:any, description:any){
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/update-personal-headline`, { headline,description })
+      return this.http.post<any>(`${this.apiUri}/update-personal-headline`, { headline,description })
       
     }
     checkForgotPassword(link: string) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/check-password-request`, { link })
+      return this.http.post<any>(`${this.apiUri}/check-password-request`, { link })
         .pipe(map(data => {
           return data;
         }))
     }
 
     updateForgotPassword(password: string, link: string) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/update-password-request`, { password, link })
+      return this.http.post<any>(`${this.apiUri}/update-password-request`, { password, link })
         .pipe(map(data => {
           return data;
       }))
     }
     image_upload(imageArr: any) {
-      return this.http.post<any>(`http://kinky-api.wrctpl.com/api/users/image-upload`, { imageArr })
+      return this.http.post<any>(`${this.apiUri}/image-upload`, { imageArr })
         .pipe(map(data => {
           return data;
       }));

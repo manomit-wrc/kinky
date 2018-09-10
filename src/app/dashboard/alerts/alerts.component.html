@@ -1,6 +1,13 @@
 <h4>Alerts</h4>
-<div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" [ngClass]="{'fade out':closeAlert}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{errorMsg}}</div>
-<div *ngIf="successMsg" class="alert alert-success alert-dismissible" [ngClass]="{'fade out':closeAlert1}"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{successMsg}}</div>
+<div class="alert alert-danger" *ngIf="errorMessage">
+      
+  <strong>{{ errorMessage }}</strong>
+</div>
+
+<div class="alert alert-success" *ngIf="successMessage">
+  
+    <strong>{{ successMessage }}</strong>
+  </div>
 <div class="personal-full-with-area">
   <input class="personal-radio-btn" [(ngModel)]="radiogroup" name="alert"  value="1" type="radio">
   <span class="personal-radio-title"><strong>Please email me discounts, weekly newsletter and important updates about the site.</strong></span> </div>
