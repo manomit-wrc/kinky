@@ -31,6 +31,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
 import * as fromCountry from './country/country.reducer';
 import { CountryEffects } from './country/country.effects';
+import { OnlineUsersComponent } from './online-users/online-users.component';
 
 
 
@@ -66,7 +67,8 @@ import { CountryEffects } from './country/country.effects';
        EventsComponent,
        AddEventComponent,
        MyProfileComponent,
-       PhotoUploadComponent
+       PhotoUploadComponent,
+       OnlineUsersComponent
       ]
 })
 

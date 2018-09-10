@@ -25,9 +25,13 @@ export class AuthenticationService {
     // }
 
 
-    login(username:string, password:string): Observable<any> {
-      return this.http.post<any>(`${this.apiUri}/login`, { username, password });
+    login(username:string, password:string , ip:string): Observable<any> {
+
+      return this.http.post<any>(`${this.apiUri}/login`, { username, password , ip});
     }
+
+
+
 
 
 
@@ -46,8 +50,9 @@ export class AuthenticationService {
     }
 
     logout() {
-        this.store.dispatch(new Logout());
-        window.location.href = "/";
+         this.store.dispatch(new Logout());
+         this.http.post<any>(`${this.apiUri}/logout`, {});
+            window.location.href = "/";
 
     }
 
@@ -227,7 +232,7 @@ export class AuthenticationService {
 
     personal_details_save(headline:any, description:any){
       return this.http.post<any>(`${this.apiUri}/update-personal-headline`, { headline,description })
-      
+
     }
     checkForgotPassword(link: string) {
       return this.http.post<any>(`${this.apiUri}/check-password-request`, { link })
@@ -248,6 +253,14 @@ export class AuthenticationService {
           return data;
       }));
     }
+
+    fetch_online_users() {
+      return this.http.post<any>(`${this.apiUri}/fetch-online-users`, {})
+        .pipe(map(data => {
+          return data;
+      }));
+    }
+
 
 
 /* Check for password match*/

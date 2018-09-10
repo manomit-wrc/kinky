@@ -7,6 +7,7 @@ import { EventsComponent } from './events/events.component';
 import { AddEventComponent } from './events/add-events.component';
 import { LayoutComponent } from './layout/layout.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { OnlineUsersComponent } from './online-users/online-users.component';
 import { AuthGuard } from '../guards';
 import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
 const authRoutes: Routes = [
@@ -23,6 +24,7 @@ const authRoutes: Routes = [
           { path: 'add-meetup', component: AddEventComponent, pathMatch: 'full', canActivate: [AuthGuard]},
           { path: 'my-profile', component: MyProfileComponent, pathMatch: 'full', canActivate: [AuthGuard]},
           { path: 'my-photo-upload', component: PhotoUploadComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+          { path: 'online-users', component: OnlineUsersComponent, pathMatch: 'full', canActivate: [AuthGuard]},
         ]
     }
 ];

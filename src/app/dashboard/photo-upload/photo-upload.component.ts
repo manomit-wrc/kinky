@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Observable, noop } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { log } from 'util';
-import { AlertsService } from 'angular-alert-module';
 @Component({
   selector: 'app-photo-upload',
   templateUrl: './photo-upload.component.html',
@@ -17,7 +16,6 @@ export class PhotoUploadComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer,
     private auth: AuthenticationService,
     private router: Router,
-    private alerts: AlertsService
   ) { }
 image = [];
   ngOnInit() {
@@ -30,7 +28,7 @@ image = [];
       this.auth.image_upload(this.fileArr)
       .pipe(first())
       .subscribe(data => {
-        this.alerts.setMessage('Image upload Successfull!', 'success');
+
 
       });
     }
