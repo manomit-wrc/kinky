@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
         this.auth.login(this.f.username.value, this.f.password.value, this.ipaddress)
           .pipe(
             tap(data => {
-              alert();
+             
               localStorage.setItem("token", data.token);
               const info = data.info;
               const settings = data.settings;
