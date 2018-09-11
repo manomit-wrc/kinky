@@ -67,7 +67,7 @@ export class InterestsComponent implements OnInit {
     this.store.select(loadAllMasters)
       .subscribe(masters => {
         if(masters !== null) {
-          this.country = masters.country;
+          this.country = masters.countries;
           this.state = masters.states;
         }
 

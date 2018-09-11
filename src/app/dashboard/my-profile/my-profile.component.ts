@@ -74,7 +74,7 @@ export class MyProfileComponent implements OnInit {
             if(masters !== undefined) {
               
               if(masters !== undefined) {
-                this.country = masters.country.filter(c => c._id === data.country);
+                this.country = masters.countries.filter(c => c._id === data.country);
                 this.states = masters.states.filter( s => s._id === data.state );
                 this.height = masters.height.filter( h => h._id === data.height);
                 this.height = this.height[0].name;

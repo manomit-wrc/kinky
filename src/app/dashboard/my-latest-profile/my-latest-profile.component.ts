@@ -26,6 +26,8 @@ export class MyLatestProfileComponent implements OnInit {
   st: any;
   states: any;
   countrys: any;
+  country: any;
+  state: any;
   looking_for: any;
   dd: any;
   mm: any;
@@ -82,7 +84,7 @@ export class MyLatestProfileComponent implements OnInit {
       select(loadAllMasters),
       tap(data => {
         
-        this.countrys = data.country;
+        this.countrys = data.countries;
         this.timezones = data.timezones;
         this.ethnicities = data.ethnicity;
         this.haircolors = data.hair;
@@ -93,6 +95,8 @@ export class MyLatestProfileComponent implements OnInit {
 
       })
     ).subscribe(noop);
+
+    
 
     this._success.subscribe((message) => this.successMessage = message);
     this._success.pipe(
@@ -126,10 +130,12 @@ export class MyLatestProfileComponent implements OnInit {
       select(userDetails),
       tap(response => {
         if(response !== undefined) {
-
+          
           this.headline = response.headline;
           this.personal_details = response.description;
           this.data = response;
+          this.country = response.country !== undefined ? response.country : '';
+          this.state = response.state !== undefined ? response.state : '';
           this.testArr = response.interested_in;
           this.testArr2 = response.age_range;
           this.testArr1 = response.body_decoration;
@@ -164,8 +170,10 @@ export class MyLatestProfileComponent implements OnInit {
     data['looking_for'] = this.testArr3;
     data['body_decoration'] = this.testArr1;
     data['travel_arrangment'] = this.testArr4;
+    data['country'] = this.country;
+    data['state'] = this.state;
 
-  console.log(data);
+  console.log(data.country, data.state);
   this.auth.personal_info_update(data)
     .pipe(
       tap(data => {
