@@ -50,9 +50,15 @@ export class AuthenticationService {
     }
 
     logout() {
-         this.store.dispatch(new Logout());
-         this.http.post<any>(`${this.apiUri}/logout`, {});
-            window.location.href = "/";
+
+       // return  this.http.post<any>(`${this.apiUri}/logout`, {});
+       // return this.http.post<any>(`${this.apiUri}/logout`, {})
+       // .pipe(map(user => {
+          this.store.dispatch(new Logout());
+            // login successful if there's a jwt token in the response
+            window.location.href = "/" ;//for logout
+        //}));
+
 
     }
 

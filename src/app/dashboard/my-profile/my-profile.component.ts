@@ -36,6 +36,8 @@ travel_arrangements:any;
 country: any;
 states: any;
 purpose:any;
+headline:any;
+description:any;
 
   constructor(
     private auth: AuthenticationService,
@@ -46,15 +48,11 @@ purpose:any;
 
   ngOnInit() {
 
-    
-
     this.store.select(userDetails)
     .subscribe(data => {
-      
+
       this.avatar = data.avatar !== undefined ? data.avatar: null;
         this.name = data.username;
-
-        
 
         this.store.select(loadAllMasters)
           .subscribe(masters => {
@@ -63,9 +61,8 @@ purpose:any;
               this.states = masters.states.filter( s => s._id === data.state );
               this.address = this.states[0].name + "," + this.country[0].name;
             }
-              
+
           })
-        
         this.gender = data.gender;
         this.sexuality = data.sexuality;
         this.age = this.getAge(data.mm +"/"+data.dd +"/"+data.yyyy );
@@ -86,6 +83,8 @@ purpose:any;
         this.size = data.size;
         this.travel_arrangements = data.travel_arrangment;
         this.purpose =data.purpose;
+        this.headline =data.headline;
+        this.description =data.description;
     })
 
     this.avt.profileImage.subscribe(img => this.avatar = img)

@@ -11,16 +11,16 @@
         <li><a href="#password"  class="forgot">Forgotten details</a></li>
       </ul>
     </div>
-    
+
     <div id="signup" style="display:none;">
         <div class="top-form"
               [ngStyle]="{'display': isShow ? 'none' : 'block'}"
               >
                 <div class="first-div">
-                  
+
                   <h5>Select Your Gender</h5>
                   <div class="alert alert-danger" *ngIf="errorMessage">
-              
+
                       <strong>{{ errorMessage }}</strong>
                     </div>
                   <div class="signup-outer">
@@ -37,9 +37,9 @@
                       <button (click)="getSex('CTT')">CD/TV/TS</button>
                     </div>
                   </div>
-        
-        
-        
+
+
+
                 </div>
                 <button class="next form-submit-btn" (click)="nextForm()">Next</button>
                 <div class="have-account-sec">
@@ -50,15 +50,15 @@
         </div>
         <div class="next-div" [ngStyle]="{'display': isShow ? 'block' : 'none'}">
           <div class="top-form">
-            
+
             <h5>Sign Up</h5>
             <div class="alert alert-danger" *ngIf="errorMessage">
-        
+
                 <strong>{{ errorMessage }}</strong>
               </div>
-          
+
               <div class="alert alert-success" *ngIf="successMessage">
-                
+
                   <strong>{{ successMessage }}</strong>
               </div>
             <form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
@@ -73,7 +73,7 @@
                 <div *ngIf="signupSubmitted && signup.username.errors" class="invalid-feedback">
                     <span *ngIf="signup.username.errors.required">Username is required</span>
                 </div>
-  
+
               </div>
               <div class="main-form-row">
                 <label>Password</label>
@@ -109,15 +109,21 @@
                 <div class="input-box-sml"
                 [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.DD.errors }"
                 >
-                  <input type="number" class="input-form" placeholder="1" formControlName="DD" max="31">
-  
+                <select  formControlName="DD">
+                  <option [value]="d" *ngFor="let d of day">{{d}}</option>
+                </select>
+
                 </div>
-  
+
                 <div class="input-box-sml" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.MM.errors }">
-                  <input type="number" class="input-form" placeholder="1" formControlName="MM" max="12">
+                  <select formControlName="MM">
+                    <option [value]="m" *ngFor="let m of month">{{m}}</option>
+                  </select>
                 </div>
                 <div class="input-box-sml" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.YYYY.errors }">
-                  <input type="number" class="input-form" placeholder="YYYY" formControlName="YYYY" max="2018">
+                  <select formControlName="YYYY">
+                    <option [value]="y" *ngFor="let y of year">{{y}}</option>
+                  </select>
                 </div>
               </div>
               <div class=" signup-creat-btn">
@@ -128,7 +134,7 @@
               <div class="agree-checkbox">
                 <input type="checkbox" class="checkbtn-agree" (change)="terms($event)">
                 <span>I agree to the <a href="#">terms & conditions</a></span>
-  
+
               </div>
             </form>
           </div>

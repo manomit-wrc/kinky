@@ -2,30 +2,23 @@
   <h5>Your Interests</h5>
 </div>
 <div class="general-tab-row">
-    
+
   <label>I am primarily looking for</label>
   <div class="alert alert-danger" *ngIf="errorMessage">
-      
+
     <strong>{{ errorMessage }}</strong>
   </div>
 
   <div class="alert alert-success" *ngIf="successMessage">
-    
+
       <strong>{{ successMessage }}</strong>
   </div>
   <div>
-    <div class="personal-radio-outer">
-      <input class="personal-radio-btn" value="M" [(ngModel)]="gender" name="gender" type="radio" [checked]="gender =='M'">
-      <span class="personal-radio-title">Male</span></div>
-    <div class="personal-radio-outer">
-      <input class="personal-radio-btn" value="F" [(ngModel)]="gender" name="gender" type="radio" [checked]="gender =='F'">
-      <span class="personal-radio-title">Female</span></div>
-    <div class="personal-radio-outer">
-      <input class="personal-radio-btn" value="C" [(ngModel)]="gender" name="gender" type="radio" [checked]="gender =='C'">
-      <span class="personal-radio-title">Couple</span></div>
-    <div class="personal-radio-outer">
-      <input class="personal-radio-btn" value="O" [(ngModel)]="gender" name="gender" type="radio" [checked]="gender =='O'">
-      <span class="personal-radio-title">CD / TV / TS</span></div>
+      <ul>
+        <li *ngFor="let n of looking_for_arr" [ngClass]="{'detail-active':(testArr.indexOf(n) > -1)}">
+            <a href="javascript:void(0)" (click)="setClasslookingfor($event)">{{n}}</a>
+        </li>
+    </ul>
   </div>
 </div>
 <div class="general-tab-row">
@@ -73,19 +66,18 @@
   <label>Prevent contact from members who</label>
 </div>
 <div class="general-tab-row">
-  <div class="personal-full-with-area">
+<!--   <div class="personal-full-with-area">
     <input class="personal-radio-btn" value="1" name="member" [(ngModel)]="contactmember" type="radio">
     <span class="personal-radio-title"><strong>Don't match my interests</strong></span> </div>
   <div class="personal-full-with-area">
     <input class="personal-radio-btn" value="2"  name="member" [(ngModel)]="contactmember" type="radio">
-    <span class="personal-radio-title"><strong>Live in another country</strong></span> </div>
-  <div class="personal-full-with-area">
-    <input class="personal-radio-btn" value="3"   name="member" [(ngModel)]="contactmember" type="radio">
-    <span class="personal-radio-title"><strong>Offer Paid Services</strong></span> </div>
-</div>
-<!--<div class="general-tab-row">
-  <input class="save-btn update-btn" value="Update" type="submit">
-</div>-->
+    <span class="personal-radio-title"><strong>Live in another country</strong></span> </div> -->
+    <ul>
+      <li *ngFor="let n of members_arr" [ngClass]="{'detail-active':(testArr1.indexOf(n) > -1)}">
+          <a href="javascript:void(0)" (click)="setClassmembers($event)">{{n}}</a>
+      </li>
+  </ul>
+
 <div class="general-tab-row">
   <label>Site Appearance</label>
 </div>

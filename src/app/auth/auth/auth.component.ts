@@ -16,15 +16,17 @@ export class AuthComponent implements OnInit {
   private _error = new Subject<string>();
   successMessage: string;
   errorMessage: string;
-  
+
   signupForm: FormGroup;
-  
-  
+
+
   signupLoading = false;
-  
+
   signupSubmitted = false;
-  
-  
+  day:any =[];
+  month:any =[];
+  year:any =[];
+
   gender: string = '';
   isShow: boolean = false;
   termsConditions = false;
@@ -35,6 +37,18 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.day = [
+
+      '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17',
+       '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'
+      ];
+
+      this.month = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+
+      for (let i = 1970; i <=  new Date().getFullYear(); i++) {
+        this.year.push(i);
+      }
 
     this._error.subscribe((message) => this.errorMessage = message);
     this._error.pipe(
@@ -61,7 +75,7 @@ export class AuthComponent implements OnInit {
 
   get signup() { return this.signupForm.controls; }
 
-  
+
   getSex(value) {
     this.gender = value;
 
@@ -90,12 +104,12 @@ export class AuthComponent implements OnInit {
       return;
     }
     if (!this.termsConditions) {
-      
+
       this._error.next('Please select terms and conditions');
       return;
     }
-    
-    this.signupLoading = true;
+
+   this.signupLoading = true;
     this.auth.signup(
       this.signup.username.value,
       this.signup.password.value,

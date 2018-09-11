@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input,Renderer} from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { first, debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -23,12 +23,17 @@ export class InterestsComponent implements OnInit {
   state: any;
   successMessage: string;
   errorMessage: string;
-  
+  testArr:any =[];
+  testArr1:any =[];
+  looking_for_arr:any =[];
+  members_arr:any =[];
   loading: any = false;
+  age_range:any =[];
   constructor(
     private auth: AuthenticationService,
     private router: Router,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private renderer: Renderer,
     ) { }
 
   ngOnInit() {
@@ -44,27 +49,35 @@ export class InterestsComponent implements OnInit {
     ).subscribe(() => this.successMessage = null)
 
     if(this.userObj !== undefined) {
-      this.gender = this.userObj.gender !== undefined ? this.userObj.gender : '';
+      console.log('====================================');
+      console.log(this.userObj);
+      console.log('====================================');
+      this.testArr = this.userObj.gender;
       this.from_age = this.userObj.from_age ? this.userObj.from_age.toString() : '';
       this.to_age = this.userObj.to_age ? this.userObj.to_age.toString() : '';
       this.distance = this.userObj.distance ? this.userObj.distance.toString(): '';
       this.count = this.userObj.country;
       this.st = this.userObj.state;
-      this.contactmember = this.userObj.contactmember ? this.userObj.contactmember.toString(): '';
+      this.testArr1 = this.userObj.contactmember;
       this.explicit_content = this.userObj.explicit_content;
     }
-    
-    
+
+
     this.store.select(loadAllMasters)
       .subscribe(masters => {
         if(masters !== null) {
           this.country = masters.country;
           this.state = masters.states;
         }
-        
+
       })
 
+      this.looking_for_arr = ['Male','Female','Couple','CD / TV / TS'];
+      this.members_arr = ['Don\'t match my interests','Live in another country',];
 
+      for (let i = 1; i <=  55; i++) {
+        this.age_range.push(i);
+      }
 
   }
 
@@ -81,10 +94,10 @@ export class InterestsComponent implements OnInit {
   update(gender, from_age, to_age, distance, country_id, state_id, contactmember, explicit_content) {
     this.loading = true;
 
- this.auth.interest_update(gender, from_age, to_age, distance, country_id, state_id, contactmember, explicit_content)
+ this.auth.interest_update(this.testArr, from_age, to_age, distance, country_id, state_id, this.testArr1, explicit_content)
     .pipe(first())
     .subscribe(data => {
-      
+
       this.loading = false;
       if (data.code !== 200) {
         this._error.next(data.message);
@@ -95,6 +108,44 @@ export class InterestsComponent implements OnInit {
     }
 
     });
+  }
+
+
+  setClasslookingfor(event) {
+    var target = event.currentTarget;
+
+    if(target.parentElement.className.indexOf("detail-active") === -1) {
+
+      this.testArr.push(event.target.textContent);
+      this.renderer.setElementClass(target.parentElement,"detail-active",true);
+    }
+    else {
+      var index = this.testArr.indexOf(event.target.textContent);
+
+      if (index > -1) {
+         this.testArr.splice(index, 1);
+      }
+      target.parentElement.classList.remove("detail-active");
+    }
+
+  }
+  setClassmembers(event) {
+    var target = event.currentTarget;
+
+    if(target.parentElement.className.indexOf("detail-active") === -1) {
+
+      this.testArr1.push(event.target.textContent);
+      this.renderer.setElementClass(target.parentElement,"detail-active",true);
+    }
+    else {
+      var index = this.testArr1.indexOf(event.target.textContent);
+
+      if (index > -1) {
+         this.testArr1.splice(index, 1);
+      }
+      target.parentElement.classList.remove("detail-active");
+    }
+
   }
 
 }

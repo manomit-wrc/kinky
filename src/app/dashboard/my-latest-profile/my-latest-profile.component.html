@@ -4,7 +4,7 @@
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h4><img src="/assets/images/setting-icon.png" alt=""><span>Add at least personal details</span></h4>
         <div class="alert alert-success" *ngIf="successMessage">
-      
+
           <strong>{{ successMessage }}</strong>
         </div>
         <div class="latest-personal-details-tab-top">
@@ -13,12 +13,12 @@
             <li [ngClass]="{ 'pages_active': tab === 'tab2' }"><a [routerLink]="" (click)="displayTab('tab2')">About Me</a></li>
           </ul>
         </div>
-        
+
         <div class="latest-personal-details-tab-bot">
           <div id="tab1" [ngStyle]="{'display': tab === 'tab1' ? 'block' : 'none'}">
             <div class="personal-detail-tab-row">
               <div class="personal-detail-medium-box select-box">
-                
+
                 <label>Location</label>
                 <select name='count_id' (change)="onItemChange($event.target.value)" [(ngModel)]="data.country">
                   <option [value]="count._id" *ngFor="let count of countrys ">{{count.name}}</option>
@@ -41,18 +41,12 @@
               <div class="personal-bigradio-sec">
                 <label>I am primarily looking for</label>
                 <div>
-                  <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" value="M" [(ngModel)]="data.looking_for" name="gender" type="radio" [checked]="data.looking_for =='M'">
-                    <span class="personal-radio-title">Male</span></div>
-                  <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" value="F" [(ngModel)]="data.looking_for" name="gender" type="radio" [checked]="data.looking_for =='F'">
-                    <span class="personal-radio-title">Female</span></div>
-                  <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" value="C" [(ngModel)]="data.looking_for" name="gender" type="radio" [checked]="data.looking_for =='C'">
-                    <span class="personal-radio-title">Couple</span></div>
-                  <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" value="O" [(ngModel)]="data.looking_for" name="gender" type="radio" [checked]="data.looking_for =='O'">
-                    <span class="personal-radio-title">CD / TV / TS</span></div>
+                    <ul>
+                      <li *ngFor="let n of looking_for_arr" [ngClass]="{'detail-active':(testArr3.indexOf(n) > -1)}">
+                          <a href="javascript:void(0)" (click)="setClasslookingfor($event)">{{n}}</a>
+                      </li>
+                  </ul>
+
                 </div>
               </div>
               <div class="personal-bigradio-sec">
@@ -103,16 +97,16 @@
                 <label>Sexuality</label>
                 <div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="data.sexuality" value="STRAIGHT" type="radio">
+                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="data.sexuality" value="Straight" type="radio">
                     <span class="personal-radio-title">Straight</span></div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="data.sexuality" value="GAY" type="radio">
+                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="data.sexuality" value="Gay" type="radio">
                     <span class="personal-radio-title">Gay</span></div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="data.sexuality" value="BI" type="radio">
+                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="data.sexuality" value="Bi" type="radio">
                     <span class="personal-radio-title">Bi</span></div>
                   <div class="personal-radio-outer">
-                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="data.sexuality" value="BICURIOUS" type="radio">
+                    <input class="personal-radio-btn" name="sexuality" [(ngModel)]="data.sexuality" value="Bicurious" type="radio">
                     <span class="personal-radio-title">Bi-curious</span></div>
                 </div>
               </div>
@@ -151,71 +145,60 @@
             </div>
             <div class="personal-detail-tab-row">
               <label>Body decoration</label>
-              <div class="personal-full-with-area">
-                <input class="personal-radio-btn" name="body_deco" [(ngModel)]="data.body_decoration" value="EARNINGS" type="radio">
-                <span class="personal-radio-title"><strong>Earrings</strong></span> </div>
-              <div class="personal-full-with-area">
-                <input class="personal-radio-btn" name="body_deco"  [(ngModel)]="data.body_decoration" value="NOSERINGS" type="radio">
-                <span class="personal-radio-title"><strong>Nose rings</strong></span> </div>
-              <div class="personal-full-with-area">
-                <input class="personal-radio-btn" name="body_deco"  [(ngModel)]="data.body_decoration" value="BODYPIERCING" type="radio">
-                <span class="personal-radio-title"><strong>Body piercing</strong></span> </div>
-              <div class="personal-full-with-area">
-                <input class="personal-radio-btn" name="body_deco" [(ngModel)]="data.body_decoration"  value="INTIMATEPIERCING" type="radio">
-                <span class="personal-radio-title"><strong>Intimate Piercing</strong></span> </div>
-              <div class="personal-full-with-area">
-                <input class="personal-radio-btn" name="body_deco"  [(ngModel)]="data.body_decoration" value="TATTOOS" type="radio">
-                <span class="personal-radio-title"><strong>Tattoos</strong></span> </div>
-
-              <div class="personal-full-with-area">
-                <input class="personal-radio-btn" name="body_deco" [(ngModel)]="data.body_decoration" value="PREFERNOTTOSAY" type="radio">
-                <span class="personal-radio-title"><strong>Prefer not to say</strong></span> </div>
+                <ul>
+                  <li *ngFor="let n of bodydecoration_arr" [ngClass]="{'detail-active':(testArr1.indexOf(n) > -1)}">
+                      <a href="javascript:void(0)" (click)="setClassbody($event)">{{n}}</a>
+                  </li>
+              </ul>
             </div>
+
+
+
             <div class="personal-detail-tab-row">
               <div class="personal-detail-medium-box select-box">
                 <label>Drink</label>
                 <select  [(ngModel)]="data.drink">
-                  <option value="NEVER">Never</option>
-                  <option value="SOCIALLY">Socially</option>
-                  <option value="REGULARLY">Regularly</option>
-                  <option value="ILIVETODRINK">I live to drink</option>
-                  <option value="IWILLTELLYOULETTER">I will tell you later</option>
+                  <option value="Never">Never</option>
+                  <option value="Socially">Socially</option>
+                  <option value="Regularly">Regularly</option>
+                  <option value="I live to drink">I live to drink</option>
+                  <option value="I will tell you later">I will tell you later</option>
                 </select>
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>Smoke</label>
                 <select [(ngModel)]="data.smoke">
-                  <option value="NO">No</option>
-                  <option value="YES">Yes</option>
-                  <option value="IWILLTELLYOULETTER">I will tell you later</option>
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                  <option value="I will tell you later">I will tell you later</option>
                 </select>
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>Drugs</label>
                 <select [(ngModel)]="data.drugs">
-                  <option value="NONE">None</option>
-                  <option value="SOME">Some</option>
-                  <option value="HEAVY">Heavy</option>
-                  <option value="IWILLTELLYOULETTER">I will tell you later</option>
+                  <option value="None">None</option>
+                  <option value="Some">Some</option>
+                  <option value="Heavy">Heavy</option>
+                  <option value="I will tell you later">I will tell you later</option>
                 </select>
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>Cock/Breast size</label>
                 <select [(ngModel)]="data.size">
-                  <option value="SMALL">Small</option>
-                  <option value="MEDIUM">Medium</option>
-                  <option value="LARGE">Large</option>
-                  <option value="VERYLARGE">Very large</option>
-                  <option value="PREFERNOTTOSAY">Prefer not to say</option>
+                  <option value="Small">Small</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Large">Large</option>
+                  <option value="Very large">Very large</option>
+                  <option value="Prefer not to say">Prefer not to say</option>
                 </select>
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>Safe sex</label>
                 <select [(ngModel)]="data.safe_sex">
-                  <option value="ALWAYS">Always</option>
-                  <option value="SOMETIMES">Sometimes</option>
-                  <option value="NEVER">Never</option>
-                  <option value="IWILLTELLYOULETTER">I will tell you later</option>
+                  <option value="Always">Always</option>
+                  <option value="Sometimes">Sometimes</option>
+                  <option value="Never">Never</option>
+                  <option value="I will tell you later">I will tell you later</option>
                 </select>
               </div>
             </div>
@@ -239,25 +222,25 @@
             <div class="personal-detail-tab-row">
               <label>Travel arrangements</label>
               <div>
-                <div class="personal-radio-outer">
-                  <input class="personal-radio-btn" name="travel" [(ngModel)]="data.travel_arrangment" value="CANACCOMMODATE" type="radio">
-                  <span class="personal-radio-title">Can accommodate</span></div>
-                <div class="personal-radio-outer">
-                  <input class="personal-radio-btn" name="travel" [(ngModel)]="data.travel_arrangment" value="WILLTRAVEL" type="radio">
-                  <span class="personal-radio-title">Will travel</span></div>
+
+                  <ul>
+                    <li *ngFor="let n of travel_arr" [ngClass]="{'detail-active':(testArr4.indexOf(n) > -1)}">
+                        <a href="javascript:void(0)" (click)="setClasstravel($event)">{{n}}</a>
+                    </li>
+                </ul>
               </div>
             </div>
-            <div class="personal-detail-tab-row">
+           <!--  <div class="personal-detail-tab-row">
               <label>I'm here to</label>
               <div>
                 <div class="personal-radio-outer">
-                  <input class="personal-radio-btn" name="here" [(ngModel)]="data.purpose" value="HAVEFUN" type="radio">
+                  <input class="personal-radio-btn" name="here" [(ngModel)]="data.purpose" value="Have Fun" type="radio">
                   <span class="personal-radio-title">Have Fun</span></div>
                 <div class="personal-radio-outer">
-                  <input class="personal-radio-btn" name="here" [(ngModel)]="data.purpose" value="PROMOTEAPAIDSERVICE" type="radio">
+                  <input class="personal-radio-btn" name="here" [(ngModel)]="data.purpose" value="Promote A Paid Service" type="radio">
                   <span class="personal-radio-title">Promote A Paid Service</span></div>
               </div>
-            </div>
+            </div> -->
             <div class="personal-detail-tab-butn-row">
               <!-- <input class="cancel-btn" value="Cancel" type="submit"> -->
               <input [disabled]="loading" class="save-btn" value="Save " type="submit" (click)="personal_details_update(data)">
@@ -267,7 +250,7 @@
         </div>
           <div id="tab2" [ngStyle]="{'display': tab === 'tab2' ? 'block' : 'none'}">
             <div class="latest-personal-detail-row">
-            
+
               <h5>Your Profile Headline</h5>
               <textarea class="latest-personal-detail-textarea"  [(ngModel)]="headline"></textarea>
             </div>

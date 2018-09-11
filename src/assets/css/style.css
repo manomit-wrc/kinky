@@ -712,6 +712,8 @@ box-shadow: 3px 3px 9px -1px rgba(0,0,0,0.44);}
 .personal-detail-tab-row ul li:hover a{color:#872435;}
 
 .personal-detail-tab-row ul li.detail-active a{ color:#fff; background:#6b9dac; border-radius:5px;}
+.general-tab-row ul li.detail-active a{ color:#fff; background:#6b9dac; border-radius:5px;}
+.alert_row ul li.detail-active a{ color:#fff; background:#6b9dac; border-radius:5px;}
 
 .personal-detail-link{ margin-top:2px;}
 
@@ -2003,12 +2005,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', end
 }
 
 @-webkit-keyframes animatebottom {
-  from { bottom:-100px; opacity:0 } 
+  from { bottom:-100px; opacity:0 }
   to { bottom:0px; opacity:1 }
 }
 
-@keyframes animatebottom { 
-  from{ bottom:-100px; opacity:0 } 
+@keyframes animatebottom {
+  from{ bottom:-100px; opacity:0 }
   to{ bottom:0; opacity:1 }
 }
 

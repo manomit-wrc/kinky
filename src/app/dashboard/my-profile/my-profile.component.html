@@ -9,8 +9,8 @@
             <div class="profile-top-text">
               <h5><a href="javascript:void(0)">{{name}}</a></h5>
               <p><i class="fa fa-map-marker"></i>{{address}}</p>
-              <p *ngIf="gender=='M'"><i class="fa fa-mars"></i>{{age}} {{sexuality |titlecase}}</p>
-              <p *ngIf="gender!='M'"><i class="fa fa-venus"></i>{{age}} {{sexuality|titlecase}}</p>
+              <p *ngIf="gender=='M'"><i class="fa fa-mars"></i>{{age}} {{sexuality }}</p>
+              <p *ngIf="gender!='M'"><i class="fa fa-venus"></i>{{age}} {{sexuality}}</p>
               <p><a href="javascript:void(0)">Reviews 0</a> <strong>|</strong> <a href="javascript:void(0)"><span>Email Verified</span></a></p>
               <p><em>Seeking {{looking_for}}</em></p>
               <p><a href="javascript:void(0)">{{interested_in}}</a></p>
@@ -29,7 +29,7 @@
                 <li>Seeking</li>
                 <li>{{looking_for}}</li>
                 <li>Age</li>
-                <li>{{age}}</li>
+                <li>{{age}} {{sexuality}}</li>
                 <li>Sexuality</li>
                 <li>{{sexuality}}</li>
                 <li>Location</li>
@@ -60,8 +60,8 @@
           </div>
         </div>
         <div class="profile-left-text-box">
-          <h4>come and join us,, we are happy to serve you,haha</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit.</p>
+          <h4>{{headline}}</h4>
+          <p>{{description}}</p>
           <p><a href="#"><i class="fa fa-heart-o"></i><span>14 Likes</span></a></p>
         </div>
         <div class="profile-left-form-sec">
@@ -72,9 +72,7 @@
             <input type="text" class="save-btn profile-input-btn" value="Post">
           </div>
           <div class="profile-form-row">
-            <!-- <button class="profile-btn profile-post-btn"><img src="assets/images/profile-btn-icon-1.png" alt=""><span>Posts</span></button>
-            <button class="profile-btn profile-content-btn"><img src="assets/images/profile-btn-icon-2.png" alt=""><span>Content</span></button>
-            <button class="profile-btn profile-img-btn"><img src="assets/images/profile-btn-icon-3.png" alt=""><span>assets/images</span></button>-->
+
             <div class="profile-post-btn">
               <select>
                 <option>Posts</option>

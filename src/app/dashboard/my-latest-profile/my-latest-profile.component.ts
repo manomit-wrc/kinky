@@ -16,7 +16,7 @@ import { loadAllMasters } from '../dashboard.selectors';
   styleUrls: ['./my-latest-profile.component.css']
 })
 export class MyLatestProfileComponent implements OnInit {
-  
+
   private _success = new Subject<string>();
   successMessage: string;
   tab: String = 'tab1';
@@ -57,9 +57,15 @@ export class MyLatestProfileComponent implements OnInit {
   month: any = [];
   year: any = [];
   interested_arr: any = [];
+  bodydecoration_arr: any = [];
+  looking_for_arr: any = [];
+  travel_arr: any = [];
   people_aged_arr: any = [];
   testArr: any = [];
+  testArr1: any = [];
   testArr2: any = [];
+  testArr3: any = [];
+  testArr4: any = [];
   interested_arr_list: any= [];
   age_range_list: any= [];
   loading: any = false;
@@ -71,7 +77,7 @@ export class MyLatestProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
     this.store.pipe(
       select(loadAllMasters),
       tap(data => {
@@ -83,7 +89,7 @@ export class MyLatestProfileComponent implements OnInit {
         this.builds = data.build;
         this.heights = data.height;
         this.states = data.states;
-        
+
       })
     ).subscribe(noop);
 
@@ -107,7 +113,13 @@ export class MyLatestProfileComponent implements OnInit {
     '#Dogging', '#Friendship', '#Gay', '#Group Meets', '#Hookups', '#Lesbian', '#Lingerie', '#Long Term Regular Meets',
     '#Long Term Relationship', '#Mature', '#MILF', '#Online Chat', '#Tatto', '#Threesomes', '#Trans', '#Webcam'];
 
+    this.bodydecoration_arr = ['Earrings','Nose rings','Body piercing','Intimate Piercing','Tattoos','Prefer not to say'];
+
     this.people_aged_arr = ['#18 - 30', '#30 - 40', '#40 - 50', '#50 - 60', '#60 +'];
+
+    this.looking_for_arr = ['Male','Female','Couple','CD / TV / TS'];
+
+    this.travel_arr = ['Can accommodate','Will travel'];
 
     this.store.pipe(
       select(userDetails),
@@ -119,6 +131,9 @@ export class MyLatestProfileComponent implements OnInit {
           this.data = response;
           this.testArr = response.interested_in;
           this.testArr2 = response.age_range;
+          this.testArr1 = response.body_decoration;
+          this.testArr3 = response.looking_for;
+          this.testArr4 = response.travel_arrangment;
         }
 
       })
@@ -145,7 +160,11 @@ export class MyLatestProfileComponent implements OnInit {
     this.loading = true;
     data['interested_in'] = this.testArr;
     data['age_range'] = this.testArr2;
+    data['looking_for'] = this.testArr3;
+    data['body_decoration'] = this.testArr1;
+    data['travel_arrangment'] = this.testArr4;
 
+    console.log(data);
   this.auth.personal_info_update(data)
     .pipe(
       tap(data => {
@@ -154,7 +173,7 @@ export class MyLatestProfileComponent implements OnInit {
         this.store.dispatch(new Login({ info}))
         window.scrollTo(0,0);
         this._success.next('Information updated successfully');
-        
+
       })
     )
     .subscribe(
@@ -173,7 +192,7 @@ export class MyLatestProfileComponent implements OnInit {
         this.store.dispatch(new Login({ info}))
         window.scrollTo(0,0);
         this._success.next('Information updated successfully');
-        
+
       })
     )
     .subscribe(
@@ -183,6 +202,27 @@ export class MyLatestProfileComponent implements OnInit {
       this.loading = false;
       //this.alerts.setMessage('Please fill the details!', 'error');
     }
+  }
+
+  setClassbody(event) {
+    var target = event.currentTarget;
+
+    if(target.parentElement.className.indexOf("detail-active") === -1) {
+
+     this.testArr1.push(event.target.textContent);
+
+      this.renderer.setElementClass(target.parentElement,"detail-active",true);
+    }
+    else {
+
+     var index = this.testArr1.indexOf(event.target.textContent);
+
+     if (index > -1) {
+        this.testArr1.splice(index, 1);
+     }
+      target.parentElement.classList.remove("detail-active");
+    }
+
   }
 
   setClass(event) {
@@ -218,6 +258,40 @@ export class MyLatestProfileComponent implements OnInit {
 
       if (index > -1) {
          this.testArr2.splice(index, 1);
+      }
+      target.parentElement.classList.remove("detail-active");
+    }
+  }
+
+  setClasslookingfor(event) {
+    var target = event.currentTarget;
+
+    if(target.parentElement.className.indexOf("detail-active") === -1) {
+      this.testArr3.push(event.target.textContent);
+      this.renderer.setElementClass(target.parentElement,"detail-active",true);
+    }
+    else {
+      var index = this.testArr3.indexOf(event.target.textContent);
+
+      if (index > -1) {
+         this.testArr3.splice(index, 1);
+      }
+      target.parentElement.classList.remove("detail-active");
+    }
+  }
+
+  setClasstravel(event) {
+    var target = event.currentTarget;
+
+    if(target.parentElement.className.indexOf("detail-active") === -1) {
+      this.testArr4.push(event.target.textContent);
+      this.renderer.setElementClass(target.parentElement,"detail-active",true);
+    }
+    else {
+      var index = this.testArr4.indexOf(event.target.textContent);
+
+      if (index > -1) {
+         this.testArr4.splice(index, 1);
       }
       target.parentElement.classList.remove("detail-active");
     }
