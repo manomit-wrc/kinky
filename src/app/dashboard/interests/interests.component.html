@@ -25,17 +25,15 @@
   <label>Age Range</label>
   <div class="setting-sml-drop select-box">
     <select [(ngModel)]="from_age">
-      <option value="18">18</option>
-      <option value="35">35</option>
-      <option value="54">54</option>
+      <option value="age" *ngFor ="let age of age_range">{{age}}</option>
+      <option value="55">55+</option>
     </select>
   </div>
   <div class="to">To</div>
   <div class="setting-sml-drop select-box">
     <select [(ngModel)]="to_age">
-      <option value="18">18</option>
-      <option value="35">35</option>
-      <option value="54">54</option>
+   <option value="age" *ngFor ="let age of age_range">{{age}}</option>
+   <option value="55">55+</option>
     </select>
   </div>
 </div>
@@ -43,9 +41,7 @@
   <label>Within</label>
   <div class="general-dropdown">
     <select [(ngModel)]="distance">
-      <option value="16">10miles\16km</option>
-      <option value="32">20miles\32km</option>
-      <option value="48">30miles\48km</option>
+      <option value="d" *ngFor ="let d of distance_range">{{d}} miles</option>
     </select>
   </div>
 </div>
