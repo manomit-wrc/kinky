@@ -17,8 +17,8 @@ export class InterestsComponent implements OnInit {
   private _success = new Subject<string>();
   private _error = new Subject<string>();
   @Input() userObj: any ;
-  gender: any; from_age: any; to_age: any; distance: any; count: any;
-  st: any; contactmember: any; explicit_content: any;
+  gender: any; from_age: any; to_age: any; count: any;
+  st: any; contactmember: any; explicit_content: any =false;
   country: any;
   state: any;
   successMessage: string;
@@ -29,6 +29,8 @@ export class InterestsComponent implements OnInit {
   members_arr:any =[];
   loading: any = false;
   age_range:any =[];
+  distance_range:any=[];
+  distance:any = 10;
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -37,6 +39,7 @@ export class InterestsComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+
     this._error.subscribe((message) => this.errorMessage = message);
     this._error.pipe(
       debounceTime(2000)
@@ -49,9 +52,7 @@ export class InterestsComponent implements OnInit {
     ).subscribe(() => this.successMessage = null)
 
     if(this.userObj !== undefined) {
-      console.log('====================================');
-      console.log(this.userObj);
-      console.log('====================================');
+
       this.testArr = this.userObj.gender;
       this.from_age = this.userObj.from_age ? this.userObj.from_age.toString() : '';
       this.to_age = this.userObj.to_age ? this.userObj.to_age.toString() : '';
@@ -75,10 +76,13 @@ export class InterestsComponent implements OnInit {
       this.looking_for_arr = ['Male','Female','Couple','CD / TV / TS'];
       this.members_arr = ['Don\'t match my interests','Live in another country',];
 
-      for (let i = 1; i <=  55; i++) {
+      for (let i = 1; i <=  54; i++) {
         this.age_range.push(i);
       }
 
+      for (let i = 1; i <=  100; i++) {
+        this.distance_range.push(i);
+      }
   }
 
   onItemChange(e) {

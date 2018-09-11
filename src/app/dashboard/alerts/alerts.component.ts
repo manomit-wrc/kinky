@@ -20,8 +20,9 @@ export class AlertsComponent implements OnInit {
   successMessage: string;
   errorMessage: string;
   loading: any = false;
-  testArr:any = [];
-  alerts_arr :any =[];
+
+  newsletter: Boolean = false;
+  message: Boolean = false;
   constructor(
     private auth: AuthenticationService,
     private store: Store<AppState>,
@@ -29,10 +30,7 @@ export class AlertsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  this.alerts_arr = [
-    'Please email me discounts, weekly newsletter and important updates about the site.',
-    'Please email me when I receive a new message.'
-  ];
+
 
     this._error.subscribe((message) => this.errorMessage = message);
     this._error.pipe(
@@ -48,14 +46,15 @@ export class AlertsComponent implements OnInit {
     this.store.select(settingDetails)
       .subscribe(data => {
 
-        this.testArr = data.alert_setting ;
+        this.newsletter = data.newsletter ;
+        this.message = data.message ;
       })
 
   }
 
-  update(no) {
+  update() {
     this.loading = true;
-    this.auth.alerts_update(this.testArr)
+    this.auth.alerts_update(this.newsletter, this.message)
     .pipe(first())
     .subscribe(data => {
       this.loading = false;
@@ -72,23 +71,6 @@ export class AlertsComponent implements OnInit {
     });
   }
 
-  setClassAlerts(event) {
-    var target = event.currentTarget;
 
-    if(target.parentElement.className.indexOf("detail-active") === -1) {
-
-      this.testArr.push(event.target.textContent);
-      this.renderer.setElementClass(target.parentElement,"detail-active",true);
-    }
-    else {
-      var index = this.testArr.indexOf(event.target.textContent);
-
-      if (index > -1) {
-         this.testArr.splice(index, 1);
-      }
-      target.parentElement.classList.remove("detail-active");
-    }
-
-  }
 
 }

@@ -62,8 +62,8 @@ export class AuthenticationService {
 
     }
 
-    alerts_update(alert_setting: string) {
-       return this.http.post<any>(`${this.apiUri}/alert-update`, { alert_setting })
+    alerts_update(newsletter: any, message:any) {
+       return this.http.post<any>(`${this.apiUri}/alert-update`, { newsletter , message })
       .pipe(map(user => {
         return user;
       }));

@@ -8,14 +8,14 @@
 
     <strong>{{ successMessage }}</strong>
   </div>
-  <div class = "alert_row">
+  <form>
+  <div class="personal-full-with-area">
+    <input class="personal-radio-btn"  [(ngModel)]="newsletter"  name="newsletter"  type="checkbox">
+    <span class="personal-radio-title"><strong>Please email me discounts, weekly newsletter and important updates about the site.</strong></span> </div>
+  <div class="personal-full-with-area">
+    <input class="personal-radio-btn" [(ngModel)]="message" name="message" type="checkbox">
+    <span class="personal-radio-title"><strong>Please email me when I receive a new message.</strong></span> </div>
 
-    <ul >
-      <li *ngFor="let n of alerts_arr" [ngClass]="{'detail-active':(testArr.indexOf(n) > -1)}">
-          <a href="javascript:void(0)" (click)="setClassAlerts($event)">{{n}}</a>
-      </li>
-  </ul>
-  </div>
-
-<input [disabled]="loading" type="submit" class="save-btn update-btn" value="Update" (click) = "update(radiogroup)">
+<input [disabled]="loading" type="submit" class="save-btn update-btn" value="Update" (click) = "update()">
 <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+</form>
