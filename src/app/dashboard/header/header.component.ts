@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
-import { profileImg, userDetails } from '../../auth/auth.selectors';
-import { tap } from 'rxjs/operators';
-import { noop } from '@angular/compiler/src/render3/view/util';
+
 import { UserService } from '../user.service';
+import { Logout } from '../../auth/auth.actions';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -14,18 +13,26 @@ import { UserService } from '../user.service';
 export class HeaderComponent implements OnInit {
 
   avatar: string = '';
-  constructor(private auth: AuthenticationService, private avt: UserService) { }
+  constructor(
+    private auth: AuthenticationService, 
+    private avt: UserService,
+    private store: Store<AppState>
+  ) { }
 
   ngOnInit() {
     this.avt.profileImage.subscribe(img => this.avatar = img);
   }
 
   logout() {
-    //this.auth.logout();
-
     this.auth.logout()
-    .subscribe(data => {
-    })
+      .subscribe(user => {
+        if(user.code === 200) {
+          this.store.dispatch(new Logout());
+          window.location.href = "/";
+        }
+      })
+
+    
   }
 
 }

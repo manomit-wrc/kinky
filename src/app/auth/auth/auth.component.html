@@ -106,7 +106,7 @@
               </div>
               <div class="main-form-row">
                 <label>Date of Birth</label>
-                <div class="input-box-sml"
+                <div class="personal-detail-sml-box select-box"
                 [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.DD.errors }"
                 >
                 <select  formControlName="DD">
@@ -115,12 +115,12 @@
 
                 </div>
 
-                <div class="input-box-sml" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.MM.errors }">
+                <div class="personal-detail-sml-box select-box" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.MM.errors }">
                   <select formControlName="MM">
                     <option [value]="m" *ngFor="let m of month">{{m}}</option>
                   </select>
                 </div>
-                <div class="input-box-sml" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.YYYY.errors }">
+                <div class="personal-detail-sml-box select-box" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.YYYY.errors }">
                   <select formControlName="YYYY">
                     <option [value]="y" *ngFor="let y of year">{{y}}</option>
                   </select>

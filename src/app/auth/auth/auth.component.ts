@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services';
-import { first, tap, debounceTime } from 'rxjs/operators';
-import {noop, Subject} from "rxjs";
+import { debounceTime } from 'rxjs/operators';
+import { Subject} from "rxjs";
 
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../reducers';
+import { Login, Settings } from '../auth.actions';
 
 @Component({
   selector: 'app-auth',
@@ -33,7 +36,8 @@ export class AuthComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
@@ -121,7 +125,12 @@ export class AuthComponent implements OnInit {
     .subscribe(data => {
       this.signupLoading = false;
       if (data.code === 200) {
-        this._success.next(data.message);
+        localStorage.setItem("token", data.token);
+        const info = data.info;
+        const settings = data.settings;
+        this.store.dispatch(new Login({ info }));
+        this.store.dispatch(new Settings({ settings }));
+        window.location.href = "/my-profile";
       } else {
         this._error.next(data.message);
         }

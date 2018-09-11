@@ -81,6 +81,7 @@ export class MyLatestProfileComponent implements OnInit {
     this.store.pipe(
       select(loadAllMasters),
       tap(data => {
+        
         this.countrys = data.country;
         this.timezones = data.timezones;
         this.ethnicities = data.ethnicity;
@@ -164,7 +165,7 @@ export class MyLatestProfileComponent implements OnInit {
     data['body_decoration'] = this.testArr1;
     data['travel_arrangment'] = this.testArr4;
 
-    console.log(data);
+  console.log(data);
   this.auth.personal_info_update(data)
     .pipe(
       tap(data => {

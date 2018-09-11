@@ -30,12 +30,6 @@ export class AuthenticationService {
       return this.http.post<any>(`${this.apiUri}/login`, { username, password , ip});
     }
 
-
-
-
-
-
-
     signup(username: string, password: string, email: string, dd: number, mm: number, yyyy: number, gender: string) {
         return this.http.post<any>(`${this.apiUri}/signup`, { username, password, email, dd, mm, yyyy, gender })
             .pipe(map(data => {
@@ -49,17 +43,8 @@ export class AuthenticationService {
             }));
     }
 
-    logout() {
-
-       // return  this.http.post<any>(`${this.apiUri}/logout`, {});
-       // return this.http.post<any>(`${this.apiUri}/logout`, {})
-       // .pipe(map(user => {
-          this.store.dispatch(new Logout());
-            // login successful if there's a jwt token in the response
-            window.location.href = "/" ;//for logout
-        //}));
-
-
+    logout(): Observable<any> {
+       return this.http.post<any>(`${this.apiUri}/logout`, {})
     }
 
     alerts_update(alert_setting: string) {
@@ -265,6 +250,10 @@ export class AuthenticationService {
         .pipe(map(data => {
           return data;
       }));
+    }
+
+    verifyEmail(): Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/verify-email`, {})
     }
 
 

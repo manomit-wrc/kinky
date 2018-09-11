@@ -1,6 +1,10 @@
 <div class="inner-main-sec">
   <div class="container">
     <div class="row">
+      <div class="alert alert-success" *ngIf="successMessage">
+
+          <strong>{{ successMessage }}</strong>
+      </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="profile-left-top-box">
           <div class="profile-left-active">Active Now</div>
@@ -11,7 +15,11 @@
               <p><i class="fa fa-map-marker"></i>{{address}}</p>
               <p *ngIf="gender=='M'"><i class="fa fa-mars"></i>{{age}} {{sexuality }}</p>
               <p *ngIf="gender!='M'"><i class="fa fa-venus"></i>{{age}} {{sexuality}}</p>
-              <p><a href="javascript:void(0)">Reviews 0</a> <strong>|</strong> <a href="javascript:void(0)"><span>Email Verified</span></a></p>
+              <p><a href="javascript:void(0)">Reviews 0</a> <strong>|</strong> 
+                <a href="javascript:void(0)" *ngIf="email_verified"><span>Email Verified</span></a>
+                <a href="javascript:void(0)" (click)="verifyEmail()" *ngIf="!email_verified"><span style="color:#872345 !important;">Email Unverified</span></a>
+                <img *ngIf="isLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              </p>
               <p><em>Seeking {{looking_for}}</em></p>
               <p><a href="javascript:void(0)">{{interested_in}}</a></p>
             </div>
