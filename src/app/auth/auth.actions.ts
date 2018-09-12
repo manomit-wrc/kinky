@@ -3,7 +3,8 @@ import { Action } from '@ngrx/store';
 export enum AuthActionTypes {
   LoginAction = '[Login] Action',
   LogoutAction = '[Logout] Action',
-  USER_SETTINGS = '[User Settings] Action'
+  USER_SETTINGS = '[User Settings] Action',
+  COUNT = '[Count] Action'
 }
 
 
@@ -29,5 +30,13 @@ export class Logout implements Action {
 
 }
 
+export class Count implements Action {
 
-export type AuthActions = Login | Logout | Settings;
+  readonly type = AuthActionTypes.COUNT;
+  constructor(public payload: { counts: any }) {}
+
+
+}
+
+
+export type AuthActions = Login | Logout | Settings|Count;

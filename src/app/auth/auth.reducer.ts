@@ -5,14 +5,16 @@ export interface AuthState {
   loggedIn: boolean,
   user: any,
   images: any,
-  settings: any
+  settings: any,
+  counts:any
 }
 
 export const initialAuthState: AuthState = {
   loggedIn: false,
   user: undefined,
   images: undefined,
-  settings: undefined
+  settings: undefined,
+  counts:undefined
 };
 
 export function authReducer(state = initialAuthState,
@@ -36,6 +38,11 @@ export function authReducer(state = initialAuthState,
         return {
           ...state,
           settings: action.payload.settings
+        }
+    case AuthActionTypes.COUNT:
+        return {
+          ...state,
+          counts: action.payload.counts
         }
 
     default:

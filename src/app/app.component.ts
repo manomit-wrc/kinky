@@ -19,10 +19,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    
-    this.auth.loadMaster()
-    .pipe(tap(masters => {
-      this.store.dispatch(new loadMasters({ masters }));
-    })).subscribe(noop)
-  }
+this.auth.loadMaster()
+.pipe(tap(masters => {
+this.store.dispatch(new loadMasters({ masters }));
+})).subscribe(noop)
+
 }

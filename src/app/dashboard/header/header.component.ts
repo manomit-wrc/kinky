@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
-
+import { countUser } from '../../auth/auth.selectors';
 import { UserService } from '../user.service';
 import { Logout } from '../../auth/auth.actions';
 @Component({
@@ -21,6 +21,18 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.avt.profileImage.subscribe(img => this.avatar = img);
+
+  /*   this.store.select(countUser)
+    .subscribe(data => {
+      this.count = data;
+    }); */
+
+    this.auth.onlineusers()
+    .subscribe(user =>{
+      this.count = user.count;
+    })
+
+
   }
 
   logout() {

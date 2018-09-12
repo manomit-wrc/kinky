@@ -255,6 +255,9 @@ export class AuthenticationService {
     verifyEmail(): Observable<any> {
       return this.http.post<any>(`${this.apiUri}/verify-email`, {})
     }
+    onlineusers(): Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/count-online-user`, {})
+    }
 
 
 
