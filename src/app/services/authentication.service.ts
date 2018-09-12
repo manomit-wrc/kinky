@@ -30,6 +30,10 @@ export class AuthenticationService {
       return this.http.post<any>(`${this.apiUri}/login`, { username, password , ip});
     }
 
+    getCurrentPosition(): Observable<any> {
+      return this.http.get<any>('http://ip-api.com/json');
+    }
+
     signup(username: string, password: string, email: string, dd: number, mm: number, yyyy: number, gender: string) {
         return this.http.post<any>(`${this.apiUri}/signup`, { username, password, email, dd, mm, yyyy, gender })
             .pipe(map(data => {

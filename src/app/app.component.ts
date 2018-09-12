@@ -14,15 +14,26 @@ import { Location } from './auth/auth.actions';
 })
 export class AppComponent implements OnInit {
   title = 'app';
-
+  
   constructor(private store: Store<AppState>,
     private auth: AuthenticationService) {}
 
   ngOnInit() {
+
+    this.auth.getCurrentPosition()
+      .subscribe(location => {
+        
+        this.store.dispatch(new Location({ location }))
+      })
+
+    
+
     this.auth.loadMaster()
 .pipe(tap(masters => {
 this.store.dispatch(new loadMasters({ masters }));
-})).subscribe(noop)
+})).subscribe(noop);
+  
+  
   }
 
 }
