@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
-import { Login, Settings } from '../auth.actions';
+import { Login, Settings,Count } from '../auth.actions';
 
 
 @Component({
@@ -75,6 +75,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem("token", data.token);
               const info = data.info;
               const settings = data.settings;
+              const counts = data.count;
               this.loading = false;
               if ( data.code !== 200) {
 
@@ -82,12 +83,18 @@ export class LoginComponent implements OnInit {
          } else {
                 this.store.dispatch(new Login({ info }));
                 this.store.dispatch(new Settings({ settings }))
+                this.store.dispatch(new Count({ counts }))
                 window.location.href = "/my-profile";
               }
             })
           ).subscribe(
             noop,
-            () => alert('Login Failed')
+            (err) => {
+            this.loading = false;
+            console.log(err);
+            alert('Login Failed');
+            }
+           
           );
       });
 

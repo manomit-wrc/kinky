@@ -5,7 +5,8 @@ export enum AuthActionTypes {
   LogoutAction = '[Logout] Action',
   USER_SETTINGS = '[User Settings] Action',
 
-  USER_LOCATION = '[User Location] Action'
+  USER_LOCATION = '[User Location] Action',
+  COUNT = '[Count] Action'
 }
 
 
@@ -31,7 +32,12 @@ export class Logout implements Action {
 
 }
 
+export class Count implements Action {
 
+  readonly type = AuthActionTypes.COUNT;
+  constructor(public payload: { counts: any }) {}
+
+}
 
 export class Location implements Action {
   readonly type = AuthActionTypes.USER_LOCATION;
@@ -39,4 +45,6 @@ export class Location implements Action {
 }
 
 
-export type AuthActions = Login | Logout | Settings | Location;
+
+
+export type AuthActions = Login | Logout | Settings| Count | Location;

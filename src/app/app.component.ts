@@ -19,19 +19,10 @@ export class AppComponent implements OnInit {
     private auth: AuthenticationService) {}
 
   ngOnInit() {
-
-    this.auth.loadLocation()
-      .pipe(
-        tap(location => {
-          this.store.dispatch(new Location({ location }))
-        })
-      ).subscribe(noop);
-    
     this.auth.loadMaster()
-    .pipe(tap(masters => {
-      this.store.dispatch(new loadMasters({ masters }));
-    })).subscribe(noop);
-
-    
+.pipe(tap(masters => {
+this.store.dispatch(new loadMasters({ masters }));
+})).subscribe(noop)
   }
+
 }

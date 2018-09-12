@@ -30,10 +30,12 @@ export const profileImg = createSelector(
   auth => auth.user !== undefined ? auth.user.avatar: null
 )
 
-
-
-
 export const locationDetails = createSelector(
   selectAuthState,
   auth => auth.location
+)
+
+export const countUser = createSelector(
+  selectAuthState,
+  auth => auth.counts !== undefined ? auth.counts: null
 )

@@ -8,7 +8,7 @@ import {noop, Subject} from "rxjs";
   styleUrls: ['./online-users.component.css']
 })
 export class OnlineUsersComponent implements OnInit {
-
+users : any;
   constructor(
     private auth: AuthenticationService,
   ) { }
@@ -18,8 +18,8 @@ export class OnlineUsersComponent implements OnInit {
     this.auth.fetch_online_users()
     .pipe(
       tap(data => {
-        alert();
-console.log(data);
+    console.log(data);
+    this.users = data.user;
       })
     ).subscribe(
       noop,
@@ -27,6 +27,18 @@ console.log(data);
     );
 
   }
+
+   getAge(DOB) {
+    var today = new Date();
+    var birthDate = new Date(DOB);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age = age - 1;
+    }
+
+    return age;
+}
 
 }
 

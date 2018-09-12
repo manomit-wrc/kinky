@@ -263,6 +263,9 @@ export class AuthenticationService {
     loadCities(country: string): Observable<any> {
       return this.http.post<any>(`${this.apiUri}/load-cities`, { country })
     }
+    onlineusers(): Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/count-online-user`, {})
+    }
 
 
 
