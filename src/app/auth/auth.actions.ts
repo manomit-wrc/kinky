@@ -3,7 +3,9 @@ import { Action } from '@ngrx/store';
 export enum AuthActionTypes {
   LoginAction = '[Login] Action',
   LogoutAction = '[Logout] Action',
-  USER_SETTINGS = '[User Settings] Action'
+  USER_SETTINGS = '[User Settings] Action',
+
+  USER_LOCATION = '[User Location] Action'
 }
 
 
@@ -30,4 +32,11 @@ export class Logout implements Action {
 }
 
 
-export type AuthActions = Login | Logout | Settings;
+
+export class Location implements Action {
+  readonly type = AuthActionTypes.USER_LOCATION;
+  constructor(public payload: { location: any }) {}
+}
+
+
+export type AuthActions = Login | Logout | Settings | Location;

@@ -4,7 +4,8 @@ import { noop } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from './reducers';
 import { AuthenticationService } from './services';
-import { loadMasters } from './dashboard/dashboard.actions'
+import { loadMasters } from './dashboard/dashboard.actions';
+import { Location } from './auth/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -19,10 +20,18 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
+    this.auth.loadLocation()
+      .pipe(
+        tap(location => {
+          this.store.dispatch(new Location({ location }))
+        })
+      ).subscribe(noop);
     
     this.auth.loadMaster()
     .pipe(tap(masters => {
       this.store.dispatch(new loadMasters({ masters }));
-    })).subscribe(noop)
+    })).subscribe(noop);
+
+    
   }
 }

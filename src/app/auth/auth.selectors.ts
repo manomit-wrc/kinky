@@ -29,3 +29,11 @@ export const profileImg = createSelector(
   selectAuthState,
   auth => auth.user !== undefined ? auth.user.avatar: null
 )
+
+
+
+
+export const locationDetails = createSelector(
+  selectAuthState,
+  auth => auth.location
+)

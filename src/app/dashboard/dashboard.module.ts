@@ -1,5 +1,6 @@
 import { ModuleWithProviders,NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { LayoutComponent } from './layout/layout.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -44,6 +45,7 @@ import { OnlineUsersComponent } from './online-users/online-users.component';
   imports: [
     CommonModule,
     NgProgressModule.forRoot(),
+    NgSelectModule,
     DashBoardRoutingModule,
     ReactiveFormsModule,
     FormsModule,

@@ -38,7 +38,10 @@ export class ProfileProtectionComponent implements OnInit {
 
     this.store.select(settingDetails)
       .subscribe(data => {
-        this.radiogroup = data.profile_setting ? data.profile_setting.toString(): '';
+        if(data !== null) {
+          this.radiogroup = data.profile_setting ? data.profile_setting.toString(): '';
+        }
+        
       })
     
   }

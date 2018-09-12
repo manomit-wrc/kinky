@@ -42,8 +42,11 @@ export class IntroductionMessageComponent implements OnInit {
 
     this.store.select(settingDetails)
       .subscribe(data => {
-        this.preferred_introduction =  data.preferred_introduction;
-        this.own_introduction =  data.own_introduction;
+        if(data !== null) {
+          this.preferred_introduction =  data.preferred_introduction;
+          this.own_introduction =  data.own_introduction;
+        }
+        
       })
    
   }

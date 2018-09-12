@@ -20,18 +20,22 @@
               <div class="personal-detail-medium-box select-box">
 
                 <label>Location</label>
-                <select name='count_id' (change)="onItemChange($event.target.value)" [(ngModel)]="country">
-                  <option [value]="">Select Country</option>
-                  <option [value]="count._id" *ngFor="let count of countrys ">{{count.name}}</option>
-                </select>
+                
+                <ng-select [items]="countrys"
+                        bindLabel="name"
+                        bindValue="name"
+                        [(ngModel)]="country"
+                        (change)="onItemChange($event)">
+                </ng-select>
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>&nbsp;</label>
                 
-                <select [(ngModel)]="state" name ="st_id">
-                  <option [value]="">Select City</option>
-                  <option [value]="st._id" *ngFor="let st of states">{{st.name}}</option>
-                </select>
+                <ng-select [items]="states"
+                        bindLabel="state"
+                        bindValue="state"
+                        [(ngModel)]="state">
+                </ng-select>
               </div>
               <div class="personal-detail-big-box select-box">
                 <label>Time Zone</label>

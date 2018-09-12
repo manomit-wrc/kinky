@@ -17,6 +17,8 @@ import { Settings } from '../../auth/auth.actions';
 export class SiteconfigureComponent implements OnInit {
   private _success = new Subject<string>();
   private _error = new Subject<string>();
+
+  languages: any = [];
   
   email: any;
   mobile: any;
@@ -33,6 +35,8 @@ export class SiteconfigureComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.languages = ['English', 'French', 'German', 'Spanish'];
 
     this._error.subscribe((message) => this.errorMessage = message);
     this._error.pipe(
@@ -56,10 +60,18 @@ export class SiteconfigureComponent implements OnInit {
     
     this.store.select(settingDetails)
       .subscribe(data => {
-        this.language = data.language;
-        this.timezone = data.timezone;
+        if(data !== null) {
+          this.language = data.language === undefined ? 'English': data.language;
+          this.timezone = data.timezone === undefined ? this.timezones[0]: data.timezone;
+          this.mobile = data.mobile ? data.mobile.toString(): '';
+        }
+        else {
+          this.language = 'English';
+          this.timezone = this.timezones[0];
+        }
+        
       
-        this.mobile = data.mobile ? data.mobile.toString(): '';
+        
       })
   }
 

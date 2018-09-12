@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
-import { userDetails } from '../../auth/auth.selectors';
+import { userDetails, locationDetails } from '../../auth/auth.selectors';
 import { Login } from '../../auth/auth.actions';
 import { loadAllMasters } from '../dashboard.selectors';
 @Component({
@@ -24,7 +24,7 @@ export class MyLatestProfileComponent implements OnInit {
   data: any = {};
   count: any;
   st: any;
-  states: any;
+  states: any = [];
   countrys: any;
   country: any;
   state: any;
@@ -83,15 +83,16 @@ export class MyLatestProfileComponent implements OnInit {
     this.store.pipe(
       select(loadAllMasters),
       tap(data => {
+        if(data !== null) {
+          this.countrys = data.countries;
+          this.timezones = data.timezones;
+          this.ethnicities = data.ethnicity;
+          this.haircolors = data.hair;
+          this.bodyhairs = data.body_hairs;
+          this.builds = data.build;
+          this.heights = data.height;
+        }
         
-        this.countrys = data.countries;
-        this.timezones = data.timezones;
-        this.ethnicities = data.ethnicity;
-        this.haircolors = data.hair;
-        this.bodyhairs = data.body_hairs;
-        this.builds = data.build;
-        this.heights = data.height;
-        this.states = data.states;
 
       })
     ).subscribe(noop);
@@ -125,6 +126,7 @@ export class MyLatestProfileComponent implements OnInit {
     this.looking_for_arr = ['Male','Female','Couple','CD / TV / TS'];
 
     this.travel_arr = ['Can accommodate','Will travel'];
+    
 
     this.store.pipe(
       select(userDetails),
@@ -146,7 +148,31 @@ export class MyLatestProfileComponent implements OnInit {
       })
     ).subscribe(
       noop
-    )
+    );
+
+    this.store.pipe(
+      select(locationDetails),
+      tap(data => {
+        if(this.data.country === undefined || this.data.state === undefined) {
+          this.country = data.country;
+          this.state = data.city;
+        }
+        else {
+          this.country = this.data.country;
+          this.state = this.data.state;
+        }
+
+        this.auth.loadCities(this.country)
+          .pipe(
+            tap(data => {
+              
+              this.states = data.cities;
+            })
+          ).subscribe(noop)
+      })
+    ).subscribe(noop);
+
+    
   }
 
   displayTab(value) {
@@ -154,13 +180,15 @@ export class MyLatestProfileComponent implements OnInit {
   }
 
   onItemChange(e) {
-    this.auth.state(e)
-    .pipe(first())
-    .subscribe(data => {
-    this.states = data.data;
-
-
-    });
+    
+    this.auth.loadCities(e.name)
+      .pipe(
+        tap(data => {
+          this.state = data.cities[0];
+          this.states = data.cities;
+        })
+      ).subscribe(noop)
+    
   }
 
   personal_details_update (data) {
@@ -173,7 +201,6 @@ export class MyLatestProfileComponent implements OnInit {
     data['country'] = this.country;
     data['state'] = this.state;
 
-  console.log(data.country, data.state);
   this.auth.personal_info_update(data)
     .pipe(
       tap(data => {

@@ -1,9 +1,11 @@
 import {Component, OnInit, Input,Renderer} from '@angular/core';
 import { AuthenticationService } from '../../services';
-import { first, debounceTime } from 'rxjs/operators';
+import { first, debounceTime, tap } from 'rxjs/operators';
+import { noop } from 'rxjs';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
+import { locationDetails } from '../../auth/auth.selectors';
 import { loadAllMasters } from '../dashboard.selectors';
 import { Subject } from 'rxjs';
 import { Settings } from '../../auth/auth.actions';
@@ -31,6 +33,7 @@ export class InterestsComponent implements OnInit {
   age_range:any =[];
   distance_range:any=[];
   distance:any = 10;
+  states: any = [];
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -51,14 +54,39 @@ export class InterestsComponent implements OnInit {
       debounceTime(4000)
     ).subscribe(() => this.successMessage = null)
 
+    this.store.pipe(
+      select(locationDetails),
+      tap(data => {
+        
+        if(this.userObj === undefined || this.userObj.country === undefined || this.userObj.state === undefined) {
+         
+          this.count = data.country;
+          this.st = data.city;
+        }
+        else {
+          this.count = this.userObj.country;
+          this.st = this.userObj.state;
+        }
+        
+        this.auth.loadCities(this.count)
+          .pipe(
+            tap(data => {
+              
+              this.states = data.cities;
+            })
+          ).subscribe(noop)
+      })
+    ).subscribe(noop);
+
     if(this.userObj !== undefined) {
+
+      
 
       this.testArr = this.userObj.gender;
       this.from_age = this.userObj.from_age ? this.userObj.from_age.toString() : '';
       this.to_age = this.userObj.to_age ? this.userObj.to_age.toString() : '';
       this.distance = this.userObj.distance ? this.userObj.distance.toString(): '';
-      this.count = this.userObj.country;
-      this.st = this.userObj.state;
+      
       this.testArr1 = this.userObj.contactmember;
       this.explicit_content = this.userObj.explicit_content;
     }
@@ -86,13 +114,14 @@ export class InterestsComponent implements OnInit {
   }
 
   onItemChange(e) {
-    this.auth.state(e)
-    .pipe(first())
-    .subscribe(data => {
-    this.state = data.data;
-
-
-    });
+    
+    this.auth.loadCities(e.name)
+      .pipe(
+        tap(data => {
+          this.st = data.cities[0];
+          this.states = data.cities;
+        })
+  ).subscribe(noop)
   }
 
   update(gender, from_age, to_age, distance, country_id, state_id, contactmember, explicit_content) {

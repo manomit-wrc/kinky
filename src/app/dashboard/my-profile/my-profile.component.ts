@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { UserService } from '../user.service';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
-import { userDetails } from '../../auth/auth.selectors';
+import { userDetails, locationDetails } from '../../auth/auth.selectors';
 import { noop } from '@angular/compiler/src/render3/view/util';
 import { loadAllMasters } from '../dashboard.selectors';
 import { Subject } from 'rxjs';
@@ -38,7 +38,7 @@ export class MyProfileComponent implements OnInit {
   size:any;
   travel_arrangements:any;
   country: any;
-  states: any;
+  city: any;
   purpose:any;
   headline:any;
   description:any;
@@ -61,6 +61,9 @@ export class MyProfileComponent implements OnInit {
 
     this.store.select(userDetails)
     .subscribe(data => {
+
+      this.country = data.country === undefined ? '' : data.country;
+      this.city = data.state === undefined ? '' : data.state;
       
       if(data.email_verified) {
         this.email_verified = true;
@@ -74,19 +77,21 @@ export class MyProfileComponent implements OnInit {
             if(masters !== undefined) {
               
               if(masters !== undefined) {
-                this.country = masters.countries.filter(c => c._id === data.country);
-                this.states = masters.states.filter( s => s._id === data.state );
-                this.height = masters.height.filter( h => h._id === data.height);
-                this.height = this.height[0].name;
-                this.build = masters.build.filter( h => h._id === data.build);
-                this.build = this.build[0].name;
-                this.hair = masters.hair.filter( h => h._id === data.hair);
-                this.hair = this.hair[0].name;
-                this.address = this.states[0].name + "," + this.country[0].name;
+                if(data.height !== undefined) {
+                  this.height = masters.height.filter( h => h._id === data.height);
+                  this.height = this.height.length === 0 ? '' : this.height[0].name;
+                }
+                if(data.build !== undefined) {
+                  this.build = masters.build.filter( h => h._id === data.build);
+                  this.build = this.build.length === 0 ? '' : this.build[0].name;
+                }
+                if(data.hair !== undefined) {
+                  this.hair = masters.hair.filter( h => h._id === data.hair);
+                  this.hair = this.hair.length === 0 ? '' : this.hair[0].name;
+                }
+               
               }
-              else {
-                this.address = "N/A, N/A";
-              }
+              
             }
 
           })
@@ -110,7 +115,17 @@ export class MyProfileComponent implements OnInit {
         this.purpose = data.purpose === undefined ? 'N/A' : data.purpose;
         this.headline = data.headline === undefined ? 'N/A' : data.headline;
         this.description = data.description === undefined ? 'N/A' : data.description;
-    })
+    });
+
+    this.store.select(locationDetails)
+      .subscribe(location => {
+        if(this.country === "" || this.city === "") {
+          this.address = `${location.city},${location.country}`
+        }
+        else {
+          this.address = `${this.city},${this.country}`
+        }
+      })
 
     this.avt.profileImage.subscribe(img => this.avatar = img)
 

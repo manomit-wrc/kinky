@@ -24,38 +24,54 @@
 <div class="general-tab-row">
   <label>Age Range</label>
   <div class="setting-sml-drop select-box">
-    <select [(ngModel)]="from_age">
-      <option value="age" *ngFor ="let age of age_range">{{age}}</option>
-      <option value="55">55+</option>
-    </select>
+    
+    <ng-select [items]="age_range"
+           bindLabel="from_age"
+           bindValue="from_age"
+           [(ngModel)]="from_age">
+    </ng-select>
   </div>
   <div class="to">To</div>
   <div class="setting-sml-drop select-box">
-    <select [(ngModel)]="to_age">
-   <option value="age" *ngFor ="let age of age_range">{{age}}</option>
-   <option value="55">55+</option>
-    </select>
+    
+    <ng-select [items]="age_range"
+           bindLabel="to_age"
+           bindValue="to_age"
+           [(ngModel)]="to_age">
+    </ng-select>
   </div>
 </div>
 <div class="general-tab-row">
   <label>Within</label>
-  <div class="general-dropdown">
-    <select [(ngModel)]="distance">
+  <div class="general-dropdown" style="position:unset !important;">
+    <!--<select [(ngModel)]="distance">
       <option value="d" *ngFor ="let d of distance_range">{{d}} miles</option>
-    </select>
+    </select>-->
+    <ng-select [items]="distance_range"
+           bindLabel="distance"
+           bindValue="distance"
+           [(ngModel)]="distance">
+    </ng-select>
   </div>
 </div>
 <div class="general-tab-row">
   <label>Of</label>
   <div class="setting-medium-drop select-box">
-    <select name='count_id' (change)="onItemChange($event.target.value)" [(ngModel)]="count">
-      <option [value]="count._id" *ngFor="let count of country">{{count.name}}</option>
-    </select>
+    
+    <ng-select [items]="country"
+        bindLabel="name"
+        bindValue="name"
+        [(ngModel)]="count"
+        (change)="onItemChange($event)">
+    </ng-select>
   </div>
   <div class="setting-medium-drop setting-medium-drop-right select-box">
-    <select [(ngModel)]="st" name ="st_id">
-      <option [value]="st._id" *ngFor="let st of state">{{st.name}}</option>
-    </select>
+    
+    <ng-select [items]="states"
+        bindLabel="st"
+        bindValue="st"
+        [(ngModel)]="st">
+    </ng-select>
   </div>
 </div>
 <div class="general-tab-row">

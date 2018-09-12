@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {AuthActionTypes, Login, Logout, Settings} from './auth.actions';
+import {AuthActionTypes, Login, Logout, Settings,   Location} from './auth.actions';
 import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {defer, of} from 'rxjs';
@@ -34,16 +34,31 @@ export class AuthEffects {
     })
   );
 
+
+
+
+  @Effect({ dispatch: false })
+  $location = this.actions$.pipe(
+    ofType<Location>(AuthActionTypes.USER_LOCATION),
+    tap(action => localStorage.setItem("location", JSON.stringify(action.payload.location)))
+  );
+
   @Effect()
   init$ = defer(() => {
 
     const userData = localStorage.getItem("user");
     const settingData = localStorage.getItem("settings");
+
+
+    const locationData = localStorage.getItem("location");
    
     if (userData) {
        return of(
         new Login({info:JSON.parse(userData)}),
-        new Settings({ settings: JSON.parse(settingData)})
+        new Settings({ settings: JSON.parse(settingData)}),
+
+
+        new Location({ location: JSON.parse(locationData)})
        );
        
     }

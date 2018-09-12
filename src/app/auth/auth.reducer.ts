@@ -5,14 +5,18 @@ export interface AuthState {
   loggedIn: boolean,
   user: any,
   images: any,
-  settings: any
+  settings: any,
+
+  location: any
 }
 
 export const initialAuthState: AuthState = {
   loggedIn: false,
   user: undefined,
   images: undefined,
-  settings: undefined
+  settings: undefined,
+
+  location: undefined
 };
 
 export function authReducer(state = initialAuthState,
@@ -36,6 +40,13 @@ export function authReducer(state = initialAuthState,
         return {
           ...state,
           settings: action.payload.settings
+        }
+
+    
+    case AuthActionTypes.USER_LOCATION:
+        return {
+          ...state,
+          location: action.payload.location
         }
 
     default:

@@ -253,7 +253,15 @@ export class AuthenticationService {
     }
 
     verifyEmail(): Observable<any> {
-      return this.http.post<any>(`${this.apiUri}/verify-email`, {})
+      return this.http.post<any>(`${this.apiUri}/verify-email`, {});
+    }
+
+    loadLocation(): Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/load-location`, {});
+    }
+
+    loadCities(country: string): Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/load-cities`, { country })
     }
 
 

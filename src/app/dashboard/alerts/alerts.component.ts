@@ -45,9 +45,15 @@ export class AlertsComponent implements OnInit {
 
     this.store.select(settingDetails)
       .subscribe(data => {
-
-        this.newsletter = data.newsletter ;
-        this.message = data.message ;
+        if(data !== null) {
+          this.newsletter = data.newsletter ;
+          this.message = data.message ;
+        }
+        else {
+          this.newsletter = false ;
+          this.message = false ;
+        }
+        
       })
 
   }
