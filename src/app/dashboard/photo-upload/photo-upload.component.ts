@@ -7,6 +7,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { log } from 'util';
 import * as S3 from 'aws-sdk/clients/s3';
 import { Subject } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../../reducers';
+import { Login } from '../../auth/auth.actions';
+import { profileImages } from '../../auth/auth.selectors';
 
 @Component({
   selector: 'app-photo-upload',
@@ -24,12 +28,20 @@ export class PhotoUploadComponent implements OnInit {
 
   constructor(private sanitizer: DomSanitizer,
     private auth: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) { }
 images = [];
 BarWidth = 0;
 
   ngOnInit() {
+
+    this.store.pipe(
+      select(profileImages),
+      tap(images => {
+        this.fileArr = images;
+      })
+    ).subscribe(noop);
 
     this._imageData.subscribe((percentage) => this.BarWidth = percentage);
     
@@ -71,13 +83,18 @@ BarWidth = 0;
           console.log('There was an error uploading your file: ', err);
           
         }
-  
-        console.log(data);
+
+        this.auth.uploadProfileImage(data.Location, data.key)
+          .pipe(tap(
+            data => {
+              console.log(data);
+              const info = data.info
+              this.store.dispatch(new Login({ info }))
+            }
+          )).subscribe(noop);
         
         });
     }
-    console.log(fileType.target.files);
-    
       
   }
 

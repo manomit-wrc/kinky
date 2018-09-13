@@ -6,9 +6,8 @@
           <h3><i class="fa fa-user" aria-hidden="true"></i><span>Photo upload</span></h3>
           <div class="photo-slider-sec photo-upload-sec">
             <div id="owl-demo" class="owl-carousel">
-              <div class="item"><img src="assets/images/photo-upload-img.png" alt=""></div>
-              <div class="item"><img src="assets/images/photo-upload-img.png" alt=""></div>
-              <div class="item"><img src="assets/images/photo-upload-img.png" alt=""></div>
+              <div *ngFor="let f of fileArr" class="item"><img [src]="f" alt=""></div>
+              
             </div>
           </div>
           <div class="photo-save-area">

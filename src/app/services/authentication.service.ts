@@ -271,6 +271,10 @@ export class AuthenticationService {
       return this.http.post<any>(`${this.apiUri}/count-online-user`, {})
     }
 
+    uploadProfileImage(img_link: string, img_name: string): Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/upload-profile-image`, {img_link, img_name})
+    }
+
 
 
 /* Check for password match*/

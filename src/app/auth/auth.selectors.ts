@@ -39,3 +39,8 @@ export const countUser = createSelector(
   selectAuthState,
   auth => auth.counts !== undefined ? auth.counts: null
 )
+
+export const profileImages = createSelector(
+  selectAuthState,
+  auth => auth.user.images
+)
