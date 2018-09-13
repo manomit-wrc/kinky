@@ -1,18 +1,20 @@
+
 <div class="inner-main-sec">
   <div class="container">
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="profile-pic-sec">
-          <h3><i class="fa fa-user" aria-hidden="true"></i><span>Photo upload</span></h3>
-          <div class="photo-slider-sec photo-upload-sec">
-            <div id="owl-demo" class="owl-carousel">
-              <div *ngFor="let f of fileArr" class="item"><img [src]="f.url" alt=""></div>
-
-            </div>
-          </div>
+          <h3><i class="fa fa-user" aria-hidden="true"></i><span>Video</span></h3>
+          <div class="video-upload-sec">
+            <!--<div id="owl-demo" class="owl-carousel">
+              <div class="item"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+              <div class="item"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+              <div class="item"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+            </div>-->
+            <img src="assets/images/video-upload-img.jpg" alt=""> </div>
           <div class="photo-save-area">
             <div class="photo-save-input-outer">
-              <input type="text" class="photo-input" placeholder="My Best Photo">
+              <input type="text" class="photo-input" placeholder="My Best Video">
             </div>
             <div class="photo-save-input-outer">
               <input type="submit" class="private-btn" value="Private">
@@ -25,35 +27,33 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="photo-row photo-row1">
           <div class="downarrow-mobile downarrow-mobile1"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
-          <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Photos</span></h4>
+          <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Videos</span></h4>
           <ul>
             <li *ngFor="let f of fileArr">
-              <img [src]="f.url" alt="">
+              <video width="150" height="150" controls>
+                <source [src]="f.url" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
               <div class="photo-edit-outer"> <a href="javascript:void(0)" class="photo-edit-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                 <div class="edit-popup-photo-vid">
                   <ul>
-                    <li><a href="#">Move to private</a></li>
-                    <li><a href="#">Set as profile</a></li>
-                    <li><a href="#">Delete</a></li>
+                    <li><a href="#" (click)="setToPrivate()">Move to private</a></li>
+                    <li><a href="#" (click)="delete()">Delete</a></li>
                   </ul>
                 </div>
               </div>
             </li>
-
           </ul>
           <div class="addphoto-icon-sec">
-            <input type="file" class="uplod-btn" accept="image/*" (change)="changeListener($event)" name="imageArr" multiple>
-            <a href="#"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add Photo</span></a>
-          </div>
-          <!--<ng-progress id="bar-one" #barOne spinnerPosition="left"></ng-progress>-->
-          <div class="progress">
+            <input type="file" class="uplod-btn" (change)="changeListener($event)" name="videoArr" multiple>
+            <a href="#"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add Video</span></a> </div>
+            <div class="progress">
 
-            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [attr.aria-valuenow]="BarWidth" aria-valuemin="0" aria-valuemax ="100"
-                style="min-width: 2em;" [style.width]="(BarWidth/100)*100 + '%'">
-                {{BarWidth}}%
-          </div>
-          </div>
-
+              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [attr.aria-valuenow]="BarWidth" aria-valuemin="0" aria-valuemax ="100"
+                  style="min-width: 2em;" [style.width]="(BarWidth/100)*100 + '%'">
+                  {{BarWidth}}%
+            </div>
+            </div>
         </div>
         <div class="photo-row photo-row2">
           <div class="downarrow-mobile downarrow-mobile2"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
@@ -80,9 +80,3 @@
             <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
           </ul>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-

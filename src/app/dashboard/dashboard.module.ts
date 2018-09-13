@@ -35,7 +35,9 @@ import { CountryEffects } from './country/country.effects';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { OnlineUsersComponent } from './online-users/online-users.component';
 
-
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { FriendlistComponent } from './friendlist/friendlist.component';
+import { VideoUploadComponent } from './video-upload/video-upload.component';
 
 
 
@@ -52,7 +54,8 @@ import { OnlineUsersComponent } from './online-users/online-users.component';
     StoreModule.forFeature('dashboard', fromDashboard.dashBoardReducer),
     EffectsModule.forFeature([DashboardEffects, CountryEffects]),
     StoreModule.forFeature('country', fromCountry.countriesReducer),
-    
+    FilterPipeModule
+
   ],
   declarations: [
     LayoutComponent,
@@ -72,7 +75,9 @@ import { OnlineUsersComponent } from './online-users/online-users.component';
        AddEventComponent,
        MyProfileComponent,
        PhotoUploadComponent,
-       OnlineUsersComponent
+       OnlineUsersComponent,
+       FriendlistComponent,
+       VideoUploadComponent
       ]
 })
 
@@ -80,7 +85,7 @@ export class DashboardModule {
   static forRoot(): ModuleWithProviders {
       return {
           ngModule: DashboardModule,
-          
+
       }
   }
 }
