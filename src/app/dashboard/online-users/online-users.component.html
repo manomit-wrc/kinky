@@ -10,31 +10,36 @@
             <label>looking for</label>
             <div>
               <div class="personal-radio-outer">
-                <input class="personal-radio-btn" value="" type="radio">
+                <input class="personal-radio-btn" value="M" [(ngModel)]="userFilter.user.gender" type="radio">
                 <span class="personal-radio-title">Male</span></div>
               <div class="personal-radio-outer">
-                <input class="personal-radio-btn" value="" type="radio">
+                <input class="personal-radio-btn" value="F" [(ngModel)]="userFilter.user.gender" type="radio">
                 <span class="personal-radio-title">Female</span></div>
               <div class="personal-radio-outer">
-                <input class="personal-radio-btn" value="" type="radio">
+                <input class="personal-radio-btn" value="C" [(ngModel)]="userFilter.user.gender" type="radio">
                 <span class="personal-radio-title">Couple</span></div>
               <div class="personal-radio-outer">
-                <input class="personal-radio-btn" value="" type="radio">
+                <input class="personal-radio-btn" value="O" [(ngModel)]="userFilter.user.gender" type="radio">
                 <span class="personal-radio-title">CD / TV / TS</span></div>
             </div>
           </div>
           <div class="general-tab-row">
             <div class="personal-detail-medium-box online-user-big-select-box select-box">
               <label>from</label>
-              <select>
-                <option>Philippines</option>
-              </select>
+              <ng-select [items]="countrys"
+                        bindLabel="name"
+                        bindValue="name"
+                        [(ngModel)]="userFilter.user.country"
+                        (change)="onItemChange($event)">
+                </ng-select>
             </div>
             <div class="personal-detail-medium-box online-user-big-select-box select-box">
               <label>region</label>
-              <select>
-                <option>All</option>
-              </select>
+              <ng-select [items]="states"
+                        bindLabel="state"
+                        bindValue="state"
+                        [(ngModel)]="userFilter.user.state">
+                </ng-select>
             </div>
           </div>
         </div>
@@ -47,9 +52,9 @@
         </div>
         <div class="friends-tab-content">
           <div>
-            <ul id="myList2">              
-              <li >      
-              <div *ngFor = "let us of users">        
+            <ul id="myList2">
+              <li >
+              <div *ngFor = "let us of users | filterBy: userFilter">
                 <div class="row">
                   <div class="col-lg-10 col-md-12 col-sm-9 col-xs-12">
                     <div class="friends-sml-img"><a href="#"><img [src]="us.user.avatar" alt=""></a>
@@ -59,7 +64,7 @@
                       <h6><a href="#">{{us.user.username}}</a></h6>
                       <p *ngIf="us.user.gender=='M'"><i class="fa fa-mars"></i> {{this.getAge(us.user.mm +"/"+us.user.dd +"/"+us.user.yyyy )}} {{us.user.sexuality }}</p>
                       <p *ngIf="us.user.gender!='M'"><i class="fa fa-venus"></i> {{this.getAge(us.user.mm +"/"+us.user.dd +"/"+us.user.yyyy )}} {{us.user.sexuality}}</p>
-                      <p><span><i class="fa fa-map-marker"></i> Bel-air Four, Rizal, Philippines</span></p>
+                      <p><span><i class="fa fa-map-marker"></i> {{us.user.state}}, {{us.user.country}}</span></p>
                       <p><a href="#">{{us.user.interested_in}}</a></p>
                     </div>
                   </div>
@@ -69,6 +74,7 @@
                 </div>
                 </div>
               </li>
+              <p *ngIf="(users | filterBy: userFilter).length === 0">No matching elements</p>
             </ul>
             <div id="loadMore2" class="more-setting-outer">More</div>
           </div>

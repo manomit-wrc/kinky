@@ -44,3 +44,8 @@ export const profileImages = createSelector(
   selectAuthState,
   auth => auth.user.images
 )
+
+export const profileVideos = createSelector(
+  selectAuthState,
+  auth => auth.user.videos
+)

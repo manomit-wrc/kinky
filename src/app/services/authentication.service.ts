@@ -274,6 +274,9 @@ export class AuthenticationService {
     uploadProfileImage(img_link: string, img_name: string): Observable<any> {
       return this.http.post<any>(`${this.apiUri}/upload-profile-image`, {img_link, img_name})
     }
+    uploadProfileVideo(video_link: string, video_name: string): Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/upload-profile-video`, {video_link, video_name})
+    }
 
 
 

@@ -36,6 +36,13 @@ import { NgProgressModule } from '@ngx-progressbar/core';
 import { OnlineUsersComponent } from './online-users/online-users.component';
 import { OwlModule } from 'ngx-owl-carousel';
 
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { FriendlistComponent } from './friendlist/friendlist.component';
+import { VideoUploadComponent } from './video-upload/video-upload.component';
+
+
+
+
 
 @NgModule({
   imports: [
@@ -49,7 +56,8 @@ import { OwlModule } from 'ngx-owl-carousel';
     StoreModule.forFeature('dashboard', fromDashboard.dashBoardReducer),
     EffectsModule.forFeature([DashboardEffects, CountryEffects]),
     StoreModule.forFeature('country', fromCountry.countriesReducer),
-    
+    FilterPipeModule
+
   ],
   declarations: [
     LayoutComponent,
@@ -69,7 +77,9 @@ import { OwlModule } from 'ngx-owl-carousel';
        AddEventComponent,
        MyProfileComponent,
        PhotoUploadComponent,
-       OnlineUsersComponent
+       OnlineUsersComponent,
+       FriendlistComponent,
+       VideoUploadComponent
       ]
 })
 
@@ -77,7 +87,7 @@ export class DashboardModule {
   static forRoot(): ModuleWithProviders {
       return {
           ngModule: DashboardModule,
-          
+
       }
   }
 }
