@@ -34,11 +34,7 @@ import * as fromCountry from './country/country.reducer';
 import { CountryEffects } from './country/country.effects';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { OnlineUsersComponent } from './online-users/online-users.component';
-
-
-
-
-
+import { OwlModule } from 'ngx-owl-carousel';
 
 
 @NgModule({
@@ -46,6 +42,7 @@ import { OnlineUsersComponent } from './online-users/online-users.component';
     CommonModule,
     NgProgressModule.forRoot(),
     NgSelectModule,
+    OwlModule,
     DashBoardRoutingModule,
     ReactiveFormsModule,
     FormsModule,

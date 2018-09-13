@@ -24,6 +24,7 @@ export class PhotoUploadComponent implements OnInit {
   fileArr = [];
   IMG_FOLDER = 'images/';
   percentage: any;
+  loading: boolean = false;
   
 
   constructor(private sanitizer: DomSanitizer,
@@ -48,11 +49,15 @@ BarWidth = 0;
   }
 
   changeListener(fileType: any)  {
-    
+    this.loading = true;
     for(let i = 0; i < fileType.target.files.length; i++) {
       const file = fileType.target.files[i];
 
-      this.fileArr.push(this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)));
+      this.fileArr.push({
+        url: this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)),
+        altTag: '',
+        access: 'Public'
+      });
       const params = {
         Bucket: 'kinky-wrc',
         Key: this.IMG_FOLDER + file.name,
