@@ -25,6 +25,7 @@ export class PhotoUploadComponent implements OnInit {
   IMG_FOLDER = 'images/';
   percentage: any;
   loading: boolean = false;
+
   
 
   constructor(private sanitizer: DomSanitizer,

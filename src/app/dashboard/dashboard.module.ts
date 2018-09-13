@@ -39,6 +39,8 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { FriendlistComponent } from './friendlist/friendlist.component';
 import { VideoUploadComponent } from './video-upload/video-upload.component';
+import { CarouselComponent, CarouselItemElement } from './carousel/carousel.component';
+import { CarouselItemDirective } from './carousel-item.directive';
 
 
 
@@ -79,7 +81,10 @@ import { VideoUploadComponent } from './video-upload/video-upload.component';
        PhotoUploadComponent,
        OnlineUsersComponent,
        FriendlistComponent,
-       VideoUploadComponent
+       VideoUploadComponent,
+       CarouselComponent,
+       CarouselItemElement,
+       CarouselItemDirective
       ]
 })
 
