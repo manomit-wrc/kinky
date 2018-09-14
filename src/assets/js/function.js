@@ -95,33 +95,33 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
- $(".photo-edit-outer .photo-edit-icon").click(function(){
+//  $(".photo-edit-outer .photo-edit-icon").click(function(){
 
- $(this).siblings(".edit-popup-photo-vid").toggle();
- });
+//  $(this).siblings(".edit-popup-photo-vid").toggle();
+//  });
  
- $(".photo-edit-icon").click(function(){
+//  $(".photo-edit-icon").click(function(){
  
-  $(this).toggleClass("photo-edit-icon-active");
+//   $(this).toggleClass("photo-edit-icon-active");
  	
-	});
+// 	});
 	
-	$(".photo-row ul li").hover(function(){				   
-	 $(this).find(".photo-edit-outer").addClass("photo-popshow");
+	// $(".photo-row ul li").hover(function(){				   
+	//  $(this).find(".photo-edit-outer").addClass("photo-popshow");
 	 
 	 
-	 });
+	//  });
  
  
- $(".photo-edit-outer").click(function(e){
-    e.stopPropagation();
-});
+//  $(".photo-edit-outer").click(function(e){
+//     e.stopPropagation();
+// });
  
  
  $(document).click(function(){
-    $(".photo-edit-outer").removeClass("photo-popshow");
-	$(".edit-popup-photo-vid").hide();
-	$(".photo-edit-icon").removeClass("photo-edit-icon-active");
+    //$(".photo-edit-outer").removeClass("photo-popshow");
+	//$(".edit-popup-photo-vid").hide();
+	//$(".photo-edit-icon").removeClass("photo-edit-icon-active");
 });
  
  

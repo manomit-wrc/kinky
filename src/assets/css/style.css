@@ -511,7 +511,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#18080a', end
 
 .owl-pagination{ display:none;}
 
-.owl-buttons{ position:absolute; width:100%; left:0; top:35%;}
+.owl-buttons{ position:absolute; width:85%; left:40px; top:35%;}
 
 .photo-slider-sec .owl-prev{ float:left; width:35px; height:35px; background:url(../images/arrow-left.png) no-repeat; background-size:100% auto;}
 

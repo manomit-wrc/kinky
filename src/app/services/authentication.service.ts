@@ -271,11 +271,15 @@ export class AuthenticationService {
       return this.http.post<any>(`${this.apiUri}/count-online-user`, {})
     }
 
-    uploadProfileImage(img_link: string, img_name: string): Observable<any> {
-      return this.http.post<any>(`${this.apiUri}/upload-profile-image`, {img_link, img_name})
+    uploadProfileImage(imageData: any): Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/upload-profile-image`, {imageData})
     }
     uploadProfileVideo(video_link: string, video_name: string): Observable<any> {
       return this.http.post<any>(`${this.apiUri}/upload-profile-video`, {video_link, video_name})
+    }
+
+    deleteImage(image: string): Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/delete-image`, {image});
     }
 
 
