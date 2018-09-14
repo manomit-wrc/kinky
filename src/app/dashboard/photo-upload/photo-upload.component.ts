@@ -30,6 +30,8 @@ export class PhotoUploadComponent implements OnInit {
   imageData = [];
   display='none';
 
+
+
   constructor(private sanitizer: DomSanitizer,
     private auth: AuthenticationService,
     private router: Router,
@@ -106,6 +108,23 @@ BarWidth = 0;
     
 
     return new Promise(resolve => {
+      const params = {
+        Bucket: 'kinky-wrc',
+        Key: this.IMG_FOLDER + file.name,
+        Body: file,
+        ACL: 'public-read'
+      };
+      const bucket = new S3(
+        {
+          accessKeyId: 'AKIAI7FM27MZKQR6LXQQ',
+          secretAccessKey: '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',
+          region: 'us-east-1'
+        }
+      );
+
+
+      this.percentage = 10;
+      this._success.next(this.percentage);
 
       bucket.upload(params).on("httpUploadProgress", evt => {
 

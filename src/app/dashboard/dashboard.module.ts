@@ -1,4 +1,4 @@
-import { ModuleWithProviders,NgModule } from '@angular/core';
+import { ModuleWithProviders,NgModule , NO_ERRORS_SCHEMA} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { LayoutComponent } from './layout/layout.component';
@@ -42,10 +42,6 @@ import { VideoUploadComponent } from './video-upload/video-upload.component';
 import { CarouselComponent, CarouselItemElement } from './carousel/carousel.component';
 import { CarouselItemDirective } from './carousel-item.directive';
 
-
-
-
-
 @NgModule({
   imports: [
     CommonModule,
@@ -58,7 +54,7 @@ import { CarouselItemDirective } from './carousel-item.directive';
     StoreModule.forFeature('dashboard', fromDashboard.dashBoardReducer),
     EffectsModule.forFeature([DashboardEffects, CountryEffects]),
     StoreModule.forFeature('country', fromCountry.countriesReducer),
-    FilterPipeModule
+    FilterPipeModule,
 
   ],
   declarations: [

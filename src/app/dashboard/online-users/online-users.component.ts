@@ -14,7 +14,7 @@ import { loadAllMasters } from '../dashboard.selectors';
 })
 export class OnlineUsersComponent implements OnInit {
 users: any;
-userFilter: any = { user: {gender: ''} };
+userFilter: any = { user: {gender: '', country: '', state: ''} };
 data: any = {};
 country: any;
 state: any;
