@@ -26,7 +26,7 @@ export class PhotoUploadComponent implements OnInit {
   percentage: any;
   loading: boolean = false;
 
-  
+
 
   constructor(private sanitizer: DomSanitizer,
     private auth: AuthenticationService,
@@ -46,7 +46,7 @@ BarWidth = 0;
     ).subscribe(noop);
 
     this._imageData.subscribe((percentage) => this.BarWidth = percentage);
-    
+
   }
 
   changeListener(fileType: any)  {
@@ -73,21 +73,21 @@ BarWidth = 0;
         }
       );
 
-      
+
       this.percentage = 10;
       this._success.next(this.percentage);
-      
+
       bucket.upload(params).on("httpUploadProgress", evt => {
-        
+
         this.percentage = (evt.loaded * 100) / evt.total;
         this._success.next(parseInt(this.percentage));
-        
+
       }).send((err, data) => {
-        
-        
+
+
         if (err) {
           console.log('There was an error uploading your file: ', err);
-          
+
         }
 
         this.auth.uploadProfileImage(data.Location, data.key)
@@ -98,12 +98,12 @@ BarWidth = 0;
               this.store.dispatch(new Login({ info }))
             }
           )).subscribe(noop);
-        
+
         });
     }
-      
+
   }
 
 
-  
+
 }

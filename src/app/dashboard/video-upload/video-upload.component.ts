@@ -1,3 +1,4 @@
+import { UploadService } from '../../services/upload.service';
 import { Component, OnInit, Renderer } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { first, tap } from 'rxjs/operators';
@@ -11,7 +12,6 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { Login } from '../../auth/auth.actions';
 import { profileVideos } from '../../auth/auth.selectors';
-
 @Component({
   selector: 'app-video-upload',
   templateUrl: './video-upload.component.html',
@@ -20,16 +20,23 @@ import { profileVideos } from '../../auth/auth.selectors';
 export class VideoUploadComponent implements OnInit {
   videos = [];
   BarWidth = 0;
+  video_url:any;
+  video_id:any;
+  access:any;
   public _success : BehaviorSubject<number> = new BehaviorSubject(0);
   _videoData = this._success.asObservable();
   selectedFiles: FileList;
   fileArr = [];
   VIDEO_FOLDER = 'videos/';
+  userFilter = {access : ''};
   percentage: any;
+  video_tag:any;
+  setAccess:boolean = false;
   constructor(private sanitizer: DomSanitizer,
     private auth: AuthenticationService,
+    private _upload: UploadService,
     private router: Router,
-    private store: Store<AppState>) { }
+    private store: Store<AppState>) {}
 
   ngOnInit() {
 
@@ -37,6 +44,7 @@ export class VideoUploadComponent implements OnInit {
     this.store.pipe(
       select(profileVideos),
       tap(videos => {
+        console.log(videos);
         this.fileArr = videos;
       })
     ).subscribe(noop);
@@ -75,7 +83,6 @@ export class VideoUploadComponent implements OnInit {
 
       }).send((err, data) => {
 
-
         if (err) {
           console.log('There was an error uploading your file: ', err);
 
@@ -85,14 +92,77 @@ export class VideoUploadComponent implements OnInit {
           .pipe(tap(
             data => {
               console.log(data);
-              const info = data.info
+              const info = data.info;
               this.store.dispatch(new Login({ info }))
+             // window.location.reload();
             }
           )).subscribe(noop);
 
         });
     }
 
+  }
+
+  video_select(url,id) {
+    this.video_url = url;
+    this.video_id = id;
+  }
+
+  setToPrivate(id) {
+    this._upload.videosetprivate(id)
+    .pipe(first())
+    .subscribe(data => {
+      const info = data.info;
+      this.store.dispatch(new Login({ info }));
+      window.location.reload();
+
+    });
+  }
+
+  setprivate() {
+    this.setAccess = !this.setAccess;
+  }
+
+  delete(id) {
+
+    if(id!=undefined){
+      this._upload.deletevideo(id)
+      .pipe(first())
+      .subscribe(data => {
+        const info = data.info;
+        this.store.dispatch(new Login({ info }));
+        window.location.reload();
+
+      });
+
+    }else{
+      alert("please select an video");
+    }
+
+
+  }
+
+  update_video(url){
+
+   if (this.video_tag != undefined && url!=undefined) {
+    if(this.setAccess == true){
+      this.access ='private';
+    }else{
+      this.access ='public';
+    }
+
+      this._upload.update_video(this.video_tag,url,this.access)
+    .pipe(first())
+    .subscribe(data => {
+      const info = data.info;
+      this.store.dispatch(new Login({ info }));
+      window.location.reload();
+
+    });
+
+   } else {
+    alert('Please select an video and also type a name of the video');
+   }
   }
 
 }
