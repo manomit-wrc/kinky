@@ -49,3 +49,8 @@ export const profileVideos = createSelector(
   selectAuthState,
   auth => auth.user.videos
 )
+
+export const emailVerified = createSelector(
+  selectAuthState,
+  auth => auth.user.email_verified
+)

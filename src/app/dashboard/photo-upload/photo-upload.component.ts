@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer } from '@angular/core';
+import { Component, OnInit, Renderer, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { first, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -11,6 +11,9 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { Login } from '../../auth/auth.actions';
 import { profileImages } from '../../auth/auth.selectors';
+import { NgxImageGalleryComponent, GALLERY_IMAGE, GALLERY_CONF } from "ngx-image-gallery";
+declare var $: any;
+
 
 @Component({
   selector: 'app-photo-upload',
@@ -19,6 +22,7 @@ import { profileImages } from '../../auth/auth.selectors';
 })
 export class PhotoUploadComponent implements OnInit {
   public _success : BehaviorSubject<number> = new BehaviorSubject(0);
+  @ViewChild(NgxImageGalleryComponent) ngxImageGallery: NgxImageGalleryComponent;
   _imageData = this._success.asObservable();
   selectedFiles: FileList;
   fileArr = [];
@@ -30,6 +34,29 @@ export class PhotoUploadComponent implements OnInit {
   imageData = [];
   display='none';
 
+  conf: GALLERY_CONF = {
+    imageOffset: '0px',
+    showDeleteControl: false,
+    showImageTitle: false,
+  };
+	
+  // gallery images
+  images: GALLERY_IMAGE[] = [
+    {
+      url: "https://images.pexels.com/photos/669013/pexels-photo-669013.jpeg?w=1260", 
+      altText: 'woman-in-black-blazer-holding-blue-cup', 
+      title: 'woman-in-black-blazer-holding-blue-cup',
+      thumbnailUrl: "https://images.pexels.com/photos/669013/pexels-photo-669013.jpeg?w=60"
+    },
+    {
+      url: "https://images.pexels.com/photos/669006/pexels-photo-669006.jpeg?w=1260", 
+      altText: 'two-woman-standing-on-the-ground-and-staring-at-the-mountain', 
+      extUrl: 'https://www.pexels.com/photo/two-woman-standing-on-the-ground-and-staring-at-the-mountain-669006/',
+      thumbnailUrl: "https://images.pexels.com/photos/669006/pexels-photo-669006.jpeg?w=60"
+    },
+  ];
+
+
 
 
   constructor(private sanitizer: DomSanitizer,
@@ -38,10 +65,13 @@ export class PhotoUploadComponent implements OnInit {
     private store: Store<AppState>,
     private renderer: Renderer
   ) { }
-images = [];
+
 BarWidth = 0;
 
   ngOnInit() {
+
+    
+
     this.display='block';
     this.store.pipe(
       select(profileImages),
@@ -49,12 +79,30 @@ BarWidth = 0;
         this.fileArr = images;
         this.publicImages = this.fileArr.filter(f => f.access === 'Public');
         this.privateImages = this.fileArr.filter(f => f.access === 'Private');
+
+        //$("#owl-demo").data('owlCarousel').reinit();
+        
       })
     ).subscribe(noop);
 
 
 
     this._imageData.subscribe((percentage) => this.BarWidth = percentage);
+
+    $(document).ready(function() {
+      
+      var owl = $("#owl-demo");
+      owl.owlCarousel({
+        navigation : true,
+        slideSpeed : 300,
+        paginationSpeed : 400,
+        singleItem : true,
+        afterMove: function(elem) {
+
+        }
+      });
+      
+    });
 
   }
 
@@ -79,10 +127,10 @@ BarWidth = 0;
     this.auth.uploadProfileImage(this.imageData)
       .pipe(tap(
         data => {
-          console.log(data);
+          
           const info = data.info
           this.store.dispatch(new Login({ info }));
-          //window.location.reload();
+          window.location.reload();
 
         }
       )).subscribe(noop);
@@ -90,23 +138,7 @@ BarWidth = 0;
   }
 
   uploadImage(file) {
-    const params = {
-      Bucket: 'kinky-wrc',
-      Key: this.IMG_FOLDER + file.name,
-      Body: file,
-      ACL: 'public-read'
-    };
-    const bucket = new S3(
-      {
-        accessKeyId: 'AKIAI7FM27MZKQR6LXQQ',
-        secretAccessKey: '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',
-        region: 'us-east-1'
-      }
-    );
-
-
-    
-
+   
     return new Promise(resolve => {
       const params = {
         Bucket: 'kinky-wrc',
@@ -188,5 +220,81 @@ BarWidth = 0;
 
   }
 
+  openGallery(index: number = 0) {
+    
+    this.ngxImageGallery.open(index);
+  }
+	
+  // close gallery
+  closeGallery() {
+    this.ngxImageGallery.close();
+  }
+	
+  // set new active(visible) image in gallery
+  newImage(index: number = 0) {
+    this.ngxImageGallery.setActiveImage(index);
+  }
+	
+  // next image in gallery
+  nextImage(index: number = 0) {
+    this.ngxImageGallery.next()
+    //this.ngxImageGallery.next(index);
+  }
+	
+  // prev image in gallery
+  prevImage(index: number = 0) {
+    this.ngxImageGallery.prev();
+    //this.ngxImageGallery.prev(index);
+  }
+	
+  /**************************************************/
+	
+  // EVENTS
+  // callback on gallery opened
+  galleryOpened(index) {
+    console.info('Gallery opened at index ', index);
+  }
+
+  // callback on gallery closed
+  galleryClosed() {
+    console.info('Gallery closed.');
+  }
+
+  // callback on gallery image clicked
+  galleryImageClicked(index) {
+    console.info('Gallery image clicked with index ', index);
+  }
+  
+  // callback on gallery image changed
+  galleryImageChanged(index) {
+    console.info('Gallery image changed to index ', index);
+  }
+
+  // callback on user clicked delete button
+
+  moveToPrivate(imgUrl, access) {
+    access = access === 'Private' ? 'Public' : 'Private';
+    this.auth.moveToPrivate(imgUrl, access)
+      .pipe(
+        tap(data => {
+          const info = data.info;
+          this.store.dispatch(new Login({ info }));
+          window.location.reload();
+          
+        })
+      ).subscribe(noop)
+  }
+
+  setAsProfile(imgUrl) {
+    this.auth.setAsProfile(imgUrl)
+      .pipe(
+        tap(data => {
+          const info = data.info;
+          this.store.dispatch(new Login({ info }));
+          window.location.reload();
+        })
+      ).subscribe(noop);
+  }
+  
 
 }

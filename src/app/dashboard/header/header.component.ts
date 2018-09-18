@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
-import { countUser } from '../../auth/auth.selectors';
+import { countUser, emailVerified } from '../../auth/auth.selectors';
 import { UserService } from '../user.service';
 import { Logout } from '../../auth/auth.actions';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -13,6 +14,7 @@ import { Logout } from '../../auth/auth.actions';
 export class HeaderComponent implements OnInit {
 
   avatar: string = '';
+  is_email_verified = 0;
   count: any;
   constructor(
     private auth: AuthenticationService, 
@@ -21,12 +23,19 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    
     this.avt.profileImage.subscribe(img => this.avatar = img);
 
   /*   this.store.select(countUser)
     .subscribe(data => {
       this.count = data;
     }); */
+
+    this.store.select(emailVerified)
+      .subscribe(isEmailVerified => {
+        this.is_email_verified = isEmailVerified;
+      })
 
     this.auth.onlineusers()
     .subscribe(user =>{

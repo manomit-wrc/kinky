@@ -130,7 +130,7 @@ export class AuthComponent implements OnInit {
         const settings = data.settings;
         this.store.dispatch(new Login({ info }));
         this.store.dispatch(new Settings({ settings }));
-        window.location.href = "/my-profile";
+        window.location.href = "/settings";
       } else {
         this._error.next(data.message);
         }

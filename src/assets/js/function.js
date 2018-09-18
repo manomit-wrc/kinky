@@ -290,22 +290,22 @@ $(".msg-delete").click(function (e) {
 /***********************Profile-Gallery**********************/
 
 
-$(document).ready(function() {
-var $owl = $('.owl-carousel');
+// $(document).ready(function() {
+// var $owl = $('.owl-carousel');
 
-$owl.children().each( function( index ) {
-  $(this).attr( 'data-position', index ); // NB: .attr() instead of .data()
-});
+// $owl.children().each( function( index ) {
+//   $(this).attr( 'data-position', index ); // NB: .attr() instead of .data()
+// });
 
-$owl.owlCarousel({
-  center: true,
-  loop: true,
-  items:3,
-});
+// $owl.owlCarousel({
+//   center: true,
+//   loop: true,
+//   items:3,
+// });
 
-$(document).on('click', '.owl-item>div', function() {
-  $owl.trigger('to.owl.carousel', $(this).data( 'position' ) );
-});});
+// $(document).on('click', '.owl-item>div', function() {
+//   $owl.trigger('to.owl.carousel', $(this).data( 'position' ) );
+// });});
 
 
 

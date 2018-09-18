@@ -282,6 +282,13 @@ export class AuthenticationService {
       return this.http.post<any>(`${this.apiUri}/delete-image`, {image});
     }
 
+    moveToPrivate(imageUrl: string, access: string): Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/move-to-private`, {imageUrl, access});
+    }
+    setAsProfile(imageUrl: string): Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/set-as-profile`, {imageUrl});
+    }
+
 
 
 /* Check for password match*/

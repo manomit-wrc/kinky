@@ -4,19 +4,32 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="profile-pic-sec">
           <h3><i class="fa fa-user" aria-hidden="true"></i><span>Photo upload</span></h3>
-          <div class="photo-slider-sec photo-upload-sec">
-            <!--<div id="owl-demo" class="owl-carousel">
-              <div *ngFor="let f of fileArr" class="item"><img [src]="f.url" alt=""></div>
-              
-            </div>-->
-            <carousel>
+          
+            
+            <div class="photo-slider-sec photo-upload-sec">
+              <div id="owl-demo" class="owl-carousel">
+                <div *ngFor="let f of fileArr" class="item"><img [src]="f.url" alt=""></div>
+                
+              </div>
+            </div>
+            <!--<carousel>
               <ng-container *ngFor="let f of fileArr;">
                 <ng-container *carouselItem>
                   <div class="item"><img [src]="f.url" [alt]="f.altTag"></div>
                 </ng-container>
               </ng-container>
-            </carousel>
-          </div>
+            </carousel>-->
+            <!--<ngx-image-gallery 
+                [images]="images" 
+                [conf]="conf"
+                (onOpen)="galleryOpened($event)"
+                (onClose)="galleryClosed()"
+                (onImageClicked)="galleryImageClicked($event)"
+                (onImageChange)="galleryImageChanged($event)"
+                (onDelete)="deleteImage($event)"
+            >
+            </ngx-image-gallery>-->
+          
           <div class="photo-save-area">
               <div class="photo-save-input-outer">
                 <input type="text" class="photo-input" placeholder="My Best Photo">
@@ -42,8 +55,12 @@
                 </a>
                 <div class="edit-popup-photo-vid">
                   <ul>
-                    <li><a href="javascript:void(0)">Move to private</a></li>
-                    <li><a href="javascript:void(0)">Set as profile</a></li>
+                    <li>
+                      <a href="javascript:void(0)" (click)="moveToPrivate(f.url, f.access)">
+                        Move To {{f.access === 'Private' ? 'Public' : 'Private'}}
+                      </a>
+                    </li>
+                    <li><a href="javascript:void(0)" (click)="setAsProfile(f.url)">Set as profile</a></li>
                     <li><a href="javascript:void(0)" (click)="deleteImage(f.url)">Delete</a></li>
                   </ul>
                 </div>
