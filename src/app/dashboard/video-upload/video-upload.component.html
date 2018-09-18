@@ -6,10 +6,9 @@
         <div class="profile-pic-sec" >
           <h3><i class="fa fa-user" aria-hidden="true"></i><span>Video</span></h3>
           <div class="video-upload-sec">
-              <video width="400" height="400" controls *ngIf="video_url">
-                  <source [src]="video_url" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
+                <video width="400" height="400" [src] = "video_url" controls *ngIf="video_url">
+                  Your browser does not support HTML5 video.
+              </video>
                 <p *ngIf="!video_url">No video selected</p>
                </div>
           <div class="photo-save-area" >
@@ -30,10 +29,9 @@
           <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Videos</span></h4>
           <ul>
             <li *ngFor="let f of fileArr">
-              <video width="150" height="150" controls (click)="video_select(f.url,f._id)">
-                <source [src]="f.url" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
+              <video [src] = "f.url" width="150" height="150" controls (click)="video_select(f.url,f._id)">
+                Your browser does not support HTML5 video.
+            </video>
               <div class="photo-edit-outer"> <a href="javascript:void(0)" class="photo-edit-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                 <div class="edit-popup-photo-vid">
                   <ul>
@@ -47,9 +45,9 @@
           <div class="addphoto-icon-sec">
             <input type="file" class="uplod-btn" (change)="changeListener($event)" name="videoArr" multiple>
             <a href="#"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add Video</span></a> </div>
-            <div class="progress">
+            <div class="progress" *ngIf="loading">
 
-              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [attr.aria-valuenow]="BarWidth" aria-valuemin="0" aria-valuemax ="100"
+              <div  class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [attr.aria-valuenow]="BarWidth" aria-valuemin="0" aria-valuemax ="100"
                   style="min-width: 2em;" [style.width]="(BarWidth/100)*100 + '%'">
                   {{BarWidth}}%
             </div>
@@ -60,9 +58,8 @@
           <h4><img src="assets/images/photo-icon-2.png" alt=""><span>Public</span></h4>
           <ul>
             <li *ngFor="let f of fileArr | filterBy :{access: 'public'}">
-              <video width="150" height="150" controls>
-              <source [src]="f.url" type="video/mp4">
-              Your browser does not support the video tag.
+              <video [src] = "f.url" width="150" height="150" controls>
+                Your browser does not support HTML5 video.
             </video>
             </li>
           </ul>
@@ -72,10 +69,9 @@
           <h4><img src="assets/images/photo-icon-2.png" alt=""><span>Private</span></h4>
           <ul>
               <li *ngFor="let f of fileArr | filterBy:{access: 'private'} ">
-                  <video width="150" height="150" controls>
-                  <source [src]="f.url" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
+                <video [src] = "f.url" width="150" height="150" controls >
+                  Your browser does not support HTML5 video.
+              </video>
                 </li>
           </ul>
         </div>

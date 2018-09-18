@@ -178,10 +178,10 @@ export class AuthenticationService {
 
 
  interest_update
- (gender: any, from_age: any, to_age: any, distance: any, country: any, state: any, contactmember: any, explicit_content: any) {
+ (looking_for_male:any,looking_for_female:any,looking_for_couple:any,looking_for_cd:any,from_age:any,to_age:any,distance:any,country_id:any,state_id:any,interest_match:any,live_country:any,explicit_content:any) {
       return this.http.post<any>
       (`${this.apiUri}/interest-update`,
-       { gender, from_age, to_age, distance, country, state, contactmember, explicit_content})
+       { looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,from_age,to_age,distance,country_id,state_id,interest_match,live_country,explicit_content})
       .pipe(map(user => {
           // login successful if there's a jwt token in the response
 

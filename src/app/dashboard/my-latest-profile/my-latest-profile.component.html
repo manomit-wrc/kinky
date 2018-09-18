@@ -20,7 +20,7 @@
               <div class="personal-detail-medium-box select-box">
 
                 <label>Location</label>
-                
+
                 <ng-select [items]="countrys"
                         bindLabel="name"
                         bindValue="name"
@@ -30,7 +30,7 @@
               </div>
               <div class="personal-detail-medium-box select-box">
                 <label>&nbsp;</label>
-                
+
                 <ng-select [items]="states"
                         bindLabel="state"
                         bindValue="state"
@@ -215,6 +215,152 @@
                 </select>
               </div>
             </div>
+
+            <!--female block-->
+            <div *ngIf="data.gender=='C'">
+
+
+              <div class="personal-detail-tab-row-heading"><h2>Female</h2></div>
+              <div class="personal-detail-tab-row">
+                <div class="personal-bigradio-sec">
+                  <div>
+                    <div class="personal-detail-sml-box select-box">
+                      <label>Date of birth</label>
+                      <select [(ngModel)]="data.dd_female">
+                        <option [value]="d" *ngFor="let d of day">{{d}}</option>
+                      </select>
+                    </div>
+                    <div class="personal-detail-sml-box select-box">
+                      <label>&nbsp;</label>
+                      <select [(ngModel)]="data.mm_female">
+                        <option [value]="m" *ngFor="let m of month">{{m}}</option>
+                      </select>
+                    </div>
+                    <div class="personal-detail-sml-box select-box">
+                      <label>&nbsp;</label>
+                      <select [(ngModel)]="data.yyyy_female">
+                        <option [value]="y" *ngFor="let y of year">{{y}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="personal-bigradio-sec">
+                  <label>Sexuality</label>
+                  <div>
+                    <div class="personal-radio-outer">
+                      <input class="personal-radio-btn" name="sexuality_female" [(ngModel)]="data.sexuality_female" value="Straight" type="radio">
+                      <span class="personal-radio-title">Straight</span></div>
+                    <div class="personal-radio-outer">
+                      <input class="personal-radio-btn" name="sexuality_female" [(ngModel)]="data.sexuality_female" value="Gay" type="radio">
+                      <span class="personal-radio-title">Gay</span></div>
+                    <div class="personal-radio-outer">
+                      <input class="personal-radio-btn" name="sexuality_female" [(ngModel)]="data.sexuality_female" value="Bi" type="radio">
+                      <span class="personal-radio-title">Bi</span></div>
+                    <div class="personal-radio-outer">
+                      <input class="personal-radio-btn" name="sexuality_female" [(ngModel)]="data.sexuality_female" value="Bicurious" type="radio">
+                      <span class="personal-radio-title">Bi-curious</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="personal-detail-tab-row">
+                <div class="personal-detail-medium-box select-box">
+                  <label>Ethnicity</label>
+                  <select name='eth_id' [(ngModel)]="data.ethnicity_female">
+                      <option [value]="">Select Ethnicity</option>
+                    <option [value]="opt._id" *ngFor="let opt of ethnicities">{{opt.name}}</option>
+                  </select>
+                </div>
+                <div class="personal-detail-medium-box select-box">
+                  <label>Height</label>
+                  <select name='height_id'  [(ngModel)]="data.height_female">
+                      <option [value]="">Select Height</option>
+                    <option [value]="opt._id" *ngFor="let opt of heights">{{opt.name}}</option>
+                  </select>
+                </div>
+                <div class="personal-detail-medium-box select-box">
+                  <label>Build</label>
+                  <select name='build_id'  [(ngModel)]="data.build_female">
+                      <option [value]="">Select Build</option>
+                    <option [value]="opt._id" *ngFor="let opt of builds">{{opt.name}}</option>
+                  </select>
+                </div>
+                <div class="personal-detail-medium-box select-box">
+                  <label>Hair</label>
+                  <select name='opt_id'  [(ngModel)]="data.hair_female">
+                      <option [value]="">Select Hair Style</option>
+                    <option [value]="opt._id" *ngFor="let opt of haircolors">{{opt.name}}</option>
+                  </select>
+                </div>
+                <div class="personal-detail-medium-box select-box">
+                  <label>Body hair</label>
+                  <select name='body_hair_id'  [(ngModel)]="data.body_hair_female">
+                      <option [value]="">Select Body hair type</option>
+                    <option [value]="opt._id" *ngFor="let opt of bodyhairs">{{opt.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="personal-detail-tab-row">
+                <label>Body decoration</label>
+                  <ul>
+                    <li *ngFor="let n of bodydecoration_arr" [ngClass]="{'detail-active':(testArr5.indexOf(n) > -1)}">
+                        <a href="javascript:void(0)" (click)="setClassbodyfemale($event)">{{n}}</a>
+                    </li>
+                </ul>
+              </div>
+
+
+
+              <div class="personal-detail-tab-row">
+                <div class="personal-detail-medium-box select-box">
+                  <label>Drink</label>
+                  <select  [(ngModel)]="data.drink_female">
+                    <option value="Never">Never</option>
+                    <option value="Socially">Socially</option>
+                    <option value="Regularly">Regularly</option>
+                    <option value="I live to drink">I live to drink</option>
+                    <option value="I will tell you later">I will tell you later</option>
+                  </select>
+                </div>
+                <div class="personal-detail-medium-box select-box">
+                  <label>Smoke</label>
+                  <select [(ngModel)]="data.smoke_female">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                    <option value="I will tell you later">I will tell you later</option>
+                  </select>
+                </div>
+                <div class="personal-detail-medium-box select-box">
+                  <label>Drugs</label>
+                  <select [(ngModel)]="data.drugs_female">
+                    <option value="None">None</option>
+                    <option value="Some">Some</option>
+                    <option value="Heavy">Heavy</option>
+                    <option value="I will tell you later">I will tell you later</option>
+                  </select>
+                </div>
+                <div class="personal-detail-medium-box select-box">
+                  <label>Cock/Breast size</label>
+                  <select [(ngModel)]="data.size_female">
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                    <option value="Very large">Very large</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                  </select>
+                </div>
+                <div class="personal-detail-medium-box select-box">
+                  <label>Safe sex</label>
+                  <select [(ngModel)]="data.safe_sex_female">
+                    <option value="Always">Always</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Never">Never</option>
+                    <option value="I will tell you later">I will tell you later</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!--end female block-->
+
             <div class="personal-detail-tab-row">
               <label>I'm interested in <span>(click all that apply)</span></label>
               <ul>
@@ -243,7 +389,7 @@
                 </ul>
               </div>
             </div>
-          
+
             <div class="personal-detail-tab-butn-row">
               <!-- <input class="cancel-btn" value="Cancel" type="submit"> -->
               <input [disabled]="loading" class="save-btn" value="Save " type="submit" (click)="personal_details_update(data)">

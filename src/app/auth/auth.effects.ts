@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {AuthActionTypes, Login, Logout, Settings,   Location, Count} from './auth.actions';
+import {AuthActionTypes, Login, Logout, Settings, Location, Count} from './auth.actions';
 
 import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
@@ -30,7 +30,7 @@ export class AuthEffects {
       localStorage.removeItem("user");
       localStorage.removeItem("settings");
       localStorage.removeItem("token");
-      
+
 
     })
   );
@@ -57,7 +57,7 @@ export class AuthEffects {
 
     const countData = localStorage.getItem("counts");
     const locationData = localStorage.getItem("location");
-   
+
     if (userData) {
        return of(
         new Login({info:JSON.parse(userData)}),
@@ -65,7 +65,7 @@ export class AuthEffects {
         new Count({ counts: JSON.parse(countData)}),
         new Location({ location: JSON.parse(locationData)})
        );
-       
+
     }
 
     else {

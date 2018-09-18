@@ -14,17 +14,29 @@
       <strong>{{ successMessage }}</strong>
   </div>
   <div>
-      <ul>
+     <!--  <ul>
         <li *ngFor="let n of looking_for_arr" [ngClass]="{'detail-active':(testArr.indexOf(n) > -1)}">
             <a href="javascript:void(0)" (click)="setClasslookingfor($event)">{{n}}</a>
         </li>
-    </ul>
+    </ul> -->
+    <div class="personal-radio-outer">
+      <input class="personal-radio-btn" [(ngModel)]="looking_for_male" name="lookingfor" type="checkbox">
+      <span class="personal-radio-title">Male</span></div>
+    <div class="personal-radio-outer">
+      <input class="personal-radio-btn" [(ngModel)]="looking_for_female" name="lookingfor" type="checkbox">
+      <span class="personal-radio-title">Female</span></div>
+    <div class="personal-radio-outer">
+      <input class="personal-radio-btn" [(ngModel)]="looking_for_couple" name="lookingfor" type="checkbox">
+      <span class="personal-radio-title">Couple</span></div>
+    <div class="personal-radio-outer">
+      <input class="personal-radio-btn" [(ngModel)]="looking_for_cd" name="lookingfor" type="checkbox">
+      <span class="personal-radio-title">CD / TV / TS</span></div>
   </div>
 </div>
 <div class="general-tab-row">
   <label>Age Range</label>
   <div class="setting-sml-drop select-box">
-    
+
     <ng-select [items]="age_range"
            bindLabel="from_age"
            bindValue="from_age"
@@ -33,7 +45,7 @@
   </div>
   <div class="to">To</div>
   <div class="setting-sml-drop select-box">
-    
+
     <ng-select [items]="age_range"
            bindLabel="to_age"
            bindValue="to_age"
@@ -57,7 +69,7 @@
 <div class="general-tab-row">
   <label>Of</label>
   <div class="setting-medium-drop select-box">
-    
+
     <ng-select [items]="country"
         bindLabel="name"
         bindValue="name"
@@ -66,7 +78,7 @@
     </ng-select>
   </div>
   <div class="setting-medium-drop setting-medium-drop-right select-box">
-    
+
     <ng-select [items]="states"
         bindLabel="st"
         bindValue="st"
@@ -78,17 +90,17 @@
   <label>Prevent contact from members who</label>
 </div>
 <div class="general-tab-row">
-<!--   <div class="personal-full-with-area">
-    <input class="personal-radio-btn" value="1" name="member" [(ngModel)]="contactmember" type="radio">
+   <div class="personal-full-with-area">
+    <input class="personal-radio-btn" name="member" [(ngModel)]="interest_match" type="checkbox">
     <span class="personal-radio-title"><strong>Don't match my interests</strong></span> </div>
   <div class="personal-full-with-area">
-    <input class="personal-radio-btn" value="2"  name="member" [(ngModel)]="contactmember" type="radio">
-    <span class="personal-radio-title"><strong>Live in another country</strong></span> </div> -->
-    <ul>
+    <input class="personal-radio-btn"  name="member" [(ngModel)]="live_country" type="checkbox">
+    <span class="personal-radio-title"><strong>Live in another country</strong></span> </div>
+   <!--  <ul>
       <li *ngFor="let n of members_arr" [ngClass]="{'detail-active':(testArr1.indexOf(n) > -1)}">
           <a href="javascript:void(0)" (click)="setClassmembers($event)">{{n}}</a>
       </li>
-  </ul>
+  </ul> -->
 
 <div class="general-tab-row">
   <label>Site Appearance</label>
@@ -99,6 +111,6 @@
     <span class="personal-radio-title"><strong>Allow explicit content</strong></span> </div>
 </div>
 <div class="general-tab-row">
-  <input [disabled]="loading" class="save-btn update-btn" value="Update" type="submit" (click)="update(gender,from_age,to_age,distance,count,st,contactmember,explicit_content)">
+  <input [disabled]="loading" class="save-btn update-btn" value="Update" type="submit" (click)="update(looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,from_age,to_age,distance,count,st,interest_match,live_country,explicit_content)">
   <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
 </div>

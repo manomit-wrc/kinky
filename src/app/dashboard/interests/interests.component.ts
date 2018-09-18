@@ -28,6 +28,12 @@ export class InterestsComponent implements OnInit {
   testArr:any =[];
   testArr1:any =[];
   looking_for_arr:any =[];
+  looking_for_male:any=false;
+  looking_for_female:any=false;
+  looking_for_couple:any=false;
+  looking_for_cd:any=false;
+  interest_match:any =false;
+  live_country:any= false;;
   members_arr:any =[];
   loading: any = false;
   age_range:any =[];
@@ -57,9 +63,9 @@ export class InterestsComponent implements OnInit {
     this.store.pipe(
       select(locationDetails),
       tap(data => {
-        
+
         if(this.userObj === undefined || this.userObj.country === undefined || this.userObj.state === undefined) {
-         
+
           this.count = data.country;
           this.st = data.city;
         }
@@ -67,11 +73,11 @@ export class InterestsComponent implements OnInit {
           this.count = this.userObj.country;
           this.st = this.userObj.state;
         }
-        
+
         this.auth.loadCities(this.count)
           .pipe(
             tap(data => {
-              
+
               this.states = data.cities;
             })
           ).subscribe(noop)
@@ -80,13 +86,16 @@ export class InterestsComponent implements OnInit {
 
     if(this.userObj !== undefined) {
 
-      
 
-      this.testArr = this.userObj.gender;
+      this.looking_for_male = this.userObj.looking_for_male;
+      this.looking_for_female = this.userObj.looking_for_female;
+      this.looking_for_couple = this.userObj.looking_for_couple;
+      this.looking_for_cd = this.userObj.looking_for_cd;
       this.from_age = this.userObj.from_age ? this.userObj.from_age.toString() : '';
       this.to_age = this.userObj.to_age ? this.userObj.to_age.toString() : '';
       this.distance = this.userObj.distance ? this.userObj.distance.toString(): '';
-      
+      this.interest_match = this.userObj.interest_match;
+      this.live_country = this.userObj.live_country;
       this.testArr1 = this.userObj.contactmember;
       this.explicit_content = this.userObj.explicit_content;
     }
@@ -114,7 +123,7 @@ export class InterestsComponent implements OnInit {
   }
 
   onItemChange(e) {
-    
+
     this.auth.loadCities(e.name)
       .pipe(
         tap(data => {
@@ -124,10 +133,10 @@ export class InterestsComponent implements OnInit {
   ).subscribe(noop)
   }
 
-  update(gender, from_age, to_age, distance, country_id, state_id, contactmember, explicit_content) {
+  update(looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,from_age,to_age,distance,country_id,state_id,interest_match,live_country,explicit_content) {
     this.loading = true;
 
- this.auth.interest_update(this.testArr, from_age, to_age, distance, country_id, state_id, this.testArr1, explicit_content)
+ this.auth.interest_update(looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,from_age,to_age,distance,country_id,state_id,interest_match,live_country,explicit_content)
     .pipe(first())
     .subscribe(data => {
 
@@ -144,7 +153,7 @@ export class InterestsComponent implements OnInit {
   }
 
 
-  setClasslookingfor(event) {
+  /* setClasslookingfor(event) {
     var target = event.currentTarget;
 
     if(target.parentElement.className.indexOf("detail-active") === -1) {
@@ -161,8 +170,8 @@ export class InterestsComponent implements OnInit {
       target.parentElement.classList.remove("detail-active");
     }
 
-  }
-  setClassmembers(event) {
+  } */
+ /*  setClassmembers(event) {
     var target = event.currentTarget;
 
     if(target.parentElement.className.indexOf("detail-active") === -1) {
@@ -179,6 +188,6 @@ export class InterestsComponent implements OnInit {
       target.parentElement.classList.remove("detail-active");
     }
 
-  }
+  } */
 
 }

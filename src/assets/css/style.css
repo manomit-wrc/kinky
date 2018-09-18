@@ -1520,8 +1520,21 @@ box-shadow: 5px 5px 5px -3px rgba(0,0,0,0.25); border-radius:100%;}
 
 .profile-more-box ul{ margin:20px 0 0 0; padding:0; text-align:left;}
 
-.profile-more-box ul li{ margin:3px 0; font-size:15px; width:48%; display:inline-block; vertical-align:middle;}
+.profile-more-box ul li{  font-size: 15px;display: inline-block;vertical-align: middle;word-wrap: break-word;}
+/* .profile-more-box .right-ullist li{ margin:3px 0; font-size:15px; width:100% !important; display:block; vertical-align:middle;} */
 
+.profile-more-box-list-33 li {
+  margin: 3px 4% 3px 0;
+  width: 28%;
+}
+
+.profile-more-box-list-50 li {
+  width: 48%;
+  margin: 3px  0;
+}
+
+.personal-detail-tab-row-heading { margin: 20px 0 0 0;}
+.personal-detail-tab-row-heading h2 {font-size: 20px;border-bottom: 2px solid #333; display: inline-block;}
 .profile-frnds-cross{margin-bottom:10px;}
 
 .loadmore-btn{ margin-top:25px; margin-bottom:15px;}

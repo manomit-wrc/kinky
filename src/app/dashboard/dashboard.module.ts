@@ -41,6 +41,7 @@ import { FriendlistComponent } from './friendlist/friendlist.component';
 import { VideoUploadComponent } from './video-upload/video-upload.component';
 import { CarouselComponent, CarouselItemElement } from './carousel/carousel.component';
 import { CarouselItemDirective } from './carousel-item.directive';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   imports: [
@@ -80,7 +81,8 @@ import { CarouselItemDirective } from './carousel-item.directive';
        VideoUploadComponent,
        CarouselComponent,
        CarouselItemElement,
-       CarouselItemDirective
+       CarouselItemDirective,
+       SearchComponent
       ]
 })
 

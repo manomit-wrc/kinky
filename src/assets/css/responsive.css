@@ -166,7 +166,7 @@
 
 .profile-edit-box{ margin:0 30px;}
 
-.profile-input-outer{ width:79%;} 
+.profile-input-outer{ width:79%;}
 
 .profile-input-text{ width:76%;}
 
@@ -196,7 +196,7 @@
 
 .interested-sec ul li{ display:inline-block; vertical-align:middle; margin:0 3px;}
 
-.interested-sec ul li p{ font-size:18px;} 
+.interested-sec ul li p{ font-size:18px;}
 
 .profile-hotlist-sec ul{ text-align:center; margin:0; padding:0; text-align:center;}
 
@@ -419,9 +419,9 @@
 
 .profile-left-photouploadsec{ text-align:left;}
 
-.profile-photoupload{margin: 0 30px 0 50px;}
+.profile-photoupload{margin: 0 20px 0 20px;}
 
-.profile-input-outer{ width:67%;} 
+.profile-input-outer{ width:67%;}
 
 .profile-hotlist-sec .friends-sml-text{ width:116px; text-align:left; margin:0 10px 0 10px;}
 
@@ -511,6 +511,7 @@
 /**********************Photo and video************************/
 
 .photo-row ul li{ width:18.3%;}
+.photo-row ul li video { width: 100%; }
 
 /********************Latest-Personal-Details-Tab1***************************/
 
