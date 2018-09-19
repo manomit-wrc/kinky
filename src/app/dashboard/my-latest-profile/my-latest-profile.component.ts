@@ -1,4 +1,3 @@
-import { Settings } from './../../auth/auth.actions';
 import { Component, OnInit, Renderer } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { first, tap, debounceTime } from 'rxjs/operators';
@@ -49,10 +48,10 @@ export class MyLatestProfileComponent implements OnInit {
   drugs_female: any = 'None';
   smoke: any = 'I will tell you later';
   smoke_female: any = 'I will tell you later';
-  cock_breast: any = 'Prefer not to say';
-  cock_breast_female: any = 'Prefer not to say';
-  safesex: any = 'Always';
-  safesex_female: any = 'Always';
+  size: any = 'Prefer not to say';
+  size_female: any = 'Prefer not to say';
+  safe_sex: any = 'Always';
+  safe_sex_female: any = 'Always';
   body_deco: any = 'Earrings';
   sexuality: any = 'Straight';
   sexuality_female: any = 'Straight';
@@ -96,6 +95,7 @@ export class MyLatestProfileComponent implements OnInit {
 
   ngOnInit() {
 
+    
 
     this.store.pipe(
       select(loadAllMasters),
@@ -149,7 +149,7 @@ export class MyLatestProfileComponent implements OnInit {
       select(userDetails),
       tap(response => {
         if(response !== undefined) {
-
+          
           this.headline = response.headline;
           this.personal_details = response.description;
           this.data = response;
@@ -161,6 +161,17 @@ export class MyLatestProfileComponent implements OnInit {
           //this.testArr3 = response.looking_for;
           this.testArr4 = response.travel_arrangment;
           this.testArr5 = response.body_decoration_female;
+          this.drink = response.drink !== "" ? response.drink : this.drink;
+          this.smoke = response.smoke !== "" ? response.smoke: this.smoke;
+          this.drugs = response.drugs !== "" ? response.drugs: this.drugs;
+          this.size = response.size !== "" ? response.size: this.size;
+          this.safe_sex =  response.safe_sex !== "" ? response.safe_sex: this.safe_sex;
+
+          this.drink_female = response.drink_female !== "" ? response.drink_female : this.drink_female;
+          this.smoke_female = response.smoke_female !== "" ? response.smoke_female: this.smoke_female;
+          this.drugs_female = response.drugs_female !== "" ? response.drugs_female: this.drugs_female;
+          this.size_female = response.size_female !== "" ? response.size_female: this.size_female;
+          this.safe_sex_female =  response.safe_sex_female !== "" ? response.safe_sex_female: this.safe_sex_female;
         }
 
       })
@@ -171,12 +182,12 @@ export class MyLatestProfileComponent implements OnInit {
     this.store.pipe(
       select(settingDetails),
       tap(response => {
-        if(response !== undefined) {
-
-          this.data.looking_for_male = response.looking_for_male;
-          this.data.looking_for_female = response.looking_for_female;
-          this.data.looking_for_couple = response.looking_for_couple;
-          this.data.looking_for_cd = response.looking_for_cd;
+        if(response !== undefined && response !== null) {
+          
+          this.data.looking_for_male = response.looking_for_male !== null ? response.looking_for_male : false;
+          this.data.looking_for_female = response.looking_for_female !== null ? response.looking_for_female : false;
+          this.data.looking_for_couple = response.looking_for_couple !== null ? response.looking_for_couple : false;
+          this.data.looking_for_cd = response.looking_for_cd !== null ? response.looking_for_cd :  false;
         }
 
       })
@@ -236,13 +247,26 @@ export class MyLatestProfileComponent implements OnInit {
     data['travel_arrangment'] = this.testArr4;
     data['country'] = this.country;
     data['state'] = this.state;
+    data['drink'] = this.drink;
+    data['smoke'] = this.smoke;
+    data['drugs'] = this.drugs;
+    data['size'] = this.size;
+    data['safe_sex'] = this.safe_sex;
+
+    data['drink_female'] = this.drink_female;
+    data['smoke_female'] = this.smoke_female;
+    data['drugs_female'] = this.drugs_female;
+    data['size_female'] = this.size_female;
+    data['safe_sex_female'] = this.safe_sex_female;
 
   this.auth.personal_info_update(data)
     .pipe(
       tap(data => {
         this.loading = false;
         const info = data.info;
+        const settings = data.settings;
         this.store.dispatch(new Login({ info}))
+        this.store.dispatch(new Settings({ settings}))
         window.scrollTo(0,0);
         this._success.next('Information updated successfully');
 
@@ -261,9 +285,8 @@ export class MyLatestProfileComponent implements OnInit {
       tap(data => {
         this.loading = false;
         const info = data.info;
-        const settings = data.settings;
         this.store.dispatch(new Login({ info}))
-        this.store.dispatch(new Settings({ settings}))
+        
         window.scrollTo(0,0);
         this._success.next('Information updated successfully');
 

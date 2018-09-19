@@ -12,6 +12,8 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { Login } from '../../auth/auth.actions';
 import { profileVideos } from '../../auth/auth.selectors';
+import { keyDetails } from '../../../keys/keys.prod';
+
 @Component({
   selector: 'app-video-upload',
   templateUrl: './video-upload.component.html',
@@ -67,8 +69,8 @@ export class VideoUploadComponent implements OnInit {
       };
       const bucket = new S3(
         {
-          accessKeyId: 'AKIAI7FM27MZKQR6LXQQ',
-          secretAccessKey: '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',
+          accessKeyId: keyDetails.ACCESS_KEY,
+          secretAccessKey: keyDetails.SECRET_KEY,
           region: 'us-east-1'
         }
       );
