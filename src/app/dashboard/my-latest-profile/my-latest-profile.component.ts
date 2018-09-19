@@ -1,4 +1,3 @@
-import { Settings } from './../../auth/auth.actions';
 import { Component, OnInit, Renderer } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { first, tap, debounceTime } from 'rxjs/operators';
