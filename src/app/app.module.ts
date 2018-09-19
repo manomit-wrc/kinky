@@ -30,6 +30,7 @@ import { environment } from '../environments/environment';
     AuthModule,
     DashboardModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([])
   ],
