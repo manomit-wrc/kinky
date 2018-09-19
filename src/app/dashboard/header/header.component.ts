@@ -5,6 +5,7 @@ import { AppState } from '../../reducers';
 import { countUser, emailVerified } from '../../auth/auth.selectors';
 import { UserService } from '../user.service';
 import { Logout } from '../../auth/auth.actions';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private auth: AuthenticationService,
     private avt: UserService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -49,6 +51,7 @@ export class HeaderComponent implements OnInit {
       .subscribe(data => {
         if(data.code === 200) {
           this.isLoading = false;
+          this.toastr.success('Please check your email!');
         }
       });
   }

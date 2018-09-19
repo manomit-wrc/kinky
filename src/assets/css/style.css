@@ -501,11 +501,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#18080a', end
 
 .owl-buttons{ position:absolute; width:100%; left:0; top:35%;}
 
-.photo-slider-sec .owl-prev{ float:left; width:35px; height:35px; background:url(../images/arrow-left.png) no-repeat; background-size:100% auto;}
+.photo-slider-sec .owl-prev{ float:left; width:35px; height:35px; background:url(../images/arrow-left.png) no-repeat; background-size:100% auto;position: absolute;
+  left: -60px;}
 
 .photo-slider-sec .owl-prev:hover{background:url(../images/arrow-left-hover.png) no-repeat; width:35px; height:35px; background-size:100% auto;}
 
-.photo-slider-sec .owl-next{ float:right; width:35px; height:35px; background:url(../images/arrow-right.png) no-repeat; background-size:100% auto;}
+.photo-slider-sec .owl-next{ float:right; width:35px; height:35px; background:url(../images/arrow-right.png) no-repeat; background-size:100% auto;     position: absolute;
+  right: -60px;}
 
 .photo-slider-sec .owl-next:hover{background:url(../images/arrow-right-hover.png) no-repeat; width:35px; height:35px; background-size:100% auto;}
 

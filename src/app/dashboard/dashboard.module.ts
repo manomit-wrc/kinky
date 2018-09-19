@@ -43,11 +43,13 @@ import { VideoUploadComponent } from './video-upload/video-upload.component';
 import { CarouselComponent, CarouselItemElement } from './carousel/carousel.component';
 import { CarouselItemDirective } from './carousel-item.directive';
 import { SearchComponent } from './search/search.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
     CommonModule,
     NgProgressModule.forRoot(),
+    ToastrModule.forRoot(),
     NgSelectModule,
     OwlModule,
     NgxImageGalleryModule,
