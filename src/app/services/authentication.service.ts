@@ -288,6 +288,9 @@ export class AuthenticationService {
     setAsProfile(imageUrl: string): Observable<any> {
       return this.http.post<any>(`${this.apiUri}/set-as-profile`, {imageUrl});
     }
+    changeImageDetails(imageUrl: string, access: string, altTag: string): Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/change-image-details`, {imageUrl, access, altTag});
+    }
 
 
 

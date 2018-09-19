@@ -6,15 +6,15 @@
           <h3><i class="fa fa-user" aria-hidden="true"></i><span>Photo upload</span></h3>
           
             
-            <div class="photo-slider-sec photo-upload-sec">
-              <div id="owl-demo" class="owl-carousel">
-                <div class="item">
-                  <img [src]="image" alt="">
+            <div class="photo-slider-sec photo-upload-sec" >
+              <div id="owl-demo" class="owl-carousel" >
+                <div class="item" *ngIf="showSlider">
+                  <img [src]="image.url" alt="" [ngStyle]="{'transform': 'translateX('+ transform + '%' +')', 'transition': '.8s'}">
                 </div>
                 <div class="owl-controls clickable">
-                  <div class="owl-buttons">
-                    <div class="owl-prev">prev</div>
-                    <div class="owl-next">next</div>
+                  <div class="owl-buttons" *ngIf="showSlider">
+                    <div class="owl-prev" (click)="onPrev()"></div>
+                    <div class="owl-next" (click)="onNext()"></div>
                   </div>
                 </div>
                 
@@ -22,16 +22,16 @@
             </div>
             
           
-          <div class="photo-save-area">
+          <div class="photo-save-area" *ngIf="showSlider">
               <div class="photo-save-input-outer">
-                <input type="text" class="photo-input" placeholder="My Best Photo">
+                <input type="text" class="photo-input" [(ngModel)]="altTag" placeholder="My Best Photo">
               </div>
               <div class="photo-save-input-outer">
-                <input type="submit" class="private-btn" value="Private">
-                <input type="submit" class="save-btn" value="Save">
+                <input type="submit" class="private-btn" [value]="btnValue" (click)="toggleClass($event)">
+                <input type="submit" class="save-btn" value="Save" (click)="changeImageAccess($event)">
               </div>
           </div>
-          <p class="text-center photo-leftr-cross-icon"><a href="#"><i class="fa fa-close"></i></a></p>
+          <p *ngIf="showSlider" class="text-center photo-leftr-cross-icon"><a href="javascript:void(0)" (click)="closeSlider()"><i class="fa fa-close"></i></a></p>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -78,7 +78,7 @@
           <div class="downarrow-mobile downarrow-mobile2"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
           <h4><img src="assets/images/photo-icon-2.png" alt=""><span>Public</span></h4>
           <ul>
-            <li *ngFor="let img of publicImages; let x = index"><img [src]="img.url" (click)="setPublicImage(img.url, x)" [alt]="img.altTag"></li>
+            <li *ngFor="let img of publicImages; let x = index"><img [src]="img.url" (click)="setPublicImage(img, x)" [alt]="img.altTag"></li>
             
           </ul>
         </div>
@@ -86,7 +86,7 @@
           <div class="downarrow-mobile downarrow-mobile3"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
           <h4><img src="assets/images/photo-icon-2.png" alt=""><span>Private</span></h4>
           <ul>
-            <li *ngFor="let img of privateImages; let x = index"><img [src]="img.url" (click)="setPrivateImage(img.url, x)" [alt]="img.altTag"></li>
+            <li *ngFor="let img of privateImages; let x = index"><img [src]="img.url" (click)="setPrivateImage(img, x)" [alt]="img.altTag"></li>
           </ul>
         </div>
         

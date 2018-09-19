@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer, ViewEncapsulation } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { first, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -17,7 +17,8 @@ import { profileImages } from '../../auth/auth.selectors';
 @Component({
   selector: 'app-photo-upload',
   templateUrl: './photo-upload.component.html',
-  styleUrls: ['./photo-upload.component.css']
+  styleUrls: ['./photo-upload.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PhotoUploadComponent implements OnInit {
   public _success : BehaviorSubject<number> = new BehaviorSubject(0);
@@ -30,11 +31,15 @@ export class PhotoUploadComponent implements OnInit {
   loading: boolean = false;
   publicImages = [];
   privateImages = [];
+  tempImages = [];
   imageData = [];
   display='none';
-  image: string = '';
+  image: any;
   selectedIndex: number;
   transform: number;
+  showSlider: boolean = false;
+  btnValue: string = '';
+  altTag = '';
 
 
 
@@ -51,7 +56,7 @@ BarWidth = 0;
   ngOnInit() {
 
     this.selectedIndex = 0;
-    this.transform = 100;
+    this.transform = 0;
 
     this.display='block';
     this.store.pipe(
@@ -86,9 +91,9 @@ BarWidth = 0;
         altTag: '',
         access: 'Public'
       });
-      
+
       await this.uploadImage(file);
-      
+
     }
     this.display='block';
     this.auth.uploadProfileImage(this.imageData)
@@ -97,7 +102,7 @@ BarWidth = 0;
           
           const info = data.info
           this.store.dispatch(new Login({ info }));
-          window.location.reload();
+          //window.location.reload();
 
         }
       )).subscribe(noop);
@@ -144,7 +149,7 @@ BarWidth = 0;
           access: 'Public'
         })
 
-        
+
         resolve();
         });
 
@@ -157,7 +162,7 @@ BarWidth = 0;
         tap(data => {
           const info = data.info;
           this.store.dispatch(new Login({ info }));
-          window.location.href = "/my-photo-upload";
+          //window.location.href = "/my-photo-upload";
         })
       ).subscribe(noop);
   }
@@ -197,7 +202,7 @@ BarWidth = 0;
         tap(data => {
           const info = data.info;
           this.store.dispatch(new Login({ info }));
-          window.location.reload();
+          //window.location.reload();
           
         })
       ).subscribe(noop)
@@ -209,22 +214,78 @@ BarWidth = 0;
         tap(data => {
           const info = data.info;
           this.store.dispatch(new Login({ info }));
-          window.location.reload();
+          //window.location.reload();
         })
       ).subscribe(noop);
   }
 
   setPublicImage(image, index) {
-    console.log(image);
+    this.btnValue = 'Private';
+    this.showSlider = true;
     this.image = image;
-    // this.transform =  100 - (index) * 50;
-    // this.selectedIndex = index;
-    // this.selectedIndex = this.selectedIndex + 1;
+    this.selectedIndex = index;
+    this.tempImages = this.publicImages;
+    
+  }
 
-    // if(this.selectedIndex > 4) {
-    //   this.selectedIndex = 0;
-    // }
+  setPrivateImage(image, index) {
+    this.btnValue = 'Public';
+    this.showSlider = true;
+    this.image = image;
+    this.selectedIndex = index;
+    this.tempImages = this.privateImages;
+  }
+  onPrev() {
+    this.selectedIndex = this.selectedIndex - 1;
+    if(this.selectedIndex < 0) {
+      this.selectedIndex = this.tempImages.length - 1;
+    }
+    
+    const data = this.tempImages[this.selectedIndex];
+    this.image = data;
+  }
+  
+  onNext() {
+    this.selectedIndex = this.selectedIndex + 1;
+    if(this.selectedIndex > this.tempImages.length - 1) {
+      this.selectedIndex = 0;
+    }
+    
+    const data = this.tempImages[this.selectedIndex];
+    this.image = data;
+  }
 
+  toggleClass(event) {
+    var target = event.currentTarget;
+    
+    if(target.className.indexOf("save-btn") === -1) {
+      this.renderer.setElementClass(target, "save-btn", true);
+    }
+    else {
+      target.classList.remove("save-btn");
+    }
+  }
+
+  changeImageAccess(event) {
+    var target = event.currentTarget;
+    if(target.previousSibling.className.indexOf("save-btn") === -1) {
+      this.btnValue = this.image.access
+    }
+    
+    
+    this.auth.changeImageDetails(this.image.url, this.btnValue, this.altTag)
+      .pipe(
+        tap(data => {
+          const info = data.info;
+          this.store.dispatch(new Login({ info }));
+          
+          
+        })
+      ).subscribe(noop)
+  }
+
+  closeSlider() {
+    this.showSlider = false;
   }
   
 

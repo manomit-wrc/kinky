@@ -6,10 +6,12 @@ import { Observable } from 'rxjs';
 import { UserService } from '../user.service';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
-import { userDetails, locationDetails } from '../../auth/auth.selectors';
+import { userDetails, locationDetails ,profileImages,profileVideos} from '../../auth/auth.selectors';
 import { noop } from '@angular/compiler/src/render3/view/util';
 import { loadAllMasters } from '../dashboard.selectors';
 import { Subject } from 'rxjs';
+
+declare var $: any;
 
 @Component({
   selector: 'app-my-profile',
@@ -27,7 +29,10 @@ export class MyProfileComponent implements OnInit {
   gender: any;
   age: any;
   age_female:any;
-  looking_for: any;
+  looking_for_male: any;
+  looking_for_female: any;
+  looking_for_couple: any;
+  looking_for_cd: any;
   interested_in: any;
   avatar:any;
   height:any;
@@ -54,7 +59,9 @@ export class MyProfileComponent implements OnInit {
   description:any;
   email_verified: boolean = false;
   isLoading: boolean = false;
-
+  fileArr:any;
+  publicImages:any;
+  publicvideos:any;
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -64,6 +71,25 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit() {
 
+    $(document).ready(function() {
+      var $owl = $('.owl-carousel');
+
+      $owl.children().each( function( index ) {
+        $(this).attr( 'data-position', index ); // NB: .attr() instead of .data()
+      });
+
+      $owl.owlCarousel({
+        center: true,
+        loop: true,
+        items:3,
+      });
+
+      $(document).on('click', '.owl-item>div', function() {
+        $owl.trigger('to.owl.carousel', $(this).data( 'position' ) );
+      });
+    });
+
+
     this._success.subscribe((message) => this.successMessage = message);
     this._success.pipe(
       debounceTime(4000)
@@ -71,9 +97,7 @@ export class MyProfileComponent implements OnInit {
 
     this.store.select(userDetails)
     .subscribe(data => {
-console.log('====================================');
-console.log(data);
-console.log('====================================');
+
       this.country = data.country === undefined ? '' : data.country;
       this.city = data.state === undefined ? '' : data.state;
 
@@ -124,7 +148,10 @@ console.log('====================================');
         this.sexuality_female = data.sexuality_female !== undefined ? data.sexuality_female : 'N/A';
         this.age = this.getAge(data.mm +"/"+data.dd +"/"+data.yyyy );
         this.age_female = this.getAge(data.mm_female +"/"+data.dd_female +"/"+data.yyyy_female );
-        this.looking_for = data.looking_for;
+        this.looking_for_male = data.looking_for_male;
+        this.looking_for_female = data.looking_for_female;
+        this.looking_for_couple = data.looking_for_couple;
+        this.looking_for_cd = data.looking_for_cd;
         this.interested_in = data.interested_in;
 
         this.body_decoration = data.body_decoration.join(",");
@@ -154,6 +181,20 @@ console.log('====================================');
       })
 
     this.avt.profileImage.subscribe(img => this.avatar = img)
+
+    this.store.select(profileImages).subscribe(images => {
+        this.fileArr = images;
+        this.publicImages = this.fileArr.filter(f => f.access === 'Public');
+
+      });
+
+      this.store.select(profileVideos).subscribe(videos => {
+
+          this.publicvideos = videos.filter(f => f.access === 'Public');
+          console.log('====================================');
+        console.log(this.publicvideos);
+        console.log('====================================');
+        });
 
   }
 

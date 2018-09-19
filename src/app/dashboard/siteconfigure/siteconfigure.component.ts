@@ -19,10 +19,10 @@ export class SiteconfigureComponent implements OnInit {
   private _error = new Subject<string>();
 
   languages: any = [];
-  
+
   email: any;
   mobile: any;
-  language: any;
+  language: any = 'English';
   timezone: any;
   successMessage: string;
   errorMessage: string;
@@ -48,7 +48,7 @@ export class SiteconfigureComponent implements OnInit {
     this._success.pipe(
       debounceTime(4000)
     ).subscribe(() => this.successMessage = null)
-    
+
     this.store.select(loadAllMasters)
     .subscribe(masters => {
       if(masters !== null) {
@@ -57,7 +57,7 @@ export class SiteconfigureComponent implements OnInit {
     });
     this.store.select(userDetails)
     .subscribe(user => this.email = user.email);
-    
+
     this.store.select(settingDetails)
       .subscribe(data => {
         if(data !== null) {
@@ -69,9 +69,9 @@ export class SiteconfigureComponent implements OnInit {
           this.language = 'English';
           this.timezone = this.timezones[0];
         }
-        
-      
-        
+
+
+
       })
   }
 
@@ -80,7 +80,7 @@ export class SiteconfigureComponent implements OnInit {
     this.auth.site_config_update(this.mobile, this.language, this.timezone)
     .pipe(first())
     .subscribe(data => {
-      
+
       this.loading = false;
       if (data.code !== 200) {
         this._error.next(data.message);
