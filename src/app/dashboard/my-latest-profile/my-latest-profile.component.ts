@@ -1,3 +1,4 @@
+import { Settings } from './../../auth/auth.actions';
 import { Component, OnInit, Renderer } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { first, tap, debounceTime } from 'rxjs/operators';
@@ -7,8 +8,8 @@ import { Subject } from 'rxjs';
 
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
-import { userDetails, locationDetails } from '../../auth/auth.selectors';
-import { Login } from '../../auth/auth.actions';
+import { userDetails, locationDetails,settingDetails } from '../../auth/auth.selectors';
+import { Login, Settings } from '../../auth/auth.actions';
 import { loadAllMasters } from '../dashboard.selectors';
 @Component({
   selector: 'app-my-latest-profile',
@@ -139,7 +140,7 @@ export class MyLatestProfileComponent implements OnInit {
 
     this.people_aged_arr = ['#18 - 30', '#30 - 40', '#40 - 50', '#50 - 60', '#60 +'];
 
-    this.looking_for_arr = ['Male','Female','Couple','CD / TV / TS'];
+   // this.looking_for_arr = ['Male','Female','Couple','CD / TV / TS'];
 
     this.travel_arr = ['Can accommodate','Will travel'];
 
@@ -157,7 +158,7 @@ export class MyLatestProfileComponent implements OnInit {
           this.testArr = response.interested_in;
           this.testArr2 = response.age_range;
           this.testArr1 = response.body_decoration;
-          this.testArr3 = response.looking_for;
+          //this.testArr3 = response.looking_for;
           this.testArr4 = response.travel_arrangment;
           this.testArr5 = response.body_decoration_female;
         }
@@ -166,6 +167,23 @@ export class MyLatestProfileComponent implements OnInit {
     ).subscribe(
       noop
     );
+
+    this.store.pipe(
+      select(settingDetails),
+      tap(response => {
+        if(response !== undefined) {
+
+          this.data.looking_for_male = response.looking_for_male;
+          this.data.looking_for_female = response.looking_for_female;
+          this.data.looking_for_couple = response.looking_for_couple;
+          this.data.looking_for_cd = response.looking_for_cd;
+        }
+
+      })
+    ).subscribe(
+      noop
+    );
+
 
     this.store.pipe(
       select(locationDetails),
@@ -243,7 +261,9 @@ export class MyLatestProfileComponent implements OnInit {
       tap(data => {
         this.loading = false;
         const info = data.info;
+        const settings = data.settings;
         this.store.dispatch(new Login({ info}))
+        this.store.dispatch(new Settings({ settings}))
         window.scrollTo(0,0);
         this._success.next('Information updated successfully');
 
