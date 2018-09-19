@@ -23,6 +23,7 @@ export class VideoUploadComponent implements OnInit {
   video_url:any;
   video_id:any;
   access:any;
+  loading: boolean = false;
   public _success : BehaviorSubject<number> = new BehaviorSubject(0);
   _videoData = this._success.asObservable();
   selectedFiles: FileList;
@@ -53,7 +54,7 @@ export class VideoUploadComponent implements OnInit {
   }
 
   changeListener(fileType: any)  {
-
+    this.loading = true;
     for(let i = 0; i < fileType.target.files.length; i++) {
       const file = fileType.target.files[i];
 

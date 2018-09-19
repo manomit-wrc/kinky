@@ -32,6 +32,9 @@ export class MyLatestProfileComponent implements OnInit {
   dd: any;
   mm: any;
   yyyy: any;
+  dd_female: any;
+  mm_female: any;
+  yyyy_female: any;
   timezone: any;
   timezones: any;
   ethnicities: any;
@@ -40,21 +43,32 @@ export class MyLatestProfileComponent implements OnInit {
   builds: any;
   heights: any;
   drink: any = 'NEVER';
+  drink_female: any = 'NEVER';
   drugs: any = 'NONE';
+  drugs_female: any = 'NONE';
   smoke: any = 'NO';
+  smoke_female: any = 'NO';
   cock_breast: any = 'SMALL';
+  cock_breast_female: any = 'SMALL';
   safesex: any = 'ALWAYS';
+  safesex_female: any = 'ALWAYS';
   body_deco: any = 'EARNINGS';
   sexuality: any = 'STRAIGHT';
+  sexuality_female: any = 'STRAIGHT';
   travel: any = 'CANACCOMMODATE';
   here: any = 'HAVEFUN';
   headline: any = '';
   personal_details: any = '';
   ethnicity: any;
+  ethnicity_female: any;
   height: any;
+  height_female: any;
   build: any;
+  build_female: any;
   hair: any;
+  hair_female: any;
   build_hair: any;
+  build_hair_female: any;
   day: any = [];
   month: any = [];
   year: any = [];
@@ -68,6 +82,7 @@ export class MyLatestProfileComponent implements OnInit {
   testArr2: any = [];
   testArr3: any = [];
   testArr4: any = [];
+  testArr5: any = [];
   interested_arr_list: any= [];
   age_range_list: any= [];
   loading: any = false;
@@ -92,12 +107,12 @@ export class MyLatestProfileComponent implements OnInit {
           this.builds = data.build;
           this.heights = data.height;
         }
-        
+
 
       })
     ).subscribe(noop);
 
-    
+
 
     this._success.subscribe((message) => this.successMessage = message);
     this._success.pipe(
@@ -126,13 +141,13 @@ export class MyLatestProfileComponent implements OnInit {
     this.looking_for_arr = ['Male','Female','Couple','CD / TV / TS'];
 
     this.travel_arr = ['Can accommodate','Will travel'];
-    
+
 
     this.store.pipe(
       select(userDetails),
       tap(response => {
         if(response !== undefined) {
-          
+
           this.headline = response.headline;
           this.personal_details = response.description;
           this.data = response;
@@ -143,6 +158,7 @@ export class MyLatestProfileComponent implements OnInit {
           this.testArr1 = response.body_decoration;
           this.testArr3 = response.looking_for;
           this.testArr4 = response.travel_arrangment;
+          this.testArr5 = response.body_decoration_female;
         }
 
       })
@@ -165,14 +181,14 @@ export class MyLatestProfileComponent implements OnInit {
         this.auth.loadCities(this.country)
           .pipe(
             tap(data => {
-              
+
               this.states = data.cities;
             })
           ).subscribe(noop)
       })
     ).subscribe(noop);
 
-    
+
   }
 
   displayTab(value) {
@@ -180,7 +196,7 @@ export class MyLatestProfileComponent implements OnInit {
   }
 
   onItemChange(e) {
-    
+
     this.auth.loadCities(e.name)
       .pipe(
         tap(data => {
@@ -188,7 +204,7 @@ export class MyLatestProfileComponent implements OnInit {
           this.states = data.cities;
         })
       ).subscribe(noop)
-    
+
   }
 
   personal_details_update (data) {
@@ -197,6 +213,7 @@ export class MyLatestProfileComponent implements OnInit {
     data['age_range'] = this.testArr2;
     data['looking_for'] = this.testArr3;
     data['body_decoration'] = this.testArr1;
+    data['body_decoration_female'] = this.testArr5;
     data['travel_arrangment'] = this.testArr4;
     data['country'] = this.country;
     data['state'] = this.state;
@@ -255,6 +272,26 @@ export class MyLatestProfileComponent implements OnInit {
 
      if (index > -1) {
         this.testArr1.splice(index, 1);
+     }
+      target.parentElement.classList.remove("detail-active");
+    }
+
+  }
+  setClassbodyfemale(event) {
+    var target = event.currentTarget;
+
+    if(target.parentElement.className.indexOf("detail-active") === -1) {
+
+     this.testArr5.push(event.target.textContent);
+
+      this.renderer.setElementClass(target.parentElement,"detail-active",true);
+    }
+    else {
+
+     var index = this.testArr5.indexOf(event.target.textContent);
+
+     if (index > -1) {
+        this.testArr5.splice(index, 1);
      }
       target.parentElement.classList.remove("detail-active");
     }
@@ -332,6 +369,7 @@ export class MyLatestProfileComponent implements OnInit {
       target.parentElement.classList.remove("detail-active");
     }
   }
+
 
 
 }

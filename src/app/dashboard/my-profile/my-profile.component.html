@@ -3,7 +3,7 @@
     <div class="row">
       <div class="alert alert-success" *ngIf="successMessage">
 
-          <strong>{{ successMessage }}</strong>
+        <strong>{{ successMessage }}</strong>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="profile-left-top-box">
@@ -13,11 +13,13 @@
             <div class="profile-top-text">
               <h5><a href="javascript:void(0)">{{name}}</a></h5>
               <p><i class="fa fa-map-marker"></i>{{address}}</p>
-              <p *ngIf="gender=='M'"><i class="fa fa-mars"></i>{{age}} {{sexuality }}</p>
-              <p *ngIf="gender!='M'"><i class="fa fa-venus"></i>{{age}} {{sexuality}}</p>
-              <p><a href="javascript:void(0)">Reviews 0</a> <strong>|</strong> 
+              <p *ngIf="gender=='M'"><i class="fa fa-mars"></i>Male {{age }}</p>
+              <p *ngIf="gender=='F'"><i class="fa fa-venus"></i>Female {{age}}</p>
+              <p *ngIf="gender=='C'"><i class="fa fa-venus-mars" aria-hidden="true"></i>Male,Female</p>
+              <p><a href="javascript:void(0)">Reviews 0</a> <strong>|</strong>
                 <a href="javascript:void(0)" *ngIf="email_verified"><span>Email Verified</span></a>
-                <a href="javascript:void(0)" (click)="verifyEmail()" *ngIf="!email_verified"><span style="color:#872345 !important;">Email Unverified</span></a>
+                <a href="javascript:void(0)" (click)="verifyEmail()" *ngIf="!email_verified"><span style="color:#872345 !important;">Email
+                    Unverified</span></a>
                 <img *ngIf="isLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
               </p>
               <p><em>Seeking {{looking_for}}</em></p>
@@ -25,45 +27,74 @@
             </div>
           </div>
           <div class="profile-left-photouploadsec">
-            <div class="profile-photoupload"> <a href="/my-photo-upload"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add Photo</span></a> </div>
-            <div class="profile-edit-box"> <a href="/latest-personal-details"> <strong><i class="fa fa-pencil-square-o" aria-hidden="true"></i></strong> <span>Edit</span> </a> </div>
-            <div class="profile-edit-box profile-more-btn"> <a href="javascript:void(0)"> <strong><i class="fa fa-toggle-down"></i></strong> <span>More</span> </a> </div>
+            <div class="profile-photoupload"> <a href="/my-photo-upload"><strong><img src="assets/images/photo-pluse-icon.png"
+                    alt=""></strong><span>Add Photo</span></a> </div>
+            <div class="profile-photoupload"> <a href="/my-video-upload"><strong><img src="assets/images/photo-pluse-icon.png"
+                      alt=""></strong><span>Add Video</span></a> </div>
+            <div class="profile-edit-box"> <a href="/latest-personal-details"> <strong><i class="fa fa-pencil-square-o"
+                    aria-hidden="true"></i></strong> <span>Edit</span> </a> </div>
+            <div class="profile-edit-box profile-more-btn"> <a href="javascript:void(0)"> <strong><i class="fa fa-toggle-down"></i></strong>
+                <span>More</span> </a> </div>
             <div class="profile-more-box">
               <h5>Personal Details</h5>
-              <ul>
+              <!-- <ul class="profile-more-box-list-33 profile-more-box-list-50"> -->
+              <ul [ngClass]="gender=='C' ? 'profile-more-box-list-33' : 'profile-more-box-list-50'">
                 <li>Gender</li>
                 <li *ngIf="gender=='M'">Male</li>
-                <li *ngIf="gender!='M'">Female</li>
+                <li *ngIf="gender=='F'">Female</li>
+                <li *ngIf="gender=='C'">Couple</li>
+                <li *ngIf="gender=='O'">CD/TV/TS</li>
+                <li *ngIf="gender=='C'">Female</li>
+
+
                 <li>Seeking</li>
                 <li>{{looking_for}}</li>
+                <li *ngIf="gender=='C'">{{looking_for}}</li>
                 <li>Age</li>
                 <li>{{age}} {{sexuality}}</li>
+                <li *ngIf="gender=='C'">{{age_female}} {{sexuality_female}}</li>
                 <li>Sexuality</li>
                 <li>{{sexuality}}</li>
+                <li *ngIf="gender=='C'">{{sexuality_female}}</li>
                 <li>Location</li>
                 <li>{{address}}</li>
+                <li *ngIf="gender=='C'">{{address}}</li>
                 <li>Height</li>
                 <li>{{height}}</li>
+                <li *ngIf="gender=='C'">{{height_female}}</li>
                 <li>Build</li>
                 <li>{{build}}</li>
+                <li *ngIf="gender=='C'">{{build_female}}</li>
                 <li>Hair</li>
                 <li>{{hair}}</li>
+                <li *ngIf="gender=='C'">{{hair_female}}</li>
                 <li>Body decoration</li>
                 <li>{{body_decoration}}</li>
+                <li *ngIf="gender=='C'">{{body_decoration_female}}</li>
                 <li>Drink</li>
                 <li>{{drink}}</li>
+                <li *ngIf="gender=='C'">{{drink_female}}</li>
                 <li>Smoke</li>
                 <li>{{smoke}}</li>
+                <li *ngIf="gender=='C'">{{smoke_female}}</li>
                 <li>Drugs</li>
                 <li>{{drugs}}</li>
+                <li *ngIf="gender=='C'">{{drugs_female}}</li>
                 <li>Cock/Breast size</li>
                 <li>{{size}}</li>
+                <li *ngIf="gender=='C'">{{size_female}}</li>
                 <li>Travel</li>
                 <li>{{travel_arrangements}}</li>
+                <li *ngIf="gender=='C'">{{travel_arrangements}}</li>
                 <li>Paid Services</li>
                 <li *ngIf="purpose=='HAVEFUN'">No </li>
                 <li *ngIf="purpose!='HAVEFUN'">Yes </li>
+
+                <li *ngIf="purpose=='HAVEFUN' && gender=='C'">No </li>
+                <li *ngIf="purpose!='HAVEFUN' && gender=='C'">Yes </li>
               </ul>
+
+
             </div>
           </div>
         </div>
@@ -76,7 +107,8 @@
           <div class="profile-form-row">
             <div class="profile-input-outer">
               <input type="text" class="profile-input-text" placeholder="Whats in your mind...">
-              <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+              <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
+                  alt=""></a> </div>
             <input type="text" class="save-btn profile-input-btn" value="Post">
           </div>
           <div class="profile-form-row">
@@ -116,7 +148,9 @@
                     <h6><a href="#">LoveAngle2018</a></h6>
                     <p>Labor Day Fuck, hmmmm..</p>
                   </div>
-                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a> <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a> <span class="prof-date">4 Minutes ago</span> </div>
+                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14
+                        likes</span></a> <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i>
+                      <span>1 Comment</span></a> <span class="prof-date">4 Minutes ago</span> </div>
                 </div>
                 <ul>
                   <li>
@@ -126,7 +160,8 @@
                         <h6><a href="#">lola_kemiron</a></h6>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
                       </div>
-                      <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a><span class="prof-date">4 Minutes ago</span></div>
+                      <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14
+                            likes</span></a><span class="prof-date">4 Minutes ago</span></div>
                     </div>
                   </li>
                 </ul>
@@ -136,7 +171,8 @@
               <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
               <div class="profile-input-outer">
                 <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
-                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
+                    alt=""></a> </div>
             </div>
           </div>
           <div class="profile-post-row">
@@ -149,7 +185,9 @@
                     <p><a href="#">lola_kemiron</a> likes your profile</p>
                     <div class="activity-list-img"><img src="assets/images/activity-dummy-img.jpg" alt=""></div>
                   </div>
-                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a> <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a> <span class="prof-date">4 Minutes ago</span> </div>
+                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14
+                        likes</span></a> <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i>
+                      <span>1 Comment</span></a> <span class="prof-date">4 Minutes ago</span> </div>
                 </div>
               </li>
             </ul>
@@ -157,7 +195,8 @@
               <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
               <div class="profile-input-outer">
                 <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
-                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
+                    alt=""></a> </div>
             </div>
           </div>
           <div class="profile-post-row">
@@ -170,7 +209,9 @@
                     <p><a href="#">lola_kemiron</a>and <a href="#">3 others</a> have looked at your profile</p>
                     <div class="activity-list-img"><img src="assets/images/activity-dummy-img.jpg" alt=""></div>
                   </div>
-                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a> <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a> <span class="prof-date">4 Minutes ago</span> </div>
+                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14
+                        likes</span></a> <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i>
+                      <span>1 Comment</span></a> <span class="prof-date">4 Minutes ago</span> </div>
                 </div>
               </li>
             </ul>
@@ -178,7 +219,8 @@
               <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
               <div class="profile-input-outer">
                 <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
-                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
+                    alt=""></a> </div>
             </div>
           </div>
           <div class="profile-post-row">
@@ -227,7 +269,8 @@
               <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
               <div class="profile-input-outer">
                 <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
-                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
+                    alt=""></a> </div>
             </div>
           </div>
           <div class="profile-post-row">
@@ -309,7 +352,8 @@
           <div class="interested-icon-sec">
             <ul>
               <li class="like-popup"><a href="#" class="interested-iocn-1"></a>
-                <div class="prof-pop-icon-sec"> <a href="#" class="profile-pop-icon-1"></a> <a href="#" class="profile-pop-icon-2"></a> </div>
+                <div class="prof-pop-icon-sec"> <a href="#" class="profile-pop-icon-1"></a> <a href="#" class="profile-pop-icon-2"></a>
+                </div>
               </li>
               <li><a href="#" class="interested-iocn-2"></a></li>
               <li><a href="#" class="interested-iocn-3"></a></li>
@@ -330,7 +374,8 @@
           </ul>
           <div class="addphoto-icon-sec">
             <!--<input class="uplod-btn" type="file">-->
-            <a href="photo-video.html"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add Photo or Video</span></a> </div>
+            <a href="photo-video.html"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add
+                Photo or Video</span></a> </div>
         </div>
         <div class="friends-tab-content profile-right-friends-sec">
           <h5><i class="fa fa-handshake-o"></i> <span>Friends</span></h5>
@@ -338,90 +383,105 @@
             <li>
               <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
-                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg"
+                        alt=""></a>
                     <div class="event-user-active">&nbsp;</div>
                   </div>
                   <div class="friends-sml-text">
                     <h6><a href="user-timeline.html">oirazor1971</a></h6>
-                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25
+                        Bi-Ceriussss</span> </p>
                   </div>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
                   <div class="friends-icon-sec">
                     <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
-                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a>
+                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
                 </div>
               </div>
             </li>
             <li>
               <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
-                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg"
+                        alt=""></a>
                     <div class="event-user-active">&nbsp;</div>
                   </div>
                   <div class="friends-sml-text">
                     <h6><a href="user-timeline.html">oirazor1971</a></h6>
-                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25
+                        Bi-Ceriussss</span> </p>
                   </div>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
                   <div class="friends-icon-sec">
                     <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
-                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a>
+                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
                 </div>
               </div>
             </li>
             <li>
               <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
-                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg"
+                        alt=""></a>
                     <div class="event-user-active">&nbsp;</div>
                   </div>
                   <div class="friends-sml-text">
                     <h6><a href="user-timeline.html">oirazor1971</a></h6>
-                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25
+                        Bi-Ceriussss</span> </p>
                   </div>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
                   <div class="friends-icon-sec">
                     <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
-                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a>
+                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
                 </div>
               </div>
             </li>
             <li>
               <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
-                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg"
+                        alt=""></a>
                     <div class="event-user-active">&nbsp;</div>
                   </div>
                   <div class="friends-sml-text">
                     <h6><a href="user-timeline.html">oirazor1971</a></h6>
-                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25
+                        Bi-Ceriussss</span> </p>
                   </div>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
                   <div class="friends-icon-sec">
                     <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
-                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a>
+                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
                 </div>
               </div>
             </li>
             <li>
               <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
-                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg"
+                        alt=""></a>
                     <div class="event-user-active">&nbsp;</div>
                   </div>
                   <div class="friends-sml-text">
                     <h6><a href="user-timeline.html">oirazor1971</a></h6>
-                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25
+                        Bi-Ceriussss</span> </p>
                   </div>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
                   <div class="friends-icon-sec">
                     <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
-                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a>
+                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
                 </div>
               </div>
             </li>
@@ -431,7 +491,8 @@
         <div class="profile-party-sec">
           <h5><img src="assets/images/common-icon-1.png" alt=""> <span>Parties</span></h5>
           <div class="party-form"> You have no events </div>
-          <div class="addphoto-icon-sec"> <a href="events.html"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add Event</span></a> </div>
+          <div class="addphoto-icon-sec"> <a href="events.html"><strong><img src="assets/images/photo-pluse-icon.png"
+                  alt=""></strong><span>Add Event</span></a> </div>
         </div>
         <div class="profile-review-sec">
           <h5><img src="assets/images/star-icon.png" alt=""><span>Upcoming Parties and Events</span></h5>
@@ -441,7 +502,8 @@
               <div class="profile-post-text">
                 <div class="prof-text-top">
                   <h6><a href="#">LoveAngle2018</a></h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore</p>
                 </div>
               </div>
             </li>
@@ -450,7 +512,8 @@
               <div class="profile-post-text">
                 <div class="prof-text-top">
                   <h6><a href="#">LoveAngle2018</a></h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore</p>
                 </div>
               </div>
             </li>
@@ -459,7 +522,8 @@
               <div class="profile-post-text">
                 <div class="prof-text-top">
                   <h6><a href="#">LoveAngle2018</a></h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore</p>
                 </div>
               </div>
             </li>
@@ -468,7 +532,8 @@
               <div class="profile-post-text">
                 <div class="prof-text-top">
                   <h6><a href="#">LoveAngle2018</a></h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore</p>
                 </div>
               </div>
             </li>
@@ -488,7 +553,8 @@
                   <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
                   <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
                 </div>
-                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
+                  <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
               </div>
               <div class="hotlist-box">
                 <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
@@ -499,7 +565,8 @@
                   <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
                   <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
                 </div>
-                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
+                  <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
               </div>
             </li>
             <li>
@@ -512,7 +579,8 @@
                   <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
                   <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
                 </div>
-                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
+                  <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
               </div>
               <div class="hotlist-box">
                 <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
@@ -523,7 +591,8 @@
                   <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
                   <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
                 </div>
-                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
+                  <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
               </div>
             </li>
           </ul>

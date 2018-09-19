@@ -1,0 +1,291 @@
+<div class="inner-main-sec">
+  <div class="container">
+    <div class="row latest-personal-detail-outer">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h4><img src="assets/images/setting-icon.png" alt=""><span>Add at least personal details</span></h4>
+        <div class="general-tab-top-outer">
+          <ul class="form-tab-1">
+            <li [ngClass]="{ 'pages_active': tab === 'tab1' }"><a [routerLink]="" (click)="displayTab('tab1')"><img src="assets/images/search-icon-1.png" alt=""> <span>Quick Search</span></a></li>
+            <li [ngClass]="{ 'pages_active': tab === 'tab2' }"><a [routerLink]="" (click)="displayTab('tab2')"><img src="assets/images/online-icon.png" alt=""> <span>Advanced Search</span></a></li>
+            <li [ngClass]="{ 'pages_active': tab === 'tab3' }"><a [routerLink]="" (click)="displayTab('tab3')"><img src="assets/images/search-icon-3.png" alt=""> <span>By Username</span></a></li>
+          </ul>
+        </div>
+        <div class="search-detail-bot">
+          <div id="tab1" [ngStyle]="{'display': tab === 'tab1' ? 'block' : 'none'}">
+            <div class="search-detail-tab-row">
+              <div class="personal-bigradio-sec">
+                <label>I am / We are a</label>
+                <div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="M" [(ngModel)]="gender" name="gendrs" type="radio">
+                    <span class="personal-radio-title">Male</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="F" [(ngModel)]="gender" name="gendrs" type="radio">
+                    <span class="personal-radio-title">Female </span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="C" [(ngModel)]="gender"  name="gendrs" type="radio">
+                    <span class="personal-radio-title">Couple</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="O" [(ngModel)]="gender" name="gendrs" type="radio">
+                    <span class="personal-radio-title">CD / TV / TS</span></div>
+                </div>
+              </div>
+              <div class="personal-bigradio-sec">
+                <label>looking for a</label>
+                <div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="M" [(ngModel)]="looking_for" name="gendr" type="radio">
+                    <span class="personal-radio-title">Male</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="F" [(ngModel)]="looking_for" name="gendr" type="radio">
+                    <span class="personal-radio-title">Female </span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="C" [(ngModel)]="looking_for" name="gendr" type="radio">
+                    <span class="personal-radio-title">Couple</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="O" [(ngModel)]="looking_for" name="gendr" type="radio">
+                    <span class="personal-radio-title">CD / TV / TS</span></div>
+                </div>
+              </div>
+              <div class="personal-bigradio-sec">
+                <label>Only show profiles with</label>
+                <div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="P" [(ngModel)]="show_profile" name="show" type="radio">
+                    <span class="personal-radio-title">Photo</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="V" [(ngModel)]="show_profile" name="show"type="radio">
+                    <span class="personal-radio-title">Video</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="search-detail-tab-row">
+              <div class="personal-detail-medium-box select-box">
+                <label>Find people near a town</label>
+                <ng-select [items]="distance_range"
+                    bindLabel="distance"
+                    bindValue="distance"
+                    [(ngModel)]="distance">
+                 </ng-select>
+              </div>
+            </div>
+            <div class="search-detail-tab-row">
+              <label>By default we use the town in <a href="#">your profile</a></label>
+              <div class="personal-detail-medium-box select-box">
+                <ng-select [items]="country"
+                bindLabel="name"
+                bindValue="name"
+                [(ngModel)]="count"
+                (change)="onItemChange($event)">
+               </ng-select>
+              </div>
+              <div class="personal-detail-medium-box select-box">
+                <ng-select [items]="states"
+                bindLabel="st"
+                bindValue="st"
+                [(ngModel)]="st">
+               </ng-select>
+              </div>
+            </div>
+            <div class="search-detail-tab-row search-detail-tab-rowlst-row">
+              <input type="submit" class="save-btn" value="Search" (click)="submit_quick_search()">
+            </div>
+          </div>
+          <div id="tab2" [ngStyle]="{'display': tab === 'tab2' ? 'block' : 'none'}">
+            <div class="search-detail-tab-row">
+              <div class="personal-bigradio-sec">
+                <label>I am / We are a</label>
+                <div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" name="gender" value="" type="radio">
+                    <span class="personal-radio-title">Male</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" name="gender" type="radio">
+                    <span class="personal-radio-title">Female </span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" name="gender" type="radio">
+                    <span class="personal-radio-title">Couple</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" name="gender" type="radio">
+                    <span class="personal-radio-title">CD / TV / TS</span></div>
+                </div>
+              </div>
+              <div class="personal-bigradio-sec">
+                <label>looking for a</label>
+                <div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Male</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Female </span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Couple</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">CD / TV / TS</span></div>
+                </div>
+              </div>
+              <div class="personal-bigradio-sec">
+                <label>Only show profiles with</label>
+                <div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Photo</span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Video</span></div>
+                </div>
+              </div>
+              <div class="personal-bigradio-sec search-fourth-item">
+                <label>Only show people who are</label>
+                <div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Have Fun </span></div>
+                  <div class="personal-radio-outer">
+                    <input class="personal-radio-btn" value="" type="radio">
+                    <span class="personal-radio-title">Promote A Paid Service</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="search-detail-tab-row">
+              <div class="personal-detail-medium-box select-box">
+                <label>Find people near a town</label>
+                <select>
+                  <option>100miles/160km</option>
+                </select>
+              </div>
+            </div>
+            <div class="search-detail-tab-row">
+              <label>By default we use the town in <a href="#">your profile</a></label>
+              <div class="personal-detail-medium-box select-box">
+                <select>
+                  <option>USA</option>
+                </select>
+              </div>
+              <div class="personal-detail-medium-box select-box">
+                <select>
+                  <option>Tucson, Arizona</option>
+                </select>
+              </div>
+            </div>
+            <div class="search-detail-tab-row">
+              <label>Order profiles by</label>
+              <div class="personal-radio-outer">
+                <input class="personal-radio-btn" value="" type="radio">
+                <span class="personal-radio-title">Most recently logged on </span></div>
+              <div class="personal-radio-outer">
+                <input class="personal-radio-btn" value="" type="radio">
+                <span class="personal-radio-title">Newest profile</span></div>
+              <div class="personal-radio-outer">
+                <input class="personal-radio-btn" value="" type="radio">
+                <span class="personal-radio-title">Most liked</span></div>
+            </div>
+            <div class="search-detail-tab-row">
+              <div class="search-medium-search-outer select-box">
+                <label>Ethnicity</label>
+                <select>
+                  <option>African</option>
+                  <option>Arabic</option>
+                  <option>Asian</option>
+                  <option>Caucasian</option>
+                  <option>Indian</option>
+                  <option>Latino</option>
+                  <option>Oriental</option>
+                  <option>Mixed race</option>
+                  <option>Other</option>
+                  <option>I will tell you later</option>
+                </select>
+              </div>
+              <div class="search-medium-search-outer select-box">
+                <label>Smoke</label>
+                <select>
+                  <option>No</option>
+                  <option>Yes</option>
+                  <option>I will tell you later</option>
+                </select>
+              </div>
+              <div class="search-medium-search-outer select-box">
+                <label>Safe sex</label>
+                <select>
+                  <option>Always</option>
+                  <option>Sometimes</option>
+                  <option>Never</option>
+                  <option>I will tell you later</option>
+                </select>
+              </div>
+              <div class="search-medium-search-outer select-box">
+                <label>Cock/Breast size</label>
+                <select>
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                  <option>Very large</option>
+                  <option>Prefer not to say</option>
+                </select>
+              </div>
+              <div class="search-medium-search-outer select-box">
+                <label>Build</label>
+                <select>
+                  <option>Petite</option>
+                  <option>Athletic</option>
+                  <option>Slim</option>
+                  <option>Average</option>
+                  <option>A few extra pound</option>
+                  <option>Big and beautiful</option>
+                  <option>Muscular</option>
+                  <option>I will tell you later</option>
+                </select>
+              </div>
+              <!--<div class="search-medium-search-outer select-box">
+                <label>Ethnicity</label>
+                <select>
+                  <option>All</option>
+                </select>
+              </div>-->
+            </div>
+            <div class="search-detail-tab-row">
+              <label>AGE</label>
+              <div class="search-sml-select-outer"> <span class="personal-radio-title">From</span>
+                <input type="text" class="search-age-input" value="18">
+              </div>
+              <div class="search-sml-select-outer"> <span class="personal-radio-title">To</span>
+                <input type="text" class="search-age-input" value="30">
+              </div>
+            </div>
+            <div class="search-detail-tab-row">
+              <div class="personal-detail-medium-box select-box">
+                <label>Verification level</label>
+                <select>
+                  <option>USA</option>
+                </select>
+              </div>
+              <div class="personal-detail-medium-box select-box">
+                <label>Spoken language</label>
+                <select>
+                  <option>Tucson, Arizona</option>
+                </select>
+              </div>
+            </div>
+            <div class="search-detail-tab-row search-detail-tab-rowlst-row">
+              <input class="save-btn" value="Search" type="submit">
+            </div>
+          </div>
+          <div id="tab3" [ngStyle]="{'display': tab === 'tab3' ? 'block' : 'none'}">
+            <div class="search-detail-tab-row search-detail-tab-rowlst-row">
+              <div class="search-user-input-outer">
+                <label>Type Username Here</label>
+                <input type="text" class="search-user-input" [(ngModel)]="username" placeholder="Username...">
+              </div>
+            </div>
+            <div class="search-detail-tab-row search-detail-tab-rowlst-row">
+              <input type="submit" class="save-btn" value="Search" (click)="submit_username()">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,6 +12,7 @@ import { FriendlistComponent } from './friendlist/friendlist.component';
 import { AuthGuard } from '../guards';
 import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
 import { VideoUploadComponent } from './video-upload/video-upload.component';
+import { SearchComponent } from './search/search.component';
 const authRoutes: Routes = [
 
     //Site routes goes here
@@ -29,6 +30,7 @@ const authRoutes: Routes = [
           { path: 'my-video-upload', component: VideoUploadComponent, pathMatch: 'full', canActivate: [AuthGuard]},
           { path: 'online-users', component: OnlineUsersComponent, pathMatch: 'full', canActivate: [AuthGuard]},
           { path: 'friendlist', component: FriendlistComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+          { path: 'search', component: SearchComponent, pathMatch: 'full', canActivate: [AuthGuard]},
         ]
     }
 ];

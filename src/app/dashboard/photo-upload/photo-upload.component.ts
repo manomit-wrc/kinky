@@ -11,8 +11,7 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { Login } from '../../auth/auth.actions';
 import { profileImages } from '../../auth/auth.selectors';
-import { NgxImageGalleryComponent, GALLERY_IMAGE, GALLERY_CONF } from "ngx-image-gallery";
-declare var $: any;
+
 
 
 @Component({
@@ -22,7 +21,7 @@ declare var $: any;
 })
 export class PhotoUploadComponent implements OnInit {
   public _success : BehaviorSubject<number> = new BehaviorSubject(0);
-  @ViewChild(NgxImageGalleryComponent) ngxImageGallery: NgxImageGalleryComponent;
+  
   _imageData = this._success.asObservable();
   selectedFiles: FileList;
   fileArr = [];
@@ -33,28 +32,9 @@ export class PhotoUploadComponent implements OnInit {
   privateImages = [];
   imageData = [];
   display='none';
-
-  conf: GALLERY_CONF = {
-    imageOffset: '0px',
-    showDeleteControl: false,
-    showImageTitle: false,
-  };
-	
-  // gallery images
-  images: GALLERY_IMAGE[] = [
-    {
-      url: "https://images.pexels.com/photos/669013/pexels-photo-669013.jpeg?w=1260", 
-      altText: 'woman-in-black-blazer-holding-blue-cup', 
-      title: 'woman-in-black-blazer-holding-blue-cup',
-      thumbnailUrl: "https://images.pexels.com/photos/669013/pexels-photo-669013.jpeg?w=60"
-    },
-    {
-      url: "https://images.pexels.com/photos/669006/pexels-photo-669006.jpeg?w=1260", 
-      altText: 'two-woman-standing-on-the-ground-and-staring-at-the-mountain', 
-      extUrl: 'https://www.pexels.com/photo/two-woman-standing-on-the-ground-and-staring-at-the-mountain-669006/',
-      thumbnailUrl: "https://images.pexels.com/photos/669006/pexels-photo-669006.jpeg?w=60"
-    },
-  ];
+  image: string = '';
+  selectedIndex: number;
+  transform: number;
 
 
 
@@ -70,7 +50,8 @@ BarWidth = 0;
 
   ngOnInit() {
 
-    
+    this.selectedIndex = 0;
+    this.transform = 100;
 
     this.display='block';
     this.store.pipe(
@@ -89,20 +70,6 @@ BarWidth = 0;
 
     this._imageData.subscribe((percentage) => this.BarWidth = percentage);
 
-    $(document).ready(function() {
-      
-      var owl = $("#owl-demo");
-      owl.owlCarousel({
-        navigation : true,
-        slideSpeed : 300,
-        paginationSpeed : 400,
-        singleItem : true,
-        afterMove: function(elem) {
-
-        }
-      });
-      
-    });
 
   }
 
@@ -190,6 +157,7 @@ BarWidth = 0;
         tap(data => {
           const info = data.info;
           this.store.dispatch(new Login({ info }));
+          window.location.href = "/my-photo-upload";
         })
       ).subscribe(noop);
   }
@@ -220,57 +188,7 @@ BarWidth = 0;
 
   }
 
-  openGallery(index: number = 0) {
-    
-    this.ngxImageGallery.open(index);
-  }
-	
-  // close gallery
-  closeGallery() {
-    this.ngxImageGallery.close();
-  }
-	
-  // set new active(visible) image in gallery
-  newImage(index: number = 0) {
-    this.ngxImageGallery.setActiveImage(index);
-  }
-	
-  // next image in gallery
-  nextImage(index: number = 0) {
-    this.ngxImageGallery.next()
-    //this.ngxImageGallery.next(index);
-  }
-	
-  // prev image in gallery
-  prevImage(index: number = 0) {
-    this.ngxImageGallery.prev();
-    //this.ngxImageGallery.prev(index);
-  }
-	
-  /**************************************************/
-	
-  // EVENTS
-  // callback on gallery opened
-  galleryOpened(index) {
-    console.info('Gallery opened at index ', index);
-  }
-
-  // callback on gallery closed
-  galleryClosed() {
-    console.info('Gallery closed.');
-  }
-
-  // callback on gallery image clicked
-  galleryImageClicked(index) {
-    console.info('Gallery image clicked with index ', index);
-  }
   
-  // callback on gallery image changed
-  galleryImageChanged(index) {
-    console.info('Gallery image changed to index ', index);
-  }
-
-  // callback on user clicked delete button
 
   moveToPrivate(imgUrl, access) {
     access = access === 'Private' ? 'Public' : 'Private';
@@ -294,6 +212,19 @@ BarWidth = 0;
           window.location.reload();
         })
       ).subscribe(noop);
+  }
+
+  setPublicImage(image, index) {
+    console.log(image);
+    this.image = image;
+    // this.transform =  100 - (index) * 50;
+    // this.selectedIndex = index;
+    // this.selectedIndex = this.selectedIndex + 1;
+
+    // if(this.selectedIndex > 4) {
+    //   this.selectedIndex = 0;
+    // }
+
   }
   
 

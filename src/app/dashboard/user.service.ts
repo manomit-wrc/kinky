@@ -11,7 +11,7 @@ export class UserService {
 
   private image = new BehaviorSubject('');
   profileImage = this.image.asObservable();
-  constructor(private store: Store<AppState>) { 
+  constructor(private store: Store<AppState>) {
     this.store.select(profileImg)
       .subscribe(data => {
         this.image.next(data);
