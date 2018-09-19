@@ -38,7 +38,7 @@ export class InterestsComponent implements OnInit {
   loading: any = false;
   age_range:any =[];
   distance_range:any=[];
-  distance:any = 10;
+  distance:any = '10';
   states: any = [];
   from_age: any = 18;
   to_age: any= 35;

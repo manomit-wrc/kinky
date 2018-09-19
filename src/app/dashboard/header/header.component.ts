@@ -12,19 +12,18 @@ import { Logout } from '../../auth/auth.actions';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
   avatar: string = '';
   is_email_verified = 0;
   count: any;
+  isLoading: any = false;
   constructor(
-    private auth: AuthenticationService, 
+    private auth: AuthenticationService,
     private avt: UserService,
     private store: Store<AppState>
   ) { }
 
   ngOnInit() {
 
-    
     this.avt.profileImage.subscribe(img => this.avatar = img);
 
   /*   this.store.select(countUser)
@@ -44,6 +43,16 @@ export class HeaderComponent implements OnInit {
 
 
   }
+  verifyEmail(){
+    this.isLoading = true;
+    this.auth.verifyEmail()
+      .subscribe(data => {
+        if(data.code === 200) {
+          this.isLoading = false;
+        }
+      });
+  }
+
 
   logout() {
     this.auth.logout()
@@ -54,7 +63,7 @@ export class HeaderComponent implements OnInit {
         }
       })
 
-    
+
   }
 
 }
