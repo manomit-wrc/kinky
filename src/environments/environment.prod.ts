@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUri: 'http://kinky-api.wrctpl.com/api/users'
+  apiUri: 'http://kinky-api.wrctpl.com/api/users',
+  label: 'yyy'
 };
