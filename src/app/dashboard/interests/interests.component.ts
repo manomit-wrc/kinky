@@ -19,7 +19,7 @@ export class InterestsComponent implements OnInit {
   private _success = new Subject<string>();
   private _error = new Subject<string>();
   @Input() userObj: any ;
-  gender: any; from_age: any; to_age: any; count: any;
+  gender: any; count: any;
   st: any; contactmember: any; explicit_content: any =false;
   country: any;
   state: any;
@@ -40,6 +40,8 @@ export class InterestsComponent implements OnInit {
   distance_range:any=[];
   distance:any = 10;
   states: any = [];
+  from_age: any = 18;
+  to_age: any= 35;
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -113,13 +115,11 @@ export class InterestsComponent implements OnInit {
       this.looking_for_arr = ['Male','Female','Couple','CD / TV / TS'];
       this.members_arr = ['Don\'t match my interests','Live in another country',];
 
-      for (let i = 1; i <=  54; i++) {
+      for (let i = 18; i <=  55; i++) {
         this.age_range.push(i);
       }
 
-      for (let i = 1; i <=  100; i++) {
-        this.distance_range.push(i);
-      }
+     this.distance_range  = [{level:'Upto 10 Miles',value:'10'},{level:'Upto 30 Miles',value:'30'},{level:'Upto 50 Miles',value:'50'},{level:'Upto 70 Miles',value:'70'},{level:'Upto 90 Miles',value:'90'},{level:'Upto 100 Miles',value:'100'},{level:'100+',value:'101'}]
   }
 
   onItemChange(e) {

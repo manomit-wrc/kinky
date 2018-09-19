@@ -21,7 +21,7 @@ export class MyLatestProfileComponent implements OnInit {
   successMessage: string;
   tab: String = 'tab1';
   gender: any;
-  data: any = {};
+  data = {};
   count: any;
   st: any;
   states: any = [];
@@ -42,21 +42,21 @@ export class MyLatestProfileComponent implements OnInit {
   bodyhairs: any;
   builds: any;
   heights: any;
-  drink: any = 'NEVER';
-  drink_female: any = 'NEVER';
-  drugs: any = 'NONE';
-  drugs_female: any = 'NONE';
-  smoke: any = 'NO';
-  smoke_female: any = 'NO';
-  cock_breast: any = 'SMALL';
-  cock_breast_female: any = 'SMALL';
-  safesex: any = 'ALWAYS';
-  safesex_female: any = 'ALWAYS';
-  body_deco: any = 'EARNINGS';
-  sexuality: any = 'STRAIGHT';
-  sexuality_female: any = 'STRAIGHT';
-  travel: any = 'CANACCOMMODATE';
-  here: any = 'HAVEFUN';
+  drink: any = 'I will tell you later';
+  drink_female: any = 'I will tell you later';
+  drugs: any = 'None';
+  drugs_female: any = 'None';
+  smoke: any = 'I will tell you later';
+  smoke_female: any = 'I will tell you later';
+  cock_breast: any = 'Prefer not to say';
+  cock_breast_female: any = 'Prefer not to say';
+  safesex: any = 'Always';
+  safesex_female: any = 'Always';
+  body_deco: any = 'Earrings';
+  sexuality: any = 'Straight';
+  sexuality_female: any = 'Straight';
+  travel: any = 'Can accommodate';
+  here: any = 'Have fun';
   headline: any = '';
   personal_details: any = '';
   ethnicity: any;
@@ -94,6 +94,7 @@ export class MyLatestProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
 
     this.store.pipe(
       select(loadAllMasters),
@@ -208,7 +209,7 @@ export class MyLatestProfileComponent implements OnInit {
   }
 
   personal_details_update (data) {
-    this.loading = true;
+ this.loading = true;
     data['interested_in'] = this.testArr;
     data['age_range'] = this.testArr2;
     data['looking_for'] = this.testArr3;

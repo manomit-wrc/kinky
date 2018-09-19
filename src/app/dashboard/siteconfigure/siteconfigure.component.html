@@ -1,18 +1,19 @@
 <div class="general-tab-row">
   <label>Site language</label>
   <div class="alert alert-danger" *ngIf="errorMessage">
-      
+
     <strong>{{ errorMessage }}</strong>
   </div>
 
   <div class="alert alert-success" *ngIf="successMessage">
-    
+
       <strong>{{ successMessage }}</strong>
   </div>
   <div class="general-dropdown" style="position:unset !important;">
-    
+
     <ng-select [items]="languages"
         bindLabel="language"
+        [clearable]= 'false'
         bindValue="language"
         [(ngModel)]="language"
     >
@@ -22,10 +23,11 @@
 <div class="general-tab-row">
   <label>Time Zone</label>
   <div class="general-dropdown" style="position:unset !important;">
-    
+
     <ng-select [items]="timezones"
         bindLabel="name"
         bindValue="label"
+        [clearable]= 'false'
         [(ngModel)]="timezone"
     >
     </ng-select>

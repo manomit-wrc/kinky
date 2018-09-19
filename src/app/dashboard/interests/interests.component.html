@@ -39,6 +39,7 @@
 
     <ng-select [items]="age_range"
            bindLabel="from_age"
+           [clearable]= 'false'
            bindValue="from_age"
            [(ngModel)]="from_age">
     </ng-select>
@@ -48,6 +49,7 @@
 
     <ng-select [items]="age_range"
            bindLabel="to_age"
+           [clearable]= 'false'
            bindValue="to_age"
            [(ngModel)]="to_age">
     </ng-select>
@@ -60,8 +62,9 @@
       <option value="d" *ngFor ="let d of distance_range">{{d}} miles</option>
     </select>-->
     <ng-select [items]="distance_range"
-           bindLabel="distance"
-           bindValue="distance"
+           bindLabel="level"
+           [clearable]= 'false'
+           bindValue="value"
            [(ngModel)]="distance">
     </ng-select>
   </div>
@@ -73,6 +76,7 @@
     <ng-select [items]="country"
         bindLabel="name"
         bindValue="name"
+        [clearable]= 'false'
         [(ngModel)]="count"
         (change)="onItemChange($event)">
     </ng-select>
@@ -81,6 +85,7 @@
 
     <ng-select [items]="states"
         bindLabel="st"
+        [clearable]= 'false'
         bindValue="st"
         [(ngModel)]="st">
     </ng-select>

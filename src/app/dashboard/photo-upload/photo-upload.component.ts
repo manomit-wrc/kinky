@@ -71,9 +71,9 @@ BarWidth = 0;
         altTag: '',
         access: 'Public'
       });
-      
+
       await this.uploadImage(file);
-      
+
     }
     this.display='block';
     this.auth.uploadProfileImage(this.imageData)
@@ -105,7 +105,7 @@ BarWidth = 0;
     );
 
 
-    
+
 
     return new Promise(resolve => {
       const params = {
@@ -145,7 +145,7 @@ BarWidth = 0;
           access: 'Public'
         })
 
-        
+
         resolve();
         });
 

@@ -13,16 +13,16 @@
             <div class="profile-top-text">
               <h5><a href="javascript:void(0)">{{name}}</a></h5>
               <p><i class="fa fa-map-marker"></i>{{address}}</p>
-              <p *ngIf="gender=='M'"><i class="fa fa-mars"></i>Male {{age }}</p>
-              <p *ngIf="gender=='F'"><i class="fa fa-venus"></i>Female {{age}}</p>
-              <p *ngIf="gender=='C'"><i class="fa fa-venus-mars" aria-hidden="true"></i>Male,Female</p>
+              <p *ngIf="gender=='M'"><i class="fa fa-mars"></i>Male,{{age }}</p>
+              <p *ngIf="gender=='F'"><i class="fa fa-venus"></i>Female,{{age}}</p>
+              <p *ngIf="gender=='C'"><i class="fa fa-venus-mars" aria-hidden="true"></i>Male,Female,{{age}},{{age_female}}</p>
               <p><a href="javascript:void(0)">Reviews 0</a> <strong>|</strong>
                 <a href="javascript:void(0)" *ngIf="email_verified"><span>Email Verified</span></a>
                 <a href="javascript:void(0)" (click)="verifyEmail()" *ngIf="!email_verified"><span style="color:#872345 !important;">Email
                     Unverified</span></a>
                 <img *ngIf="isLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
               </p>
-              <p><em>Seeking {{looking_for}}</em></p>
+              <p><em>Seeking {{looking_for_male?'male':''}} {{looking_for_female?'female':''}} {{looking_for_couple?'couple':''}} {{looking_for_cd?'cd/tv/ts':''}}</em></p>
               <p><a href="javascript:void(0)">{{interested_in}}</a></p>
             </div>
           </div>
@@ -364,18 +364,12 @@
           <!--<div class="downarrow-mobile downarrow-mobile1"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>-->
           <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Photos &amp; Videos</span></h4>
           <ul>
-            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
-            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
-            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
-            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
-            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
-            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
-            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
+            <li *ngFor="let img of publicImages;"><img [src]="img.url" [alt]="img.altTag"></li>
           </ul>
           <div class="addphoto-icon-sec">
             <!--<input class="uplod-btn" type="file">-->
-            <a href="photo-video.html"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add
-                Photo or Video</span></a> </div>
+           <!--  <a href="photo-video.html"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add
+                Photo or Video</span></a> </div> -->
         </div>
         <div class="friends-tab-content profile-right-friends-sec">
           <h5><i class="fa fa-handshake-o"></i> <span>Friends</span></h5>

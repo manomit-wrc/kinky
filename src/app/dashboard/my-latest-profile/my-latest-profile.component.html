@@ -23,6 +23,7 @@
 
                 <ng-select [items]="countrys"
                         bindLabel="name"
+                        [clearable]= 'false'
                         bindValue="name"
                         [(ngModel)]="country"
                         (change)="onItemChange($event)">
@@ -32,6 +33,7 @@
                 <label>&nbsp;</label>
 
                 <ng-select [items]="states"
+                        [clearable]= 'false'
                         bindLabel="state"
                         bindValue="state"
                         [(ngModel)]="state">
@@ -49,11 +51,23 @@
               <div class="personal-bigradio-sec">
                 <label>I am primarily looking for</label>
                 <div>
-                    <ul>
+                   <!--  <ul>
                       <li *ngFor="let n of looking_for_arr" [ngClass]="{'detail-active':(testArr3.indexOf(n) > -1)}">
                           <a href="javascript:void(0)" (click)="setClasslookingfor($event)">{{n}}</a>
                       </li>
-                  </ul>
+                  </ul> -->
+                  <div class="personal-radio-outer">
+                    <input type="checkbox" class="personal-radio-btn"  name="looking_for" [(ngModel)]="data.looking_for_male">
+                    <span class="personal-radio-title">Male</span></div>
+                  <div class="personal-radio-outer">
+                    <input type="checkbox" class="personal-radio-btn"  name="looking_for" [(ngModel)]="data.looking_for_female">
+                    <span class="personal-radio-title">Female </span></div>
+                  <div class="personal-radio-outer">
+                    <input type="checkbox" class="personal-radio-btn"  name="looking_for" [(ngModel)]="data.looking_for_couple">
+                    <span class="personal-radio-title">Couple</span></div>
+                  <div class="personal-radio-outer">
+                    <input type="checkbox" class="personal-radio-btn"  name="looking_for" [(ngModel)]="data.looking_for_cd">
+                    <span class="personal-radio-title">CD / TV / TS</span></div>
 
                 </div>
               </div>
