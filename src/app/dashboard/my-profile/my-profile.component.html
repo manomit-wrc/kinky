@@ -48,8 +48,8 @@
 
 
                 <li>Seeking</li>
-                <li>{{looking_for}}</li>
-                <li *ngIf="gender=='C'">{{looking_for}}</li>
+                <li> {{looking_for_male?'male':''}} {{looking_for_female?'female':''}} {{looking_for_couple?'couple':''}} {{looking_for_cd?'cd/tv/ts':''}}</li>
+                <li *ngIf="gender=='C'"> {{looking_for_male?'male':''}} {{looking_for_female?'female':''}} {{looking_for_couple?'couple':''}} {{looking_for_cd?'cd/tv/ts':''}}</li>
                 <li>Age</li>
                 <li>{{age}} {{sexuality}}</li>
                 <li *ngIf="gender=='C'">{{age_female}} {{sexuality_female}}</li>
@@ -109,7 +109,7 @@
               <input type="text" class="profile-input-text" placeholder="Whats in your mind...">
               <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
                   alt=""></a> </div>
-            <input type="text" class="save-btn profile-input-btn" value="Post">
+            <input type="button" class="save-btn profile-input-btn" value="Post">
           </div>
           <div class="profile-form-row">
 
@@ -365,6 +365,7 @@
           <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Photos &amp; Videos</span></h4>
           <ul>
             <li *ngFor="let img of publicImages;"><img [src]="img.url" [alt]="img.altTag"></li>
+            <li *ngFor="let f of publicvideos | filterBy :{access: 'public'}"><video [src] = "f.url"  controls>Your browser does not support HTML5 video.</video></li>
           </ul>
           <div class="addphoto-icon-sec">
             <!--<input class="uplod-btn" type="file">-->
