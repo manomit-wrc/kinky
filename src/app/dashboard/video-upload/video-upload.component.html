@@ -29,7 +29,7 @@
           <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Videos</span></h4>
           <ul>
             <li *ngFor="let f of fileArr">
-              <video [src] = "f.url" width="150" height="150" controls (click)="video_select(f.url,f._id)">
+              <video id="video" [src] = "f.url" width="150" height="150" controls (click)="video_select(f.url,f._id)">
                 Your browser does not support HTML5 video.
             </video>
               <div class="photo-edit-outer"> <a href="javascript:void(0)" class="photo-edit-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
@@ -58,7 +58,7 @@
           <h4><img src="assets/images/photo-icon-2.png" alt=""><span>Public</span></h4>
           <ul>
             <li *ngFor="let f of fileArr | filterBy :{access: 'public'}">
-              <video [src] = "f.url" width="150" height="150" controls>
+              <video [src] = "f.url" width="150" height="150" controls  (click)="video_select(f.url,f._id)">
                 Your browser does not support HTML5 video.
             </video>
             </li>
@@ -69,7 +69,7 @@
           <h4><img src="assets/images/photo-icon-2.png" alt=""><span>Private</span></h4>
           <ul>
               <li *ngFor="let f of fileArr | filterBy:{access: 'private'} ">
-                <video [src] = "f.url" width="150" height="150" controls >
+                <video [src] = "f.url" width="150" height="150" controls  (click)="video_select(f.url,f._id)">
                   Your browser does not support HTML5 video.
               </video>
                 </li>
