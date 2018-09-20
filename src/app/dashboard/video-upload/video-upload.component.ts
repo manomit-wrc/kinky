@@ -61,14 +61,14 @@ export class VideoUploadComponent implements OnInit {
     for(let i = 0; i < fileType.target.files.length; i++) {
       const file = fileType.target.files[i];
 
-      if(file.size > 5000000){
+      if(file.size > 120000000){
         this.toastr.error("File Name: " + file.name + " not uploaded because of lentgh is greater than 120 Mb" );
       }else{
 
         this.store.pipe(
           select(profileVideos),
           tap(videos => {
-           if(videos.length >= 2){
+           if(videos.length >= 5){
             this.toastr.error("You already reached your maximum 5 videos uploading limit. If you want to upload new video please delete existing video from your video library.");
            }else{
        this.loading = true;
