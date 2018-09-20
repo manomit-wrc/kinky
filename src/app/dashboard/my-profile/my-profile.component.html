@@ -22,7 +22,7 @@
                     Unverified</span></a>
                 <img *ngIf="isLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
               </p>
-              <p><em>Seeking {{looking_for_male?'male':''}} {{looking_for_female?'female':''}} {{looking_for_couple?'couple':''}} {{looking_for_cd?'cd/tv/ts':''}}</em></p>
+              <p><em>Seeking {{this.seeking_for}}</em></p>
               <p><a href="javascript:void(0)">{{interested_in}}</a></p>
             </div>
           </div>
@@ -42,17 +42,17 @@
                 <li>Gender</li>
                 <li *ngIf="gender=='M'">Male</li>
                 <li *ngIf="gender=='F'">Female</li>
-                <li *ngIf="gender=='C'">Couple</li>
+                <li *ngIf="gender=='C'">Male</li>
                 <li *ngIf="gender=='O'">CD/TV/TS</li>
                 <li *ngIf="gender=='C'">Female</li>
 
 
                 <li>Seeking</li>
-                <li> {{looking_for_male?'male':''}} {{looking_for_female?'female':''}} {{looking_for_couple?'couple':''}} {{looking_for_cd?'cd/tv/ts':''}}</li>
-                <li *ngIf="gender=='C'"> {{looking_for_male?'male':''}} {{looking_for_female?'female':''}} {{looking_for_couple?'couple':''}} {{looking_for_cd?'cd/tv/ts':''}}</li>
+                <li> {{seeking_for}} </li>
+                <li *ngIf="gender=='C'"> {{seeking_for}}</li>
                 <li>Age</li>
-                <li>{{age}} {{sexuality}}</li>
-                <li *ngIf="gender=='C'">{{age_female}} {{sexuality_female}}</li>
+                <li>{{age}}</li>
+                <li *ngIf="gender=='C'">{{age_female}}</li>
                 <li>Sexuality</li>
                 <li>{{sexuality}}</li>
                 <li *ngIf="gender=='C'">{{sexuality_female}}</li>
@@ -86,12 +86,12 @@
                 <li>Travel</li>
                 <li>{{travel_arrangements}}</li>
                 <li *ngIf="gender=='C'">{{travel_arrangements}}</li>
-                <li>Paid Services</li>
+                <!--<li>Paid Services</li>
                 <li *ngIf="purpose=='HAVEFUN'">No </li>
                 <li *ngIf="purpose!='HAVEFUN'">Yes </li>
 
                 <li *ngIf="purpose=='HAVEFUN' && gender=='C'">No </li>
-                <li *ngIf="purpose!='HAVEFUN' && gender=='C'">Yes </li>
+                <li *ngIf="purpose!='HAVEFUN' && gender=='C'">Yes </li>-->
               </ul>
 
 

@@ -37,10 +37,10 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="photo-row photo-row1">
           <div class="downarrow-mobile downarrow-mobile1"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
-          <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Photos</span></h4>
+          <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Photos &nbsp;<em style="font-style: italic;font-size: small;">(For more features please rollover on image)</em></span></h4>
           <ul>
             <li *ngFor="let f of fileArr" (mouseenter)="onMouseEnter($event)" (mouseleave) ="onMouseLeave($event)">
-              <img [src]="f.url" [alt]="f.altTag">
+              <img [src]="f.url" [alt]="f.altTag" style="width: 95px!important; height:95px!important;">
               <div class="photo-edit-outer"> 
                 <a href="javascript:void(0)" class="photo-edit-icon">
                   <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onAnchorClick($event)"></i>
@@ -78,7 +78,7 @@
           <div class="downarrow-mobile downarrow-mobile2"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
           <h4><img src="assets/images/photo-icon-2.png" alt=""><span>Public</span></h4>
           <ul>
-            <li *ngFor="let img of publicImages; let x = index"><img [src]="img.url" (click)="setPublicImage(img, x)" [alt]="img.altTag"></li>
+            <li *ngFor="let img of publicImages; let x = index"><img [src]="img.url" (click)="setPublicImage(img, x)" style="width: 95px!important; height:95px!important;" [alt]="img.altTag"></li>
             
           </ul>
         </div>
@@ -86,7 +86,7 @@
           <div class="downarrow-mobile downarrow-mobile3"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
           <h4><img src="assets/images/photo-icon-2.png" alt=""><span>Private</span></h4>
           <ul>
-            <li *ngFor="let img of privateImages; let x = index"><img [src]="img.url" (click)="setPrivateImage(img, x)" [alt]="img.altTag"></li>
+            <li *ngFor="let img of privateImages; let x = index"><img [src]="img.url" (click)="setPrivateImage(img, x)" style="width: 95px!important; height:95px!important;" [alt]="img.altTag"></li>
           </ul>
         </div>
         

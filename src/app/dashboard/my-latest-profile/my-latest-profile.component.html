@@ -95,18 +95,19 @@
             <div class="personal-detail-tab-row">
               <div class="personal-bigradio-sec">
                 <div>
-                  <div class="personal-detail-sml-box select-box">
-                    <label>Date of birth</label>
-                    <select [(ngModel)]="data.dd">
-                      <option [value]="d" *ngFor="let d of day">{{d}}</option>
-                    </select>
-                  </div>
+                  
                   <div class="personal-detail-sml-box select-box">
                     <label>&nbsp;</label>
                     <select [(ngModel)]="data.mm">
-                      <option [value]="m" *ngFor="let m of month">{{m}}</option>
+                        <option [value]="m.value" *ngFor="let m of month">{{m.label}}</option>
                     </select>
                   </div>
+                  <div class="personal-detail-sml-box select-box">
+                      <label>Date of birth</label>
+                      <select [(ngModel)]="data.dd">
+                        <option [value]="d.value" *ngFor="let d of day">{{d.label}}</option>
+                      </select>
+                    </div>
                   <div class="personal-detail-sml-box select-box">
                     <label>&nbsp;</label>
                     <select [(ngModel)]="data.yyyy">
@@ -238,18 +239,19 @@
               <div class="personal-detail-tab-row">
                 <div class="personal-bigradio-sec">
                   <div>
-                    <div class="personal-detail-sml-box select-box">
-                      <label>Date of birth</label>
-                      <select [(ngModel)]="data.dd_female">
-                        <option [value]="d" *ngFor="let d of day">{{d}}</option>
-                      </select>
-                    </div>
+                    
                     <div class="personal-detail-sml-box select-box">
                       <label>&nbsp;</label>
                       <select [(ngModel)]="data.mm_female">
-                        <option [value]="m" *ngFor="let m of month">{{m}}</option>
+                          <option [value]="m.value" *ngFor="let m of month">{{m.label}}</option>
                       </select>
                     </div>
+                    <div class="personal-detail-sml-box select-box">
+                        <label>Date of birth</label>
+                        <select [(ngModel)]="data.dd_female">
+                            <option [value]="d.value" *ngFor="let d of day">{{d.label}}</option>
+                        </select>
+                      </div>
                     <div class="personal-detail-sml-box select-box">
                       <label>&nbsp;</label>
                       <select [(ngModel)]="data.yyyy_female">

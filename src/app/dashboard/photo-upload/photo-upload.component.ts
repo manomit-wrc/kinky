@@ -12,6 +12,7 @@ import { AppState } from '../../reducers';
 import { Login } from '../../auth/auth.actions';
 import { profileImages } from '../../auth/auth.selectors';
 import { keyDetails } from '../../../keys/keys.prod';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -49,7 +50,8 @@ export class PhotoUploadComponent implements OnInit {
     private auth: AuthenticationService,
     private router: Router,
     private store: Store<AppState>,
-    private renderer: Renderer
+    private renderer: Renderer,
+    private toastr: ToastrService
   ) { }
 
 BarWidth = 0;
@@ -66,8 +68,6 @@ BarWidth = 0;
         this.fileArr = images;
         this.publicImages = this.fileArr.filter(f => f.access === 'Public');
         this.privateImages = this.fileArr.filter(f => f.access === 'Private');
-
-        //$("#owl-demo").data('owlCarousel').reinit();
         
       })
     ).subscribe(noop);
@@ -86,14 +86,20 @@ BarWidth = 0;
     this.loading = true;
     for(let i = 0; i < fileType.target.files.length; i++) {
       const file = fileType.target.files[i];
+      if((file.size / 1000) <= 5000) {
 
-      this.fileArr.push({
-        url: this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)),
-        altTag: '',
-        access: 'Public'
-      });
+        this.fileArr.push({
+          url: this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)),
+          altTag: '',
+          access: 'Public'
+        });
 
-      await this.uploadImage(file);
+        await this.uploadImage(file);
+      }
+      else {
+        this.toastr.error("Image size is more than 5 MB")
+      }
+
 
     }
     this.display='block';
@@ -103,8 +109,11 @@ BarWidth = 0;
           
           const info = data.info
           this.store.dispatch(new Login({ info }));
+          this.toastr.success("Images are uploaded successfully");
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
           //window.location.reload();
-
         }
       )).subscribe(noop);
 
@@ -146,8 +155,8 @@ BarWidth = 0;
 
         this.imageData.push({
           url: data.Location,
-          altTag: data.key,
-          access: 'Public'
+          altTag: '',
+          access: 'Private'
         })
 
 
@@ -164,6 +173,7 @@ BarWidth = 0;
           const info = data.info;
           this.store.dispatch(new Login({ info }));
           //window.location.href = "/my-photo-upload";
+          this.toastr.success("Image deleted permenantly");
         })
       ).subscribe(noop);
   }
@@ -204,20 +214,31 @@ BarWidth = 0;
           const info = data.info;
           this.store.dispatch(new Login({ info }));
           //window.location.reload();
+          this.toastr.success(`This image is now ${access}`);
           
         })
       ).subscribe(noop)
   }
 
   setAsProfile(imgUrl) {
-    this.auth.setAsProfile(imgUrl)
+    
+    let img = new Image();
+    img.src = imgUrl;
+   
+    if(img.naturalHeight <= 170 && img.naturalWidth <= 170) {
+      this.auth.setAsProfile(imgUrl)
       .pipe(
         tap(data => {
           const info = data.info;
           this.store.dispatch(new Login({ info }));
-          //window.location.reload();
+          this.toastr.success("Image set as profile pic");
         })
       ).subscribe(noop);
+    }
+    else {
+      this.toastr.error(`For profile pic, maximum image dimension will be 170x170`)
+    }
+    
   }
 
   setPublicImage(image, index) {
@@ -226,6 +247,7 @@ BarWidth = 0;
     this.image = image;
     this.selectedIndex = index;
     this.tempImages = this.publicImages;
+    this.altTag = image.altTag;
     
   }
 
@@ -235,6 +257,7 @@ BarWidth = 0;
     this.image = image;
     this.selectedIndex = index;
     this.tempImages = this.privateImages;
+    this.altTag = image.altTag;
   }
   onPrev() {
     this.selectedIndex = this.selectedIndex - 1;
@@ -244,6 +267,7 @@ BarWidth = 0;
     
     const data = this.tempImages[this.selectedIndex];
     this.image = data;
+    this.altTag = this.image.altTag;
   }
   
   onNext() {
@@ -254,6 +278,7 @@ BarWidth = 0;
     
     const data = this.tempImages[this.selectedIndex];
     this.image = data;
+    this.altTag = this.image.altTag;
   }
 
   toggleClass(event) {
@@ -279,7 +304,7 @@ BarWidth = 0;
         tap(data => {
           const info = data.info;
           this.store.dispatch(new Login({ info }));
-          
+          this.toastr.success("Image details is changed successfully");
           
         })
       ).subscribe(noop)
@@ -288,6 +313,7 @@ BarWidth = 0;
   closeSlider() {
     this.showSlider = false;
   }
+
   
 
 }

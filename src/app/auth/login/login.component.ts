@@ -6,9 +6,10 @@ import {noop, Subject} from "rxjs";
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { Login, Settings,Count } from '../auth.actions';
+import { getIPAddress } from '../auth.selectors';
 
 
 @Component({
@@ -37,13 +38,23 @@ export class LoginComponent implements OnInit {
     this._error.subscribe((message) => this.errorMessage = message);
 
     this._error.pipe(
-      debounceTime(2000)
+      debounceTime(1000)
     ).subscribe(() => this.errorMessage = null);
 
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.store.pipe(
+      select(getIPAddress),
+      tap(data => {
+        if(data !== undefined) {
+          
+          this.ipaddress = data.query;
+        }
+      
+      })
+    ).subscribe(noop);
 
     try {
       const decoded = jwt_decode(localStorage.getItem('token'));
@@ -65,10 +76,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-     this.http.get<{ip: String}>('https://jsonip.com')
-      .subscribe( datas => {
-        this.ipaddress = datas.ip;
-        this.auth.login(this.f.username.value, this.f.password.value, this.ipaddress)
+    this.auth.login(this.f.username.value, this.f.password.value, this.ipaddress)
           .pipe(
             tap(data => {
 
@@ -95,9 +103,7 @@ export class LoginComponent implements OnInit {
             alert('Login Failed');
             }
            
-          );
-      });
-
+      ); 
 
   }
 

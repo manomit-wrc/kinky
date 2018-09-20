@@ -62,6 +62,7 @@ export class MyProfileComponent implements OnInit {
   fileArr:any;
   publicImages:any;
   publicvideos:any;
+  seeking_for: string = '';
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -168,6 +169,13 @@ export class MyProfileComponent implements OnInit {
         this.purpose = data.purpose === undefined ? 'N/A' : data.purpose;
         this.headline = data.headline === undefined ? 'N/A' : data.headline;
         this.description = data.description === undefined ? 'N/A' : data.description;
+
+        this.seeking_for = this.looking_for_male ? 'Male,': '';
+        this.seeking_for += this.looking_for_female ? 'Female,': '';
+        this.seeking_for += this.looking_for_couple ? 'Couple,': '';
+        this.seeking_for += this.looking_for_cd ? ' CD/TV/TS,': '';
+
+        this.seeking_for = this.seeking_for.substring(0, this.seeking_for.length - 1);
     });
 
     this.store.select(locationDetails)

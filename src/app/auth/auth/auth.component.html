@@ -105,23 +105,27 @@
                 </div>
               </div>
               <div class="main-form-row">
-                <label>Date of Birth</label>
+                <label>Date of Birth(Minimum age require 18 years.)</label>
+                
+
+                <div class="personal-detail-sml-box select-box" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.MM.errors }">
+                  <select formControlName="MM" [(ngModel)]="MM">
+                    <option [value]="" disabled>Month</option>
+                    <option [value]="m.value" *ngFor="let m of month">{{m.label}}</option>
+                  </select>
+                </div>
                 <div class="personal-detail-sml-box select-box"
                 [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.DD.errors }"
                 >
-                <select  formControlName="DD">
-                  <option [value]="d" *ngFor="let d of day">{{d}}</option>
+                <select  formControlName="DD" [(ngModel)]="DD">
+                  <option [value]="" disabled>Day</option>
+                  <option [value]="d.value" *ngFor="let d of day">{{d.label}}</option>
                 </select>
 
                 </div>
-
-                <div class="personal-detail-sml-box select-box" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.MM.errors }">
-                  <select formControlName="MM">
-                    <option [value]="m" *ngFor="let m of month">{{m}}</option>
-                  </select>
-                </div>
                 <div class="personal-detail-sml-box select-box" [ngClass]="{ 'input-box-sml-error': signupSubmitted && signup.YYYY.errors }">
-                  <select formControlName="YYYY">
+                  <select formControlName="YYYY" [(ngModel)]="YYYY">
+                    <option [value]="" disabled>Year</option>
                     <option [value]="y" *ngFor="let y of year">{{y}}</option>
                   </select>
                 </div>

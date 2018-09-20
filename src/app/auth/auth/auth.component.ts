@@ -29,6 +29,9 @@ export class AuthComponent implements OnInit {
   day:any =[];
   month:any =[];
   year:any =[];
+  MM: string = '';
+  DD: string = '';
+  YYYY: string = '';
 
   gender: string = '';
   isShow: boolean = false;
@@ -42,13 +45,30 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
 
-    this.day = [
+    // this.day = [
 
-      '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17',
-       '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'
-      ];
+    //   '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17',
+    //    '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'
+    //   ];
 
-      this.month = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+      //this.month = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+
+      for(let i=1; i<=31; i++) {
+        const m = i <= 9 ? `0${i}`: i;
+        this.day.push({
+          label:m,
+          value: i
+        });
+      }
+
+      for(let i = 1; i <= 12; i++) {
+        const m = i <= 9 ? `0${i}`: i;
+        this.month.push({
+          label:m,
+          value: i
+        });
+      }
+
 
       for (let i = 1970; i <=  new Date().getFullYear(); i++) {
         this.year.push(i);

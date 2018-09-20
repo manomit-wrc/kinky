@@ -54,3 +54,8 @@ export const emailVerified = createSelector(
   selectAuthState,
   auth => auth.user.email_verified
 )
+
+export const getIPAddress = createSelector(
+  selectAuthState,
+  auth => auth.location
+)
