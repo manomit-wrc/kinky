@@ -17,6 +17,7 @@ export class ChangePasswordComponent implements OnInit {
   closeAlert = false;
   closeAlert1 = false;
   gender: any;
+  showdenger:any =false;
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthenticationService
@@ -27,11 +28,21 @@ export class ChangePasswordComponent implements OnInit {
       old_password: ['', Validators.required],
       password: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.min(1), Validators.minLength(5)])],
       c_password: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.min(1), Validators.minLength(5)])],
-    }, {
-      validator: this.auth.MatchPassword // your validation method
+    },
+    {
+      validator: this.auth.MatchPassword
     });
 
 
+  }
+
+  onKey(event: any) { // without type info
+
+    if(event.target.value != this.changePassword.password.value){
+      this.showdenger = true;
+    }else{
+      this.showdenger = false;
+    }
   }
 
   get changePassword() { return this.changePassForm.controls; }

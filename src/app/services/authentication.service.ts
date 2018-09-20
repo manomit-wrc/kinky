@@ -295,7 +295,7 @@ export class AuthenticationService {
 
 
 /* Check for password match*/
-     MatchPassword(AC: AbstractControl) {
+      MatchPassword(AC: AbstractControl) {
      const password = AC.get('password').value; // to get value in input tag
       const c_password = AC.get('c_password').value; // to get value in input tag
        if ( password != c_password ) {
@@ -306,5 +306,6 @@ export class AuthenticationService {
            return null;
        }
    }
+
 
   }

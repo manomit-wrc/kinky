@@ -13,7 +13,7 @@ import { AppState } from '../../reducers';
 import { Login } from '../../auth/auth.actions';
 import { profileVideos } from '../../auth/auth.selectors';
 import { keyDetails } from '../../../keys/keys.prod';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-video-upload',
   templateUrl: './video-upload.component.html',
@@ -39,7 +39,8 @@ export class VideoUploadComponent implements OnInit {
     private auth: AuthenticationService,
     private _upload: UploadService,
     private router: Router,
-    private store: Store<AppState>) {}
+    private store: Store<AppState>,
+    private toastr: ToastrService) {}
 
   ngOnInit() {
 
@@ -56,52 +57,74 @@ export class VideoUploadComponent implements OnInit {
   }
 
   changeListener(fileType: any)  {
-    this.loading = true;
+
     for(let i = 0; i < fileType.target.files.length; i++) {
       const file = fileType.target.files[i];
 
-      this.fileArr.push(this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)));
-      const params = {
-        Bucket: 'kinky-wrc',
-        Key: this.VIDEO_FOLDER + file.name,
-        Body: file,
-        ACL: 'public-read'
-      };
-      const bucket = new S3(
-        {
-          accessKeyId: keyDetails.ACCESS_KEY,
-          secretAccessKey: keyDetails.SECRET_KEY,
-          region: 'us-east-1'
-        }
-      );
+      if(file.size > 5000000){
+        this.toastr.error("File Name: " + file.name + " not uploaded because of lentgh is greater than 120 Mb" );
+      }else{
+
+        this.store.pipe(
+          select(profileVideos),
+          tap(videos => {
+           if(videos.length >= 2){
+            this.toastr.error("You already reached your maximum 5 videos uploading limit. If you want to upload new video please delete existing video from your video library.");
+           }else{
+       this.loading = true;
+
+       this.fileArr.push(this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)));
+       const params = {
+         Bucket: 'kinky-wrc',
+         Key: this.VIDEO_FOLDER + file.name,
+         Body: file,
+         ACL: 'public-read'
+       };
+       const bucket = new S3(
+         {
+           accessKeyId: keyDetails.ACCESS_KEY,
+           secretAccessKey: keyDetails.SECRET_KEY,
+           region: 'us-east-1'
+         }
+       );
 
 
-      this.percentage = 10;
-      this._success.next(this.percentage);
+       this.percentage = 10;
+       this._success.next(this.percentage);
 
-      bucket.upload(params).on("httpUploadProgress", evt => {
+       bucket.upload(params).on("httpUploadProgress", evt => {
 
-        this.percentage = (evt.loaded * 100) / evt.total;
-        this._success.next(parseInt(this.percentage));
+         this.percentage = (evt.loaded * 100) / evt.total;
+         this._success.next(parseInt(this.percentage));
 
-      }).send((err, data) => {
+       }).send((err, data) => {
 
-        if (err) {
-          console.log('There was an error uploading your file: ', err);
+         if (err) {
+           console.log('There was an error uploading your file: ', err);
 
-        }
+         }
 
-        this.auth.uploadProfileVideo(data.Location, data.key)
-          .pipe(tap(
-            data => {
-              console.log(data);
-              const info = data.info;
-              this.store.dispatch(new Login({ info }))
-             // window.location.reload();
-            }
-          )).subscribe(noop);
+         this.auth.uploadProfileVideo(data.Location, data.key)
+           .pipe(tap(
+             data => {
+               console.log(data);
+               const info = data.info;
+               this.store.dispatch(new Login({ info }))
+              // window.location.reload();
+             }
+           )).subscribe(noop);
 
-        });
+         });
+
+
+           }
+          })
+        ).subscribe(noop);
+
+
+      }
+
+     /* */
     }
 
   }

@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
               const counts = data.count;
               this.loading = false;
               if ( data.code !== 200) {
-
+                this.loading = false;
                 this._error.next(data.message);
          } else {
                 this.store.dispatch(new Login({ info }));

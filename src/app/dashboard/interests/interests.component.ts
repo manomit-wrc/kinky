@@ -93,9 +93,9 @@ export class InterestsComponent implements OnInit {
       this.looking_for_female = this.userObj.looking_for_female;
       this.looking_for_couple = this.userObj.looking_for_couple;
       this.looking_for_cd = this.userObj.looking_for_cd;
-      this.from_age = this.userObj.from_age ? this.userObj.from_age.toString() : '';
-      this.to_age = this.userObj.to_age ? this.userObj.to_age.toString() : '';
-      this.distance = this.userObj.distance ? this.userObj.distance.toString(): '';
+      this.from_age = this.userObj.from_age ? this.userObj.from_age.toString() : this.from_age;
+      this.to_age = this.userObj.to_age ? this.userObj.to_age.toString() : this.to_age;
+      this.distance = this.userObj.distance ? this.userObj.distance.toString() : this.distance;
       this.interest_match = this.userObj.interest_match;
       this.live_country = this.userObj.live_country;
       this.testArr1 = this.userObj.contactmember;
