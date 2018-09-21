@@ -855,7 +855,7 @@ box-shadow: 3px 3px 9px -1px rgba(0,0,0,0.44);}
 
 .friends-tab-content ul{ margin:0; padding:0;}
 
-.friends-tab-content ul li{ background:#fff; border-radius:5px; padding:12px 15px; margin:15px 0;}
+.friends-tab-content ul li{ background:#fff; border-radius:5px; padding:12px 15px; margin:15px 0; width: 100% !important;}
 
 .friends-tab-content ul li:first-child{ margin:0;}
 
@@ -2019,3 +2019,56 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', end
 .general-tab-row .general-dropdown::after { display: none !important; }
 
 .general-tab-row .ng-select-container span { color: #333 !important; }
+
+.video-upload-sec video {
+  display: table;
+  margin: 0 auto;
+}
+
+.video-upload-sec {
+  width: 90%;
+  margin: 0 auto 10px;
+  position: relative;
+}
+
+.video-upload-sec .video-prev {
+  position: absolute;
+  right: -40px;
+  background: url(../images/arrow-left.png) no-repeat;
+  width: 55px;
+  height: 55px;
+  float: right;
+  top: 185px;
+  background-size: 100% auto;
+  cursor: pointer;
+}
+
+.video-upload-sec .video-next {
+  position: absolute;
+  left: -40px;
+  background: url(../images/arrow-right.png) no-repeat;
+  width: 55px;
+  height: 55px;
+  float: right;
+  top: 185px;
+  background-size: 100% auto;
+  cursor: pointer;
+}
+
+.video-upload-sec .video-next:hover {
+  background: url(../images/arrow-right-hover.png) no-repeat;
+}
+
+.video-upload-sec .video-prev:hover {
+  background: url(../images/arrow-left-hover.png) no-repeat;
+}
+
+.profile-right-photo-vid-sec img.upload-all, .profile-right-photo-vid-sec video.upload-all {
+  height: 96px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  background: #000;
+}

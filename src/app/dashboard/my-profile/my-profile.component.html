@@ -364,8 +364,8 @@
           <!--<div class="downarrow-mobile downarrow-mobile1"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>-->
           <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Photos &amp; Videos</span></h4>
           <ul>
-            <li *ngFor="let img of publicImages;"><img [src]="img.url" [alt]="img.altTag"></li>
-            <li *ngFor="let f of publicvideos | filterBy :{access: 'public'}"><video [src] = "f.url"  controls>Your browser does not support HTML5 video.</video></li>
+            <li *ngFor="let img of publicImages;"><img class="upload-all" [src]="img.url" [alt]="img.altTag"></li>
+            <li *ngFor="let f of publicvideos | filterBy :{access: 'public'}"><video class="upload-all" [src] = "f.url"  controls>Your browser does not support HTML5 video.</video></li>
           </ul>
           <div class="addphoto-icon-sec">
             <!--<input class="uplod-btn" type="file">-->
