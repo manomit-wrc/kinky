@@ -19,7 +19,17 @@ export class SearchService {
     return this.http.post<any>(`${this.apiUri}/search-by-username`, { username });
   }
 
-  submit_quick_search(gender,looking_for,show_profile,distance,country,state){
-    return this.http.post<any>(`${this.apiUri}/submit-quick-search`, { gender,looking_for,show_profile,distance,country,state });
+  submit_quick_search(gender,looking_for,distance,country,state){
+    return this.http.post<any>(`${this.apiUri}/submit-quick-search`, { gender,looking_for,distance,country,state });
+  }
+
+  userdetailsByid(id){
+   return this.http.post<any>(`${this.apiUri}/userdetailsByid`, {id});
+  }
+  request_send(to_id){
+   return this.http.post<any>(`${this.apiUri}/request_send`, {to_id});
+  }
+  fetchInvitation(){
+   return this.http.post<any>(`${this.apiUri}/fetch-invetation`, {});
   }
 }
