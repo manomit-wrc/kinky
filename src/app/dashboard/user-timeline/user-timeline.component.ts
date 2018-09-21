@@ -1,28 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services';
-import { debounceTime, tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { UserService } from '../user.service';
-import { Store, select } from '@ngrx/store';
-import { AppState } from '../../reducers';
-import { userDetails, locationDetails ,profileImages,profileVideos} from '../../auth/auth.selectors';
-import { noop } from '@angular/compiler/src/render3/view/util';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Observable, noop, BehaviorSubject, pipe } from 'rxjs';
+import {SearchService} from '../../services/search.service';
+import { first, tap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 import { loadAllMasters } from '../dashboard.selectors';
 import { Subject } from 'rxjs';
-
-declare var $: any;
-
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../../reducers';
 @Component({
-  selector: 'app-my-profile',
-  templateUrl: './my-profile.component.html',
-  styleUrls: ['./my-profile.component.css']
+  selector: 'app-user-timeline',
+  templateUrl: './user-timeline.component.html',
+  styleUrls: ['./user-timeline.component.css']
 })
-export class MyProfileComponent implements OnInit {
-  private _success = new Subject<string>();
-
-  successMessage: string;
-  name: any;
+export class UserTimelineComponent implements OnInit {
+  username:any;
   address: any;
   sexuality: any;
   sexuality_female: any;
@@ -59,57 +51,22 @@ export class MyProfileComponent implements OnInit {
   description:any;
   email_verified: boolean = false;
   isLoading: boolean = false;
-  fileArr:any;
+  fileArrImages:any;
+  fileArrVideos:any;
   publicImages:any;
   publicvideos:any;
   seeking_for: string = '';
-  constructor(
-    private auth: AuthenticationService,
-    private router: Router,
-    private avt: UserService,
-    private store: Store<AppState>
-  ) { }
+  constructor(private router: ActivatedRoute,public search: SearchService,private toastr: ToastrService, private store: Store<AppState>) { }
 
   ngOnInit() {
-
-    $(document).ready(function() {
-      var $owl = $('.owl-carousel');
-
-      $owl.children().each( function( index ) {
-        $(this).attr( 'data-position', index ); // NB: .attr() instead of .data()
-      });
-
-      $owl.owlCarousel({
-        center: true,
-        loop: true,
-        items:3,
-      });
-
-      $(document).on('click', '.owl-item>div', function() {
-        $owl.trigger('to.owl.carousel', $(this).data( 'position' ) );
-      });
-    });
-
-
-    this._success.subscribe((message) => this.successMessage = message);
-    this._success.pipe(
-      debounceTime(4000)
-    ).subscribe(() => this.successMessage = null)
-
-    this.store.select(userDetails)
-    .subscribe(data => {
-
-      this.country = data.country === undefined ? '' : data.country;
-      this.city = data.state === undefined ? '' : data.state;
-
-      if(data.email_verified) {
-        this.email_verified = true;
-      }
-
-      this.avatar = data.avatar !== undefined ? data.avatar: null;
-        this.name = data.username;
-
-        this.store.select(loadAllMasters)
+    let user_id = this.router.snapshot.params.user_id;
+      this.search.userdetailsByid(user_id)
+      .pipe(
+        tap(datas => {
+          let data = datas.info;
+        this.username = data.username;
+         this.avatar = data.avatar !== undefined ? data.avatar: null;
+         this.store.select(loadAllMasters)
           .subscribe(masters => {
             if(masters !== undefined) {
 
@@ -144,7 +101,8 @@ export class MyProfileComponent implements OnInit {
             }
 
           })
-        this.gender = data.gender !== undefined ? data.gender : 'N/A';
+
+          this.gender = data.gender !== undefined ? data.gender : 'N/A';
         this.sexuality = data.sexuality !== undefined ? data.sexuality : 'N/A';
         this.sexuality_female = data.sexuality_female !== undefined ? data.sexuality_female : 'N/A';
         this.age = this.getAge(data.mm +"/"+data.dd +"/"+data.yyyy );
@@ -176,55 +134,27 @@ export class MyProfileComponent implements OnInit {
         this.seeking_for += this.looking_for_cd ? ' CD/TV/TS,': '';
 
         this.seeking_for = this.seeking_for.substring(0, this.seeking_for.length - 1);
-    });
+         this.fileArrImages = data.images;
+        this.publicImages = this.fileArrImages.filter(f => f.access === 'Public');
+         this.fileArrVideos = data.videos;
+        this.publicvideos = this.fileArrVideos.filter(f => f.access === 'Public');
 
-    this.store.select(locationDetails)
-      .subscribe(location => {
-        if(this.country === "" || this.city === "") {
-          this.address = `${location.city},${location.country}`
-        }
-        else {
-          this.address = `${this.city},${this.country}`
-        }
-      })
-
-    this.avt.profileImage.subscribe(img => this.avatar = img)
-
-    this.store.select(profileImages).subscribe(images => {
-        this.fileArr = images;
-        this.publicImages = this.fileArr.filter(f => f.access === 'Public');
-
-      });
-
-      this.store.select(profileVideos).subscribe(videos => {
-
-          this.publicvideos = videos.filter(f => f.access === 'Public');
-
-        });
-
+        })
+  ).subscribe(noop)
   }
 
+
+
    getAge(DOB) {
-    var today = new Date();
-    var birthDate = new Date(DOB);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age = age - 1;
+        var today = new Date();
+        var birthDate = new Date(DOB);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age = age - 1;
+        }
+
+        return age;
     }
-
-    return age;
-}
-
-verifyEmail() {
-  this.isLoading = true;
-  this.auth.verifyEmail()
-    .subscribe(data => {
-      if(data.code === 200) {
-        this.isLoading = false;
-        this._success.next(data.message);
-      }
-    });
-}
 
 }

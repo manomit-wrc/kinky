@@ -211,14 +211,14 @@
             <div class="invitation-receive-sec">
               <h4>Invitations Received</h4>
               <ul>
-                <li>
+                <li *ngFor="let opt of results">
                   <div class="row">
                     <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
-                      <div class="friends-sml-img"><img src="assets/images/photo-image-1.jpg" alt="">
+                      <div class="friends-sml-img"><img [src]="opt.avatar" alt="">
                         <div class="event-user-active">&nbsp;</div>
                       </div>
                       <div class="friends-sml-text">
-                        <h6>oirazor1971</h6>
+                        <h6>{{opt.gender}}</h6>
                         <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
                       </div>
                     </div>

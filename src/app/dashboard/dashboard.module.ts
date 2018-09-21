@@ -44,6 +44,7 @@ import { CarouselComponent, CarouselItemElement } from './carousel/carousel.comp
 import { CarouselItemDirective } from './carousel-item.directive';
 import { SearchComponent } from './search/search.component';
 import { ToastrModule } from 'ngx-toastr';
+import { UserTimelineComponent } from './user-timeline/user-timeline.component';
 
 @NgModule({
   imports: [
@@ -86,7 +87,8 @@ import { ToastrModule } from 'ngx-toastr';
        CarouselComponent,
        CarouselItemElement,
        CarouselItemDirective,
-       SearchComponent
+       SearchComponent,
+       UserTimelineComponent
       ]
 })
 

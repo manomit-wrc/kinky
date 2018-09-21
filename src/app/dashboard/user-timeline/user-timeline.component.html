@@ -1,0 +1,670 @@
+<div class="inner-main-sec">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="profile-left-top-box">
+          <div class="profile-left-active">Active Now</div>
+          <div class="profile-left-details-box">
+            <div class="profile-left-img">
+              <div class="box-circle hidden-xxs">
+                <div class="progress-circle progress-70"><span><img [src]="avatar" alt=""></span> </div>
+              </div>
+              <p><strong>70%</strong> Matched</p>
+            </div>
+            <div class="profile-top-text">
+              <h5><a href="#">{{username}}</a></h5>
+              <p><i class="fa fa-map-marker"></i>{{address}}</p>
+               <p *ngIf="gender=='M'"><i class="fa fa-mars"></i>Male,{{age }}</p>
+               <p *ngIf="gender=='O'"><i class="fa fa-mars"></i>CD/TV/TS,{{age }}</p>
+              <p *ngIf="gender=='F'"><i class="fa fa-venus"></i>Female,{{age}}</p>
+              <p *ngIf="gender=='C'"><i class="fa fa-venus-mars" aria-hidden="true"></i>Male,Female,{{age}},{{age_female}}</p>
+              <p><a href="javascript:void(0)">Reviews 0</a> <strong>|</strong> <a href="#"><span>Email Verified</span></a></p>
+              <p><em>Seeking {{this.seeking_for}}</em></p>
+              <p><a href="javascript:void(0)">{{interested_in}}</a></p>
+              <div class="user-timeline-topleft-icon">
+                <ul>
+                  <li><a href="javascript:void(0)" class="user-timeline-left-icon-1">&nbsp;</a></li>
+                  <li><a href="#javascript:void(0)" class="user-timeline-left-icon-2">&nbsp;</a></li>
+                  <li><a href="javascript:void(0)" class="user-timeline-left-icon-3 profile-more-btn">&nbsp;</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="profile-more-box">
+              <h5>Personal Details</h5>
+             <ul [ngClass]="gender=='C' ? 'profile-more-box-list-33' : 'profile-more-box-list-50'">
+                <li>Gender</li>
+                <li *ngIf="gender=='M'">Male</li>
+                <li *ngIf="gender=='F'">Female</li>
+                <li *ngIf="gender=='C'">Male</li>
+                <li *ngIf="gender=='O'">CD/TV/TS</li>
+                <li *ngIf="gender=='C'">Female</li>
+
+
+                <li>Seeking</li>
+                <li> {{seeking_for}} </li>
+                <li *ngIf="gender=='C'"> {{seeking_for}}</li>
+                <li>Age</li>
+                <li>{{age}}</li>
+                <li *ngIf="gender=='C'">{{age_female}}</li>
+                <li>Sexuality</li>
+                <li>{{sexuality}}</li>
+                <li *ngIf="gender=='C'">{{sexuality_female}}</li>
+                <li>Location</li>
+                <li>{{address}}</li>
+                <li *ngIf="gender=='C'">{{address}}</li>
+                <li>Height</li>
+                <li>{{height}}</li>
+                <li *ngIf="gender=='C'">{{height_female}}</li>
+                <li>Build</li>
+                <li>{{build}}</li>
+                <li *ngIf="gender=='C'">{{build_female}}</li>
+                <li>Hair</li>
+                <li>{{hair}}</li>
+                <li *ngIf="gender=='C'">{{hair_female}}</li>
+                <li>Body decoration</li>
+                <li>{{body_decoration}}</li>
+                <li *ngIf="gender=='C'">{{body_decoration_female}}</li>
+                <li>Drink</li>
+                <li>{{drink}}</li>
+                <li *ngIf="gender=='C'">{{drink_female}}</li>
+                <li>Smoke</li>
+                <li>{{smoke}}</li>
+                <li *ngIf="gender=='C'">{{smoke_female}}</li>
+                <li>Drugs</li>
+                <li>{{drugs}}</li>
+                <li *ngIf="gender=='C'">{{drugs_female}}</li>
+                <li>Cock/Breast size</li>
+                <li>{{size}}</li>
+                <li *ngIf="gender=='C'">{{size_female}}</li>
+                <li>Travel</li>
+                <li>{{travel_arrangements}}</li>
+                <li *ngIf="gender=='C'">{{travel_arrangements}}</li>
+<!--                 <li>Paid Services</li>
+                <li *ngIf="purpose=='HAVEFUN'">No </li>
+                <li *ngIf="purpose!='HAVEFUN'">Yes </li>
+
+                <li *ngIf="purpose=='HAVEFUN' && gender=='C'">No </li>
+                <li *ngIf="purpose!='HAVEFUN' && gender=='C'">Yes </li> -->
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="profile-left-text-box">
+          <h4>horny fat lady wanting hardcore</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit.</p>
+          <p><a href="#"><i class="fa fa-heart-o"></i><span>14 Likes</span></a></p>
+        </div>
+        <div class="profile-left-form-sec">
+          <div class="profile-form-row">
+            <div class="profile-input-outer user-timeline-textinput-left">
+              <input class="profile-input-text" placeholder="Message Text..." type="text">
+            </div>
+          </div>
+          <div class="profile-form-row">
+            <button class="user-timeline-left-btn user-chat-btn"><img src="assets/images/usertimeline-icon-1.png" alt=""><span>Chat</span></button>
+            <button class="user-timeline-left-btn user-review-btn"><img src="assets/images/usertimeline-icon-2.png" alt=""><span>My Friends</span></button>
+            <button class="user-timeline-left-btn user-review-btn"><img src="assets/images/usertimeline-icon-2.png" alt=""><span>Review</span></button>
+            <button class="user-timeline-left-btn"><img src="assets/images/usertimeline-icon-3.png" alt=""></button>
+            <button class="user-timeline-left-btn"><img src="assets/images/usertimeline-icon-4.png" alt=""></button>
+            <button class="save-btn usertimeline-send-btn">Send Message</button>
+          </div>
+          <div class="profile-form-row">
+            <!--<button class="user-timeline-big-btn"><img src="assets/images/profile-btn-icon-2.png" alt=""><span>Content</span></button>
+            <button class="user-timeline-big-btn"><img src="assets/images/profile-btn-icon-3.png" alt=""><span>assets/images</span></button>-->
+            <div class="user-timeline-big-btn">
+              <select>
+                <option>Content</option>
+                <option>Safe content only</option>
+                <option>All including explicit</option>
+              </select>
+            </div>
+            <div class="user-timeline-big-btn">
+              <select>
+                <option>assets/images</option>
+                <option>Large assets/images</option>
+                <option>Thumbnails only</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="profile-post-sec">
+          <div class="profile-post-row">
+            <ul>
+              <li>
+                <div class="profile-post-img"><img src="assets/images/user-timeline-post-img.jpg" alt=""></div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6><a href="#">Totolo33</a></h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo conse</p>
+                  </div>
+                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a> <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a> <span class="prof-date">20 March</span> </div>
+                </div>
+                <ul>
+                  <li>
+                    <div class="profile-post-img"><img src="assets/images/photo-image-1.jpg" alt=""></div>
+                    <div class="profile-post-text">
+                      <div class="prof-text-top">
+                        <h6><a href="#">lola_kemiron</a></h6>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                      </div>
+                      <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a><span class="prof-date">20 March</span></div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div class="profile-comment-box">
+              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+              <div class="profile-input-outer">
+                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+            </div>
+          </div>
+          <div class="profile-post-row">
+            <ul>
+              <li>
+                <div class="profile-post-img"><img src="assets/images/user-timeline-post-img.jpg" alt=""></div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6><a href="#">Totolo33</a></h6>
+                    <p>Lorem Ipsum Dolor</p>
+                    <div class="activity-list-img"><a href="#" data-toggle="modal" data-target="#video-pop"><img src="assets/images/activity-dummy-img.jpg" alt=""></a>
+                      <div class="modal fade" id="video-pop" role="dialog">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <!--<div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4>SEARCH FOR RATES </h4>
+                </div>-->
+                            <div class="modal-body">
+                              <button type="button" class="close modal-cross" data-dismiss="modal">&times;</button>
+                              <div class="modal-body-inner">
+                                <div class="modal-left">
+                                  <div class="modal-left-icon"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart-o"></i></a> </div>
+                                  <div class="modal-left-video-outer">
+                                    <div class="owl-demo-pop owl-carousel">
+                                      <div class="item"><img src="assets/images/modal-video.jpg" alt=""></div>
+                                      <div class="item"><img src="assets/images/modal-video.jpg" alt=""></div>
+                                      <div class="item"><img src="assets/images/modal-video.jpg" alt=""></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-right">
+                                  <div class="moda-row">
+                                    <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""> </div>
+                                    <div class="modal-top-text-icon">
+                                      <h5><a href="#">Totolo33</a></h5>
+                                      <p><a href="#"><i class="fa fa-heart-o"></i><span>14 Likes</span></a></p>
+                                    </div>
+                                  </div>
+                                  <div class="modal-row">
+                                    <div class="profile-input-outer">
+                                      <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                                      <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+                                  </div>
+                                  <div class="modal-row text-center">
+                                    <input type="submit" class="save-btn" value="Post">
+                                  </div>
+                                  <div class="modal-row">
+                                    <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt="">
+                                      <div class="event-user-active">&nbsp;</div>
+                                    </div>
+                                    <div class="profile-post-text">
+                                      <div class="prof-text-top">
+                                        <h6><a href="#">Shogunpro125 </a></h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                                      </div>
+                                    </div>
+                                    <div class="useracitivity-date">4 Minutes ago</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>
+                    <!--<a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a>-->
+                    <span class="prof-date">20 March</span> </div>
+                </div>
+              </li>
+            </ul>
+            <div class="profile-comment-box">
+              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+              <div class="profile-input-outer">
+                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+            </div>
+          </div>
+          <div class="profile-post-row">
+            <ul>
+              <li>
+                <div class="profile-post-img"><img src="assets/images/user-timeline-post-img.jpg" alt=""></div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6><a href="#">Totolo33</a></h6>
+                    <!--<p><a href="#">lola_kemiron</a>and <a href="#">3 others</a> have looked at your profile</p>-->
+                    <p>Lorem Ipsum Dolor</p>
+                    <div class="activity-list-img"><a href="#" data-toggle="modal" data-target="#image-pop"><img src="assets/images/user-post-image.jpg" alt=""></a>
+                      <div class="modal fade" id="image-pop" role="dialog">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <!--<div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4>SEARCH FOR RATES </h4>
+                </div>-->
+                            <div class="modal-body">
+                              <button type="button" class="close modal-cross" data-dismiss="modal">&times;</button>
+                              <div class="modal-body-inner">
+                                <div class="modal-left">
+                                  <div class="modal-left-image-outer">
+                                    <div class="owl-demo-pop owl-carousel">
+                                      <div class="item"><img src="assets/images/popupphoto.jpg" alt=""></div>
+                                      <div class="item"><img src="assets/images/popupphoto.jpg" alt=""></div>
+                                      <div class="item"><img src="assets/images/popupphoto.jpg" alt=""></div>
+                                    </div>
+                                    <div class="modal-image-icon"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart-o"></i></a> </div>
+                                  </div>
+                                </div>
+                                <div class="modal-right">
+                                  <div class="moda-row">
+                                    <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""> </div>
+                                    <div class="modal-top-text-icon">
+                                      <h5><a href="#">Totolo33</a></h5>
+                                      <p><a href="#"><i class="fa fa-heart-o"></i><span>14 Likes</span></a></p>
+                                    </div>
+                                  </div>
+                                  <div class="modal-row">
+                                    <div class="profile-input-outer">
+                                      <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                                      <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+                                  </div>
+                                  <div class="modal-row text-center">
+                                    <input type="submit" class="save-btn" value="Post">
+                                  </div>
+                                  <div class="modal-row">
+                                    <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt="">
+                                      <div class="event-user-active">&nbsp;</div>
+                                    </div>
+                                    <div class="profile-post-text">
+                                      <div class="prof-text-top">
+                                        <h6><a href="#">Shogunpro125 </a></h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                                      </div>
+                                    </div>
+                                    <div class="useracitivity-date">4 Minutes ago</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>
+                    <!--<a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a>-->
+                    <span class="prof-date">20 March</span> </div>
+                </div>
+              </li>
+            </ul>
+            <div class="profile-comment-box">
+              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+              <div class="profile-input-outer">
+                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+            </div>
+          </div>
+          <div class="profile-post-row">
+            <ul>
+              <li>
+                <div class="profile-post-img"><img src="assets/images/user-timeline-post-img.jpg" alt=""></div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6><a href="#">Totolo33</a></h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo conse</p>
+                  </div>
+                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>
+                    <!--<a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a>-->
+                    <a href="#" class="prof-date">4 Minutes ago</a> </div>
+                </div>
+                <ul>
+                  <li>
+                    <div class="profile-post-img"><img src="assets/images/photo-image-1.jpg" alt=""></div>
+                    <div class="profile-post-text">
+                      <div class="prof-text-top">
+                        <h6><a href="#">lola_kemiron</a></h6>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
+                      </div>
+                      <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a> <a href="#" class="prof-date">4 Minutes ago</a> </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div class="profile-comment-box">
+              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+              <div class="profile-input-outer">
+                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+            </div>
+          </div>
+          <div class="profile-post-row">
+            <ul>
+              <li>
+                <div class="profile-post-img"><img src="assets/images/user-timeline-post-img.jpg" alt=""></div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6><a href="#">Totolo33</a></h6>
+                    <p>Lorem ipsum dolor</p>
+                    <div class="activity-list-img"><img src="assets/images/activity-dummy-img.jpg" alt=""></div>
+                  </div>
+                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>
+                    <!--<a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a>-->
+                    <a href="#" class="prof-date">4 Minutes ago</a> </div>
+                </div>
+              </li>
+            </ul>
+            <div class="profile-comment-box">
+              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+              <div class="profile-input-outer">
+                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+            </div>
+          </div>
+          <div class="profile-post-row">
+            <ul>
+              <li>
+                <div class="profile-post-img"><img src="assets/images/user-timeline-post-img.jpg" alt=""></div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6><a href="#">Totolo33</a></h6>
+                    <p>Lorem ipsum dolor</p>
+                    <div class="activity-list-img"><img src="assets/images/user-post-image.jpg" alt=""></div>
+                  </div>
+                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>
+                    <!--<a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a> -->
+                    <a href="#" class="prof-date">4 Minutes ago</a> </div>
+                </div>
+              </li>
+            </ul>
+            <div class="profile-comment-box">
+              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+              <div class="profile-input-outer">
+                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+            </div>
+          </div>
+          <p><a href="#" class="form-submit-btn loadmore-btn" id="loadMore-profile">Load More</a></p>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="photo-row photo-row1 usertimeline-photo-vid-sec">
+          <!--<div class="downarrow-mobile downarrow-mobile1"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>-->
+          <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Photos &amp; Videos</span></h4>
+          <ul>
+           <li *ngFor="let img of publicImages;"><img [src]="img.url" [alt]="img.altTag" ></li>
+            <li *ngFor="let f of publicvideos | filterBy :{access: 'public'}"><video [src] = "f.url"  controls>Your browser does not support HTML5 video.</video></li>
+          </ul>
+        </div>
+        <div class="similar-prof-sec">
+          <h5><img src="assets/images/profile-icon.png" alt=""><span>Similar Profiles</span></h5>
+          <ul>
+            <li>
+              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
+                <div class="event-user-active">&nbsp;</div>
+              </div>
+              <p><a href="#">oirazor1971</a></p>
+            </li>
+            <li>
+              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
+                <div class="event-user-active">&nbsp;</div>
+              </div>
+              <p><a href="#">oirazor1971</a></p>
+            </li>
+            <li>
+              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
+                <div class="event-user-active">&nbsp;</div>
+              </div>
+              <p><a href="#">oirazor1971</a></p>
+            </li>
+            <li>
+              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
+                <div class="event-user-active">&nbsp;</div>
+              </div>
+              <p><a href="#">oirazor1971</a></p>
+            </li>
+            <li>
+              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
+                <div class="event-user-active">&nbsp;</div>
+              </div>
+              <p><a href="#">oirazor1971</a></p>
+            </li>
+            <li>
+              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
+                <div class="event-user-active">&nbsp;</div>
+              </div>
+              <p><a href="#">oirazor1971</a></p>
+            </li>
+            <li>
+              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
+                <div class="event-user-active">&nbsp;</div>
+              </div>
+              <p><a href="#">oirazor1971</a></p>
+            </li>
+            <li>
+              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
+                <div class="event-user-active">&nbsp;</div>
+              </div>
+              <p><a href="#">oirazor1971</a></p>
+            </li>
+            <li>
+              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
+                <div class="event-user-active">&nbsp;</div>
+              </div>
+              <p><a href="#">oirazor1971</a></p>
+            </li>
+            <li>
+              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
+                <div class="event-user-active">&nbsp;</div>
+              </div>
+              <p><a href="#">oirazor1971</a></p>
+            </li>
+          </ul>
+        </div>
+        <div class="profile-review-sec">
+          <h5><img src="assets/images/star-icon.png" alt=""><span>Reviews</span></h5>
+          <ul>
+            <li>
+              <div class="profile-post-img"><img src="assets/images/event-pic-6.jpg" alt="">
+                <div class="event-user-active">&nbsp;</div>
+              </div>
+              <div class="profile-post-text">
+                <div class="prof-text-top">
+                  <h6><a href="#">lola_kemiron</a></h6>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                </div>
+              </div>
+              <div class="useracitivity-date">20 Mart</div>
+            </li>
+          </ul>
+        </div>
+        <div class="profile-left-form-sec">
+          <div class="profile-form-row">
+            <div class="profile-input-outer user-timeline-textinput">
+              <input class="profile-input-text" placeholder="Have you meet? Leave a review..." type="text">
+            </div>
+            <input class="save-btn profile-input-btn" value="Post" type="text">
+          </div>
+        </div>
+        <div class="friends-tab-content profile-right-friends-sec">
+          <h5><i class="fa fa-handshake-o"></i> <span>Friends</span></h5>
+          <ul id="myList2">
+            <li>
+              <div class="row">
+                <div class="col-lg-10 col-md-12 col-sm-9 col-xs-12">
+                  <div class="friends-sml-img"><img src="assets/images/photo-image-1.jpg" alt="">
+                    <div class="event-user-active">&nbsp;</div>
+                  </div>
+                  <div class="friends-sml-text">
+                    <h6>oirazor1971</h6>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-12 col-sm-3 col-xs-12">
+                  <div class="friends-icon-sec">
+                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
+                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-lg-10 col-md-12 col-sm-9 col-xs-12">
+                  <div class="friends-sml-img"><img src="assets/images/photo-image-1.jpg" alt="">
+                    <div class="event-user-active">&nbsp;</div>
+                  </div>
+                  <div class="friends-sml-text">
+                    <h6>oirazor1971</h6>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-12 col-sm-3 col-xs-12">
+                  <div class="friends-icon-sec">
+                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
+                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-lg-10 col-md-12 col-sm-9 col-xs-12">
+                  <div class="friends-sml-img"><img src="assets/images/photo-image-1.jpg" alt="">
+                    <div class="event-user-active">&nbsp;</div>
+                  </div>
+                  <div class="friends-sml-text">
+                    <h6>oirazor1971</h6>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                  </div>
+                  <div class="visit-user">Last visit 01:44 Today</div>
+                </div>
+                <div class="col-lg-2 col-md-12 col-sm-3 col-xs-12">
+                  <div class="friends-icon-sec">
+                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
+                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
+                  <div class="friends-sml-img"><img src="assets/images/photo-image-1.jpg" alt="">
+                    <div class="event-user-active">&nbsp;</div>
+                  </div>
+                  <div class="friends-sml-text">
+                    <h6>oirazor1971</h6>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
+                  <div class="friends-icon-sec">
+                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
+                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
+                  <div class="friends-sml-img"><img src="assets/images/photo-image-1.jpg" alt="">
+                    <div class="event-user-active">&nbsp;</div>
+                  </div>
+                  <div class="friends-sml-text">
+                    <h6>oirazor1971</h6>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25 Bi-Ceriussss</span> </p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
+                  <div class="friends-icon-sec">
+                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
+                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div id="loadMore2" class="more-setting-outer">More</div>
+        </div>
+        <div class="profile-hotlist-sec">
+          <h5><i class="fa fa-heart-o"></i> <span>Hotlist</span></h5>
+          <ul id="myList3">
+            <li>
+              <div class="hotlist-box">
+                <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                  <div class="event-user-active">&nbsp;</div>
+                </div>
+                <div class="friends-sml-text online-user-sml-text">
+                  <h6><a href="#">Patrick</a></h6>
+                  <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
+                  <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
+                </div>
+                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+              </div>
+              <div class="hotlist-box">
+                <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                  <div class="event-user-active">&nbsp;</div>
+                </div>
+                <div class="friends-sml-text online-user-sml-text">
+                  <h6><a href="#">Patrick</a></h6>
+                  <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
+                  <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
+                </div>
+                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+              </div>
+            </li>
+            <li>
+              <div class="hotlist-box">
+                <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                  <div class="event-user-active">&nbsp;</div>
+                </div>
+                <div class="friends-sml-text online-user-sml-text">
+                  <h6><a href="#">Patrick</a></h6>
+                  <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
+                  <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
+                </div>
+                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+              </div>
+              <div class="hotlist-box">
+                <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                  <div class="event-user-active">&nbsp;</div>
+                </div>
+                <div class="friends-sml-text online-user-sml-text">
+                  <h6><a href="#">Patrick</a></h6>
+                  <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
+                  <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
+                </div>
+                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+              </div>
+            </li>
+          </ul>
+          <div id="loadMore3" class="more-setting-outer">More</div>
+        </div>
+        <div class="profile-review-sec">
+          <h5><img src="assets/images/event-icon.png" alt=""><span>1 Meet-ups</span></h5>
+          <ul>
+            <li>
+              <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt="">
+                <div class="event-user-active">&nbsp;</div>
+              </div>
+              <div class="profile-post-text">
+                <div class="prof-text-top">
+                  <h6><a href="#">Shogunpro125 </a></h6>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                </div>
+              </div>
+              <div class="useracitivity-date">20 Mart</div>
+            </li>
+          </ul>
+        </div>
+
