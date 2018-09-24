@@ -92,6 +92,7 @@
             </div>
             <div class="search-detail-tab-row search-detail-tab-rowlst-row">
               <input type="submit" class="save-btn" value="Search" (click)="submit_quick_search()">
+              <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
             </div>
           </div>
           <div id="tab2" [ngStyle]="{'display': tab === 'tab2' ? 'block' : 'none'}">
@@ -281,6 +282,7 @@
               <div class="search-user-input-outer">
                 <label>Type Username Here</label>
                 <input type="text" class="search-user-input" [(ngModel)]="username" placeholder="Username...">
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
               </div>
             </div>
             <div class="search-detail-tab-row search-detail-tab-rowlst-row">
@@ -289,9 +291,27 @@
           </div>
         </div>
 
-        <ul  *ngIf="results.length" >
+        <ul>
           <li *ngFor="let opt of results">
-            <div class="row" >
+            <div class="row" *ngIf= "quick">
+              <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
+                <div class="friends-sml-img"><img [src]="opt.user.avatar" alt="">
+                  <div class="event-user-active">&nbsp;</div>
+                </div>
+                <div class="friends-sml-text"  (click)="goToTimeline(opt.user._id)">
+                  <h6>{{opt.user.username}}</h6>
+                  <p *ngIf="opt.gender=='C'"> <span><i class="fa fa-mars"></i> {{this.getAge(opt.user.mm +"/"+opt.user.dd +"/"+opt.user.yyyy )}} {{opt.user.sexuality}}</span> <span><i class="fa fa-venus"></i> {{this.getAge(opt.user.mm +"/"+opt.user.dd +"/"+opt.user.yyyy )}} {{opt.user.sexuality_female}}</span> </p>
+                  <p *ngIf="opt.gender=='M'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.user.mm +"/"+opt.user.dd +"/"+opt.user.yyyy )}} {{opt.user.sexuality}}</span></p>
+                  <p *ngIf="opt.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.user.mm +"/"+opt.user.dd +"/"+opt.user.yyyy )}} {{opt.user.sexuality}}</span> </p>
+                  <p *ngIf="opt.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.user.mm +"/"+opt.user.dd +"/"+opt.user.yyyy )}} {{opt.user.sexuality}}</span> </p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
+                <div class="friends-icon-sec" *ngIf="status=='2'"> <a href="javascript:void(0)" class="friends-plus-icon" (click)="request_send(opt._id)"><i class="fa fa-plus" aria-hidden="true"></i></a> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                <div class="friends-icon-sec" *ngIf="status =='0'"> <a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+              </div>
+            </div>
+            <div class="row" *ngIf= "!quick">
               <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
                 <div class="friends-sml-img"><img [src]="opt.avatar" alt="">
                   <div class="event-user-active">&nbsp;</div>
@@ -310,6 +330,7 @@
               </div>
             </div>
           </li>
+          <li *ngIf="results.length=='0'"><p>No User found</p></li>
         </ul>
 
       </div>

@@ -34,6 +34,8 @@ export class SearchComponent implements OnInit {
   state:any;
   results:any=[];
   status:any = 2;
+  loading:any = false;
+  quick:any = false;
   constructor(private router: Router,private auth: AuthenticationService,public search: SearchService,private store: Store<AppState>,private toastr: ToastrService) {
   }
 
@@ -43,7 +45,6 @@ export class SearchComponent implements OnInit {
       this.search.search_by_username(this.username)
       .pipe(
         tap(data => {
-          this.results = data.info;
           if(data.code != 200){
             this.toastr.error("user not find");
           }else{
@@ -116,12 +117,20 @@ export class SearchComponent implements OnInit {
   }
 
    submit_quick_search(){
+      this.loading = true;
 
      this.search.submit_quick_search(this.gender,this.looking_for_male,this.looking_for_female,this.looking_for_couple,this.looking_for_cd,this.distance,this.count,this.st)
       .pipe(
         tap(data => {
+          this.loading = false;
+          if(data.code != 200){
+            this.toastr.error("user not find");
+            this.results = [];
+          }else{
+            this.quick= true;
+            this.results = data.info;
 
-
+          }
 
         })
       ).subscribe(noop);

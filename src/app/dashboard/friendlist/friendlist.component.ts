@@ -61,6 +61,7 @@ friend_list:any = [];
       tap(datas => {
         this.toastr.success(datas.msg);
         this.results = datas.info;
+        window.location.reload();
       })
 ).subscribe(noop);
   }
@@ -71,6 +72,7 @@ friend_list:any = [];
       tap(datas => {
         this.toastr.success(datas.msg);
         this.list = datas.info;
+        window.location.reload();
       })
 ).subscribe(noop);
   }
@@ -80,6 +82,7 @@ friend_list:any = [];
       tap(datas => {
         this.toastr.success(datas.msg);
         this.friend_list = datas.info;
+        window.location.reload();
       })
 ).subscribe(noop);
   }

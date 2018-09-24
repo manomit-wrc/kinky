@@ -133,10 +133,10 @@ export class InterestsComponent implements OnInit {
   ).subscribe(noop)
   }
 
-  update(looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,from_age,to_age,distance,country_id,state_id,interest_match,live_country,explicit_content) {
+  update(looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,from_age,to_age,distance,country,state,interest_match,live_country,explicit_content) {
     this.loading = true;
 
- this.auth.interest_update(looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,from_age,to_age,distance,country_id,state_id,interest_match,live_country,explicit_content)
+ this.auth.interest_update(looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,from_age,to_age,distance,country,state,interest_match,live_country,explicit_content)
     .pipe(first())
     .subscribe(data => {
 
