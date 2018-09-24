@@ -22,7 +22,10 @@ export class SearchComponent implements OnInit {
   distance:any =  '10';
   gender:any;
   show_profile:any;
-  looking_for:any;
+  looking_for_male:any = false;
+  looking_for_female:any = false;
+  looking_for_couple:any = false;
+  looking_for_cd:any = false;
   show__user:any = false;
   count:any;
   st:any;
@@ -114,7 +117,7 @@ export class SearchComponent implements OnInit {
 
    submit_quick_search(){
 
-          this.search.submit_quick_search(this.gender,this.looking_for,this.distance,this.count,this.st)
+     this.search.submit_quick_search(this.gender,this.looking_for_male,this.looking_for_female,this.looking_for_couple,this.looking_for_cd,this.distance,this.count,this.st)
       .pipe(
         tap(data => {
 

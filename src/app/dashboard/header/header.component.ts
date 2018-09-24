@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   avatar: string = '';
   is_email_verified = 0;
   count: any;
+  count_friend:any;
   isLoading: any = false;
   constructor(
     private auth: AuthenticationService,
@@ -36,12 +37,17 @@ export class HeaderComponent implements OnInit {
     this.store.select(emailVerified)
       .subscribe(isEmailVerified => {
         this.is_email_verified = isEmailVerified;
-      })
+      });
 
     this.auth.onlineusers()
-    .subscribe(user =>{
+    .subscribe(user => {
       this.count = user.count;
-    })
+    });
+
+    this.auth.friends_count()
+    .subscribe(user => {
+      this.count_friend = user.count;
+    });
 
 
   }

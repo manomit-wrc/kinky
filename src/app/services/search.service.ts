@@ -19,8 +19,8 @@ export class SearchService {
     return this.http.post<any>(`${this.apiUri}/search-by-username`, { username });
   }
 
-  submit_quick_search(gender,looking_for,distance,country,state){
-    return this.http.post<any>(`${this.apiUri}/submit-quick-search`, { gender,looking_for,distance,country,state });
+  submit_quick_search(gender,looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,distance,country,state){
+    return this.http.post<any>(`${this.apiUri}/submit-quick-search`, { gender,looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,distance,country,state });
   }
 
   userdetailsByid(id){
@@ -31,5 +31,23 @@ export class SearchService {
   }
   fetchInvitation(){
    return this.http.post<any>(`${this.apiUri}/fetch-invetation`, {});
+  }
+  show_invetation_list(){
+   return this.http.post<any>(`${this.apiUri}/show_invetation_list`, {});
+  }
+  accept(from_id){
+   return this.http.post<any>(`${this.apiUri}/accept`, {from_id});
+  }
+  reject(from_id){
+   return this.http.post<any>(`${this.apiUri}/reject`, {from_id});
+  }
+  friend_list(){
+    return this.http.post<any>(`${this.apiUri}/friend_list`, {});
+  }
+  cancel_invetation(to_id){
+    return this.http.post<any>(`${this.apiUri}/cancel_invetation`, {to_id});
+  }
+  friend_remove(to_id){
+    return this.http.post<any>(`${this.apiUri}/friend_remove`, {to_id});
   }
 }
