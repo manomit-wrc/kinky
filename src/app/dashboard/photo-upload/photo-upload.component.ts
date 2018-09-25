@@ -24,7 +24,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PhotoUploadComponent implements OnInit {
   public _success : BehaviorSubject<number> = new BehaviorSubject(0);
-  
+
   _imageData = this._success.asObservable();
   selectedFiles: FileList;
   fileArr = [];
@@ -68,7 +68,7 @@ BarWidth = 0;
         this.fileArr = images;
         this.publicImages = this.fileArr.filter(f => f.access === 'Public');
         this.privateImages = this.fileArr.filter(f => f.access === 'Private');
-        
+
       })
     ).subscribe(noop);
 
@@ -106,7 +106,7 @@ BarWidth = 0;
     this.auth.uploadProfileImage(this.imageData)
       .pipe(tap(
         data => {
-          
+
           const info = data.info
           this.store.dispatch(new Login({ info }));
           this.toastr.success("Images are uploaded successfully");
@@ -120,7 +120,7 @@ BarWidth = 0;
   }
 
   uploadImage(file) {
-   
+
     return new Promise(resolve => {
       const params = {
         Bucket: 'kinky-wrc',
@@ -204,7 +204,7 @@ BarWidth = 0;
 
   }
 
-  
+
 
   moveToPrivate(imgUrl, access) {
     access = access === 'Private' ? 'Public' : 'Private';
@@ -215,16 +215,16 @@ BarWidth = 0;
           this.store.dispatch(new Login({ info }));
           //window.location.reload();
           this.toastr.success(`This image is now ${access}`);
-          
+
         })
       ).subscribe(noop)
   }
 
   setAsProfile(imgUrl) {
-    
+
     let img = new Image();
     img.src = imgUrl;
-   
+
     if(img.naturalHeight <= 170 && img.naturalWidth <= 170) {
       this.auth.setAsProfile(imgUrl)
       .pipe(
@@ -238,7 +238,7 @@ BarWidth = 0;
     else {
       this.toastr.error(`For profile pic, maximum image dimension will be 170x170`)
     }
-    
+
   }
 
   setPublicImage(image, index) {
@@ -248,7 +248,7 @@ BarWidth = 0;
     this.selectedIndex = index;
     this.tempImages = this.publicImages;
     this.altTag = image.altTag;
-    
+
   }
 
   setPrivateImage(image, index) {
@@ -264,18 +264,18 @@ BarWidth = 0;
     if(this.selectedIndex < 0) {
       this.selectedIndex = this.tempImages.length - 1;
     }
-    
+
     const data = this.tempImages[this.selectedIndex];
     this.image = data;
     this.altTag = this.image.altTag;
   }
-  
+
   onNext() {
     this.selectedIndex = this.selectedIndex + 1;
     if(this.selectedIndex > this.tempImages.length - 1) {
       this.selectedIndex = 0;
     }
-    
+
     const data = this.tempImages[this.selectedIndex];
     this.image = data;
     this.altTag = this.image.altTag;
@@ -283,7 +283,7 @@ BarWidth = 0;
 
   toggleClass(event) {
     var target = event.currentTarget;
-    
+
     if(target.className.indexOf("save-btn") === -1) {
       this.renderer.setElementClass(target, "save-btn", true);
     }
@@ -297,15 +297,15 @@ BarWidth = 0;
     if(target.previousSibling.className.indexOf("save-btn") === -1) {
       this.btnValue = this.image.access
     }
-    
-    
+
+
     this.auth.changeImageDetails(this.image.url, this.btnValue, this.altTag)
       .pipe(
         tap(data => {
           const info = data.info;
           this.store.dispatch(new Login({ info }));
           this.toastr.success("Image details is changed successfully");
-          
+
         })
       ).subscribe(noop)
   }
@@ -314,6 +314,6 @@ BarWidth = 0;
     this.showSlider = false;
   }
 
-  
+
 
 }

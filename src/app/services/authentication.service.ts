@@ -295,6 +295,13 @@ export class AuthenticationService {
       return this.http.post<any>(`${this.apiUri}/change-image-details`, {imageUrl, access, altTag});
     }
 
+    post(post_description:string):Observable<any>{
+      return this.http.post<any>(`${this.apiUri}/post_description`, {post_description});
+    }
+    post_list(post_description:string):Observable<any>{
+      return this.http.post<any>(`${this.apiUri}/post_list`, {});
+    }
+
 
 
 /* Check for password match*/

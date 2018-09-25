@@ -44,6 +44,9 @@ export class SearchService {
   friend_list(){
     return this.http.post<any>(`${this.apiUri}/friend_list`, {});
   }
+  friend_list_by_user(id){
+    return this.http.post<any>(`${this.apiUri}/friend_list_by_user`, {id});
+  }
   cancel_invetation(to_id){
     return this.http.post<any>(`${this.apiUri}/cancel_invetation`, {to_id});
   }

@@ -1,3 +1,4 @@
+import { SearchService } from '../../services/search.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { debounceTime, tap } from 'rxjs/operators';
@@ -10,7 +11,7 @@ import { userDetails, locationDetails ,profileImages,profileVideos} from '../../
 import { noop } from '@angular/compiler/src/render3/view/util';
 import { loadAllMasters } from '../dashboard.selectors';
 import { Subject } from 'rxjs';
-
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 
 @Component({
@@ -63,14 +64,29 @@ export class MyProfileComponent implements OnInit {
   publicImages:any;
   publicvideos:any;
   seeking_for: string = '';
+  friend_list:any= [];
+  post_description:any = "";
   constructor(
     private auth: AuthenticationService,
     private router: Router,
     private avt: UserService,
-    private store: Store<AppState>
+    public search: SearchService,
+    private store: Store<AppState>,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
+
+    this.search.friend_list()
+      .subscribe (datas => {
+        this.friend_list = datas.info;
+      });
+
+      this.auth.post_list(this.post_description)
+    .subscribe(data => {
+
+    });
+
 
     $(document).ready(function() {
       var $owl = $('.owl-carousel');
@@ -204,6 +220,15 @@ export class MyProfileComponent implements OnInit {
 
   }
 
+  friend_remove(id){
+    this.search.friend_remove(id)
+    .subscribe(datas => {
+        this.toastr.success(datas.msg);
+        this.friend_list = datas.info;
+        window.location.reload();
+      });
+  }
+
    getAge(DOB) {
     var today = new Date();
     var birthDate = new Date(DOB);
@@ -223,6 +248,15 @@ verifyEmail() {
       if(data.code === 200) {
         this.isLoading = false;
         this._success.next(data.message);
+      }
+    });
+}
+
+post(){
+  this.auth.post(this.post_description)
+    .subscribe(data => {
+      if(data.code === 200) {
+
       }
     });
 }

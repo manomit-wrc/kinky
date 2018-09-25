@@ -107,10 +107,10 @@
         <div class="profile-left-form-sec">
           <div class="profile-form-row">
             <div class="profile-input-outer">
-              <input type="text" class="profile-input-text" placeholder="Whats in your mind...">
+              <input type="text" [(ngModel)]="post_description" class="profile-input-text" placeholder="Whats in your mind...">
               <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
                   alt=""></a> </div>
-            <input type="button" class="save-btn profile-input-btn" value="Post">
+            <input type="button" class="save-btn profile-input-btn" value="Post" (click)="post()">
           </div>
           <div class="profile-form-row">
 
@@ -375,109 +375,23 @@
         </div>
         <div class="friends-tab-content profile-right-friends-sec">
           <h5><i class="fa fa-handshake-o"></i> <span>Friends</span></h5>
-          <ul id="myList2">
-            <li>
+          <ul>
+            <li *ngFor="let opt of friend_list">
               <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
-                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg"
-                        alt=""></a>
+                  <div class="friends-sml-img"><img [src]="opt.from_user.avatar" alt="">
                     <div class="event-user-active">&nbsp;</div>
                   </div>
                   <div class="friends-sml-text">
-                    <h6><a href="user-timeline.html">oirazor1971</a></h6>
-                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25
-                        Bi-Ceriussss</span> </p>
+                    <h6>{{opt.from_user.username}}</h6>
+                    <p *ngIf="opt.from_user.gender=='C'"> <span><i class="fa fa-mars"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> <span><i class="fa fa-venus"></i> {{this.getAge(opt.from_user.mm_female +"/"+opt.from_user.dd_female +"/"+opt.from_user.yyyy_female )}} {{opt.from_user.sexuality_female}}</span> </p>
+                      <p *ngIf="opt.from_user.gender=='M'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span></p>
+                      <p *ngIf="opt.from_user.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> </p>
+                      <p *ngIf="opt.from_user.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> </p>
                   </div>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
-                  <div class="friends-icon-sec">
-                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
-                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a>
-                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="row">
-                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
-                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg"
-                        alt=""></a>
-                    <div class="event-user-active">&nbsp;</div>
-                  </div>
-                  <div class="friends-sml-text">
-                    <h6><a href="user-timeline.html">oirazor1971</a></h6>
-                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25
-                        Bi-Ceriussss</span> </p>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
-                  <div class="friends-icon-sec">
-                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
-                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a>
-                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="row">
-                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
-                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg"
-                        alt=""></a>
-                    <div class="event-user-active">&nbsp;</div>
-                  </div>
-                  <div class="friends-sml-text">
-                    <h6><a href="user-timeline.html">oirazor1971</a></h6>
-                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25
-                        Bi-Ceriussss</span> </p>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
-                  <div class="friends-icon-sec">
-                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
-                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a>
-                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="row">
-                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
-                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg"
-                        alt=""></a>
-                    <div class="event-user-active">&nbsp;</div>
-                  </div>
-                  <div class="friends-sml-text">
-                    <h6><a href="user-timeline.html">oirazor1971</a></h6>
-                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25
-                        Bi-Ceriussss</span> </p>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
-                  <div class="friends-icon-sec">
-                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
-                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a>
-                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="row">
-                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
-                  <div class="friends-sml-img"><a href="user-timeline.html"><img src="assets/images/photo-image-1.jpg"
-                        alt=""></a>
-                    <div class="event-user-active">&nbsp;</div>
-                  </div>
-                  <div class="friends-sml-text">
-                    <h6><a href="user-timeline.html">oirazor1971</a></h6>
-                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span> <span><i class="fa fa-venus"></i> 25
-                        Bi-Ceriussss</span> </p>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
-                  <div class="friends-icon-sec">
-                    <!--<a href="#" class="friends-cross-icon"><i class="fa fa-close"></i></a>-->
-                    <a href="javascript:void(0)" class="friends-cross-icon profile-frnds-cross"><i class="fa fa-close"></i></a>
-                    <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                  <div class="friends-icon-sec"> <a href="javascript:void(0)" (click)="friend_remove(opt.from_user._id)" class="friends-cross-icon"><i class="fa fa-close"></i></a> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
                 </div>
               </div>
             </li>

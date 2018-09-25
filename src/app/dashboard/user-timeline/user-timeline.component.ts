@@ -56,6 +56,8 @@ export class UserTimelineComponent implements OnInit {
   publicImages:any;
   publicvideos:any;
   seeking_for: string = '';
+  friend_list:any = [];
+  status:any = 2;
   constructor(private router: ActivatedRoute,public search: SearchService,private toastr: ToastrService, private store: Store<AppState>) { }
 
   ngOnInit() {
@@ -63,9 +65,11 @@ export class UserTimelineComponent implements OnInit {
       this.search.userdetailsByid(user_id)
       .pipe(
         tap(datas => {
+
           let data = datas.info;
         this.username = data.username;
          this.avatar = data.avatar !== undefined ? data.avatar: null;
+         this.address = data.state + "," + data.country;
          this.store.select(loadAllMasters)
           .subscribe(masters => {
             if(masters !== undefined) {
@@ -141,9 +145,39 @@ export class UserTimelineComponent implements OnInit {
 
         })
   ).subscribe(noop)
+
+  this.search.friend_list_by_user(user_id)
+  .subscribe (datas => {
+    this.friend_list = datas.info;
+  });
+
   }
+  request_send(){
+    this.search.request_send(this.router.snapshot.params.user_id)
+    .pipe(
+      tap(data => {
+
+        if(data.code!=200){
+          this.toastr.error("Something went wrong");
+        }else{
+          this.status = data.status;
+          this.toastr.success(data.info);
+        }
 
 
+      })
+    ).subscribe(noop);
+  }
+  friend_remove(id){
+    this.search.friend_remove(id)
+    .pipe(
+      tap(datas => {
+        this.toastr.success(datas.msg);
+        this.friend_list = datas.info;
+        window.location.reload();
+      })
+).subscribe(noop);
+  }
 
    getAge(DOB) {
         var today = new Date();
