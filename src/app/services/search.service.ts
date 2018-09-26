@@ -22,6 +22,9 @@ export class SearchService {
   submit_quick_search(gender,looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,distance,country,state){
     return this.http.post<any>(`${this.apiUri}/submit-quick-search`, { gender,looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,distance,country,state });
   }
+  submit_advance_search(gender,looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,distance,country,state,ethnicity,smoke,safe_sex,size,build,from_age,to_age){
+    return this.http.post<any>(`${this.apiUri}/submit-advance-search`, { gender,looking_for_male,looking_for_female,looking_for_couple,looking_for_cd,distance,country,state,ethnicity,smoke,safe_sex,size,build,from_age,to_age });
+  }
 
   userdetailsByid(id){
    return this.http.post<any>(`${this.apiUri}/userdetailsByid`, {id});
