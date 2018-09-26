@@ -21,6 +21,16 @@ export class SearchComponent implements OnInit {
   distance_range: any = [];
   distance:any =  '10';
   gender:any;
+  builds: any;
+  from_age: any = 18;
+  to_age: any= 35;
+  ethnicity: any;
+  build: any;
+  smoke:any="No";
+  safe_sex:any ="Never";
+  size:any="Small";
+  age_range:any=[];
+  ethnicities: any;
   show_profile:any;
   looking_for_male:any = false;
   looking_for_female:any = false;
@@ -66,6 +76,10 @@ export class SearchComponent implements OnInit {
       this.distance_range.push(i);
     }
 
+    for (let i = 18; i <=  55; i++) {
+      this.age_range.push(i);
+    }
+
     this.distance_range  = [{level:'Upto 10 Miles',value:'10'},{level:'Upto 30 Miles',value:'30'},{level:'Upto 50 Miles',value:'50'},{level:'Upto 70 Miles',value:'70'},{level:'Upto 90 Miles',value:'90'},{level:'Upto 100 Miles',value:'100'},{level:'100+',value:'101'}]
 
      this.store.pipe(
@@ -96,9 +110,31 @@ export class SearchComponent implements OnInit {
       if(masters !== null) {
         this.country = masters.countries;
         this.state = masters.states;
+        this.builds = masters.build;
+        this.ethnicities = masters.ethnicity;
       }
 
     })
+  }
+
+  advance_search(){
+
+
+    this.search.submit_advance_search(this.gender,this.looking_for_male,this.looking_for_female,this.looking_for_couple,this.looking_for_cd,this.distance,this.count,this.st,this.ethnicity,this.smoke,this.safe_sex,this.size,this.build,this.from_age,this.to_age)
+      .pipe(
+        tap(data => {
+          this.loading = false;
+          if(data.code != 200){
+            this.toastr.error("user not find");
+            this.results = [];
+          }else{
+            this.quick= true;
+            this.results = data.info;
+
+          }
+
+        })
+      ).subscribe(noop);
   }
 
   onItemChange(e) {

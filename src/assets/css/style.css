@@ -556,7 +556,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#852335', end
 
 .photo-row ul li{ width:46%; display:inline-block; vertical-align:top; margin:0 3px 15px; border-radius:6px; position:relative;}
 
-.photo-row ul li img{ width:100%; display:block; border-radius:6px; height: 95px;}
+.photo-row ul li img{ width:100%; display:block; /* border-radius:6px; height: 95px; */}
 
 .photo-edit-icon{ position:absolute; padding:6px 8px; background:#fff; border-radius:100%; right:10px; bottom:10px; font-size:13px; color:#8d8c8c; display:block;}
 
