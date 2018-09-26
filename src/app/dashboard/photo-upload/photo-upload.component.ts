@@ -137,7 +137,7 @@ BarWidth = 0;
       );
 
 
-      this.percentage = 10;
+      
       this._success.next(this.percentage);
 
       bucket.upload(params).on("httpUploadProgress", evt => {

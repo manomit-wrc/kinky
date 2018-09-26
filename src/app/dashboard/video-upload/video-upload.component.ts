@@ -42,6 +42,9 @@ export class VideoUploadComponent implements OnInit {
   publicVideos:any=[];
   privateVideos:any=[];
   video:any;
+  videoCount: number = 0;
+  videoData = [];
+  display='none';
   constructor(private sanitizer: DomSanitizer,
     private auth: AuthenticationService,
     private _upload: UploadService,
@@ -53,10 +56,11 @@ export class VideoUploadComponent implements OnInit {
   ngOnInit() {
 
     this.selectedIndex = 0;
+    this.display='block';
     this.store.pipe(
       select(profileVideos),
       tap(videos => {
-        console.log(videos);
+        this.videoCount = videos.length;
         this.fileArr = videos;
         this.publicVideos = this.fileArr.filter(f => f.access === 'Public');
         this.privateVideos = this.fileArr.filter(f => f.access === 'Private');
@@ -66,76 +70,94 @@ export class VideoUploadComponent implements OnInit {
     this._videoData.subscribe((percentage) => this.BarWidth = percentage);
   }
 
-  changeListener(fileType: any)  {
-    this.store.pipe(
-      select(profileVideos),
-      tap(videos => {
-       if(videos.length >= 5){
-        this.toastr.error("You already reached your maximum 5 videos uploading limit. If you want to upload new video please delete existing video from your video library.");
-       }else{
+  async changeListener(fileType: any)  {
+    
+    if(this.videoCount + fileType.target.files.length > 5) {
+      this.toastr.error("No of videos should be 5");
+      return;
+    }
+    this.percentage = 10;
+    this._success.next(this.percentage);
+    this.loading = true;
     for(let i = 0; i < fileType.target.files.length; i++) {
       const file = fileType.target.files[i];
+      if((file.size / 1000) <= 120000) {
 
-      if(file.size > 120000000){
-        this.toastr.error("File Name: " + file.name + " not uploaded because of lentgh is greater than 120 Mb" );
-      }else{
+        this.fileArr.push({
+          url: this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)),
+          altTag: '',
+          access: 'Public'
+        });
 
-       this.loading = true;
-
-       this.fileArr.push(this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)));
-       const params = {
-         Bucket: 'kinky-wrc',
-         Key: this.VIDEO_FOLDER + file.name,
-         Body: file,
-         ACL: 'public-read'
-       };
-       const bucket = new S3(
-         {
-           accessKeyId: keyDetails.ACCESS_KEY,
-           secretAccessKey: keyDetails.SECRET_KEY,
-           region: 'us-east-1'
-         }
-       );
-
-
-       this.percentage = 10;
-       this._success.next(this.percentage);
-
-       bucket.upload(params).on("httpUploadProgress", evt => {
-
-         this.percentage = (evt.loaded * 100) / evt.total;
-         this._success.next(parseInt(this.percentage));
-
-       }).send((err, data) => {
-
-         if (err) {
-           console.log('There was an error uploading your file: ', err);
-
-         }
-
-         this.auth.uploadProfileVideo(data.Location, data.key)
-           .pipe(tap(
-             data => {
-               console.log(data);
-               const info = data.info;
-               this.store.dispatch(new Login({ info }))
-               this.toastr.success("Videos are uploaded successfully");
-               setTimeout(() => {
-                 window.location.reload();
-               }, 1000);
-             }
-           )).subscribe(noop);
-
-         });
-
-
-
-
+        await this.uploadVideo(file);
       }
+      else {
+        this.toastr.error("Video size is more than 120 MB")
+      }
+
+
     }
+
+    this.display='block';
+    this.auth.uploadProfileVideo(this.videoData)
+      .pipe(tap(
+        data => {
+
+          const info = data.info
+          this.store.dispatch(new Login({ info }));
+          this.toastr.success("Videos are uploaded successfully");
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+          //window.location.reload();
+        }
+      )).subscribe(noop);
   }
-})
-).subscribe(noop);
+
+  uploadVideo(file) {
+    return new Promise(resolve => {
+      const params = {
+        Bucket: 'kinky-wrc',
+        Key: this.VIDEO_FOLDER + file.name,
+        Body: file,
+        ACL: 'public-read'
+      };
+      const bucket = new S3(
+        {
+          accessKeyId: keyDetails.ACCESS_KEY,
+          secretAccessKey: keyDetails.SECRET_KEY,
+          region: 'us-east-1'
+        }
+      );
+
+
+      
+      this._success.next(this.percentage);
+
+      bucket.upload(params).on("httpUploadProgress", evt => {
+
+        this.percentage = (evt.loaded * 100) / evt.total;
+        this._success.next(parseInt(this.percentage));
+
+      }).send((err, data) => {
+
+
+        if (err) {
+          console.log('There was an error uploading your file: ', err);
+
+        }
+
+        this.videoData.push({
+          url: data.Location,
+          altTag: '',
+          access: 'Private'
+        })
+
+
+        resolve();
+        });
+
+    })
   }
 
 
