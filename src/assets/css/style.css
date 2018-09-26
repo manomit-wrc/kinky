@@ -2028,6 +2028,9 @@ height: 95px;
 background: #000;
 }
 
+.photo-upload-sec .item video {
+  width: 100%;
+}
 /* Custom styles */
 
 .general-tab-row .general-dropdown::after { display: none !important; }

@@ -47,18 +47,19 @@ export class UploadService {
       });
 
   }
-  videosetprivate(id:String): Observable<any> {
+  videosetprivate(videoUrl: string, access: string): Observable<any> {
 
-    return this.http.post<any>(`${this.apiUri}/video-set-private`, { id });
+    return this.http.post<any>(`${this.apiUri}/video-set-private`, {videoUrl, access});
   }
-  deletevideo(id:String): Observable<any> {
+  deleteVideo(id:String): Observable<any> {
 
     return this.http.post<any>(`${this.apiUri}/video-delete`, { id });
   }
-  update_video(tag:String, url:String,access:String): Observable<any> {
+  update_video(videoUrl: string, access: string, altTag: string): Observable<any> {
 
-    return this.http.post<any>(`${this.apiUri}/video-update`, { tag,url,access });
+    return this.http.post<any>(`${this.apiUri}/video-update`, { videoUrl, access, altTag });
   }
+
 
 
 }
