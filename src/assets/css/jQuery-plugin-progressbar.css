@@ -2,11 +2,12 @@
 
 .progress-bar {
   position: relative;
-  height: 200px;
+  /*height: 10px;*/
   width: 200px;
-  float:none;
-  /*background:none;*/
-  box-shadow:none;
+  float: none;
+  /* background: none; */
+  box-shadow: none;
+  /*top: 3px;*/
 }
 
 /* .progress-bar div {
