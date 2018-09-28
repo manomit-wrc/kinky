@@ -9,6 +9,7 @@ import { loadAllMasters } from '../dashboard.selectors';
 import { AuthenticationService } from '../../services';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import * as jwt_decode from 'jwt-decode';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -17,6 +18,7 @@ import { Router } from '@angular/router';
 export class SearchComponent implements OnInit {
   tab: String = 'tab1';
   @Input() userObj: any ;
+  user_id:any;
   username: any;
   distance_range: any = [];
   distance:any =  '10';
@@ -73,6 +75,7 @@ export class SearchComponent implements OnInit {
 
 
   ngOnInit() {
+    this.user_id = jwt_decode(localStorage.getItem('token'));
     for (let i = 1; i <=  100; i++) {
       this.distance_range.push(i);
     }
@@ -82,7 +85,7 @@ export class SearchComponent implements OnInit {
     }
 
     this.distance_range  = [{level:'Upto 10 Miles',value:'10'},{level:'Upto 30 Miles',value:'30'},{level:'Upto 50 Miles',value:'50'},{level:'Upto 70 Miles',value:'70'},{level:'Upto 90 Miles',value:'90'},{level:'Upto 100 Miles',value:'100'},{level:'100+',value:'101'}]
-    
+
      this.store.pipe(
        select(userDetails),
        tap(user => {
@@ -94,7 +97,7 @@ export class SearchComponent implements OnInit {
       select(locationDetails),
       tap(data => {
 
-        
+
 
         if(this.userObj === undefined || this.userObj.country === undefined || this.userObj.state === undefined) {
 
@@ -140,7 +143,7 @@ export class SearchComponent implements OnInit {
           }else{
             this.quick= true;
             this.results = data.info;
-            
+
 
           }
 
@@ -185,7 +188,7 @@ export class SearchComponent implements OnInit {
     }
 
 request_send(event,  to_id){
-  
+
   let target = event.currentTarget;
   //console.log(target.classList.remove('friends-plus-icon'));
   //console.log(target);
@@ -198,7 +201,7 @@ request_send(event,  to_id){
         if(data.code!=200){
           this.toastr.error("Something went wrong");
         }else{
-          
+
           this.toastr.success(data.info);
           target.classList.remove('friends-plus-icon');
           target.childNodes[0].classList.remove('fa-plus');
@@ -222,12 +225,12 @@ request_send(event,  to_id){
         })
       ).subscribe(noop)
   }
-  
+
 }
 
 
       getAge(DOB) {
-        
+
         var today = new Date();
         var birthDate = new Date(DOB);
         var age = today.getFullYear() - birthDate.getFullYear();
@@ -241,7 +244,7 @@ request_send(event,  to_id){
         else {
           return age;
         }
-        
+
     }
 
 }
