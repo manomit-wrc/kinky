@@ -45,12 +45,14 @@ import { CarouselItemDirective } from './carousel-item.directive';
 import { SearchComponent } from './search/search.component';
 import { ToastrModule } from 'ngx-toastr';
 import { UserTimelineComponent } from './user-timeline/user-timeline.component';
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 
 @NgModule({
   imports: [
     CommonModule,
     NgProgressModule.forRoot(),
     ToastrModule.forRoot(),
+    SlimLoadingBarModule.forRoot(),
     NgSelectModule,
     OwlModule,
     NgxImageGalleryModule,

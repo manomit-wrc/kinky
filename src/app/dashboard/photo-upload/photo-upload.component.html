@@ -65,10 +65,13 @@
             <a href="#"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add Photo</span></a>
           </div>
           <!--<ng-progress id="bar-one" #barOne spinnerPosition="left"></ng-progress>-->
-          <div class="progress">
+          <!--<div class="slimbar-container">
+            <ng2-slim-loading-bar></ng2-slim-loading-bar>
+          </div>-->
+          <div class="slimbar-container" *ngIf="loading">
            
             <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [attr.aria-valuenow]="BarWidth" aria-valuemin="0" aria-valuemax ="100" 
-                style="min-width: 2em;" [style.width]="100 + '%'">
+                style="min-width: 2em;" [style.width]="BarWidth + '%'">
                 {{BarWidth}}%
           </div>
           </div>

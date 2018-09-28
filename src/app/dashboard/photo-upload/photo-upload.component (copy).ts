@@ -117,11 +117,8 @@ BarWidth = 0;
           this.store.dispatch(new Login({ info }));
           this.toastr.success("Images are uploaded successfully");
           this._success.next(100);
-          setTimeout(() => {
-            this.percentage = 0;
-            this.loading = false;
-          }, 2000)
-          
+          this.percentage = 0;
+          this.loading = false;
         }
         switch(event.type) {
           case HttpEventType.Sent:
@@ -146,8 +143,92 @@ BarWidth = 0;
         }
     });
 
+    //this.slimLoadingBarService.start();
+
+    // this.percentage = 10;
+    // this._success.next(this.percentage);
+    // this.loading = true;
+    // for(let i = 0; i < fileType.target.files.length; i++) {
+    //   const file = fileType.target.files[i];
+    //   if((file.size / 1000) <= 5000) {
+
+    //     this.fileArr.push({
+    //       url: this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)),
+    //       altTag: '',
+    //       access: 'Public'
+    //     });
+
+    //     await this.uploadImage(file);
+    //   }
+    //   else {
+    //     this.toastr.error("Image size is more than 5 MB")
+    //   }
+
+
+    // }
+    // this.display='block';
+    // this.auth.uploadProfileImage(this.imageData)
+    //   .pipe(tap(
+    //     data => {
+
+    //       const info = data.info
+    //       this.store.dispatch(new Login({ info }));
+    //       this.toastr.success("Images are uploaded successfully");
+    //       setTimeout(() => {
+    //         window.location.reload();
+    //       }, 1000);
+    //       //window.location.reload();
+    //     }
+    //   )).subscribe(noop);
+
   }
 
+  uploadImage(file) {
+
+    return new Promise(resolve => {
+      const params = {
+        Bucket: 'kinky-wrc',
+        Key: this.IMG_FOLDER + file.name,
+        Body: file,
+        ACL: 'public-read'
+      };
+      const bucket = new S3(
+        {
+          accessKeyId: keyDetails.ACCESS_KEY,
+          secretAccessKey: keyDetails.SECRET_KEY,
+          region: 'us-east-1'
+        }
+      );
+
+
+      
+      this._success.next(this.percentage);
+
+      bucket.upload(params).on("httpUploadProgress", evt => {
+
+        this.percentage = (evt.loaded * 100) / evt.total;
+        this._success.next(parseInt(this.percentage));
+
+      }).send((err, data) => {
+
+
+        if (err) {
+          console.log('There was an error uploading your file: ', err);
+
+        }
+
+        this.imageData.push({
+          url: data.Location,
+          altTag: '',
+          access: 'Private'
+        })
+
+
+        resolve();
+        });
+
+    })
+  }
 
   deleteImage(image) {
     this.auth.deleteImage(image)
