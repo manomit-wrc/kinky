@@ -21,7 +21,7 @@ declare var $: any;
 })
 export class MyProfileComponent implements OnInit {
   private _success = new Subject<string>();
-
+  show = 6;
   successMessage: string;
   name: any;
   address: any;

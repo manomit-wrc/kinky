@@ -16,6 +16,7 @@ export class FriendlistComponent implements OnInit {
 results:any  =[];
 list:any  =[];
 friend_list:any = [];
+show = 6;
   constructor(private router: ActivatedRoute,public search: SearchService,private toastr: ToastrService, private store: Store<AppState>) { }
   tab: String = 'tab1';
   ngOnInit() {
@@ -51,6 +52,8 @@ friend_list:any = [];
       tap(datas => {
         this.toastr.success(datas.msg);
         this.results = datas.info;
+        this.friend_list = datas.results;
+        window.location.reload();
       })
 ).subscribe(noop);
   }

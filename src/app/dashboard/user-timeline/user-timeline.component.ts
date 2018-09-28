@@ -27,6 +27,7 @@ export class UserTimelineComponent implements OnInit {
   looking_for_cd: any;
   interested_in: any;
   avatar:any;
+  show:any = 6;
   height:any;
   height_female:any;
   build:any;
@@ -67,6 +68,7 @@ export class UserTimelineComponent implements OnInit {
         tap(datas => {
 
           let data = datas.info;
+
         this.username = data.username;
          this.avatar = data.avatar !== undefined ? data.avatar: null;
          this.address = data.state + "," + data.country;
@@ -106,6 +108,9 @@ export class UserTimelineComponent implements OnInit {
 
           })
 
+          if(data.email_verified) {
+            this.email_verified = true;
+          }
           this.gender = data.gender !== undefined ? data.gender : 'N/A';
         this.sexuality = data.sexuality !== undefined ? data.sexuality : 'N/A';
         this.sexuality_female = data.sexuality_female !== undefined ? data.sexuality_female : 'N/A';
@@ -148,6 +153,9 @@ export class UserTimelineComponent implements OnInit {
 
   this.search.friend_list_by_user(user_id)
   .subscribe (datas => {
+    console.log('====================================');
+    console.log(datas);
+    console.log('====================================');
     this.friend_list = datas.info;
   });
 

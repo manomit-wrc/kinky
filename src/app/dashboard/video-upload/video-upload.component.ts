@@ -71,7 +71,7 @@ export class VideoUploadComponent implements OnInit {
   }
 
   async changeListener(fileType: any)  {
-    
+
     if(this.videoCount + fileType.target.files.length > 5) {
       this.toastr.error("No of videos should be 5");
       return;
@@ -81,7 +81,7 @@ export class VideoUploadComponent implements OnInit {
     this.loading = true;
     for(let i = 0; i < fileType.target.files.length; i++) {
       const file = fileType.target.files[i];
-      if((file.size / 1000) <= 120000) {
+      if((file.size / 1000) <= 5000) {
 
         this.fileArr.push({
           url: this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)),
@@ -131,7 +131,7 @@ export class VideoUploadComponent implements OnInit {
       );
 
 
-      
+
       this._success.next(this.percentage);
 
       bucket.upload(params).on("httpUploadProgress", evt => {

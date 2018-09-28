@@ -5,7 +5,7 @@
         <div class="logo"><a href="/my-profile"><img src="/assets/images/white-logo.png" alt=""></a></div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
-        <div class="top-nav-icon"> <a href="/settings"><i class="fa fa-cog" aria-hidden="true"></i></a> <a href="/search"><i class="fa fa-search" aria-hidden="true"></i></a> <a href="user-activity.html#activity-tab"><i class="fa fa-bell-o" aria-hidden="true"></i><sup>12</sup></a> <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><sup>5</sup></a> <a href="messages.html"><i class="fa fa-envelope-o" aria-hidden="true"></i><sup>31</sup></a> <a href="hotlist.html"><i class="fa fa-heart-o"></i></a> <a href="friends.html#friends-tab-2-tab"><i class="fa fa-handshake-o"></i><sup>1</sup></a> <a href="/my-profile" class="profile-img"><img [src]="avatar" alt=""></a>
+        <div class="top-nav-icon"> <a href="/settings"><i class="fa fa-cog" aria-hidden="true"></i></a> <a href="/search"><i class="fa fa-search" aria-hidden="true"></i></a> <a href="user-activity.html#activity-tab"><i class="fa fa-bell-o" aria-hidden="true"></i><sup>12</sup></a> <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i><sup>5</sup></a> <a href="messages.html"><i class="fa fa-envelope-o" aria-hidden="true"></i><sup>31</sup></a> <a href="hotlist.html"><i class="fa fa-heart-o"></i></a> <a href="/friendlist"><i class="fa fa-handshake-o"></i><sup>{{count_friend_request}}</sup></a> <a href="/my-profile" class="profile-img"><img [src]="avatar" alt=""></a>
           <!--<a href="#" class="arrow-top"><i class="fa fa-caret-square-o-down"></i></a>-->
         </div>
       </div>
@@ -13,7 +13,7 @@
   </div>
 </div>
 <div class="alert alert-warning" style="text-align: center;" *ngIf="!is_email_verified">
-  <strong>Warning! </strong>Your email is not verify. Please verify your email address.<a href= "javascript:void(0)"(click)="verifyEmail()">Click here</a> for resend verification email.
+  <strong>Warning! </strong>Your email is not verified. Please verify your email address.<a href= "javascript:void(0)"(click)="verifyEmail()">Click here</a> for resend verification email.
   <img *ngIf="isLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
 </div>
 <div class="header-icon-sec">

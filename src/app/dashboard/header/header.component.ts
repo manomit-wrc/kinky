@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   is_email_verified = 0;
   count: any;
   count_friend:any;
+  count_friend_request:any;
   isLoading: any = false;
   constructor(
     private auth: AuthenticationService,
@@ -47,6 +48,10 @@ export class HeaderComponent implements OnInit {
     this.auth.friends_count()
     .subscribe(user => {
       this.count_friend = user.count;
+    });
+    this.auth.friends_request_count()
+    .subscribe(user => {
+      this.count_friend_request = user.count;
     });
 
 

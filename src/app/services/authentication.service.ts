@@ -273,6 +273,9 @@ export class AuthenticationService {
     friends_count(): Observable<any> {
       return this.http.post<any>(`${this.apiUri}/count_friend_list`, {})
     }
+    friends_request_count(): Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/friends_request_count`, {})
+    }
 
     uploadProfileImage(imageData: any): Observable<any> {
       return this.http.post<any>(`${this.apiUri}/upload-profile-image`, {imageData})

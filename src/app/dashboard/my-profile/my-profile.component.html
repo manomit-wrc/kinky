@@ -376,27 +376,49 @@
         <div class="friends-tab-content profile-right-friends-sec">
           <h5><i class="fa fa-handshake-o"></i> <span>Friends</span></h5>
           <ul>
-            <li *ngFor="let opt of friend_list">
-              <div class="row">
-                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
+            <li *ngFor="let opt of friend_list |slice:0:show let i=index">
+              <div class="row" *ngIf="opt.from_user.username">
+                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12" >
+                    <a href="/user-timeline/{{opt.from_user._id}}">
                   <div class="friends-sml-img"><img [src]="opt.from_user.avatar" alt="">
                     <div class="event-user-active">&nbsp;</div>
                   </div>
                   <div class="friends-sml-text">
                     <h6>{{opt.from_user.username}}</h6>
-                    <p *ngIf="opt.from_user.gender=='C'"> <span><i class="fa fa-mars"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> <span><i class="fa fa-venus"></i> {{this.getAge(opt.from_user.mm_female +"/"+opt.from_user.dd_female +"/"+opt.from_user.yyyy_female )}} {{opt.from_user.sexuality_female}}</span> </p>
+                    <p *ngIf="opt.from_user.gender=='C'"> <span><i class="fa fa-mars"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> <span><i class="fa fa-venus"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality_female}}</span> </p>
                       <p *ngIf="opt.from_user.gender=='M'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span></p>
                       <p *ngIf="opt.from_user.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> </p>
                       <p *ngIf="opt.from_user.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> </p>
                   </div>
+                  </a>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
                   <div class="friends-icon-sec"> <a href="javascript:void(0)" (click)="friend_remove(opt.from_user._id)" class="friends-cross-icon"><i class="fa fa-close"></i></a> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
                 </div>
               </div>
+              <div class="row" *ngIf="opt.to_user.username">
+                  <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12" >
+                      <a href="/user-timeline/{{opt.to_user._id}}">
+                    <div class="friends-sml-img"><img [src]="opt.to_user.avatar" alt="">
+                      <div class="event-user-active">&nbsp;</div>
+                    </div>
+                    <div class="friends-sml-text">
+                      <h6>{{opt.to_user.username}}</h6>
+                      <p *ngIf="opt.to_user.gender=='C'"> <span><i class="fa fa-mars"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span> <span><i class="fa fa-venus"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality_female}}</span> </p>
+                        <p *ngIf="opt.to_user.gender=='M'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span></p>
+                        <p *ngIf="opt.to_user.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span> </p>
+                        <p *ngIf="opt.to_user.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span> </p>
+                    </div>
+                    </a>
+                  </div>
+                  <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
+                    <div class="friends-icon-sec"> <a href="javascript:void(0)" (click)="friend_remove(opt.to_user._id)" class="friends-cross-icon"><i class="fa fa-close"></i></a> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
+                  </div>
+                </div>
+              <div id="loadMore2" class="more-setting-outer"  *ngIf="i==5 && show == 6" (click)="show = friend_list.length">More</div>
             </li>
           </ul>
-          <div id="loadMore2" class="more-setting-outer">More</div>
+
         </div>
         <div class="profile-party-sec">
           <h5><img src="assets/images/common-icon-1.png" alt=""> <span>Parties</span></h5>
