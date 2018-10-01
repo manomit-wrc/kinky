@@ -288,9 +288,23 @@ export class AuthenticationService {
       return this.http.post<any>(`${this.apiUri}/delete-image`, {image});
     }
 
+    deleteVideo(id:String): Observable<any> {
+
+      return this.http.post<any>(`${this.apiUri}/video-delete`, { id });
+    }
+
     moveToPrivate(imageUrl: string, access: string): Observable<any> {
       return this.http.post<any>(`${this.apiUri}/move-to-private`, {imageUrl, access});
     }
+    videosetprivate(videoUrl: string, access: string): Observable<any> {
+
+      return this.http.post<any>(`${this.apiUri}/video-set-private`, {videoUrl, access});
+    }
+    update_video(videoUrl: string, access: string, altTag: string): Observable<any> {
+
+      return this.http.post<any>(`${this.apiUri}/video-update`, { videoUrl, access, altTag });
+    }
+    
     setAsProfile(imageUrl: string): Observable<any> {
       return this.http.post<any>(`${this.apiUri}/set-as-profile`, {imageUrl});
     }

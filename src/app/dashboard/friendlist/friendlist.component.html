@@ -13,7 +13,7 @@
           <div id="tab1" [ngStyle]="{'display': tab === 'tab1' ? 'block' : 'none'}">
             <ul >
               <li *ngFor="let opt of friend_list |slice:0:show let i=index">
-                <div class="row" *ngIf="opt.from_user.username">
+                <div class="row" *ngIf="opt.from_user.username && opt.from_user._id != session_id">
                   <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12" >
                       <a href="/user-timeline/{{opt.from_user._id}}">
                     <div class="friends-sml-img"><img [src]="opt.from_user.avatar" alt="">
@@ -32,7 +32,7 @@
                     <div class="friends-icon-sec"> <a href="javascript:void(0)" (click)="friend_remove(opt.from_user._id)" class="friends-cross-icon"><i class="fa fa-close"></i></a> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
                   </div>
                 </div>
-                <div class="row" *ngIf="opt.to_user.username">
+                <div class="row" *ngIf="opt.to_user.username && opt.to_user._id != session_id">
                     <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12" >
                         <a href="/user-timeline/{{opt.to_user._id}}">
                       <div class="friends-sml-img"><img [src]="opt.to_user.avatar" alt="">

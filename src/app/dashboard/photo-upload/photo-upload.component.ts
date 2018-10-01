@@ -1,20 +1,15 @@
 import { Component, OnInit, Renderer, ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { AuthenticationService } from '../../services';
-import { first, tap } from 'rxjs/operators';
-import { Observable, noop, BehaviorSubject } from 'rxjs';
+import {  tap } from 'rxjs/operators';
+import { noop, BehaviorSubject } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
-import { log } from 'util';
-import * as S3 from 'aws-sdk/clients/s3';
-import { Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { Login } from '../../auth/auth.actions';
 import { profileImages } from '../../auth/auth.selectors';
-import { keyDetails } from '../../../keys/keys.prod';
 import { ToastrService } from 'ngx-toastr';
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
-import { environment } from '../../../environments/environment'
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -29,7 +24,6 @@ export class PhotoUploadComponent implements OnInit {
   _imageData = this._success.asObservable();
   selectedFiles: FileList;
   fileArr = [];
-  IMG_FOLDER = 'images/';
   percentage: any;
   loading: boolean = false;
   publicImages = [];
@@ -44,8 +38,8 @@ export class PhotoUploadComponent implements OnInit {
   btnValue: string = '';
   altTag = '';
   apiUri = environment.apiUri;
-
-
+  BarWidth: number;
+  lengthCount: number = 0;
 
 
   constructor(private sanitizer: DomSanitizer,
@@ -53,13 +47,14 @@ export class PhotoUploadComponent implements OnInit {
     private store: Store<AppState>,
     private renderer: Renderer,
     private toastr: ToastrService,
-    private slimLoadingBarService: SlimLoadingBarService,
     private http: HttpClient
   ) { }
 
-BarWidth = 0;
+
 
   ngOnInit() {
+
+    this.BarWidth = 0;
 
     this.selectedIndex = 0;
     this.transform = 0;
@@ -95,16 +90,18 @@ BarWidth = 0;
         this.fileArr.push({
           url: this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)),
           altTag: '',
-          access: 'Public'
+          access: 'Private'
         });
       }
       else {
+        this.lengthCount++;
         this.toastr.error(`${file.name} is more than 5 MB`)
       }
       
     }
 
-    this.loading = true;
+    if(this.lengthCount !== fileType.target.files.length) {
+      this.loading = true;
     this.percentage = 5;
     this._success.next(this.percentage);
 
@@ -145,6 +142,9 @@ BarWidth = 0;
             break;
         }
     });
+    }
+
+    
 
   }
 

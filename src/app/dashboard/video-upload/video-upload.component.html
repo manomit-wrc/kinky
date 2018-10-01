@@ -5,19 +5,11 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="profile-pic-sec" *ngIf="showSlider">
           <h3><i class="fa fa-user" aria-hidden="true"></i><span>Video</span></h3>
-       <!--    <div class="video-upload-sec"  *ngIf="showSlider">
-                <video width="400" height="400" [src] = "video_url" controls >
-                  Your browser does not support HTML5 video.
-              </video>
-                <p *ngIf="!video_url">No video selected</p>
-                <div class="video-prev" (click)="onPrev()"></div>
-                <div class="video-next" (click)="onNext()"></div>
-          </div> -->
-
+       
           <div class="photo-slider-sec photo-upload-sec" >
             <div id="owl-demo" class="owl-carousel" >
               <div class="item" *ngIf="showSlider">
-                <video  [src] = "video_url" controls >
+                <video  [src] = "video.url" controls >
                   Your browser does not support HTML5 video.
               </video>
               </div>
@@ -31,9 +23,9 @@
             </div>
           </div>
 
-          <div class="photo-save-area" >
+          <div class="photo-save-area" *ngIf="showSlider">
             <div class="photo-save-input-outer">
-              <input type="text" [(ngModel)]="video_tag" class="photo-input">
+              <input type="text" [(ngModel)]="altTag" class="photo-input">
             </div>
             <div class="photo-save-input-outer">
               <input type="submit" class="private-btn" [value]="btnValue" (click)="toggleClass($event)">
@@ -73,10 +65,10 @@
           <div class="addphoto-icon-sec">
             <input type="file" class="uplod-btn" (change)="changeListener($event)" name="videoArr" multiple>
             <a href="#"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add Video</span></a> </div>
-            <div class="progress" *ngIf="loading">
-
-              <div  class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [attr.aria-valuenow]="BarWidth" aria-valuemin="0" aria-valuemax ="100"
-                  style="min-width: 2em;" [style.width]="(BarWidth/100)*100 + '%'">
+            <div class="slimbar-container" *ngIf="loading">
+           
+              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [attr.aria-valuenow]="BarWidth" aria-valuemin="0" aria-valuemax ="100" 
+                  style="min-width: 2em;" [style.width]="BarWidth + '%'">
                   {{BarWidth}}%
             </div>
             </div>
@@ -86,7 +78,7 @@
           <h4><img src="assets/images/photo-icon-2.png" alt=""><span>Public</span></h4>
           <ul>
             <li *ngFor="let f of publicVideos;let i = index">
-              <video [src] = "f.url" width="150" height="150" controls  (click)="setPublicVideo(f,i)">
+              <video src = "{{f.url}}#t=1" width="150" height="150"  (click)="setPublicVideo(f,i)">
                 Your browser does not support HTML5 video.
             </video>
             </li>
@@ -97,16 +89,10 @@
           <h4><img src="assets/images/photo-icon-2.png" alt=""><span>Private</span></h4>
           <ul>
               <li *ngFor="let f of privateVideos; let i = index ">
-                <video [src] = "f.url" width="150" height="150" controls  (click)="setPrivateVideo(f,i)">
+                <video src = "{{f.url}}#t=1" width="150" height="150"  (click)="setPrivateVideo(f,i)">
                   Your browser does not support HTML5 video.
               </video>
                 </li>
           </ul>
         </div>
-       <!--  <div class="photo-row photo-row4">
-          <div class="downarrow-mobile downarrow-mobile4"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
-          <h4><img src="assets/images/photo-icon-2.png" alt=""><span>Video</span></h4>
-          <ul>
-            <li><img src="assets/images/photo-image-1.jpg" alt=""></li>
-          </ul>
-        </div> -->
+       

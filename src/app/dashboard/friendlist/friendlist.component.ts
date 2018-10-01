@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
+import * as jwt_decode from 'jwt-decode';
+
 @Component({
   selector: 'app-friendlist',
   templateUrl: './friendlist.component.html',
@@ -16,10 +18,15 @@ export class FriendlistComponent implements OnInit {
 results:any  =[];
 list:any  =[];
 friend_list:any = [];
+session_id: string = '';
 show = 6;
   constructor(private router: ActivatedRoute,public search: SearchService,private toastr: ToastrService, private store: Store<AppState>) { }
   tab: String = 'tab1';
   ngOnInit() {
+
+    const decoded = jwt_decode(localStorage.getItem('token'));
+    this.session_id = decoded.id;
+    
         this.search.fetchInvitation()
         .pipe(
           tap(datas => {
@@ -36,6 +43,7 @@ show = 6;
         this.search.friend_list()
         .pipe(
           tap(datas => {
+            console.log(datas);
             this.friend_list = datas.info;
           })
     ).subscribe(noop);

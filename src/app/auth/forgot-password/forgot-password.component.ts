@@ -15,7 +15,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   private _success = new Subject<string>();
   success: boolean = false;
-  message: string = '';
+  message: string;
   successMessage: string;
   forgotForm: FormGroup;
   submitted = false;

@@ -1,166 +1,147 @@
-import { UploadService } from '../../services/upload.service';
 import { Component, OnInit, Renderer, ViewEncapsulation } from '@angular/core';
+import { HttpClient, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { AuthenticationService } from '../../services';
-import { first, tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { Observable, noop, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { noop, BehaviorSubject } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
-import { log } from 'util';
-import * as S3 from 'aws-sdk/clients/s3';
-import { Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { Login } from '../../auth/auth.actions';
 import { profileVideos } from '../../auth/auth.selectors';
-import { keyDetails } from '../../../keys/keys.prod';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'app-video-upload',
   templateUrl: './video-upload.component.html',
-  styleUrls: ['./video-upload.component.css']
+  styleUrls: ['./video-upload.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class VideoUploadComponent implements OnInit {
-  videos = [];
-  BarWidth = 0;
-  video_url:any;
-  video_id:any;
-  access:any;
-  loading: boolean = false;
+
   public _success : BehaviorSubject<number> = new BehaviorSubject(0);
   _videoData = this._success.asObservable();
   selectedFiles: FileList;
   fileArr = [];
-  VIDEO_FOLDER = 'videos/';
-  userFilter = {access : ''};
   percentage: any;
-  video_tag:any;
-  btnValue: string = '';
-  setAccess:boolean = false;
-  showSlider:boolean = false;
-  selectedIndex: number;
-  tempVideos:any=[];
-  publicVideos:any=[];
-  privateVideos:any=[];
-  video:any;
-  videoCount: number = 0;
-  videoData = [];
+  loading: boolean = false;
+  publicVideos = [];
+  privateVideos = [];
+  tempVideos = [];
+  imageData = [];
   display='none';
+  video: any;
+  selectedIndex: number;
+  transform: number;
+  showSlider: boolean = false;
+  btnValue: string = '';
+  altTag = '';
+  apiUri = environment.apiUri;
+  BarWidth: number;
+  lengthCount: number = 0;
+
   constructor(private sanitizer: DomSanitizer,
     private auth: AuthenticationService,
-    private _upload: UploadService,
-    private router: Router,
     private store: Store<AppState>,
+    private renderer: Renderer,
     private toastr: ToastrService,
-  private renderer: Renderer) {}
+    private http: HttpClient) {}
 
   ngOnInit() {
+    
+    this.BarWidth = 0;
 
     this.selectedIndex = 0;
+    this.transform = 0;
+
     this.display='block';
     this.store.pipe(
       select(profileVideos),
       tap(videos => {
-        this.videoCount = videos.length;
         this.fileArr = videos;
         this.publicVideos = this.fileArr.filter(f => f.access === 'Public');
         this.privateVideos = this.fileArr.filter(f => f.access === 'Private');
+
       })
     ).subscribe(noop);
+
+
 
     this._videoData.subscribe((percentage) => this.BarWidth = percentage);
   }
 
-  async changeListener(fileType: any)  {
+  changeListener(fileType: any)  {
 
-    if(this.videoCount + fileType.target.files.length > 5) {
-      this.toastr.error("No of videos should be 5");
-      return;
-    }
-    this.percentage = 10;
-    this._success.next(this.percentage);
-    this.loading = true;
+
+    const fd = new FormData();
+    
     for(let i = 0; i < fileType.target.files.length; i++) {
+
+      
+      
       const file = fileType.target.files[i];
       if((file.size / 1000) <= 5000) {
-
+        fd.append('videos', file);
         this.fileArr.push({
           url: this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file)),
           altTag: '',
-          access: 'Public'
+          access: 'Private'
         });
-
-        await this.uploadVideo(file);
       }
       else {
-        this.toastr.error("Video size is more than 120 MB")
+        this.lengthCount++;
+        this.toastr.error(`${file.name} is more than 5 MB`)
       }
-
-
+      
     }
 
-    this.display='block';
-    this.auth.uploadProfileVideo(this.videoData)
-      .pipe(tap(
-        data => {
+    
 
-          const info = data.info
+    if(this.lengthCount !== fileType.target.files.length) {
+      this.loading = true;
+    this.percentage = 5;
+    this._success.next(this.percentage);
+
+
+    this.http.post(`${this.apiUri}/upload-profile-video`, fd, {
+      reportProgress: true, observe: 'events'
+    }).subscribe(( event: HttpEvent<any>) => {
+        if(event instanceof HttpResponse) {
+          const info = event.body.info;
           this.store.dispatch(new Login({ info }));
           this.toastr.success("Videos are uploaded successfully");
+          this._success.next(100);
           setTimeout(() => {
-            window.location.reload();
-          }, 1000);
-          //window.location.reload();
+            this.percentage = 0;
+            this.loading = false;
+          }, 2000)
+          
         }
-      )).subscribe(noop);
+        switch(event.type) {
+          case HttpEventType.Sent:
+            this.percentage = 10;
+            this._success.next(this.percentage);
+            
+            break;
+          case 1:
+            
+            this.percentage = Math.round(this.percentage) !== Math.round(event['loaded'] / event['total'] * 100);
+            this._success.next(parseInt(this.percentage));
+            if (Math.round(this.percentage) !== Math.round(event['loaded'] / event['total'] * 100)){
+              this.percentage = event['loaded'] / event['total'] * 100;
+              //this.slimLoadingBarService.progress = Math.round(this.percentage);
+              //console.log(this.percentage);
+              this._success.next(parseInt(this.percentage) - 2);
+            }
+            break;
+          case 2:
+            this._success.next(99);
+            break;
+        }
+    });
+    }
+
   }
-
-  uploadVideo(file) {
-    return new Promise(resolve => {
-      const params = {
-        Bucket: 'kinky-wrc',
-        Key: this.VIDEO_FOLDER + file.name,
-        Body: file,
-        ACL: 'public-read'
-      };
-      const bucket = new S3(
-        {
-          accessKeyId: keyDetails.ACCESS_KEY,
-          secretAccessKey: keyDetails.SECRET_KEY,
-          region: 'us-east-1'
-        }
-      );
-
-
-
-      this._success.next(this.percentage);
-
-      bucket.upload(params).on("httpUploadProgress", evt => {
-
-        this.percentage = (evt.loaded * 100) / evt.total;
-        this._success.next(parseInt(this.percentage));
-
-      }).send((err, data) => {
-
-
-        if (err) {
-          console.log('There was an error uploading your file: ', err);
-
-        }
-
-        this.videoData.push({
-          url: data.Location,
-          altTag: '',
-          access: 'Private'
-        })
-
-
-        resolve();
-        });
-
-    })
-  }
-
-
 
   toggleClass(event) {
     var target = event.currentTarget;
@@ -173,43 +154,27 @@ export class VideoUploadComponent implements OnInit {
     }
   }
   setPublicVideo(video, index) {
+    
+    console.log(video);
     this.btnValue = 'Private';
-    this.video_url = video.url;
     this.showSlider = true;
-    this.selectedIndex = index;
-    this.video_tag = video.altTag;
-    this.tempVideos = this.publicVideos;
     this.video = video;
+    this.selectedIndex = index;
+    this.tempVideos = this.publicVideos;
+    this.altTag = video.altTag;
 
   }
 
   setPrivateVideo(video, index) {
+    
     this.btnValue = 'Public';
-    this.video_url = video.url;
     this.showSlider = true;
-    this.selectedIndex = index;
-    this.video_tag = video.altTag;
-    this.tempVideos = this.privateVideos;
     this.video = video;
+    this.selectedIndex = index;
+    this.tempVideos = this.privateVideos;
+    this.altTag = video.altTag;
   }
-/*   delete(id) {
 
-    if(id!=undefined){
-      this._upload.deletevideo(id)
-      .pipe(first())
-      .subscribe(data => {
-        const info = data.info;
-        this.store.dispatch(new Login({ info }));
-        window.location.reload();
-
-      });
-
-    }else{
-      alert("please select an video");
-    }
-
-
-  } */
   onMouseEnter(event) {
     var target = event.currentTarget;
     if(target.querySelector('.photo-edit-outer').className.indexOf("photo-popshow") === -1) {
@@ -220,7 +185,7 @@ export class VideoUploadComponent implements OnInit {
   }
 
   deleteVideo(video) {
-    this._upload.deleteVideo(video)
+    this.auth.deleteVideo(video)
       .pipe(
         tap(data => {
           const info = data.info;
@@ -233,7 +198,7 @@ export class VideoUploadComponent implements OnInit {
 
   moveToPrivate(imgUrl, access) {
     access = access === 'Private' ? 'Public' : 'Private';
-    this._upload.videosetprivate(imgUrl, access)
+    this.auth.videosetprivate(imgUrl, access)
       .pipe(
         tap(data => {
           const info = data.info;
@@ -263,27 +228,26 @@ export class VideoUploadComponent implements OnInit {
     target.querySelector('.photo-edit-outer').classList.remove("photo-popshow");
   }
   onPrev() {
+
     this.selectedIndex = this.selectedIndex - 1;
     if(this.selectedIndex < 0) {
       this.selectedIndex = this.tempVideos.length - 1;
     }
 
     const data = this.tempVideos[this.selectedIndex];
-    this.video_url = data.url;
-    this.video_tag = data.altTag;
     this.video = data;
+    this.altTag = this.video.altTag;
   }
 
   onNext() {
-     this.selectedIndex = this.selectedIndex + 1;
+    this.selectedIndex = this.selectedIndex + 1;
     if(this.selectedIndex > this.tempVideos.length - 1) {
       this.selectedIndex = 0;
     }
 
     const data = this.tempVideos[this.selectedIndex];
-    this.video_url = data.url;
-    this.video_tag = data.altTag;
     this.video = data;
+    this.altTag = this.video.altTag;
   }
 
   closeSlider() {
@@ -298,7 +262,7 @@ export class VideoUploadComponent implements OnInit {
     }
 
 
-    this._upload.update_video(this.video_url, this.btnValue, this.video_tag)
+    this.auth.update_video(this.video.url, this.btnValue, this.altTag)
       .pipe(
         tap(data => {
           const info = data.info;
@@ -307,7 +271,6 @@ export class VideoUploadComponent implements OnInit {
 
         })
       ).subscribe(noop)
-
 
   }
 

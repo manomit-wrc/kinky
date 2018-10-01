@@ -16,3 +16,6 @@
 .slimbar-container {
     padding: 10px;
 }
+.progress-bar-success {
+    background-color: #872345 !important;
+}
