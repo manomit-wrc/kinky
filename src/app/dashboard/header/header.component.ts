@@ -6,6 +6,8 @@ import { countUser, emailVerified } from '../../auth/auth.selectors';
 import { UserService } from '../user.service';
 import { Logout } from '../../auth/auth.actions';
 import { ToastrService } from 'ngx-toastr';
+import { PusherService } from '../pusher.service';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +25,8 @@ export class HeaderComponent implements OnInit {
     private auth: AuthenticationService,
     private avt: UserService,
     private store: Store<AppState>,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private pusherService: PusherService
   ) { }
 
   ngOnInit() {
@@ -69,9 +72,14 @@ export class HeaderComponent implements OnInit {
 
 
   logout() {
+
+
+
     this.auth.logout()
       .subscribe(user => {
         if(user.code === 200) {
+          const decoded = jwt_decode(localStorage.getItem('token'));
+          this.pusherService.checkLoggedin(decoded.id);
           this.store.dispatch(new Logout());
           window.location.href = "/";
         }

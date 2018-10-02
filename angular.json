@@ -38,7 +38,8 @@
               "src/assets/js/bootstrap-material-datetimepicker.js",
               "src/assets/js/jQuery-plugin-progressbar.js",
               "src/assets/js/jquery.slimscroll.js",
-              "src/assets/js/function.js"
+              "src/assets/js/function.js",
+              "./node_modules/pusher-js/dist/web/pusher.min.js"
             ]
           },
           "configurations": {

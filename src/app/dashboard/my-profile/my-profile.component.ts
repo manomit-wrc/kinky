@@ -12,6 +12,7 @@ import { noop } from '@angular/compiler/src/render3/view/util';
 import { loadAllMasters } from '../dashboard.selectors';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import * as jwt_decode from 'jwt-decode';
 declare var $: any;
 
 @Component({
@@ -66,6 +67,8 @@ export class MyProfileComponent implements OnInit {
   seeking_for: string = '';
   friend_list:any= [];
   post_description:any = "";
+  session_id: string = '';
+
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -76,6 +79,9 @@ export class MyProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    const decoded = jwt_decode(localStorage.getItem('token'));
+    this.session_id = decoded.id;
 
     this.search.friend_list()
       .subscribe (datas => {

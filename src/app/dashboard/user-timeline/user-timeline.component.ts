@@ -8,6 +8,7 @@ import { loadAllMasters } from '../dashboard.selectors';
 import { Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
+import { PusherService } from '../pusher.service';
 @Component({
   selector: 'app-user-timeline',
   templateUrl: './user-timeline.component.html',
@@ -59,9 +60,31 @@ export class UserTimelineComponent implements OnInit {
   seeking_for: string = '';
   friend_list:any = [];
   status:any = 2;
-  constructor(private router: ActivatedRoute,public search: SearchService,private toastr: ToastrService, private store: Store<AppState>) { }
+  active_status: boolean = false;
+  constructor(
+    private router: ActivatedRoute,
+    public search: SearchService,
+    private toastr: ToastrService, 
+    private store: Store<AppState>,
+    private pusherService: PusherService
+  ) { }
 
   ngOnInit() {
+
+
+    this.pusherService.channel.bind("check-logged-in", data => {
+      if(data.user_id === this.router.snapshot.params.user_id) {
+        if(data.status === 1) {
+          this.active_status = true;
+        }
+        else {
+          this.active_status = false;
+        }
+      }
+    })
+
+    this.pusherService.checkLoggedin(this.router.snapshot.params.user_id);
+
     let user_id = this.router.snapshot.params.user_id;
       this.search.userdetailsByid(user_id)
       .pipe(
@@ -153,10 +176,9 @@ export class UserTimelineComponent implements OnInit {
 
   this.search.friend_list_by_user(user_id)
   .subscribe (datas => {
-    console.log('====================================');
-    console.log(datas);
-    console.log('====================================');
+    
     this.friend_list = datas.info;
+    
   });
 
   }

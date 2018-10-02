@@ -19,3 +19,11 @@
 .progress-bar-success {
     background-color: #872345 !important;
 }
+
+.features-box li img {
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}

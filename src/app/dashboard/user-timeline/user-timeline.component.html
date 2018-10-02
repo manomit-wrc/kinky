@@ -3,7 +3,9 @@
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="profile-left-top-box">
-          <div class="profile-left-active">Active Now</div>
+          <div class="profile-left-active">
+            {{active_status ? 'Active Now': 'Inactive Now'}}
+          </div>
           <div class="profile-left-details-box">
             <div class="profile-left-img">
               <div class="box-circle hidden-xxs">

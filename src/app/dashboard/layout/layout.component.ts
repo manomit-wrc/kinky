@@ -1,4 +1,6 @@
 import { Component, OnInit, AfterViewInit, Renderer2, ElementRef } from '@angular/core';
+import { PusherService } from '../pusher.service';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-layout',
@@ -8,12 +10,14 @@ import { Component, OnInit, AfterViewInit, Renderer2, ElementRef } from '@angula
 export class LayoutComponent implements OnInit, AfterViewInit {
   constructor( 
     private renderer: Renderer2, 
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private pusherService: PusherService
   ) { }
 
   ngOnInit() {
     //alert("Loading");
-    
+    const decoded = jwt_decode(localStorage.getItem('token'));
+    this.pusherService.checkLoggedin(decoded.id);
   }
 
   ngAfterViewInit() {
