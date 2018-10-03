@@ -89,6 +89,10 @@ export class SearchComponent implements OnInit {
      this.store.pipe(
        select(userDetails),
        tap(user => {
+        this.looking_for_male = user.looking_for_male;
+        this.looking_for_female = user.looking_for_female;
+        this.looking_for_couple = user.looking_for_couple;
+        this.looking_for_cd = user.looking_for_cd;
           this.gender = user.gender;
        })
      ).subscribe(noop);

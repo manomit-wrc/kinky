@@ -64,7 +64,7 @@ export class UserTimelineComponent implements OnInit {
   constructor(
     private router: ActivatedRoute,
     public search: SearchService,
-    private toastr: ToastrService, 
+    private toastr: ToastrService,
     private store: Store<AppState>,
     private pusherService: PusherService
   ) { }
@@ -176,9 +176,11 @@ export class UserTimelineComponent implements OnInit {
 
   this.search.friend_list_by_user(user_id)
   .subscribe (datas => {
-    
+    console.log('sdsadasd', datas);
+
+
     this.friend_list = datas.info;
-    
+
   });
 
   }
