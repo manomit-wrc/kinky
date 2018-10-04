@@ -56,4 +56,13 @@ export class SearchService {
   friend_remove(to_id){
     return this.http.post<any>(`${this.apiUri}/friend_remove`, {to_id});
   }
+  check_friends() {
+    return this.http.get<any>(`${this.apiUri}/check_friends`, {});
+  }
+  similar_profile(to_id) {
+    return this.http.post<any>(`${this.apiUri}/similar_profile`, {to_id});
+  }
+  saveTohotlist(hotlist, flag) {
+    return this.http.post<any>(`${this.apiUri}/saveTohotlist`, {hotlist, flag});
+  }
 }

@@ -27,8 +27,9 @@
               <p><a href="javascript:void(0)">{{interested_in}}</a></p>
               <div class="user-timeline-topleft-icon">
                 <ul>
-                  <li><a href="javascript:void(0)"  class="user-timeline-left-icon-1">&nbsp;</a></li>
-                  <li><a href="javascript:void(0)" class="user-timeline-left-icon-2">&nbsp;</a></li>
+                  <li *ngIf="from_users.length=== 0 && to_users.length===0"  ><a href="javascript:void(0)" (click)="request_send($event,userid)" class="user-timeline-left-icon-1">&nbsp;</a></li>
+                  <li *ngIf="from_users.length!== 0 || to_users.length!==0"><a href="javascript:void(0)"  (click)="request_send($event,userid)" class="user-timeline-left-icon-0">&nbsp;</a></li>
+                  <li><a href="javascript:void(0)"(click)="saveTohotlist()" class="user-timeline-left-icon-2">&nbsp;</a></li>
                   <li><a href="javascript:void(0)" class="user-timeline-left-icon-3 profile-more-btn">&nbsp;</a></li>
                 </ul>
               </div>
@@ -405,7 +406,7 @@
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <div class="photo-row photo-row1 usertimeline-photo-vid-sec">
+        <div class="photo-row photo-row1 usertimeline-photo-vid-sec all-upload-video-section">
           <!--<div class="downarrow-mobile downarrow-mobile1"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>-->
           <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Photos &amp; Videos</span></h4>
           <ul class="photo_video_show">
@@ -416,65 +417,13 @@
         <div class="similar-prof-sec">
           <h5><img src="assets/images/profile-icon.png" alt=""><span>Similar Profiles</span></h5>
           <ul>
-            <li>
-              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
+            <li *ngFor="let user of similarUsers | slice:0:10; let i=index">
+
+              <div class="similar-prof-img"><a href="javascript:void(0)"><img [src]="user.avatar" alt=""></a>
                 <div class="event-user-active">&nbsp;</div>
               </div>
-              <p><a href="#">oirazor1971</a></p>
-            </li>
-            <li>
-              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
-                <div class="event-user-active">&nbsp;</div>
-              </div>
-              <p><a href="#">oirazor1971</a></p>
-            </li>
-            <li>
-              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
-                <div class="event-user-active">&nbsp;</div>
-              </div>
-              <p><a href="#">oirazor1971</a></p>
-            </li>
-            <li>
-              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
-                <div class="event-user-active">&nbsp;</div>
-              </div>
-              <p><a href="#">oirazor1971</a></p>
-            </li>
-            <li>
-              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
-                <div class="event-user-active">&nbsp;</div>
-              </div>
-              <p><a href="#">oirazor1971</a></p>
-            </li>
-            <li>
-              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
-                <div class="event-user-active">&nbsp;</div>
-              </div>
-              <p><a href="#">oirazor1971</a></p>
-            </li>
-            <li>
-              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
-                <div class="event-user-active">&nbsp;</div>
-              </div>
-              <p><a href="#">oirazor1971</a></p>
-            </li>
-            <li>
-              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
-                <div class="event-user-active">&nbsp;</div>
-              </div>
-              <p><a href="#">oirazor1971</a></p>
-            </li>
-            <li>
-              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
-                <div class="event-user-active">&nbsp;</div>
-              </div>
-              <p><a href="#">oirazor1971</a></p>
-            </li>
-            <li>
-              <div class="similar-prof-img"><a href="#"><img src="assets/images/similar-profile-img.jpg" alt=""></a>
-                <div class="event-user-active">&nbsp;</div>
-              </div>
-              <p><a href="#">oirazor1971</a></p>
+              <p><a href="/user-timeline/{{user._id}}">{{user.username}}</a></p>
+
             </li>
           </ul>
         </div>
@@ -507,9 +456,9 @@
           <h5><i class="fa fa-handshake-o"></i> <span>Friends</span></h5>
           <ul>
             <li *ngFor="let opt of friend_list |slice:0: show let i=index">
-              <div class="row" *ngIf="opt.from_user.username">
+              <div class="row" *ngIf="opt.from_user.username && opt.from_user._id != session_id">
                 <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12" >
-                    <a href="/user-timeline/{{opt.from_user._id}}">
+                    <!-- <a href="/user-timeline/{{opt.from_user._id}}"> -->
                   <div class="friends-sml-img"><img [src]="opt.from_user.avatar" alt="">
                     <div class="event-user-active">&nbsp;</div>
                   </div>
@@ -520,15 +469,15 @@
                       <p *ngIf="opt.from_user.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> </p>
                       <p *ngIf="opt.from_user.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> </p>
                   </div>
-                  </a>
+                  <!-- </a> -->
                 </div>
-                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
+                <!-- <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
                   <div class="friends-icon-sec"> <a href="javascript:void(0)" (click)="friend_remove(opt.from_user._id)" class="friends-cross-icon"><i class="fa fa-close"></i></a> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
-                </div>
+                </div> -->
               </div>
-              <div class="row" *ngIf="opt.to_user.username">
+              <div class="row" *ngIf="opt.to_user.username && opt.to_user._id != session_id">
                   <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12" >
-                      <a href="/user-timeline/{{opt.to_user._id}}">
+                     <!--  <a href="/user-timeline/{{opt.to_user._id}}"> -->
                     <div class="friends-sml-img"><img [src]="opt.to_user.avatar" alt="">
                       <div class="event-user-active">&nbsp;</div>
                     </div>
@@ -539,11 +488,11 @@
                         <p *ngIf="opt.to_user.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span> </p>
                         <p *ngIf="opt.to_user.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span> </p>
                     </div>
-                    </a>
+                   <!--  </a> -->
                   </div>
-                  <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
+                  <!-- <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
                     <div class="friends-icon-sec"> <a href="javascript:void(0)" (click)="friend_remove(opt.to_user._id)" class="friends-cross-icon"><i class="fa fa-close"></i></a> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
-                  </div>
+                  </div> -->
                 </div>
               <div id="loadMore2" class="more-setting-outer"  *ngIf="i==5 && show == 6" (click)="show = friend_list.length">More</div>
             </li>

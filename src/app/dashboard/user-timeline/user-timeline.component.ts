@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Renderer } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, noop, BehaviorSubject, pipe } from 'rxjs';
 import {SearchService} from '../../services/search.service';
@@ -9,12 +9,15 @@ import { Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { PusherService } from '../pusher.service';
+import * as jwt_decode from 'jwt-decode';
 @Component({
   selector: 'app-user-timeline',
   templateUrl: './user-timeline.component.html',
   styleUrls: ['./user-timeline.component.css']
 })
 export class UserTimelineComponent implements OnInit {
+  from_users:any = [];
+  to_users:any = [];
   username:any;
   address: any;
   sexuality: any;
@@ -46,6 +49,8 @@ export class UserTimelineComponent implements OnInit {
   size:any;
   size_female:any;
   travel_arrangements:any;
+  similarUsers:any=[];
+  hotlist_status:any = false;
   country: any;
   city: any;
   purpose:any;
@@ -61,16 +66,21 @@ export class UserTimelineComponent implements OnInit {
   friend_list:any = [];
   status:any = 2;
   active_status: boolean = false;
+  session_id:any;
+  userid:any;
   constructor(
     private router: ActivatedRoute,
     public search: SearchService,
     private toastr: ToastrService,
     private store: Store<AppState>,
-    private pusherService: PusherService
+    private pusherService: PusherService,
+    private renderer: Renderer
   ) { }
 
   ngOnInit() {
 
+    const decoded = jwt_decode(localStorage.getItem('token'));
+    console.log(decoded);
 
     this.pusherService.channel.bind("check-logged-in", data => {
       if(data.user_id === this.router.snapshot.params.user_id) {
@@ -84,14 +94,14 @@ export class UserTimelineComponent implements OnInit {
     })
 
     this.pusherService.checkLoggedin(this.router.snapshot.params.user_id);
-
+    this.session_id = this.router.snapshot.params.user_id;
     let user_id = this.router.snapshot.params.user_id;
       this.search.userdetailsByid(user_id)
       .pipe(
         tap(datas => {
 
           let data = datas.info;
-
+          this.userid  = data._id;
         this.username = data.username;
          this.avatar = data.avatar !== undefined ? data.avatar: null;
          this.address = data.state + "," + data.country;
@@ -176,15 +186,30 @@ export class UserTimelineComponent implements OnInit {
 
   this.search.friend_list_by_user(user_id)
   .subscribe (datas => {
-    console.log('sdsadasd', datas);
+
 
 
     this.friend_list = datas.info;
 
   });
 
+  this.search.check_friends()
+  .subscribe (datas => {
+
+
+    this.from_users = datas.info.filter(f => f.from_user._id === user_id);
+    this.to_users = datas.info.filter(f => f.to_user._id === user_id);
+
+  });
+  this.search.similar_profile(user_id)
+  .subscribe (datas => {
+
+    this.similarUsers = datas.info.filter(f => f._id !== decoded.id);
+
+  });
+
   }
-  request_send(){
+/*   request_send(){
     this.search.request_send(this.router.snapshot.params.user_id)
     .pipe(
       tap(data => {
@@ -209,6 +234,63 @@ export class UserTimelineComponent implements OnInit {
         window.location.reload();
       })
 ).subscribe(noop);
+  } */
+
+  request_send(event,  to_id){
+
+
+     let target = event.currentTarget;
+
+    if(target.className === "user-timeline-left-icon-1") {
+      this.search.request_send(to_id)
+      .pipe(
+        tap(data => {
+
+          if(data.code!=200){
+            this.toastr.error("Something went wrong");
+          }else{
+
+            this.toastr.success(data.info);
+            target.classList.remove('user-timeline-left-icon-1');
+            this.renderer.setElementClass(target, 'user-timeline-left-icon-0', true);
+          }
+
+
+        })
+      ).subscribe(noop);
+    }
+    else {
+
+      this.search.friend_remove(to_id)
+        .pipe(
+          tap(data => {
+            this.toastr.success(data.msg);
+            target.classList.remove('user-timeline-left-icon-0');
+            this.renderer.setElementClass(target, 'user-timeline-left-icon-1', true);
+          })
+        ).subscribe(noop);
+    }
+
+  }
+
+  saveTohotlist() {
+    this.hotlist_status = ! this.hotlist_status;
+    if(this.hotlist_status){
+      this.search.saveTohotlist(this.userid,this.hotlist_status)
+      .pipe(
+        tap(data => {
+
+        })
+      ).subscribe(noop);
+    }else{
+      this.search.saveTohotlist(this.userid,this.hotlist_status)
+      .pipe(
+        tap(data => {
+
+        })
+      ).subscribe(noop);
+    }
+
   }
 
    getAge(DOB) {

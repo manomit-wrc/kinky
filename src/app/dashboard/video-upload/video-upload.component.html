@@ -5,7 +5,7 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="profile-pic-sec" *ngIf="showSlider">
           <h3><i class="fa fa-user" aria-hidden="true"></i><span>Video</span></h3>
-       
+
           <div class="photo-slider-sec photo-upload-sec" >
             <div id="owl-demo" class="owl-carousel" >
               <div class="item" *ngIf="showSlider">
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div class="photo-row photo-row1">
+        <div class="photo-row photo-row1 all-upload-video-section">
           <div class="downarrow-mobile downarrow-mobile1"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
           <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Videos</span></h4>
           <ul>
@@ -66,14 +66,14 @@
             <input type="file" class="uplod-btn" (change)="changeListener($event)" name="videoArr" multiple>
             <a href="#"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add Video</span></a> </div>
             <div class="slimbar-container" *ngIf="loading">
-           
-              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [attr.aria-valuenow]="BarWidth" aria-valuemin="0" aria-valuemax ="100" 
+
+              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [attr.aria-valuenow]="BarWidth" aria-valuemin="0" aria-valuemax ="100"
                   style="min-width: 2em;" [style.width]="BarWidth + '%'">
                   {{BarWidth}}%
             </div>
             </div>
         </div>
-        <div class="photo-row photo-row2">
+        <div class="photo-row photo-row2 all-upload-video-section">
           <div class="downarrow-mobile downarrow-mobile2"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
           <h4><img src="assets/images/photo-icon-2.png" alt=""><span>Public</span></h4>
           <ul>
@@ -84,7 +84,7 @@
             </li>
           </ul>
         </div>
-        <div class="photo-row  photo-row3">
+        <div class="photo-row  photo-row3 all-upload-video-section">
           <div class="downarrow-mobile downarrow-mobile3"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>
           <h4><img src="assets/images/photo-icon-2.png" alt=""><span>Private</span></h4>
           <ul>
@@ -95,4 +95,4 @@
                 </li>
           </ul>
         </div>
-       
+

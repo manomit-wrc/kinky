@@ -315,23 +315,50 @@
                   </div>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
-                  <div class="friends-icon-sec" *ngIf="(opt.friend_request.length === 0 || opt.friend_request[0].status === 2 ||(opt.friend_request[0].to_user != user_id.id && opt.friend_request[0].from_user!= user_id.id)) ">
-                    <a href="javascript:void(0)" class="friends-plus-icon" (click)="request_send($event, opt.user[0]._id)">
-                      <i class="fa fa-plus" aria-hidden="true"></i>
-                    </a>
-                    <a href="javascript:void(0)" class="friends-envelop-icon">
-                      <i class="fa fa-envelope-o"></i>
-                    </a>
+                  <div *ngIf="opt.friend_request_from.length !== 0">
+                      <div class="friends-icon-sec search-right" *ngIf="(opt.friend_request_from.length === 0 || opt.friend_request_from[0].status === 2 ||(opt.friend_request_from[0].to_user != user_id.id && opt.friend_request_from[0].from_user!= user_id.id)) ">
+                          <a href="javascript:void(0)" class="friends-plus-icon" (click)="request_send($event, opt.user[0]._id)">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                          </a>
+
+                        </div>
+                        <div class="friends-icon-sec search-right" *ngIf="(opt.friend_request_from.length > 0 && opt.friend_request_from[0].status === 0 && (opt.friend_request_from[0].to_user == user_id.id || opt.friend_request_from[0].from_user == user_id.id) )">
+                          <a href="javascript:void(0)" class="friends-cross-icon" (click)="request_send($event, opt.user[0]._id)">
+                            <i class="fa fa-close"></i>
+                          </a>
+                        </div>
                   </div>
-                  <div class="friends-icon-sec" *ngIf="(opt.friend_request.length > 0 && opt.friend_request[0].status === 0 && (opt.friend_request[0].to_user == user_id.id || opt.friend_request[0].from_user == user_id.id) )">
-                    <a href="javascript:void(0)" class="friends-cross-icon" (click)="request_send($event, opt.user[0]._id)">
-                      <i class="fa fa-close"></i>
-                    </a>
-                    <a href="javascript:void(0)" class="friends-envelop-icon">
-                      <i class="fa fa-envelope-o"></i>
-                    </a>
-                  </div>
+
+                <div *ngIf="opt.friend_request_to.length !== 0">
+                    <div class="friends-icon-sec search-right" *ngIf="(opt.friend_request_to.length === 0 || opt.friend_request_to[0].status === 2 ||(opt.friend_request_to[0].to_user != user_id.id && opt.friend_request_to[0].from_user!= user_id.id)) ">
+                        <a href="javascript:void(0)" class="friends-plus-icon" (click)="request_send($event, opt.user[0]._id)">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                        </a>
+
+                      </div>
+                      <div class="friends-icon-sec search-right" *ngIf="(opt.friend_request_to.length > 0 && opt.friend_request_to[0].status === 0 && (opt.friend_request_to[0].to_user == user_id.id || opt.friend_request_to[0].from_user == user_id.id) )">
+                        <a href="javascript:void(0)" class="friends-cross-icon" (click)="request_send($event, opt.user[0]._id)">
+                          <i class="fa fa-close"></i>
+                        </a>
+                      </div>
                 </div>
+
+                <div *ngIf="opt.friend_request_to.length === 0 && opt.friend_request_from.length === 0">
+
+                    <div class="friends-icon-sec search-right">
+                        <a href="javascript:void(0)" class="friends-plus-icon" (click)="request_send($event, opt.user[0]._id)">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                        </a>
+
+                      </div>
+
+                </div>
+                <div class="message-icon-fixed">
+                  <a href="javascript:void(0)" class="friends-envelop-icon">
+                    <i class="fa fa-envelope-o"></i>
+                  </a>
+                </div>
+              </div>
               </div>
 
             </li>
