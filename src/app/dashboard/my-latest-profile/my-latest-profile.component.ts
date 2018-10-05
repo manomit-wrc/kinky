@@ -95,7 +95,7 @@ export class MyLatestProfileComponent implements OnInit {
 
   ngOnInit() {
 
-    
+
 
     this.store.pipe(
       select(loadAllMasters),
@@ -157,7 +157,7 @@ export class MyLatestProfileComponent implements OnInit {
       select(userDetails),
       tap(response => {
         if(response !== undefined) {
-          
+
           this.headline = response.headline;
           this.personal_details = response.description;
           this.data = response;
@@ -191,7 +191,7 @@ export class MyLatestProfileComponent implements OnInit {
       select(settingDetails),
       tap(response => {
         if(response !== undefined && response !== null) {
-          
+
           this.data.looking_for_male = response.looking_for_male !== null ? response.looking_for_male : false;
           this.data.looking_for_female = response.looking_for_female !== null ? response.looking_for_female : false;
           this.data.looking_for_couple = response.looking_for_couple !== null ? response.looking_for_couple : false;
@@ -294,7 +294,7 @@ export class MyLatestProfileComponent implements OnInit {
         this.loading = false;
         const info = data.info;
         this.store.dispatch(new Login({ info}))
-        
+
         window.scrollTo(0,0);
         this._success.next('Information updated successfully');
 

@@ -8,7 +8,7 @@ import { AppState } from '../../reducers';
 import { locationDetails } from '../../auth/auth.selectors';
 import { loadAllMasters } from '../dashboard.selectors';
 import { Subject } from 'rxjs';
-import { Settings } from '../../auth/auth.actions';
+import { Settings,Login } from '../../auth/auth.actions';
 
 @Component({
   selector: 'app-interests',
@@ -145,7 +145,9 @@ export class InterestsComponent implements OnInit {
         this._error.next(data.message);
     } else {
       const settings = data.settings;
-      this.store.dispatch(new Settings({ settings }))
+      const info = data.info;
+      this.store.dispatch(new Settings({ settings }));
+      this.store.dispatch(new Login({ info }));
       this._success.next(data.message);
     }
 

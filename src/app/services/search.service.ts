@@ -65,4 +65,10 @@ export class SearchService {
   saveTohotlist(hotlist, flag) {
     return this.http.post<any>(`${this.apiUri}/saveTohotlist`, {hotlist, flag});
   }
+  hot_list() {
+    return this.http.post<any>(`${this.apiUri}/hot_list`, {});
+  }
+  hot_list_by_user(id) {
+    return this.http.post<any>(`${this.apiUri}/hot_list_by_user`, {id});
+  }
 }

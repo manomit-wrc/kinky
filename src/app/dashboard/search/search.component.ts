@@ -48,6 +48,8 @@ export class SearchComponent implements OnInit {
   status:any = 2;
   loading:any = false;
   quick:any = false;
+  user_country:any;
+  user_state:any;
   constructor(private router: Router,private auth: AuthenticationService,public search: SearchService,private store: Store<AppState>,private toastr: ToastrService, private renderer: Renderer) {
   }
 
@@ -94,6 +96,9 @@ export class SearchComponent implements OnInit {
         this.looking_for_couple = user.looking_for_couple;
         this.looking_for_cd = user.looking_for_cd;
           this.gender = user.gender;
+          this.user_country = user.country;
+          this.user_state = user.state;
+
        })
      ).subscribe(noop);
 
@@ -103,13 +108,13 @@ export class SearchComponent implements OnInit {
 
 
 
-        if(this.userObj === undefined || this.userObj.country === undefined || this.userObj.state === undefined) {
+        if(this.user_country === undefined || this.user_state === undefined) {
 
           this.count = data.country;
           this.st = data.city;
         } else {
-          this.count = this.userObj.country;
-          this.st = this.userObj.state;
+          this.count = this.user_country;
+          this.st = this.user_state;
         }
 
         this.auth.loadCities(this.count)

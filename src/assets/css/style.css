@@ -1248,7 +1248,7 @@ div.msg-top-box
 
 .profile-left-text-box h4{ color:#18080a; font-size:22px; font-weight:600;}
 
-.profile-left-text-box p{ font-size:16px; line-height:22px; color:#707070; margin:6px 0;}
+.profile-left-text-box p{ font-size:16px; line-height:22px; color:#707070; margin:6px 0;width: 100%; overflow: hidden;}
 
 .profile-left-text-box p i{ display:inline-block; vertical-align:middle; margin-right:7px;}
 
@@ -1471,7 +1471,9 @@ box-shadow: 5px 5px 5px -3px rgba(0,0,0,0.25); border-radius:100%;}
 .profile-hotlist-sec{margin-top:10px; background: #f4f4f4;
     border-radius: 6px;
     padding: 15px;
-    width: 100%;}
+    width: 100%;
+    overflow: hidden;
+  }
 
 .profile-hotlist-sec h5{ font-size:18px; font-weight:600; margin-bottom:20px;}
 
@@ -1481,7 +1483,15 @@ box-shadow: 5px 5px 5px -3px rgba(0,0,0,0.25); border-radius:100%;}
 
 .profile-hotlist-sec ul{ margin:0; padding:0;}
 
-.profile-hotlist-sec ul li{ width:100%; display:inline-block; vertical-align:top; margin:4px 0;}
+/* .profile-hotlist-sec ul li{ width:100%; display:inline-block; vertical-align:top; margin:4px 0;} */
+
+.profile-hotlist-sec ul li {
+  width: 50% !important;
+  display: block;
+  /* vertical-align: top; */
+  margin: 4px 0;
+  float: left;
+}
 
 .hotlist-box{ width:100%; padding:10px; background:#fff; border-radius:5px; margin:5px 0; display:inline-block; vertical-align:top; text-align:center; }
 
@@ -2121,4 +2131,14 @@ background: #000;
 .user-timeline-topleft-icon ul li a.user-timeline-left-icon-0:hover {
   background: url(../images/cross-icon-hover.png) no-repeat;
   background-size: 100% auto;
+}
+
+.user-timeline-left-icon-2.active {
+  background: url(../images/love.png) no-repeat !important;
+  background-size: 100% auto !important;
+}
+
+.hotlist-box {
+  width: 98% !important;
+  margin-right: 2%;
 }

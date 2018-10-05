@@ -24,6 +24,7 @@ export class MyProfileComponent implements OnInit {
   private _success = new Subject<string>();
   show = 6;
   successMessage: string;
+  hot_list:any=[];
   name: any;
   address: any;
   sexuality: any;
@@ -79,6 +80,11 @@ export class MyProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.search.hot_list()
+  .subscribe (datas => {
+   this.hot_list = datas.info;
+  });
 
     const decoded = jwt_decode(localStorage.getItem('token'));
     this.session_id = decoded.id;
@@ -190,7 +196,7 @@ export class MyProfileComponent implements OnInit {
         this.travel_arrangements = data.travel_arrangment.join(",");
         this.purpose = data.purpose === undefined ? 'N/A' : data.purpose;
         this.headline = data.headline === undefined ? 'N/A' : data.headline;
-        this.description = data.description === undefined ? 'N/A' : data.description;
+        this.description = data.description === undefined ? 'N/A' : data.description.replace(new RegExp('\r?\n','g'), '<br />');
 
         this.seeking_for = this.looking_for_male ? 'Male,': '';
         this.seeking_for += this.looking_for_female ? 'Female,': '';

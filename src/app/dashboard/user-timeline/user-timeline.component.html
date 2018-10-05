@@ -29,7 +29,7 @@
                 <ul>
                   <li *ngIf="from_users.length=== 0 && to_users.length===0"  ><a href="javascript:void(0)" (click)="request_send($event,userid)" class="user-timeline-left-icon-1">&nbsp;</a></li>
                   <li *ngIf="from_users.length!== 0 || to_users.length!==0"><a href="javascript:void(0)"  (click)="request_send($event,userid)" class="user-timeline-left-icon-0">&nbsp;</a></li>
-                  <li><a href="javascript:void(0)"(click)="saveTohotlist()" class="user-timeline-left-icon-2">&nbsp;</a></li>
+                  <li><a href="javascript:void(0)"(click)="saveTohotlist($event)" class="user-timeline-left-icon-2">&nbsp;</a></li>
                   <li><a href="javascript:void(0)" class="user-timeline-left-icon-3 profile-more-btn">&nbsp;</a></li>
                 </ul>
               </div>
@@ -96,7 +96,7 @@
         </div>
         <div class="profile-left-text-box">
           <h4>{{headline}}</h4>
-          <p>{{description}}</p>
+          <p [innerHTML]="description"></p>
           <p><a href="#"><i class="fa fa-heart-o"></i><span>14 Likes</span></a></p>
         </div>
         <div class="profile-left-form-sec">
@@ -458,7 +458,7 @@
             <li *ngFor="let opt of friend_list |slice:0: show let i=index">
               <div class="row" *ngIf="opt.from_user.username && opt.from_user._id != session_id">
                 <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12" >
-                    <!-- <a href="/user-timeline/{{opt.from_user._id}}"> -->
+                    <a href="/user-timeline/{{opt.from_user._id}}">
                   <div class="friends-sml-img"><img [src]="opt.from_user.avatar" alt="">
                     <div class="event-user-active">&nbsp;</div>
                   </div>
@@ -469,7 +469,7 @@
                       <p *ngIf="opt.from_user.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> </p>
                       <p *ngIf="opt.from_user.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> </p>
                   </div>
-                  <!-- </a> -->
+                  </a>
                 </div>
                 <!-- <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
                   <div class="friends-icon-sec"> <a href="javascript:void(0)" (click)="friend_remove(opt.from_user._id)" class="friends-cross-icon"><i class="fa fa-close"></i></a> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
@@ -477,7 +477,7 @@
               </div>
               <div class="row" *ngIf="opt.to_user.username && opt.to_user._id != session_id">
                   <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12" >
-                     <!--  <a href="/user-timeline/{{opt.to_user._id}}"> -->
+                      <a href="/user-timeline/{{opt.to_user._id}}">
                     <div class="friends-sml-img"><img [src]="opt.to_user.avatar" alt="">
                       <div class="event-user-active">&nbsp;</div>
                     </div>
@@ -488,7 +488,7 @@
                         <p *ngIf="opt.to_user.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span> </p>
                         <p *ngIf="opt.to_user.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span> </p>
                     </div>
-                   <!--  </a> -->
+                    </a>
                   </div>
                   <!-- <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
                     <div class="friends-icon-sec"> <a href="javascript:void(0)" (click)="friend_remove(opt.to_user._id)" class="friends-cross-icon"><i class="fa fa-close"></i></a> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
@@ -500,57 +500,40 @@
         </div>
         <div class="profile-hotlist-sec">
           <h5><i class="fa fa-heart-o"></i> <span>Hotlist</span></h5>
-          <ul id="myList3">
-            <li>
-              <div class="hotlist-box">
-                <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
-                  <div class="event-user-active">&nbsp;</div>
+          <ul>
+              <li *ngFor="let opt of hot_list">
+                  <a href="/user-timeline/{{opt._id}}">
+                <div class="hotlist-box">
+                  <div class="friends-sml-img"><a href="javascript:void(0)"><img [src]="opt.avatar" alt=""></a>
+                    <div class="event-user-active">&nbsp;</div>
+                  </div>
+                  <div class="friends-sml-text online-user-sml-text">
+                    <h6><a href="javascript:void(0)">{{opt.username}}</a></h6>
+                    <p *ngIf="opt.gender=='C'"> <span><i class="fa fa-mars"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> <span><i class="fa fa-venus"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality_female}}</span> </p>
+                        <p *ngIf="opt.gender=='M'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span></p>
+                        <p *ngIf="opt.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> </p>
+                        <p *ngIf="opt.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> </p>
+                  </div>
+                  <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
+                    <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
                 </div>
-                <div class="friends-sml-text online-user-sml-text">
-                  <h6><a href="#">Patrick</a></h6>
-                  <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
-                  <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
-                </div>
-                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
-              </div>
-              <div class="hotlist-box">
-                <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
-                  <div class="event-user-active">&nbsp;</div>
-                </div>
-                <div class="friends-sml-text online-user-sml-text">
-                  <h6><a href="#">Patrick</a></h6>
-                  <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
-                  <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
-                </div>
-                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
-              </div>
-            </li>
-            <li>
-              <div class="hotlist-box">
-                <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
-                  <div class="event-user-active">&nbsp;</div>
-                </div>
-                <div class="friends-sml-text online-user-sml-text">
-                  <h6><a href="#">Patrick</a></h6>
-                  <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
-                  <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
-                </div>
-                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
-              </div>
-              <div class="hotlist-box">
-                <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
-                  <div class="event-user-active">&nbsp;</div>
-                </div>
-                <div class="friends-sml-text online-user-sml-text">
-                  <h6><a href="#">Patrick</a></h6>
-                  <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
-                  <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
-                </div>
-                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
-              </div>
-            </li>
+            <!--     <div class="hotlist-box">
+                  <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
+                    <div class="event-user-active">&nbsp;</div>
+                  </div>
+                  <div class="friends-sml-text online-user-sml-text">
+                    <h6><a href="#">Patrick</a></h6>
+                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
+                    <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
+                  </div>
+                  <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
+                    <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+                </div> -->
+                </a>
+              </li>
+
           </ul>
-          <div id="loadMore3" class="more-setting-outer">More</div>
+          <!-- <div id="loadMore3" class="more-setting-outer">More</div> -->
         </div>
         <div class="profile-review-sec">
           <h5><img src="assets/images/event-icon.png" alt=""><span>1 Meet-ups</span></h5>

@@ -10,6 +10,8 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { PusherService } from '../pusher.service';
 import * as jwt_decode from 'jwt-decode';
+import { userDetails} from '../../auth/auth.selectors';
+import { Login, Settings } from '../../auth/auth.actions';
 @Component({
   selector: 'app-user-timeline',
   templateUrl: './user-timeline.component.html',
@@ -68,6 +70,7 @@ export class UserTimelineComponent implements OnInit {
   active_status: boolean = false;
   session_id:any;
   userid:any;
+  hot_list:any=[];
   constructor(
     private router: ActivatedRoute,
     public search: SearchService,
@@ -80,7 +83,6 @@ export class UserTimelineComponent implements OnInit {
   ngOnInit() {
 
     const decoded = jwt_decode(localStorage.getItem('token'));
-    console.log(decoded);
 
     this.pusherService.channel.bind("check-logged-in", data => {
       if(data.user_id === this.router.snapshot.params.user_id) {
@@ -99,7 +101,6 @@ export class UserTimelineComponent implements OnInit {
       this.search.userdetailsByid(user_id)
       .pipe(
         tap(datas => {
-
           let data = datas.info;
           this.userid  = data._id;
         this.username = data.username;
@@ -168,7 +169,7 @@ export class UserTimelineComponent implements OnInit {
         this.travel_arrangements = data.travel_arrangment.join(",");
         this.purpose = data.purpose === undefined ? 'N/A' : data.purpose;
         this.headline = data.headline === undefined ? 'N/A' : data.headline;
-        this.description = data.description === undefined ? 'N/A' : data.description;
+        this.description = data.description === undefined ? 'N/A' : data.description.replace(new RegExp('\r?\n','g'), '<br />');;
 
         this.seeking_for = this.looking_for_male ? 'Male,': '';
         this.seeking_for += this.looking_for_female ? 'Female,': '';
@@ -207,34 +208,24 @@ export class UserTimelineComponent implements OnInit {
     this.similarUsers = datas.info.filter(f => f._id !== decoded.id);
 
   });
+  this.search.hot_list_by_user(user_id)
+  .subscribe (datas => {
+
+    this.hot_list = datas.info;
+
+  });
+
+  this.store.select(userDetails)
+  .subscribe(data => {
+    if(data.hotlist.indexOf(this.router.snapshot.params.user_id) !== -1) {
+      document.querySelector('.user-timeline-left-icon-2').classList.add('active');
+    }else{
+      document.querySelector('.user-timeline-left-icon-2 .active').classList.remove('active');
+    }
+  });
 
   }
-/*   request_send(){
-    this.search.request_send(this.router.snapshot.params.user_id)
-    .pipe(
-      tap(data => {
 
-        if(data.code!=200){
-          this.toastr.error("Something went wrong");
-        }else{
-          this.status = data.status;
-          this.toastr.success(data.info);
-        }
-
-
-      })
-    ).subscribe(noop);
-  }
-  friend_remove(id){
-    this.search.friend_remove(id)
-    .pipe(
-      tap(datas => {
-        this.toastr.success(datas.msg);
-        this.friend_list = datas.info;
-        window.location.reload();
-      })
-).subscribe(noop);
-  } */
 
   request_send(event,  to_id){
 
@@ -273,23 +264,50 @@ export class UserTimelineComponent implements OnInit {
 
   }
 
-  saveTohotlist() {
-    this.hotlist_status = ! this.hotlist_status;
-    if(this.hotlist_status){
-      this.search.saveTohotlist(this.userid,this.hotlist_status)
+  saveTohotlist(e) {
+    let target = e.currentTarget;
+
+    //this.hotlist_status = ! this.hotlist_status;
+
+      if(target.className === "user-timeline-left-icon-2") {
+        this.hotlist_status = true;
+        this.renderer.setElementClass(target, 'active', true);
+        this.search.saveTohotlist(this.userid,this.hotlist_status)
+      .pipe(
+        tap(data => {
+          const info = data.info;
+          this.store.dispatch(new Login({ info}))
+        })
+      ).subscribe(noop);
+
+      }else{
+        this.hotlist_status = false;
+        target.classList.remove('active');
+        this.search.saveTohotlist(this.userid,this.hotlist_status)
+      .pipe(
+        tap(data => {
+          const info = data.info;
+          this.store.dispatch(new Login({ info}))
+        })
+      ).subscribe(noop);
+      }
+      /* this.search.saveTohotlist(this.userid,this.hotlist_status)
       .pipe(
         tap(data => {
 
         })
-      ).subscribe(noop);
-    }else{
-      this.search.saveTohotlist(this.userid,this.hotlist_status)
+      ).subscribe(noop); */
+
+      /* if(target.className === "user-timeline-left-icon-2 active") {
+        target.classList.remove('active');
+      } */
+      /* this.search.saveTohotlist(this.userid,this.hotlist_status)
       .pipe(
         tap(data => {
 
         })
-      ).subscribe(noop);
-    }
+      ).subscribe(noop); */
+
 
   }
 
