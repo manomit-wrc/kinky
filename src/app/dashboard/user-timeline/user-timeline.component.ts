@@ -106,56 +106,59 @@ export class UserTimelineComponent implements OnInit {
       .pipe(
         tap(datas => {
           let data = datas.info;
+
           this.user_data = datas.info;
-          this.userid  = data._id;
-        this.username = data.username;
-         this.avatar = data.avatar !== undefined ? data.avatar: null;
-         this.address = data.state + "," + data.country;
-          if(data.email_verified) {
+          this.userid  = this.user_data._id;
+        this.username = this.user_data.username;
+         this.avatar = this.user_data.avatar !== undefined ? this.user_data.avatar: null;
+         this.address = this.user_data.state + "," + this.user_data.country;
+          if(this.user_data.email_verified) {
             this.email_verified = true;
           }
-          this.gender = data.gender !== undefined ? data.gender : 'N/A';
-        this.sexuality = data.sexuality !== undefined ? data.sexuality : 'N/A';
-        this.sexuality_female = data.sexuality_female !== undefined ? data.sexuality_female : 'N/A';
-        this.age = this.getAge(data.mm +"/"+data.dd +"/"+data.yyyy );
-        this.age_female = this.getAge(data.mm_female +"/"+data.dd_female +"/"+data.yyyy_female );
-        this.looking_for_male = data.looking_for_male;
-        this.looking_for_female = data.looking_for_female;
-        this.looking_for_couple = data.looking_for_couple;
-        this.looking_for_cd = data.looking_for_cd;
-        this.interested_in = data.interested_in;
-        this.likes = data.likes.length;
-        this.body_decoration = data.body_decoration.join(",");
-        this.body_decoration_female = data.body_decoration_female.join(",");
-        this.drink = data.drink === undefined ? 'N/A' : data.drink;
-        this.drink_female = data.drink_female === undefined ? 'N/A' : data.drink_female;
-        this.smoke = data.smoke === undefined ? 'N/A' : data.smoke;
-        this.smoke_female = data.smoke_female === undefined ? 'N/A' : data.smoke_female;
-        this.drugs = data.drugs === undefined ? 'N/A' : data.drugs;
-        this.drugs_female = data.drugs_female === undefined ? 'N/A' : data.drugs_female;
-        this.size = data.size === undefined ? 'N/A' : data.size;
-        this.size_female = data.size_female === undefined ? 'N/A' : data.size_female;
-        this.travel_arrangements = data.travel_arrangment.join(",");
-        this.purpose = data.purpose === undefined ? 'N/A' : data.purpose;
-        this.headline = data.headline === undefined ? 'N/A' : data.headline;
-        this.description = data.description === undefined ? 'N/A' : data.description.replace(new RegExp('\r?\n','g'), '<br />');;
+          this.gender = this.user_data.gender !== undefined ? this.user_data.gender : 'N/A';
+        this.sexuality = this.user_data.sexuality !== undefined ? this.user_data.sexuality : 'N/A';
+        this.sexuality_female = this.user_data.sexuality_female !== undefined ? this.user_data.sexuality_female : 'N/A';
+        this.age = this.getAge(this.user_data.mm +"/"+this.user_data.dd +"/"+this.user_data.yyyy );
+        this.age_female = this.getAge(this.user_data.mm_female +"/"+this.user_data.dd_female +"/"+this.user_data.yyyy_female );
+        this.looking_for_male = this.user_data.looking_for_male;
+        this.looking_for_female = this.user_data.looking_for_female;
+        this.looking_for_couple = this.user_data.looking_for_couple;
+        this.looking_for_cd = this.user_data.looking_for_cd;
+        this.interested_in = this.user_data.interested_in;
+        this.likes = this.user_data.likes.length;
+        this.body_decoration = this.user_data.body_decoration.join(",");
+        this.body_decoration_female = this.user_data.body_decoration_female.join(",");
+        this.drink = this.user_data.drink === undefined ? 'N/A' : this.user_data.drink;
+        this.drink_female = this.user_data.drink_female === undefined ? 'N/A' : this.user_data.drink_female;
+        this.smoke = this.user_data.smoke === undefined ? 'N/A' : this.user_data.smoke;
+        this.smoke_female = this.user_data.smoke_female === undefined ? 'N/A' : this.user_data.smoke_female;
+        this.drugs = this.user_data.drugs === undefined ? 'N/A' : this.user_data.drugs;
+        this.drugs_female = this.user_data.drugs_female === undefined ? 'N/A' : this.user_data.drugs_female;
+        this.size = this.user_data.size === undefined ? 'N/A' : this.user_data.size;
+        this.size_female = this.user_data.size_female === undefined ? 'N/A' : this.user_data.size_female;
+        this.travel_arrangements = this.user_data.travel_arrangment.join(",");
+        this.purpose = this.user_data.purpose === undefined ? 'N/A' : this.user_data.purpose;
+        this.headline = this.user_data.headline === undefined ? 'N/A' : this.user_data.headline;
+        this.description = this.user_data.description === undefined ? 'N/A' : this.user_data.description.replace(new RegExp('\r?\n','g'), '<br />');;
 
         this.seeking_for = this.looking_for_male ? 'Male,': '';
         this.seeking_for += this.looking_for_female ? 'Female,': '';
         this.seeking_for += this.looking_for_couple ? 'Couple,': '';
         this.seeking_for += this.looking_for_cd ? ' CD/TV/TS,': '';
-        if(data.likes.indexOf(decoded.id) !== -1) {
-         // alert(1);
-          document.querySelector('.user-timeline-like-icon').classList.add('active');
-        }else{
-         // alert(2);
-          document.querySelector('.user-timeline-like-icon .active').classList.remove('active');
-        }
+
         this.seeking_for = this.seeking_for.substring(0, this.seeking_for.length - 1);
-         this.fileArrImages = data.images;
+         this.fileArrImages = this.user_data.images;
+
         this.publicImages = this.fileArrImages.filter(f => f.access === 'Public');
-         this.fileArrVideos = data.videos;
+         this.fileArrVideos = this.user_data.videos;
         this.publicvideos = this.fileArrVideos.filter(f => f.access === 'Public');
+        if(this.user_data.likes.indexOf(decoded.id) !== -1) {
+          // alert(1);
+           document.querySelector('.user-timeline-like-icon').classList.add('active');
+         }else{
+          // alert(2);
+           document.querySelector('.user-timeline-like-icon .active').classList.remove('active');
+         }
 
         })
   ).subscribe(noop)
