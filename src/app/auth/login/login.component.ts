@@ -9,7 +9,7 @@ import * as jwt_decode from 'jwt-decode';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { Login, Settings,Count } from '../auth.actions';
-import { getIPAddress } from '../auth.selectors';
+import { getIPAddress,locationDetails } from '../auth.selectors';
 
 
 @Component({
@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
+  lat:any = 0;
+  lon:any = 0;
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthenticationService,
@@ -49,10 +51,10 @@ export class LoginComponent implements OnInit {
       select(getIPAddress),
       tap(data => {
         if(data !== undefined) {
-          
+
           this.ipaddress = data.query;
         }
-      
+
       })
     ).subscribe(noop);
 
@@ -64,6 +66,16 @@ export class LoginComponent implements OnInit {
     } catch (error) {
 
     }
+
+    this.store.pipe(
+      select(locationDetails),
+      tap(data => {
+        if(data !== undefined) {
+          this.lat = data.lat;
+          this.lon = data.lon;
+        }
+      })
+    ).subscribe(noop);
   }
 
   get f() { return this.loginForm.controls; }
@@ -76,7 +88,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.auth.login(this.f.username.value, this.f.password.value, this.ipaddress)
+    this.auth.login(this.f.username.value, this.f.password.value, this.ipaddress , this.lat , this.lon)
           .pipe(
             tap(data => {
 
@@ -102,8 +114,8 @@ export class LoginComponent implements OnInit {
             console.log(err);
             alert('Login Failed');
             }
-           
-      ); 
+
+      );
 
   }
 

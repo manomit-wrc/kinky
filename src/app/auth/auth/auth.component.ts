@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services';
 import { debounceTime } from 'rxjs/operators';
-import { Subject} from "rxjs";
-
+import { locationDetails } from '../auth.selectors';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { Login, Settings } from '../auth.actions';
-
+import { first, tap } from 'rxjs/operators';
+import {noop, Subject} from "rxjs";
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -36,6 +36,8 @@ export class AuthComponent implements OnInit {
   gender: string = '';
   isShow: boolean = false;
   termsConditions = false;
+  lat:any = 0;
+  lon:any = 0;
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthenticationService,
@@ -44,7 +46,15 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.store.pipe(
+      select(locationDetails),
+      tap(data => {
+        if(data !== undefined) {
+          this.lat = data.lat;
+          this.lon = data.lon;
+        }
+      })
+    ).subscribe(noop);
     // this.day = [
 
     //   '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17',
@@ -141,7 +151,7 @@ export class AuthComponent implements OnInit {
       this.signup.DD.value,
       this.signup.MM.value,
       this.signup.YYYY.value,
-      this.gender)
+      this.gender,this.lat,this.lon)
     .subscribe(data => {
       this.signupLoading = false;
       if (data.code === 200) {

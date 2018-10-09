@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services';
-import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { countUser, emailVerified } from '../../auth/auth.selectors';
 import { UserService } from '../user.service';
@@ -8,7 +7,11 @@ import { Logout } from '../../auth/auth.actions';
 import { ToastrService } from 'ngx-toastr';
 import { PusherService } from '../pusher.service';
 import * as jwt_decode from 'jwt-decode';
-
+import { userDetails} from '../../auth/auth.selectors';
+import { Store, select } from '@ngrx/store';
+import { first, tap } from 'rxjs/operators';
+import { Observable, noop, BehaviorSubject, pipe } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -21,7 +24,9 @@ export class HeaderComponent implements OnInit {
   count_friend:any;
   count_friend_request:any;
   isLoading: any = false;
+  count_noti:any;
   constructor(
+    private route: Router,
     private auth: AuthenticationService,
     private avt: UserService,
     private store: Store<AppState>,
@@ -57,6 +62,12 @@ export class HeaderComponent implements OnInit {
       this.count_friend_request = user.count;
     });
 
+    this.store.select(userDetails)
+    .subscribe(data => {
+
+    this.count_noti = (data.hotlist.length + data.likes.length);
+    });
+
 
   }
   verifyEmail(){
@@ -71,17 +82,17 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  logout() {
+   logout() {
 
-
-
-    this.auth.logout()
+     this.auth.logout()
       .subscribe(user => {
-        if(user.code === 200) {
-          const decoded = jwt_decode(localStorage.getItem('token'));
-          this.pusherService.checkLoggedin(decoded.id);
+        const decoded = jwt_decode(localStorage.getItem('token'));
+        this.pusherService.checkLoggedin(decoded.id);
           this.store.dispatch(new Logout());
+        if(user.code === 200) {
+
           window.location.href = "/";
+         //this.route.navigate(['/'])
         }
       })
 

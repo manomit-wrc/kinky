@@ -69,7 +69,7 @@ export class MyProfileComponent implements OnInit {
   friend_list:any= [];
   post_description:any = "";
   session_id: string = '';
-
+  likes:any;
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -127,6 +127,8 @@ export class MyProfileComponent implements OnInit {
     this.store.select(userDetails)
     .subscribe(data => {
 
+
+      this.likes = data.likes.length;
       this.country = data.country === undefined ? '' : data.country;
       this.city = data.state === undefined ? '' : data.state;
 

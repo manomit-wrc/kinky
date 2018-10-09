@@ -25,17 +25,17 @@ export class AuthenticationService {
     // }
 
 
-    login(username:string, password:string , ip:string): Observable<any> {
+    login(username:string, password:string , ip:string , lat:number , lon:number): Observable<any> {
 
-      return this.http.post<any>(`${this.apiUri}/login`, { username, password , ip});
+      return this.http.post<any>(`${this.apiUri}/login`, { username, password , ip ,lat , lon});
     }
 
     getCurrentPosition(): Observable<any> {
       return this.http.get<any>('http://ip-api.com/json');
     }
 
-    signup(username: string, password: string, email: string, dd: number, mm: number, yyyy: number, gender: string) {
-        return this.http.post<any>(`${this.apiUri}/signup`, { username, password, email, dd, mm, yyyy, gender })
+    signup(username: string, password: string, email: string, dd: number, mm: number, yyyy: number, gender: string ,lat:number , lon:number) {
+        return this.http.post<any>(`${this.apiUri}/signup`, { username, password, email, dd, mm, yyyy, gender, lat , lon })
             .pipe(map(data => {
                 return data;
             }));
@@ -304,7 +304,7 @@ export class AuthenticationService {
 
       return this.http.post<any>(`${this.apiUri}/video-update`, { videoUrl, access, altTag });
     }
-    
+
     setAsProfile(imageUrl: string): Observable<any> {
       return this.http.post<any>(`${this.apiUri}/set-as-profile`, {imageUrl});
     }

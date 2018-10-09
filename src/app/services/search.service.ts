@@ -65,10 +65,16 @@ export class SearchService {
   saveTohotlist(hotlist, flag) {
     return this.http.post<any>(`${this.apiUri}/saveTohotlist`, {hotlist, flag});
   }
+  saveToLikes(to_id, count) {
+    return this.http.post<any>(`${this.apiUri}/saveToLikes`, {to_id, count});
+  }
   hot_list() {
     return this.http.post<any>(`${this.apiUri}/hot_list`, {});
   }
   hot_list_by_user(id) {
     return this.http.post<any>(`${this.apiUri}/hot_list_by_user`, {id});
+  }
+  match_perscent(id) {
+    return this.http.post<any>(`${this.apiUri}/match_perscent`, {id});
   }
 }

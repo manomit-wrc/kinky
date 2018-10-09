@@ -9,9 +9,9 @@
           <div class="profile-left-details-box">
             <div class="profile-left-img">
               <div class="box-circle hidden-xxs">
-                <div class="progress-circle progress-70"><span><img [src]="avatar" alt=""></span> </div>
+                <div class="progress-circle progress-{{perscent}}"><span><img [src]="avatar" alt=""></span> </div>
               </div>
-              <p><strong>70%</strong> Matched</p>
+              <p><strong>{{perscent}}%</strong> Matched</p>
             </div>
             <div class="profile-top-text">
               <h5><a href="#">{{username}}</a></h5>
@@ -97,7 +97,7 @@
         <div class="profile-left-text-box">
           <h4>{{headline}}</h4>
           <p [innerHTML]="description"></p>
-          <p><a href="#"><i class="fa fa-heart-o"></i><span>14 Likes</span></a></p>
+          <p><a href="javascript:void(0)" (click)="like($event)" class="user-timeline-like-icon" ><span>{{likes}} Likes</span></a></p>
         </div>
         <div class="profile-left-form-sec">
           <div class="profile-form-row">
@@ -418,12 +418,12 @@
           <h5><img src="assets/images/profile-icon.png" alt=""><span>Similar Profiles</span></h5>
           <ul>
             <li *ngFor="let user of similarUsers | slice:0:10; let i=index">
-
-              <div class="similar-prof-img"><a href="javascript:void(0)"><img [src]="user.avatar" alt=""></a>
+              <a href="/user-timeline/{{user._id}}">
+              <div class="similar-prof-img"><img [src]="user.avatar" alt="">
                 <div class="event-user-active">&nbsp;</div>
               </div>
-              <p><a href="/user-timeline/{{user._id}}">{{user.username}}</a></p>
-
+              <p>{{user.username}}</p>
+            </a>
             </li>
           </ul>
         </div>

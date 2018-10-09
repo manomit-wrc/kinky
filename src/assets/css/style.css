@@ -1605,7 +1605,7 @@ box-shadow: 5px 5px 5px -3px rgba(0,0,0,0.25); border-radius:100%;}
 
 .similar-prof-img .event-user-active{ bottom:8px;}
 
-.similar-prof-sec ul li p{ font-size:18px; margin-top:8px;  font-size:16px; font-weight:bold;}
+.similar-prof-sec ul li p{ font-size:18px; margin-top:8px;  font-size:16px; font-weight:bold; color: #d1832b;}
 
 .similar-prof-sec ul li p a{color:#d1832b;}
 
@@ -2138,7 +2138,37 @@ background: #000;
   background-size: 100% auto !important;
 }
 
+.user-timeline-like-icon.active {
+  background: url(../images/love.png) no-repeat !important;
+  background-size: 100% auto !important;
+  width: 45px;
+}
+
+.user-timeline-like-icon {
+  background: url(../images/love-outline.png) no-repeat !important;
+  background-size: 90% auto !important;
+  width: 54px;
+  display: inline-block;
+}
+
+.user-timeline-like-icon span {
+  margin-left: 45px;
+  display: inline-block;
+  width: 300px;
+  line-height: 48px;
+}
+
+/* .user-timeline-like-icon .active span {
+  margin-left: 45px;
+  display: inline-block;
+  width: 300px;
+  line-height: 44px;
+} */
+
+
 .hotlist-box {
   width: 98% !important;
   margin-right: 2%;
 }
+
+

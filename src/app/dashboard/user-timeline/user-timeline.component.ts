@@ -20,6 +20,8 @@ import { Login, Settings } from '../../auth/auth.actions';
 export class UserTimelineComponent implements OnInit {
   from_users:any = [];
   to_users:any = [];
+  likes:any = 0;
+  like_status:any = false;
   username:any;
   address: any;
   sexuality: any;
@@ -33,6 +35,7 @@ export class UserTimelineComponent implements OnInit {
   looking_for_cd: any;
   interested_in: any;
   avatar:any;
+  user_data:any={};
   show:any = 6;
   height:any;
   height_female:any;
@@ -71,6 +74,7 @@ export class UserTimelineComponent implements OnInit {
   session_id:any;
   userid:any;
   hot_list:any=[];
+  perscent:any;
   constructor(
     private router: ActivatedRoute,
     public search: SearchService,
@@ -83,7 +87,7 @@ export class UserTimelineComponent implements OnInit {
   ngOnInit() {
 
     const decoded = jwt_decode(localStorage.getItem('token'));
-
+    this.pusherService.checkLoggedin(this.router.snapshot.params.user_id);
     this.pusherService.channel.bind("check-logged-in", data => {
       if(data.user_id === this.router.snapshot.params.user_id) {
         if(data.status === 1) {
@@ -95,53 +99,18 @@ export class UserTimelineComponent implements OnInit {
       }
     })
 
-    this.pusherService.checkLoggedin(this.router.snapshot.params.user_id);
+
     this.session_id = this.router.snapshot.params.user_id;
     let user_id = this.router.snapshot.params.user_id;
       this.search.userdetailsByid(user_id)
       .pipe(
         tap(datas => {
           let data = datas.info;
+          this.user_data = datas.info;
           this.userid  = data._id;
         this.username = data.username;
          this.avatar = data.avatar !== undefined ? data.avatar: null;
          this.address = data.state + "," + data.country;
-         this.store.select(loadAllMasters)
-          .subscribe(masters => {
-            if(masters !== undefined) {
-
-              if(masters !== undefined) {
-                if(data.height !== undefined) {
-                  this.height = masters.height.filter( h => h._id === data.height);
-                  this.height = this.height.length === 0 ? '' : this.height[0].name;
-                }
-                if(data.height_female !== undefined) {
-                  this.height_female =masters.height.filter( h => h._id === data.height_female);
-                  this.height_female = this.height_female.length === 0 ? '' : this.height_female[0].name;
-                }
-                if(data.build !== undefined) {
-                  this.build = masters.build.filter( h => h._id === data.build);
-                  this.build = this.build.length === 0 ? '' : this.build[0].name;
-                }
-                if(data.build_female !== undefined) {
-                  this.build_female = masters.build.filter( h => h._id === data.build_female);
-                  this.build_female = this.build_female.length === 0 ? '' : this.build_female[0].name;
-                }
-                if(data.hair !== undefined) {
-                  this.hair = masters.hair.filter( h => h._id === data.hair);
-                  this.hair = this.hair.length === 0 ? '' : this.hair[0].name;
-                }
-                if(data.hair_female !== undefined) {
-                  this.hair_female = masters.hair.filter( h => h._id === data.hair_female);
-                  this.hair_female = this.hair_female.length === 0 ? '' : this.hair_female[0].name;
-                }
-
-              }
-
-            }
-
-          })
-
           if(data.email_verified) {
             this.email_verified = true;
           }
@@ -155,7 +124,7 @@ export class UserTimelineComponent implements OnInit {
         this.looking_for_couple = data.looking_for_couple;
         this.looking_for_cd = data.looking_for_cd;
         this.interested_in = data.interested_in;
-
+        this.likes = data.likes.length;
         this.body_decoration = data.body_decoration.join(",");
         this.body_decoration_female = data.body_decoration_female.join(",");
         this.drink = data.drink === undefined ? 'N/A' : data.drink;
@@ -175,7 +144,13 @@ export class UserTimelineComponent implements OnInit {
         this.seeking_for += this.looking_for_female ? 'Female,': '';
         this.seeking_for += this.looking_for_couple ? 'Couple,': '';
         this.seeking_for += this.looking_for_cd ? ' CD/TV/TS,': '';
-
+        if(data.likes.indexOf(decoded.id) !== -1) {
+         // alert(1);
+          document.querySelector('.user-timeline-like-icon').classList.add('active');
+        }else{
+         // alert(2);
+          document.querySelector('.user-timeline-like-icon .active').classList.remove('active');
+        }
         this.seeking_for = this.seeking_for.substring(0, this.seeking_for.length - 1);
          this.fileArrImages = data.images;
         this.publicImages = this.fileArrImages.filter(f => f.access === 'Public');
@@ -215,6 +190,12 @@ export class UserTimelineComponent implements OnInit {
 
   });
 
+  this.search.match_perscent(user_id)
+  .subscribe (datas => {
+  this.perscent = Math.round(datas.info);
+
+  });
+
   this.store.select(userDetails)
   .subscribe(data => {
     if(data.hotlist.indexOf(this.router.snapshot.params.user_id) !== -1) {
@@ -223,6 +204,41 @@ export class UserTimelineComponent implements OnInit {
       document.querySelector('.user-timeline-left-icon-2 .active').classList.remove('active');
     }
   });
+
+  this.store.select(loadAllMasters)
+  .subscribe(masters => {
+
+      if(masters !== undefined) {
+        if(this.user_data.height !== undefined) {
+          this.height = masters.height.filter( h => h._id === this.user_data.height);
+          this.height = this.height.length === 0 ? '' : this.height[0].name;
+
+        }
+        if(this.user_data.height_female !== undefined) {
+          this.height_female =masters.height.filter( h => h._id === this.user_data.height_female);
+          this.height_female = this.height_female.length === 0 ? '' : this.height_female[0].name;
+        }
+        if(this.user_data.build !== undefined) {
+          this.build = masters.build.filter( h => h._id === this.user_data.build);
+          this.build = this.build.length === 0 ? '' : this.build[0].name;
+        }
+        if(this.user_data.build_female !== undefined) {
+          this.build_female = masters.build.filter( h => h._id === this.user_data.build_female);
+          this.build_female = this.build_female.length === 0 ? '' : this.build_female[0].name;
+        }
+        if(this.user_data.hair !== undefined) {
+          this.hair = masters.hair.filter( h => h._id === this.user_data.hair);
+          this.hair = this.hair.length === 0 ? '' : this.hair[0].name;
+        }
+        if(this.user_data.hair_female !== undefined) {
+          this.hair_female = masters.hair.filter( h => h._id === this.user_data.hair_female);
+          this.hair_female = this.hair_female.length === 0 ? '' : this.hair_female[0].name;
+        }
+
+      }
+
+
+  })
 
   }
 
@@ -307,6 +323,38 @@ export class UserTimelineComponent implements OnInit {
 
         })
       ).subscribe(noop); */
+
+
+  }
+  like(e){
+    let target = e.currentTarget;
+
+    //this.hotlist_status = ! this.hotlist_status;
+
+      if(target.className === "user-timeline-like-icon") {
+        this.likes +=1;
+        this.like_status = true;
+        this.renderer.setElementClass(target, 'active', true);
+        this.search.saveToLikes(this.userid,this.like_status)
+      .pipe(
+        tap(data => {
+          const info = data.info;
+
+        })
+      ).subscribe(noop);
+
+      }else{
+        this.likes -=1;
+        this.like_status = false;
+        target.classList.remove('active');
+        this.search.saveToLikes(this.userid,this.like_status)
+      .pipe(
+        tap(data => {
+          const info = data.info;
+
+        })
+      ).subscribe(noop);
+      }
 
 
   }
