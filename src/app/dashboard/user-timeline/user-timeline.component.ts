@@ -72,6 +72,7 @@ export class UserTimelineComponent implements OnInit {
   status:any = 2;
   active_status: boolean = false;
   session_id:any;
+  current_id:any;
   userid:any;
   hot_list:any=[];
   perscent:any;
@@ -109,6 +110,7 @@ export class UserTimelineComponent implements OnInit {
 
           this.user_data = datas.info;
           this.userid  = this.user_data._id;
+          this.current_id =decoded.id;
         this.username = this.user_data.username;
          this.avatar = this.user_data.avatar !== undefined ? this.user_data.avatar: null;
          this.address = this.user_data.state + "," + this.user_data.country;
@@ -271,7 +273,7 @@ export class UserTimelineComponent implements OnInit {
     }
     else {
 
-      this.search.friend_remove(to_id)
+      this.search.friend_remove(to_id,to_id)
         .pipe(
           tap(data => {
             this.toastr.success(data.msg);

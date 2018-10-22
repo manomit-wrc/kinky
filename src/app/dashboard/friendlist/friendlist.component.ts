@@ -26,7 +26,7 @@ show = 6;
 
     const decoded = jwt_decode(localStorage.getItem('token'));
     this.session_id = decoded.id;
-    
+
         this.search.fetchInvitation()
         .pipe(
           tap(datas => {
@@ -87,8 +87,8 @@ show = 6;
       })
 ).subscribe(noop);
   }
-  friend_remove(id){
-    this.search.friend_remove(id)
+  friend_remove(id , requested_id){
+    this.search.friend_remove(id , requested_id)
     .pipe(
       tap(datas => {
         this.toastr.success(datas.msg);

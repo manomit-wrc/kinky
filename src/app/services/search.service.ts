@@ -53,8 +53,8 @@ export class SearchService {
   cancel_invetation(to_id){
     return this.http.post<any>(`${this.apiUri}/cancel_invetation`, {to_id});
   }
-  friend_remove(to_id){
-    return this.http.post<any>(`${this.apiUri}/friend_remove`, {to_id});
+  friend_remove(to_id, requested_id){
+    return this.http.post<any>(`${this.apiUri}/friend_remove`, {to_id, requested_id});
   }
   check_friends() {
     return this.http.get<any>(`${this.apiUri}/check_friends`, {});

@@ -91,6 +91,8 @@ export class MyProfileComponent implements OnInit {
 
     this.search.friend_list()
       .subscribe (datas => {
+        console.log(datas);
+
         this.friend_list = datas.info;
       });
 
@@ -234,8 +236,9 @@ export class MyProfileComponent implements OnInit {
 
   }
 
-  friend_remove(id){
-    this.search.friend_remove(id)
+  friend_remove(id, requested_id) {
+
+    this.search.friend_remove(id, requested_id)
     .subscribe(datas => {
         this.toastr.success(datas.msg);
         this.friend_list = datas.info;

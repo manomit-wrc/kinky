@@ -196,7 +196,7 @@ export class SearchComponent implements OnInit {
 
     }
 
-request_send(event,  to_id){
+request_send(event,  to_id , requested_id){
 
   let target = event.currentTarget;
   //console.log(target.classList.remove('friends-plus-icon'));
@@ -223,7 +223,7 @@ request_send(event,  to_id){
     ).subscribe(noop);
   }
   else {
-    this.search.friend_remove(to_id)
+    this.search.friend_remove(to_id,requested_id)
       .pipe(
         tap(data => {
           this.toastr.success(data.msg);
