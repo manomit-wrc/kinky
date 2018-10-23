@@ -318,6 +318,9 @@ export class AuthenticationService {
     post_list(post_description:string):Observable<any>{
       return this.http.post<any>(`${this.apiUri}/post_list`, {});
     }
+    noti():Observable<any>{
+      return this.http.post<any>(`${this.apiUri}/noti`, {});
+    }
 
 
 

@@ -62,10 +62,11 @@ export class HeaderComponent implements OnInit {
       this.count_friend_request = user.count;
     });
 
-    this.store.select(userDetails)
-    .subscribe(data => {
 
-    this.count_noti = (data.hotlist.length + data.likes.length);
+
+    this.auth.noti()
+    .subscribe(user => {
+      this.count_noti = user.info;
     });
 
 
