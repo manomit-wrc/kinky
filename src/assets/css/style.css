@@ -661,7 +661,7 @@ box-shadow: 3px 3px 9px -1px rgba(0,0,0,0.44);}
 
 /********************Latest-Personal-Details-Tab1***************************/
 
-.personal-detail-tab-row{ border-bottom:1px solid #c0c0c0; padding:15px 0 15px;}
+.personal-detail-tab-row{ border-bottom:1px solid #c0c0c0; padding:0;}
 
 .personal-detail-medium-box{ width:100%; margin-bottom:10px; display:inline-block; vertical-align:middle;}
 
@@ -2170,5 +2170,41 @@ background: #000;
   width: 98% !important;
   margin-right: 2%;
 }
+
+.latest-personal-details-tab-top {
+  padding: 25px 25px 0 25px;
+  border-bottom: 1px solid #d2d2d2;
+}
+
+.photo-row.photo-row1.profile-right-photo-vid-sec.tab-photo, .photo-row.photo-row1.profile-right-photo-vid-sec.tab-video  {
+  margin-top: 0;
+}
+
+.profile-right-photo-vid-sec.tab-photo ul li, .profile-right-photo-vid-sec.tab-video ul li {
+  margin: 0 3px 15px;
+  width: 15%;
+  position: relative;
+}
+
+.profile-right-photo-vid-sec.tab-photo ul li img {
+  height: auto;
+}
+
+
+.profile-right-photo-vid-sec.tab-video ul li video {
+  height: 125px !important;
+}
+
+.tab-modals .modal-header {
+  background: rgba(24,8,10,1);
+background: -moz-linear-gradient(left, rgba(24,8,10,1) 0%, rgba(132,35,53,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(24,8,10,1)), color-stop(100%, rgba(132,35,53,1)));
+background: -webkit-linear-gradient(left, rgba(24,8,10,1) 0%, rgba(132,35,53,1) 100%);
+background: -o-linear-gradient(left, rgba(24,8,10,1) 0%, rgba(132,35,53,1) 100%);
+background: -ms-linear-gradient(left, rgba(24,8,10,1) 0%, rgba(132,35,53,1) 100%);
+background: linear-gradient(to right, rgba(24,8,10,1) 0%, rgba(132,35,53,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#18080a', endColorstr='#842335', GradientType=1 );
+}
+
 
 

@@ -9,10 +9,12 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { userDetails, locationDetails ,profileImages,profileVideos} from '../../auth/auth.selectors';
 import { noop } from '@angular/compiler/src/render3/view/util';
-import { loadAllMasters } from '../dashboard.selectors';
+import { loadAllMasters,postAllMasters } from '../dashboard.selectors';
+import { postMasters } from '../dashboard.actions';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import * as jwt_decode from 'jwt-decode';
+import {ModalModule} from "ngx-modal";
 declare var $: any;
 
 @Component({
@@ -23,6 +25,9 @@ declare var $: any;
 export class MyProfileComponent implements OnInit {
   private _success = new Subject<string>();
   show = 6;
+  posts:any;
+  content_type:any;
+  tab: String = 'tab1';
   successMessage: string;
   hot_list:any=[];
   name: any;
@@ -63,13 +68,15 @@ export class MyProfileComponent implements OnInit {
   email_verified: boolean = false;
   isLoading: boolean = false;
   fileArr:any;
+  fileArrvid:any;
   publicImages:any;
   publicvideos:any;
   seeking_for: string = '';
   friend_list:any= [];
   post_description:any = "";
   session_id: string = '';
-  likes:any;
+  likes: any;
+  post_data: any = false;
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -96,10 +103,7 @@ export class MyProfileComponent implements OnInit {
         this.friend_list = datas.info;
       });
 
-      this.auth.post_list(this.post_description)
-    .subscribe(data => {
 
-    });
 
 
     $(document).ready(function() {
@@ -229,8 +233,14 @@ export class MyProfileComponent implements OnInit {
       });
 
       this.store.select(profileVideos).subscribe(videos => {
-
+        this.fileArrvid = videos;
           this.publicvideos = videos.filter(f => f.access === 'Public');
+
+        });
+      this.store.select(postAllMasters).subscribe(post => {
+     console.log('====================================');
+     console.log(post);
+     console.log('====================================');
 
         });
 
@@ -269,13 +279,41 @@ verifyEmail() {
     });
 }
 
-post(){
-  this.auth.post(this.post_description)
-    .subscribe(data => {
-      if(data.code === 200) {
+displayTab(value) {
+  this.tab = value;
+}
 
-      }
-    });
+
+
+content_click(url,type,myModal){
+localStorage.setItem("content",url);
+this.content_type = type;
+myModal.close();
+}
+
+post(){
+ // alert(localStorage.getItem("content"));
+ if(this.post_description !=""){
+   this.post_data = true;
+  this.auth.post(this.post_description,localStorage.getItem("content"),this.content_type)
+  .subscribe(data => {
+    localStorage.removeItem("content");
+    this.content_type = "";
+    if(data.code === 200) {
+      this.auth.post_list()
+      .subscribe(datas => {
+        this.post_data = false;;
+        const posts = datas.info;
+        this.post_description = "";
+        this.store.dispatch(new postMasters({ posts }));
+      });
+
+    }
+  });
+ }else{
+  this.toastr.error("Please write something.");
+ }
+
 }
 
 }

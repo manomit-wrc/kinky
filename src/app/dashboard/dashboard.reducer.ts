@@ -1,11 +1,14 @@
 import { DashboardActions, DashboardActionTypes} from './dashboard.actions';
+import { Action } from '@ngrx/store';
 
 export interface DashboardState {
   masters: any;
+  posts:any;
 }
 
 export const initialState: DashboardState = {
-  masters: undefined
+  masters: undefined,
+  posts:undefined
 }
 
 export function dashBoardReducer(state = initialState, action: DashboardActions): DashboardState {
@@ -14,6 +17,11 @@ export function dashBoardReducer(state = initialState, action: DashboardActions)
       return {
         ...state,
         masters: action.payload.masters
-      }
+      };
+    case DashboardActionTypes.POST_MASTERS:
+      return {
+        ...state,
+        masters: action.payload.posts
+      };
   }
 }

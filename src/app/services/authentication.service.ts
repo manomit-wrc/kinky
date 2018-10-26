@@ -312,10 +312,10 @@ export class AuthenticationService {
       return this.http.post<any>(`${this.apiUri}/change-image-details`, {imageUrl, access, altTag});
     }
 
-    post(post_description:string):Observable<any>{
-      return this.http.post<any>(`${this.apiUri}/post_description`, {post_description});
+    post(post_description:string,url:string,type:string):Observable<any>{
+      return this.http.post<any>(`${this.apiUri}/post_description`, {post_description, url, type});
     }
-    post_list(post_description:string):Observable<any>{
+    post_list():Observable<any>{
       return this.http.post<any>(`${this.apiUri}/post_list`, {});
     }
     noti():Observable<any>{

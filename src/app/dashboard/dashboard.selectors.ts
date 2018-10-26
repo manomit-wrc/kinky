@@ -6,3 +6,7 @@ export const loadAllMasters = createSelector(
     selectDashboardState,
     dashboard => dashboard !== undefined ? dashboard.masters : null
 );
+export const postAllMasters = createSelector(
+    selectDashboardState,
+    dashboard => dashboard.post !== undefined ? dashboard.post : null
+);

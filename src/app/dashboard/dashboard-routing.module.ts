@@ -14,6 +14,7 @@ import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
 import { VideoUploadComponent } from './video-upload/video-upload.component';
 import { SearchComponent } from './search/search.component';
 import { UserTimelineComponent } from './user-timeline/user-timeline.component';
+
 const authRoutes: Routes = [
 
     //Site routes goes here

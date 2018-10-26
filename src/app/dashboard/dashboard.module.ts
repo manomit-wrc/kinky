@@ -46,7 +46,7 @@ import { SearchComponent } from './search/search.component';
 import { ToastrModule } from 'ngx-toastr';
 import { UserTimelineComponent } from './user-timeline/user-timeline.component';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
-
+import {ModalModule} from "ngx-modal";
 @NgModule({
   imports: [
     CommonModule,
@@ -63,6 +63,7 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
     EffectsModule.forFeature([DashboardEffects, CountryEffects]),
     StoreModule.forFeature('country', fromCountry.countriesReducer),
     FilterPipeModule,
+    ModalModule
 
   ],
   declarations: [

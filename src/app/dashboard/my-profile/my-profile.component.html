@@ -108,16 +108,15 @@
           <div class="profile-form-row">
             <div class="profile-input-outer">
               <input type="text" [(ngModel)]="post_description" class="profile-input-text" placeholder="Whats in your mind...">
-              <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
+              <a href="javascript:void(0)" (click)="myModal.open()"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
                   alt=""></a> </div>
-            <input type="button" class="save-btn profile-input-btn" value="Post" (click)="post()">
+            <input type="button" class="save-btn profile-input-btn" value="Post" (click)="post()" [disabled]="post_data">
           </div>
           <div class="profile-form-row">
 
             <div class="profile-post-btn">
               <select>
                 <option>Posts</option>
-                <option>Posts from me and selected local members</option>
                 <option>Posts from me and friends</option>
                 <option>Posts from me</option>
               </select>
@@ -131,9 +130,9 @@
             </div>
             <div class="profile-post-btn">
               <select>
-                <option>assets/images</option>
-                <option>Large assets/images</option>
-                <option>Thumbnails only</option>
+                <option>Text/Images</option>
+                <option>Only images</option>
+                <option>Only text content</option>
               </select>
             </div>
             <button class="profile-btn profile-setting-btn"><img src="assets/images/setting-icon.png" alt=""></button>
@@ -513,3 +512,51 @@
     </div>
   </div>
 </div>
+
+<modal #myModal>
+   <modal-header>
+      <h1>Modal header</h1>
+  </modal-header>
+  <modal-content>
+   <!--  <li *ngFor="let img of fileArr;"><img class="upload-all" [src]="img.url" [alt]="img.altTag"></li> -->
+
+
+      <div class="row latest-personal-detail-outer tab-modals">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="latest-personal-details-tab-top">
+            <ul class="form-tab">
+              <li [ngClass]="{ 'pages_active': tab === 'tab1' }"><a [routerLink]="" (click)="displayTab('tab1')">Images </a></li>
+              <li [ngClass]="{ 'pages_active': tab === 'tab2' }"><a [routerLink]="" (click)="displayTab('tab2')">Videos</a></li>
+            </ul>
+          </div>
+          <div class="latest-personal-details-tab-bot">
+            <div id="tab1" [ngStyle]="{'display': tab === 'tab1' ? 'block' : 'none'}">
+              <div class="personal-detail-tab-row">
+                <div class="photo-row photo-row1 profile-right-photo-vid-sec tab-photo">
+                  <h4><img src="/assets/images/photo-icon-1.png" alt=""><span>Photos</span></h4>
+                  <ul>
+                    <li *ngFor="let img of fileArr;"><img class="upload-all" [src]="img.url" (click)="content_click(img.url,'image',myModal)" [alt]="img.altTag"></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div id="tab2" [ngStyle]="{'display': tab === 'tab2' ? 'block' : 'none'}">
+              <div class="photo-row photo-row1 profile-right-photo-vid-sec tab-video">
+              <h4><img src="/assets/images/photo-icon-1.png" alt=""><span>Videos</span></h4>
+              <ul>
+                <li *ngFor="let f of fileArrvid">
+
+                    <video [src] = "f.url" class="upload-all" (click)="content_click(f.url,'video',myModal)">Your browser does not support HTML5 video.</video>
+
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </modal-content>
+  <modal-footer>
+      <button class="btn btn-primary" (click)="myModal.close()">close</button>
+  </modal-footer>
+</modal>
