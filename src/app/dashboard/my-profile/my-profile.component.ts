@@ -77,6 +77,9 @@ export class MyProfileComponent implements OnInit {
   session_id: string = '';
   likes: any;
   post_data: any = false;
+  post_result: any[];
+  order: any = 'add_time';
+  reverse:any = true;
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -98,8 +101,6 @@ export class MyProfileComponent implements OnInit {
 
     this.search.friend_list()
       .subscribe (datas => {
-        console.log(datas);
-
         this.friend_list = datas.info;
       });
 
@@ -237,12 +238,14 @@ export class MyProfileComponent implements OnInit {
           this.publicvideos = videos.filter(f => f.access === 'Public');
 
         });
-      this.store.select(postAllMasters).subscribe(post => {
-     console.log('====================================');
-     console.log(post);
-     console.log('====================================');
+      this.store.select(postAllMasters).subscribe(posts => {
+         this.post_result = posts;
+         console.log('====================================');
+         console.log(posts);
+         console.log('====================================');
 
         });
+
 
   }
 

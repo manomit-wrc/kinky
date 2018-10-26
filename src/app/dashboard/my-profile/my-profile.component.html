@@ -141,18 +141,24 @@
         <div class="profile-post-sec">
           <div class="profile-post-row">
             <ul>
-              <li>
-                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
+              <li *ngFor="let opt of post_result| orderBy: -order :reverse">
+                <div class="profile-post-img"><img [src]="opt.user.avatar" alt=""></div>
                 <div class="profile-post-text">
                   <div class="prof-text-top">
-                    <h6><a href="#">LoveAngle2018</a></h6>
-                    <p>Labor Day Fuck, hmmmm..</p>
+                    <h6><a href="#">{{opt.user.username}}</a></h6>
+                    <p>{{opt.description}}</p>
+                   <!--  <p><a href="#">lola_kemiron</a> likes your profile</p> -->
+                    <div class="activity-list-img" *ngIf="opt.content">
+                      <img [src]="opt.content" alt="" *ngIf="opt.content_type =='image'">
+                      <video [src] = "opt.content"  *ngIf="opt.content_type =='video'" controls>Your browser does not support HTML5 video.</video>
+
+                    </div>
                   </div>
                   <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14
                         likes</span></a> <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i>
-                      <span>1 Comment</span></a> <span class="prof-date">4 Minutes ago</span> </div>
+                      <span>1 Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
                 </div>
-                <ul>
+            <!--     <ul>
                   <li>
                     <div class="profile-post-img"><img src="assets/images/photo-image-1.jpg" alt=""></div>
                     <div class="profile-post-text">
@@ -164,162 +170,17 @@
                             likes</span></a><span class="prof-date">4 Minutes ago</span></div>
                     </div>
                   </li>
-                </ul>
-              </li>
-            </ul>
-            <div class="profile-comment-box">
-              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
-              <div class="profile-input-outer">
-                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
-                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
-                    alt=""></a> </div>
-            </div>
-          </div>
-          <div class="profile-post-row">
-            <ul>
-              <li>
-                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
-                <div class="profile-post-text">
-                  <div class="prof-text-top">
-                    <h6><a href="#">LoveAngle2018</a></h6>
-                    <p><a href="#">lola_kemiron</a> likes your profile</p>
-                    <div class="activity-list-img"><img src="assets/images/activity-dummy-img.jpg" alt=""></div>
-                  </div>
-                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14
-                        likes</span></a> <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i>
-                      <span>1 Comment</span></a> <span class="prof-date">4 Minutes ago</span> </div>
+                </ul> -->
+                <div class="profile-comment-box" *ngIf="opt.user._id != session_id">
+                  <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+                  <div class="profile-input-outer">
+                    <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                    <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
+                        alt=""></a> </div>
                 </div>
               </li>
             </ul>
-            <div class="profile-comment-box">
-              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
-              <div class="profile-input-outer">
-                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
-                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
-                    alt=""></a> </div>
-            </div>
-          </div>
-          <div class="profile-post-row">
-            <ul>
-              <li>
-                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
-                <div class="profile-post-text">
-                  <div class="prof-text-top">
-                    <h6><a href="#">WorshipHere</a></h6>
-                    <p><a href="#">lola_kemiron</a>and <a href="#">3 others</a> have looked at your profile</p>
-                    <div class="activity-list-img"><img src="assets/images/activity-dummy-img.jpg" alt=""></div>
-                  </div>
-                  <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14
-                        likes</span></a> <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i>
-                      <span>1 Comment</span></a> <span class="prof-date">4 Minutes ago</span> </div>
-                </div>
-              </li>
-            </ul>
-            <div class="profile-comment-box">
-              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
-              <div class="profile-input-outer">
-                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
-                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
-                    alt=""></a> </div>
-            </div>
-          </div>
-          <div class="profile-post-row">
-            <ul>
-              <li>
-                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
-                <div class="profile-post-text">
-                  <div class="prof-text-top">
-                    <h6><a href="#">LoveAngle2018</a></h6>
-                    <p>Labor Day Fuck, hmmmm..</p>
-                  </div>
-                  <div class="prof-text-bot">
-                    <!--<a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>
-                  <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a>-->
-                    <span class="prof-date">4 Minutes ago</span> </div>
-                </div>
-                <ul>
-                  <li>
-                    <!--<div class="profile-post-img"><img src="assets/images/photo-image-1.jpg" alt=""></div>-->
-                    <div class="profile-post-text profile-sml-post-text">
-                      <div class="prof-text-top">
-                        <p>Only LoveAngle2018's friends can comment</p>
-                        <p><a href="#">Invite as friends</a> or <a href="#">Send Message</a></p>
-                      </div>
-                      <div class="prof-text-bot">
-                        <!--<a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>-->
-                        <span class="prof-date">4 Minutes ago</span></div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
-                <div class="profile-post-text">
-                  <div class="prof-text-top">
-                    <p><a href="#">LoveAngle2018</a> and <a href="#">1 other</a> have update their profile</p>
-                  </div>
-                  <div class="prof-text-bot">
-                    <!--<a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>
-                   <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a>-->
-                    <span class="prof-date">4 Minutes ago</span> </div>
-                </div>
-              </li>
-            </ul>
-            <div class="profile-comment-box">
-              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
-              <div class="profile-input-outer">
-                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
-                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
-                    alt=""></a> </div>
-            </div>
-          </div>
-          <div class="profile-post-row">
-            <ul>
-              <li>
-                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
-                <div class="profile-post-text">
-                  <div class="prof-text-top">
-                    <!-- <h6><a href="#">LoveAngle2018</a></h6>-->
-                    <p><a href="#">lola_kemiron</a> likes your profile</p>
-                    <!--<div class="activity-list-img"><img src="assets/images/activity-dummy-img.jpg" alt=""></div>-->
-                  </div>
-                  <div class="prof-text-bot">
-                    <!--<a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>
-                  <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a>-->
-                    <span class="prof-date">4 Minutes ago</span> </div>
-                </div>
-              </li>
-            </ul>
-            <!--<div class="profile-comment-box">
-              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
-              <div class="profile-input-outer">
-                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
-                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
-            </div>-->
-          </div>
-          <div class="profile-post-row">
-            <ul>
-              <li>
-                <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
-                <div class="profile-post-text">
-                  <div class="prof-text-top">
-                    <!--<h6><a href="#">WorshipHere</a></h6>-->
-                    <p><a href="#">lola_kemiron</a>and <a href="#">3 others</a> have looked at your profile</p>
-                    <!--<div class="activity-list-img"><img src="assets/images/activity-dummy-img.jpg" alt=""></div>-->
-                  </div>
-                  <div class="prof-text-bot">
-                    <!--<a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14 likes</span></a>
-                   <a href="#" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i> <span>1 Comment</span></a>-->
-                    <span class="prof-date">4 Minutes ago</span> </div>
-                </div>
-              </li>
-            </ul>
-            <!--<div class="profile-comment-box">
-              <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
-              <div class="profile-input-outer">
-                <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
-                <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
-            </div>-->
+
           </div>
           <p><a href="#" class="form-submit-btn loadmore-btn" id="loadMore-profile">Load More</a></p>
         </div>

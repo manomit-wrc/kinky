@@ -14,23 +14,33 @@ export class DashboardEffects {
     tap(action => localStorage.setItem("masters", JSON.stringify(action.payload.masters)))
   );
 
+  @Effect({ dispatch: false })
+  posts$ = this.actions$.pipe(
+  ofType<postMasters>(DashboardActionTypes.POST_MASTERS),
+  tap(action => localStorage.setItem("posts", JSON.stringify(action.payload.posts)))
+)
+
+
   @Effect()
   init$ = defer(() => {
 
     const masterData = localStorage.getItem("masters");
+    const postData = localStorage.getItem("posts");
 
     if (masterData) {
-       return of(new loadMasters({masters:JSON.parse(masterData)}));
+       return of(
+         new loadMasters({masters:JSON.parse(masterData)}),
+         new postMasters({posts:JSON.parse(postData)})
+
+        );
     }
 
 
   });
 
-  @Effect({ dispatch: false })
-  count$ = this.actions$.pipe(
-  ofType<postMasters>(DashboardActionTypes.POST_MASTERS),
-  tap(action => localStorage.setItem("posts", JSON.stringify(action.payload.posts)))
-)
+
+
+
 
   constructor(private actions$: Actions, private router:Router) {
 

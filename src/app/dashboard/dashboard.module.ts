@@ -47,6 +47,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { UserTimelineComponent } from './user-timeline/user-timeline.component';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import {ModalModule} from "ngx-modal";
+import { OrderModule } from 'ngx-order-pipe';
+import {TimeAgoPipe} from 'time-ago-pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -63,7 +65,8 @@ import {ModalModule} from "ngx-modal";
     EffectsModule.forFeature([DashboardEffects, CountryEffects]),
     StoreModule.forFeature('country', fromCountry.countriesReducer),
     FilterPipeModule,
-    ModalModule
+    ModalModule,
+    OrderModule
 
   ],
   declarations: [
@@ -91,7 +94,8 @@ import {ModalModule} from "ngx-modal";
        CarouselItemElement,
        CarouselItemDirective,
        SearchComponent,
-       UserTimelineComponent
+       UserTimelineComponent,
+       TimeAgoPipe
       ]
 })
 

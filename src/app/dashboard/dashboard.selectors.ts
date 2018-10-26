@@ -8,5 +8,5 @@ export const loadAllMasters = createSelector(
 );
 export const postAllMasters = createSelector(
     selectDashboardState,
-    dashboard => dashboard.post !== undefined ? dashboard.post : null
+    dashboard => dashboard.posts !== undefined ? dashboard.posts : null
 );

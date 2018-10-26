@@ -21,7 +21,7 @@ export function dashBoardReducer(state = initialState, action: DashboardActions)
     case DashboardActionTypes.POST_MASTERS:
       return {
         ...state,
-        masters: action.payload.posts
+        posts: action.payload.posts
       };
   }
 }
