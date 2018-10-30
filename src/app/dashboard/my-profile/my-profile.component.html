@@ -154,10 +154,11 @@
 
                     </div>
                   </div>
-                  <div *ngIf="opt.user._id == session_id" class="prof-text-bot"> <a href="javascript:void(0)" class="prof-like"><i class="fa fa-heart-o"></i> <span>{{like_count}}
+                  <div *ngIf="opt.user._id == session_id" class="prof-text-bot">
+                      <a href="javascript:void(0)" class="prof-like"> <span>{{like}}
                         likes</span></a> <a href="javascript:void(0)" class="prof-comment" ><i class="fa fa-keyboard-o" aria-hidden="true"></i>
                       <span (click)="showcom(opt.comments.length)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
-                  <div *ngIf="opt.user._id != session_id" class="prof-text-bot"> <a href="javascript:void(0)" class="prof-like" (click)="like_post()"><i class="fa fa-heart-o"></i> <span>{{like_count}}
+                  <div *ngIf="opt.user._id != session_id" class="prof-text-bot"> <a href="javascript:void(0)" class="prof-like" (click)="like_post($event,opt._id)"> <span>{{like}}
                         likes</span></a> <a href="javascript:void(0)" class="prof-comment" ><i class="fa fa-keyboard-o" aria-hidden="true"></i>
                       <span (click)="showcom(opt.comments.length)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
                 </div>

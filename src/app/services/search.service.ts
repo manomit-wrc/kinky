@@ -68,6 +68,11 @@ export class SearchService {
   saveToLikes(to_id, count) {
     return this.http.post<any>(`${this.apiUri}/saveToLikes`, {to_id, count});
   }
+
+  postLike(to_id,count,post_id) {
+
+    return this.http.post<any>(`${this.apiUri}/postLike`, {to_id, count,post_id});
+  }
   hot_list() {
     return this.http.post<any>(`${this.apiUri}/hot_list`, {});
   }

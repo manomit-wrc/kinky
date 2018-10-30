@@ -1,5 +1,5 @@
 import { SearchService } from '../../services/search.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { debounceTime, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -82,7 +82,8 @@ export class MyProfileComponent implements OnInit {
   post_result: any[];
   order: any = 'add_time';
   reverse:any = true;
-  like_count:any = 0;
+  like:any = 0;
+  like_status:any = false;
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -243,9 +244,35 @@ export class MyProfileComponent implements OnInit {
         });
       this.store.select(postAllMasters).subscribe(posts => {
          this.post_result = posts;
+
+
          console.log('====================================');
-         console.log(posts);
+         console.log('res', this.post_result);
          console.log('====================================');
+
+         for(let i=0;i<this.post_result.length;i++){
+
+          if (this.post_result[i].like.indexOf(decoded.id) !== -1) {
+            alert(1);
+            document.querySelector('.prof-like').classList.add('active');
+          }else{
+            alert(2);
+            document.querySelector('.prof-like .active').classList.remove('active');
+          }
+
+         }
+         /* this.post_result.forEach(element => {
+
+           if (element.like.indexOf(decoded.id) !== -1) {
+            alert(1);
+            document.querySelector('.prof-like').classList.add('active');
+          }else{
+            alert(2);
+            document.querySelector('.prof-like .active').classList.remove('active');
+          }
+
+         }); */
+
 
         });
 
@@ -261,8 +288,42 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
-  like_post(){
-alert();
+  like_post(e, post_id){
+    let target = e.currentTarget;
+
+      if(target.className === "prof-like") {
+        this.like +=1;
+        this.like_status = true;
+        target.classList.add('active');
+       this.search.postLike(this.session_id,this.like_status,post_id)
+       .subscribe(datas => {
+           if(datas.code === 200){
+       this.auth.post_list()
+      .subscribe(data => {
+        const posts = data.info;
+        this.store.dispatch(new postMasters({ posts }));
+      });
+    }
+
+        });
+
+      }else{
+        this.like -=1;
+        this.like_status = false;
+        target.classList.remove('active');
+          this.search.postLike(this.session_id,this.like_status,post_id)
+          .subscribe(datas => {
+           if(datas.code === 200){
+      this.auth.post_list()
+      .subscribe(data => {
+        const posts = data.info;
+        this.store.dispatch(new postMasters({ posts }));
+      });
+    }
+
+        });
+
+      }
   }
 
   friend_remove(id, requested_id) {

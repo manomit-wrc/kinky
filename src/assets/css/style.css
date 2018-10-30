@@ -1323,6 +1323,22 @@ div.msg-top-box
 .prof-text-bot{ width:100%; overflow:hidden; margin-top:8px;}
 
 .prof-like{ float:left; font-size:14px; color:#8e8e93;}
+.prof-like.active
+{
+    background: url(../images/love.png) no-repeat !important;
+    display: block;
+    background-position: 0px -6px !important;
+    padding-left: 25px;
+    background-size: 55% !important;
+}
+
+.prof-like {
+  background: url(../images/love-outline.png) no-repeat !important;
+  display: block;
+  background-position: 0px -6px !important;
+  padding-left: 25px;
+  background-size: 55% !important;
+}
 
 .prof-comment{ float:left; margin-left:10px; font-size:14px; color:#8e8e93;}
 
@@ -2138,7 +2154,8 @@ background: #000;
   background-size: 100% auto !important;
 }
 
-.user-timeline-like-icon.active {
+.user-timeline-like-icon.active
+{
   background: url(../images/love.png) no-repeat !important;
   background-size: 100% auto !important;
   width: 45px;
