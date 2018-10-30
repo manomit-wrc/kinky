@@ -2206,5 +2206,13 @@ background: linear-gradient(to right, rgba(24,8,10,1) 0%, rgba(132,35,53,1) 100%
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#18080a', endColorstr='#842335', GradientType=1 );
 }
 
+.activity-list-img img {
+  width: 130px;
+}
+
+.activity-list-img video {
+  width: 100%;
+}
+
 
 

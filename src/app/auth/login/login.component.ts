@@ -10,7 +10,7 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { Login, Settings,Count } from '../auth.actions';
 import { getIPAddress,locationDetails } from '../auth.selectors';
-
+import { postMasters } from '../../dashboard/dashboard.actions';
 
 @Component({
   selector: 'app-login',
@@ -101,6 +101,11 @@ export class LoginComponent implements OnInit {
                 this.loading = false;
                 this._error.next(data.message);
          } else {
+          this.auth.post_list()
+          .subscribe(datas => {
+            const posts = datas.info;
+            this.store.dispatch(new postMasters({ posts }));
+          });
                 this.store.dispatch(new Login({ info }));
                 this.store.dispatch(new Settings({ settings }))
                 this.store.dispatch(new Count({ counts }))

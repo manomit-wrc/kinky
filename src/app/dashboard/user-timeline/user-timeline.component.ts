@@ -12,6 +12,7 @@ import { PusherService } from '../pusher.service';
 import * as jwt_decode from 'jwt-decode';
 import { userDetails} from '../../auth/auth.selectors';
 import { Login, Settings } from '../../auth/auth.actions';
+import { AuthenticationService } from '../../services';
 @Component({
   selector: 'app-user-timeline',
   templateUrl: './user-timeline.component.html',
@@ -76,13 +77,17 @@ export class UserTimelineComponent implements OnInit {
   userid:any;
   hot_list:any=[];
   perscent:any;
+  order: any = 'add_time';
+  reverse:any = true;
+  post_result:any;
   constructor(
     private router: ActivatedRoute,
     public search: SearchService,
     private toastr: ToastrService,
     private store: Store<AppState>,
     private pusherService: PusherService,
-    private renderer: Renderer
+    private renderer: Renderer,
+    private auth: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -244,6 +249,14 @@ export class UserTimelineComponent implements OnInit {
 
 
   })
+
+
+  this.auth.post_list_by_user(user_id)
+  .subscribe(datas => {
+
+    this.post_result = datas.info;
+
+  });
 
   }
 

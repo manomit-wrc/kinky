@@ -25,10 +25,12 @@ declare var $: any;
 export class MyProfileComponent implements OnInit {
   private _success = new Subject<string>();
   show = 6;
+  showComment:any = false;
   posts:any;
   content_type:any;
   tab: String = 'tab1';
   successMessage: string;
+  comment_text:any;
   hot_list:any=[];
   name: any;
   address: any;
@@ -80,6 +82,7 @@ export class MyProfileComponent implements OnInit {
   post_result: any[];
   order: any = 'add_time';
   reverse:any = true;
+  like_count:any = 0;
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -249,6 +252,19 @@ export class MyProfileComponent implements OnInit {
 
   }
 
+  showcom(length){
+
+    if(length!=0 && this.showComment!=true){
+   this.showComment = true;
+    }else{
+      this.showComment = false;
+    }
+  }
+
+  like_post(){
+alert();
+  }
+
   friend_remove(id, requested_id) {
 
     this.search.friend_remove(id, requested_id)
@@ -317,6 +333,22 @@ post(){
   this.toastr.error("Please write something.");
  }
 
+}
+
+onKey(e,id){
+if(e.keyCode =='13'){
+  alert(e.target.value + id);
+  this.auth.post_comment(e.target.value,id)
+  .subscribe(datas => {
+    if(datas.code === 200){
+      this.auth.post_list()
+      .subscribe(data => {
+        const posts = data.info;
+        this.store.dispatch(new postMasters({ posts }));
+      });
+    }
+  });
+}
 }
 
 }

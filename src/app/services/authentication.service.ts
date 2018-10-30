@@ -315,8 +315,14 @@ export class AuthenticationService {
     post(post_description:string,url:string,type:string):Observable<any>{
       return this.http.post<any>(`${this.apiUri}/post_description`, {post_description, url, type});
     }
+    post_comment(comment:string,id:string):Observable<any>{
+      return this.http.post<any>(`${this.apiUri}/post_comment`, {comment,id});
+    }
     post_list():Observable<any>{
       return this.http.post<any>(`${this.apiUri}/post_list`, {});
+    }
+    post_list_by_user(id):Observable<any>{
+      return this.http.post<any>(`${this.apiUri}/post_list_by_user`, {id});
     }
     noti():Observable<any>{
       return this.http.post<any>(`${this.apiUri}/noti`, {});
