@@ -101,11 +101,6 @@ export class LoginComponent implements OnInit {
                 this.loading = false;
                 this._error.next(data.message);
          } else {
-          this.auth.post_list()
-          .subscribe(datas => {
-            const posts = datas.info;
-            this.store.dispatch(new postMasters({ posts }));
-          });
                 this.store.dispatch(new Login({ info }));
                 this.store.dispatch(new Settings({ settings }))
                 this.store.dispatch(new Count({ counts }))

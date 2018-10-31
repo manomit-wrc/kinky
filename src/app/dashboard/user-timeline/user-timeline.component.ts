@@ -20,6 +20,7 @@ import { AuthenticationService } from '../../services';
 })
 export class UserTimelineComponent implements OnInit {
   from_users:any = [];
+  showComment:any = false;
   to_users:any = [];
   likes:any = 0;
   like_status:any = false;
@@ -376,6 +377,30 @@ export class UserTimelineComponent implements OnInit {
 
 
   }
+
+  showcom(length){
+
+    if(length!=0 && this.showComment!=true){
+   this.showComment = true;
+    }else{
+      this.showComment = false;
+    }
+  }
+
+  onKey(e,id){
+    if(e.keyCode =='13'){
+      alert(e.target.value + id);
+      this.auth.post_comment(e.target.value,id)
+      .subscribe(datas => {
+        if(datas.code === 200){
+          this.auth.post_list_by_user(this.session_id)
+          .subscribe(data => {
+            this.post_result = data.info;
+          });
+        }
+      });
+    }
+    }
 
    getAge(DOB) {
         var today = new Date();

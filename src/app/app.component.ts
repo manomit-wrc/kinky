@@ -4,7 +4,7 @@ import { noop } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from './reducers';
 import { AuthenticationService } from './services';
-import { loadMasters } from './dashboard/dashboard.actions';
+import { loadMasters,postMasters } from './dashboard/dashboard.actions';
 import { Location } from './auth/auth.actions';
 
 @Component({
@@ -26,11 +26,17 @@ export class AppComponent implements OnInit {
       })
 
 
-
     this.auth.loadMaster()
 .pipe(tap(masters => {
 this.store.dispatch(new loadMasters({ masters }));
 })).subscribe(noop);
+
+
+   /*  this.auth.post_list()
+.pipe(tap(datas => {
+  const posts = datas.info;
+  this.store.dispatch(new postMasters({ posts }));
+})).subscribe(noop); */
 
 
   }

@@ -148,30 +148,30 @@
 
                     </div>
                   </div>
-                  <div class="prof-text-bot"  *ngIf="opt.user._id == current_id" > <a href="javascript:void(0)" class="prof-like"><i class="fa fa-heart-o"></i> <span>14
-                        likes</span></a> <a href="javascript:void(0)" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i>
-                      <span>1 Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
-                  <div  *ngIf="opt.user._id != current_id" class="prof-text-bot"> <a href="javascript:void(0)" class="prof-like"><i class="fa fa-heart-o"></i> <span>14
-                        likes</span></a> <a href="javascript:void(0)" class="prof-comment"><i class="fa fa-keyboard-o" aria-hidden="true"></i>
-                      <span>1 Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
+                  <div *ngIf="opt.user._id == current_id" class="prof-text-bot">
+                    <a href="javascript:void(0)" class="prof-like"> <span>12
+                      likes</span></a> <a href="javascript:void(0)" class="prof-comment" ><i class="fa fa-keyboard-o" aria-hidden="true"></i>
+                    <span (click)="showcom(opt.comments.length)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
+                <div *ngIf="opt.user._id != current_id" class="prof-text-bot"> <a href="javascript:void(0)" class="prof-like"> <span>12
+                      likes</span></a> <a href="javascript:void(0)" class="prof-comment" ><i class="fa fa-keyboard-o" aria-hidden="true"></i>
+                    <span (click)="showcom(opt.comments.length)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
                 </div>
-            <!--     <ul>
-                  <li>
+                <ul *ngIf="showComment">
+                  <li *ngFor="let comment of opt.comments">
                     <div class="profile-post-img"><img src="assets/images/photo-image-1.jpg" alt=""></div>
                     <div class="profile-post-text">
                       <div class="prof-text-top">
                         <h6><a href="#">lola_kemiron</a></h6>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
+                        <p>{{comment.comment_text}} </p>
                       </div>
-                      <div class="prof-text-bot"> <a href="#" class="prof-like"><i class="fa fa-heart-o"></i> <span>14
-                            likes</span></a><span class="prof-date">4 Minutes ago</span></div>
+                      <div class="prof-text-bot"><span class="prof-date">{{comment.add_time | timeAgo}}</span></div>
                     </div>
                   </li>
-                </ul> -->
+                </ul>
                 <div class="profile-comment-box" *ngIf="opt.user._id != current_id">
                   <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
                   <div class="profile-input-outer">
-                    <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                    <input class="profile-input-text" placeholder="Whats in your mind..." type="text" (keydown)="onKey($event,opt._id)">
                     <!-- <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> --> <a href="#"><img src="assets/images/smily-icon.png"
                         alt=""></a> </div>
                 </div>
