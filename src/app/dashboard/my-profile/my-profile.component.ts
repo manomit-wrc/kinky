@@ -246,33 +246,28 @@ export class MyProfileComponent implements OnInit {
          this.post_result = posts;
 
 
-         console.log('====================================');
-         console.log('res', this.post_result);
-         console.log('====================================');
+         
 
          for(let i=0;i<this.post_result.length;i++){
+          this.post_result[i].index = i;
+          if(this.post_result[i].like.length > 0) {
+            this.post_result[i].like_count = this.post_result[i].like.length;
 
-          if (this.post_result[i].like.indexOf(decoded.id) !== -1) {
-            alert(1);
-            document.querySelector('.prof-like').classList.add('active');
-          }else{
-            alert(2);
-            document.querySelector('.prof-like .active').classList.remove('active');
+            let likeExistByMe = this.post_result[i].like.filter(lk => lk === this.session_id);
+            if(likeExistByMe.length > 0) {
+              this.post_result[i].like_class = "active";
+            }
+            else {
+              this.post_result[i].like_class = "";
+            }
           }
-
+          else {
+            this.post_result[i].like_count = 0;
+            this.post_result[i].like_class = "";
+          }
+          
          }
-         /* this.post_result.forEach(element => {
-
-           if (element.like.indexOf(decoded.id) !== -1) {
-            alert(1);
-            document.querySelector('.prof-like').classList.add('active');
-          }else{
-            alert(2);
-            document.querySelector('.prof-like .active').classList.remove('active');
-          }
-
-         }); */
-
+        
 
         });
 
@@ -288,13 +283,19 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
-  like_post(e, post_id){
-    let target = e.currentTarget;
-
-      if(target.className === "prof-like") {
-        this.like +=1;
-        this.like_status = true;
-        target.classList.add('active');
+  like_post(post_id, index, like_class){
+    if(like_class !== "") {
+      this.post_result[index].like_class = "";
+      this.post_result[index].like = this.post_result[index].like.filter(item => item !== this.session_id);
+      this.post_result[index].like_count = this.post_result[index].like.length;
+      this.like_status = false;
+    }
+    else {
+      this.like_status = true;
+      this.post_result[index].like_class = "active";
+      this.post_result[index].like.push(this.session_id);
+      this.post_result[index].like_count = this.post_result[index].like.length;
+    }
        this.search.postLike(this.session_id,this.like_status,post_id)
        .subscribe(datas => {
            if(datas.code === 200){
@@ -305,25 +306,8 @@ export class MyProfileComponent implements OnInit {
       });
     }
 
-        });
-
-      }else{
-        this.like -=1;
-        this.like_status = false;
-        target.classList.remove('active');
-          this.search.postLike(this.session_id,this.like_status,post_id)
-          .subscribe(datas => {
-           if(datas.code === 200){
-      this.auth.post_list()
-      .subscribe(data => {
-        const posts = data.info;
-        this.store.dispatch(new postMasters({ posts }));
-      });
-    }
-
-        });
-
-      }
+    });
+    
   }
 
   friend_remove(id, requested_id) {
