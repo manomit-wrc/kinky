@@ -26,9 +26,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
     this.auth.post_list()
     .subscribe(datas => {
-console.log('====================================');
-console.log(datas);
-console.log('====================================');
+
       const posts = datas.info;
       this.store.dispatch(new postMasters({ posts }));
     });

@@ -4,7 +4,7 @@ import { Observable, noop, BehaviorSubject, pipe } from 'rxjs';
 import {SearchService} from '../../services/search.service';
 import { first, tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
-import { loadAllMasters } from '../dashboard.selectors';
+import { loadAllMasters,postAllMasters } from '../dashboard.selectors';
 import { Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
@@ -13,6 +13,7 @@ import * as jwt_decode from 'jwt-decode';
 import { userDetails} from '../../auth/auth.selectors';
 import { Login, Settings } from '../../auth/auth.actions';
 import { AuthenticationService } from '../../services';
+import {postMasters} from '../../dashboard/dashboard.actions';
 @Component({
   selector: 'app-user-timeline',
   templateUrl: './user-timeline.component.html',
@@ -81,6 +82,7 @@ export class UserTimelineComponent implements OnInit {
   order: any = 'add_time';
   reverse:any = true;
   post_result:any;
+  imageSrc:any;
   constructor(
     private router: ActivatedRoute,
     public search: SearchService,
@@ -94,6 +96,7 @@ export class UserTimelineComponent implements OnInit {
   ngOnInit() {
 
     const decoded = jwt_decode(localStorage.getItem('token'));
+    this.imageSrc = decoded.avatar;
     this.pusherService.checkLoggedin(this.router.snapshot.params.user_id);
     this.pusherService.channel.bind("check-logged-in", data => {
       if(data.user_id === this.router.snapshot.params.user_id) {
@@ -252,12 +255,33 @@ export class UserTimelineComponent implements OnInit {
   })
 
 
-  this.auth.post_list_by_user(user_id)
-  .subscribe(datas => {
+  this.store.select(postAllMasters).subscribe(posts => {
+    this.post_result = posts;
 
-    this.post_result = datas.info;
+
+    for(let i=0;i<this.post_result.length;i++){
+      this.post_result[i].index = i;
+      if(this.post_result[i].like.length > 0) {
+        this.post_result[i].like_count = this.post_result[i].like.length;
+
+        let likeExistByMe = this.post_result[i].like.filter(lk => lk === this.current_id);
+        if(likeExistByMe.length > 0) {
+          this.post_result[i].like_class = "active";
+        }
+        else {
+          this.post_result[i].like_class = "";
+        }
+      }
+      else {
+        this.post_result[i].like_count = 0;
+        this.post_result[i].like_class = "";
+      }
+
+     }
 
   });
+
+
 
   }
 
@@ -375,6 +399,34 @@ export class UserTimelineComponent implements OnInit {
       ).subscribe(noop);
       }
 
+
+  }
+
+  like_post(post_id, index, like_class){
+    if(like_class !== "") {
+      this.post_result[index].like_class = "";
+      this.post_result[index].like = this.post_result[index].like.filter(item => item !== this.current_id);
+      this.post_result[index].like_count = this.post_result[index].like.length;
+      this.like_status = false;
+    }
+    else {
+      this.like_status = true;
+      this.post_result[index].like_class = "active";
+      this.post_result[index].like.push(this.current_id);
+      this.post_result[index].like_count = this.post_result[index].like.length;
+    }
+       this.search.postLike(this.current_id,this.like_status,post_id)
+       .subscribe(datas => {
+           if(datas.code === 200){
+       this.auth.post_list_by_user(this.session_id)
+      .subscribe(data => {
+      this.post_result = data.info;
+      const posts = data.info;
+      this.store.dispatch(new postMasters({ posts }));
+      });
+    }
+
+    });
 
   }
 

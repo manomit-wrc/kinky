@@ -175,7 +175,7 @@
                   </li>
                 </ul>
                 <div class="profile-comment-box" *ngIf="opt.user._id != session_id">
-                  <div class="profile-comment-img"><img src="assets/images/profile-left-img.jpg" alt=""></div>
+                  <div class="profile-comment-img"><img [src]="this.avatar" alt=""></div>
                   <div class="profile-input-outer">
                     <input class="profile-input-text"  placeholder="Whats in your mind..." type="text" (keydown)="onKey($event,opt._id)">
                     <!-- <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> --> <a href="#"><img src="assets/images/smily-icon.png"
