@@ -346,7 +346,7 @@
                 <div *ngIf="opt.friend_request_to.length === 0 && opt.friend_request_from.length === 0">
 
                     <div class="friends-icon-sec search-right">
-                        <a href="javascript:void(0)" class="friends-plus-icon" (click)="request_send($event, opt.user[0]._id, opt.friend_request_to[0].requested_id)">
+                        <a href="javascript:void(0)" class="friends-plus-icon" (click)="request_send($event, opt.user[0]._id)">
                           <i class="fa fa-plus" aria-hidden="true"></i>
                         </a>
 

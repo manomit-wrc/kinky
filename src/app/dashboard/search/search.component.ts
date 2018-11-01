@@ -196,7 +196,7 @@ export class SearchComponent implements OnInit {
 
     }
 
-request_send(event,  to_id , requested_id){
+request_send(event,  to_id , requested_id: undefined){
 
   let target = event.currentTarget;
   //console.log(target.classList.remove('friends-plus-icon'));
