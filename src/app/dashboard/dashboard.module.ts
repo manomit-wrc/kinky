@@ -49,6 +49,7 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import {ModalModule} from "ngx-modal";
 import { OrderModule } from 'ngx-order-pipe';
 import {TimeAgoPipe} from 'time-ago-pipe';
+import { MessageChatComponent } from './message-chat/message-chat.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -95,7 +96,8 @@ import {TimeAgoPipe} from 'time-ago-pipe';
        CarouselItemDirective,
        SearchComponent,
        UserTimelineComponent,
-       TimeAgoPipe
+       TimeAgoPipe,
+       MessageChatComponent
       ]
 })
 

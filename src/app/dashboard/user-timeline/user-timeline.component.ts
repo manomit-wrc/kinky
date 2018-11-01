@@ -458,6 +458,7 @@ export class UserTimelineComponent implements OnInit {
         if(datas.code === 200){
           this.auth.post_list_by_user(this.session_id)
           .subscribe(data => {
+            e.target.value = "";
             this.post_result = data.info;
           });
         }

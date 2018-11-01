@@ -244,9 +244,9 @@ export class MyProfileComponent implements OnInit {
 
         });
 
-        
+
       if(localStorage.getItem("posts") === "null" || localStorage.getItem("posts") === null) {
-              
+
               this.auth.post_list()
                 .subscribe(datas => {
                   const posts = datas.info;
@@ -375,12 +375,12 @@ post(){
 
 onKey(e,id){
 if(e.keyCode =='13'){
-  alert(e.target.value + id);
   this.auth.post_comment(e.target.value,id)
   .subscribe(datas => {
     if(datas.code === 200){
       this.auth.post_list()
       .subscribe(data => {
+        e.target.value = "";
         const posts = data.info;
         this.store.dispatch(new postMasters({ posts }));
       });
@@ -410,7 +410,7 @@ loadAllPosts() {
 
    }
 
-  
+
 
 }
 
