@@ -84,6 +84,7 @@ export class MyProfileComponent implements OnInit {
   reverse:any = true;
   like:any = 0;
   like_status:any = false;
+  limit:any = 10;
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -246,7 +247,7 @@ export class MyProfileComponent implements OnInit {
          this.post_result = posts;
 
 
-         
+
 
          for(let i=0;i<this.post_result.length;i++){
           this.post_result[i].index = i;
@@ -265,13 +266,17 @@ export class MyProfileComponent implements OnInit {
             this.post_result[i].like_count = 0;
             this.post_result[i].like_class = "";
           }
-          
+
          }
-        
+
 
         });
 
 
+  }
+
+  loadmore() {
+   this.limit += 10;
   }
 
   showcom(length){
@@ -307,7 +312,7 @@ export class MyProfileComponent implements OnInit {
     }
 
     });
-    
+
   }
 
   friend_remove(id, requested_id) {

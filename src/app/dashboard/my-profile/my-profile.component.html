@@ -141,7 +141,7 @@
         <div class="profile-post-sec">
           <div class="profile-post-row">
             <ul>
-              <li *ngFor="let opt of post_result| orderBy: order :reverse">
+              <li *ngFor="let opt of post_result| slice:0:limit | orderBy: order :reverse">
                 <div class="profile-post-img"><img [src]="opt.user.avatar" alt=""></div>
                 <div class="profile-post-text">
                   <div class="prof-text-top">
@@ -185,7 +185,7 @@
             </ul>
 
           </div>
-          <p><a href="#" class="form-submit-btn loadmore-btn" id="loadMore-profile">Load More</a></p>
+          <p><a href="javascript:void(0)" class="form-submit-btn loadmore-btn" id="loadMore-profile" (click)="loadmore()">Load More</a></p>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

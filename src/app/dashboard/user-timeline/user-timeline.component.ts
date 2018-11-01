@@ -83,6 +83,7 @@ export class UserTimelineComponent implements OnInit {
   reverse:any = true;
   post_result:any;
   imageSrc:any;
+  limit:any = 10;
   constructor(
     private router: ActivatedRoute,
     public search: SearchService,
@@ -255,8 +256,9 @@ export class UserTimelineComponent implements OnInit {
   })
 
 
-  this.store.select(postAllMasters).subscribe(posts => {
-    this.post_result = posts;
+  this.auth.post_list_by_user(this.session_id)
+  .subscribe(data => {
+    this.post_result = data.info;
 
 
     for(let i=0;i<this.post_result.length;i++){
@@ -285,6 +287,10 @@ export class UserTimelineComponent implements OnInit {
 
   }
 
+
+  loadmore() {
+    this.limit += 10;
+   }
 
   request_send(event,  to_id){
 
@@ -350,22 +356,7 @@ export class UserTimelineComponent implements OnInit {
         })
       ).subscribe(noop);
       }
-      /* this.search.saveTohotlist(this.userid,this.hotlist_status)
-      .pipe(
-        tap(data => {
 
-        })
-      ).subscribe(noop); */
-
-      /* if(target.className === "user-timeline-left-icon-2 active") {
-        target.classList.remove('active');
-      } */
-      /* this.search.saveTohotlist(this.userid,this.hotlist_status)
-      .pipe(
-        tap(data => {
-
-        })
-      ).subscribe(noop); */
 
 
   }
@@ -418,12 +409,32 @@ export class UserTimelineComponent implements OnInit {
        this.search.postLike(this.current_id,this.like_status,post_id)
        .subscribe(datas => {
            if(datas.code === 200){
-       this.auth.post_list_by_user(this.session_id)
-      .subscribe(data => {
-      this.post_result = data.info;
-      const posts = data.info;
-      this.store.dispatch(new postMasters({ posts }));
-      });
+            this.auth.post_list_by_user(this.session_id)
+            .subscribe(data => {
+              this.post_result = data.info;
+
+
+              for(let i=0;i<this.post_result.length;i++){
+                this.post_result[i].index = i;
+                if(this.post_result[i].like.length > 0) {
+                  this.post_result[i].like_count = this.post_result[i].like.length;
+
+                  let likeExistByMe = this.post_result[i].like.filter(lk => lk === this.current_id);
+                  if(likeExistByMe.length > 0) {
+                    this.post_result[i].like_class = "active";
+                  }
+                  else {
+                    this.post_result[i].like_class = "";
+                  }
+                }
+                else {
+                  this.post_result[i].like_count = 0;
+                  this.post_result[i].like_class = "";
+                }
+
+               }
+
+            });
     }
 
     });
