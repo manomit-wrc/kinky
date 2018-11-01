@@ -17,19 +17,15 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     private pusherService: PusherService,
     private auth: AuthenticationService,
     private store: Store<AppState>,
-  ) { }
+  ) { 
+    
+    
+  }
 
   ngOnInit() {
-    //alert("Loading");
+    
     const decoded = jwt_decode(localStorage.getItem('token'));
     this.pusherService.checkLoggedin(decoded.id);
-
-    this.auth.post_list()
-    .subscribe(datas => {
-
-      const posts = datas.info;
-      this.store.dispatch(new postMasters({ posts }));
-    });
   }
 
   ngAfterViewInit() {

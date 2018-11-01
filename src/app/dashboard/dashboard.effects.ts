@@ -28,13 +28,13 @@ export class DashboardEffects {
     const postData = localStorage.getItem("posts");
 
     if (masterData || postData) {
+      
        return of(
          new loadMasters({masters:JSON.parse(masterData)}),
          new postMasters({posts:JSON.parse(postData)})
 
         );
     }
-
 
   });
 

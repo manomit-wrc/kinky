@@ -30,7 +30,7 @@ export class AuthEffects {
       localStorage.removeItem("user");
       localStorage.removeItem("settings");
       localStorage.removeItem("token");
-
+      localStorage.removeItem("posts");
 
     })
   );

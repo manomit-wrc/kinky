@@ -243,36 +243,24 @@ export class MyProfileComponent implements OnInit {
           this.publicvideos = videos.filter(f => f.access === 'Public');
 
         });
-      this.store.select(postAllMasters).subscribe(posts => {
-         this.post_result = posts;
 
-
-
-
-         for(let i=0;i<this.post_result.length;i++){
-          this.post_result[i].index = i;
-          if(this.post_result[i].like.length > 0) {
-            this.post_result[i].like_count = this.post_result[i].like.length;
-
-            let likeExistByMe = this.post_result[i].like.filter(lk => lk === this.session_id);
-            if(likeExistByMe.length > 0) {
-              this.post_result[i].like_class = "active";
-            }
-            else {
-              this.post_result[i].like_class = "";
-            }
-          }
-          else {
-            this.post_result[i].like_count = 0;
-            this.post_result[i].like_class = "";
-          }
-
-         }
-
-
-        });
-
-
+        
+      if(localStorage.getItem("posts") === "null" || localStorage.getItem("posts") === null) {
+              
+              this.auth.post_list()
+                .subscribe(datas => {
+                  const posts = datas.info;
+                  this.post_result = posts;
+                  this.loadAllPosts();
+                  this.store.dispatch(new postMasters({ posts }));
+              });
+      }
+      else {
+        this.store.select(postAllMasters).subscribe(posts => {
+          this.post_result = posts;
+          this.loadAllPosts();
+         });
+      }
   }
 
   loadmore() {
@@ -399,6 +387,31 @@ if(e.keyCode =='13'){
     }
   });
 }
+}
+
+loadAllPosts() {
+  for(let i=0;i<this.post_result.length;i++){
+    this.post_result[i].index = i;
+    if(this.post_result[i].like.length > 0) {
+      this.post_result[i].like_count = this.post_result[i].like.length;
+
+      let likeExistByMe = this.post_result[i].like.filter(lk => lk === this.session_id);
+      if(likeExistByMe.length > 0) {
+        this.post_result[i].like_class = "active";
+      }
+      else {
+        this.post_result[i].like_class = "";
+      }
+    }
+    else {
+      this.post_result[i].like_count = 0;
+      this.post_result[i].like_class = "";
+    }
+
+   }
+
+  
+
 }
 
 }
