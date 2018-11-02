@@ -34,7 +34,7 @@ const authRoutes: Routes = [
           { path: 'friendlist', component: FriendlistComponent, pathMatch: 'full', canActivate: [AuthGuard]},
           { path: 'search', component: SearchComponent, pathMatch: 'full', canActivate: [AuthGuard]},
           { path: 'user-timeline/:user_id', component: UserTimelineComponent, pathMatch: 'full', canActivate: [AuthGuard]},
-          { path: 'message-chat', component: MessageChatComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+          { path: 'message-chat/:user_id', component: MessageChatComponent, pathMatch: 'full', canActivate: [AuthGuard]},
         ]
     }
 ];

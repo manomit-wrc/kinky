@@ -327,6 +327,12 @@ export class AuthenticationService {
     noti():Observable<any>{
       return this.http.post<any>(`${this.apiUri}/noti`, {});
     }
+    submit_message(id:string,message:string):Observable<any>{
+      return this.http.post<any>(`${this.apiUri}/submit_message`, {id,message});
+    }
+    message_list_by_user(id:string):Observable<any>{
+      return this.http.post<any>(`${this.apiUri}/message_list_by_user`, {id});
+    }
 
 
 
