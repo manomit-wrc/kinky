@@ -24,6 +24,7 @@ export class MessageChatComponent implements OnInit {
 
   ngOnInit() {
     this.session_id = this.router.snapshot.params.user_id;
+
     const decoded = jwt_decode(localStorage.getItem('token'));
     this.user_id= decoded.id;
     this.auth.message_list_by_user(this.session_id)

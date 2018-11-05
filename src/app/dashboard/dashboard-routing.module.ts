@@ -15,6 +15,7 @@ import { VideoUploadComponent } from './video-upload/video-upload.component';
 import { SearchComponent } from './search/search.component';
 import { UserTimelineComponent } from './user-timeline/user-timeline.component';
 import { MessageChatComponent } from './message-chat/message-chat.component';
+import { MessageListComponent } from './message-list/message-list.component';
 const authRoutes: Routes = [
 
     //Site routes goes here
@@ -35,6 +36,7 @@ const authRoutes: Routes = [
           { path: 'search', component: SearchComponent, pathMatch: 'full', canActivate: [AuthGuard]},
           { path: 'user-timeline/:user_id', component: UserTimelineComponent, pathMatch: 'full', canActivate: [AuthGuard]},
           { path: 'message-chat/:user_id', component: MessageChatComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+          { path: 'message-list', component: MessageListComponent, pathMatch: 'full', canActivate: [AuthGuard]},
         ]
     }
 ];
