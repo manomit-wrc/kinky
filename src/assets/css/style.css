@@ -1551,15 +1551,21 @@ box-shadow: 5px 5px 5px -3px rgba(0,0,0,0.25); border-radius:100%;}
 
 .user-timeline-topleft-icon ul li{ width:55px; height:55px; display:inline-block; vertical-align:middle; margin:0 10px 0 0;}
 
-.user-timeline-topleft-icon ul li a{ display:block; width:55px; height:55px;}
+.user-timeline-topleft-icon ul li a,
+.profile-hotlist-sec .friends-icon-sec a.user-timeline-left-icon-2
+{ display:block; width:55px; height:55px;}
 
 .user-timeline-topleft-icon ul li a.user-timeline-left-icon-1{ background:url(../images/interested-icon-3.png) no-repeat; background-size:100% auto;}
 
 .user-timeline-topleft-icon ul li a.user-timeline-left-icon-1:hover{background:url(../images/interested-icon-3-hover.png) no-repeat; background-size:100% auto;}
 
-.user-timeline-topleft-icon ul li a.user-timeline-left-icon-2{ background:url(../images/interested-icon-2.png) no-repeat; background-size:100% auto;}
+.user-timeline-topleft-icon ul li a.user-timeline-left-icon-2,
+.profile-hotlist-sec .friends-icon-sec a.user-timeline-left-icon-2
+{ background:url(../images/interested-icon-2.png) no-repeat; background-size:100% auto;}
 
-.user-timeline-topleft-icon ul li a.user-timeline-left-icon-2:hover{background:url(../images/interested-icon-2-hover.png) no-repeat; background-size:100% auto;}
+.user-timeline-topleft-icon ul li a.user-timeline-left-icon-2:hover,
+.profile-hotlist-sec .friends-icon-sec a.user-timeline-left-icon-2:hover
+{background:url(../images/interested-icon-2-hover.png) no-repeat; background-size:100% auto;}
 
 .user-timeline-topleft-icon ul li a.user-timeline-left-icon-3{ background:url(../images/circle-dot.png) no-repeat; background-size:100% auto; background-size:100% auto;}
 
@@ -2149,7 +2155,9 @@ background: #000;
   background-size: 100% auto;
 }
 
-.user-timeline-left-icon-2.active {
+.user-timeline-left-icon-2.active,
+.profile-hotlist-sec .friends-icon-sec a.user-timeline-left-icon-2.active
+ {
   background: url(../images/love.png) no-repeat !important;
   background-size: 100% auto !important;
 }
@@ -2231,5 +2239,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#18080a', end
   width: 100%;
 }
 
+.profile-hotlist-sec .friends-envelop-icon {
+  font-size: 16px;
+}
 
-
+.profile-hotlist-sec .friends-icon-sec a.user-timeline-left-icon-2 {
+    background-size: contain;
+}
+.profile-hotlist-sec .friends-icon-sec a.user-timeline-left-icon-2 {
+    width: 40px;
+    height: 40px;
+}

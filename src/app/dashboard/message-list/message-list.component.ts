@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Observable, noop, BehaviorSubject, pipe } from 'rxjs';
+import { AuthenticationService } from '../../services';
+import { first, tap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-message-list',
@@ -7,9 +13,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessageListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: ActivatedRoute,
+    private auth: AuthenticationService,
+  ) { }
 
   ngOnInit() {
+    this.auth.message_list()
+    .pipe(
+      tap(data => {
+
+
+      })
+    ).subscribe(noop);
   }
 
 }

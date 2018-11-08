@@ -1,20 +1,21 @@
-import { SearchService } from '../../services/search.service';
-import { Component, OnInit} from '@angular/core';
+import { Observable, noop, BehaviorSubject, pipe } from 'rxjs';
+import {SearchService} from '../../services/search.service';
+import { first } from 'rxjs/operators';
+import { Component, OnInit,Renderer } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { debounceTime, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { UserService } from '../user.service';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { userDetails, locationDetails ,profileImages,profileVideos} from '../../auth/auth.selectors';
-import { noop } from '@angular/compiler/src/render3/view/util';
 import { loadAllMasters,postAllMasters } from '../dashboard.selectors';
 import { postMasters } from '../dashboard.actions';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import * as jwt_decode from 'jwt-decode';
 import {ModalModule} from "ngx-modal";
+import { Login } from '../../auth/auth.actions';
 declare var $: any;
 
 @Component({
@@ -33,6 +34,7 @@ export class MyProfileComponent implements OnInit {
   comment_text:any;
   hot_list:any=[];
   name: any;
+  hotlist_status:any = false;
   address: any;
   sexuality: any;
   sexuality_female: any;
@@ -85,13 +87,15 @@ export class MyProfileComponent implements OnInit {
   like:any = 0;
   like_status:any = false;
   limit:any = 10;
+  chek_val:any;
   constructor(
     private auth: AuthenticationService,
     private router: Router,
     private avt: UserService,
     public search: SearchService,
     private store: Store<AppState>,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private renderer: Renderer
   ) { }
 
   ngOnInit() {
@@ -139,7 +143,7 @@ export class MyProfileComponent implements OnInit {
     this.store.select(userDetails)
     .subscribe(data => {
 
-
+      this.chek_val = data;
       this.likes = data.likes.length;
       this.country = data.country === undefined ? '' : data.country;
       this.city = data.state === undefined ? '' : data.state;
@@ -361,6 +365,7 @@ post(){
       .subscribe(datas => {
         this.post_data = false;;
         const posts = datas.info;
+        this.post_result = posts;
         this.post_description = "";
         this.store.dispatch(new postMasters({ posts }));
       });
@@ -382,6 +387,7 @@ if(e.keyCode =='13'){
       .subscribe(data => {
         e.target.value = "";
         const posts = data.info;
+        this.post_result = posts;
         this.store.dispatch(new postMasters({ posts }));
       });
     }
@@ -413,5 +419,37 @@ loadAllPosts() {
 
 
 }
+
+saveTohotlist(e,id) {
+    let target = e.currentTarget;
+
+    //this.hotlist_status = ! this.hotlist_status;
+
+      if(target.className === "user-timeline-left-icon-2") {
+        this.hotlist_status = true;
+        this.renderer.setElementClass(target, 'active', true);
+        this.search.saveTohotlist(id,this.hotlist_status)
+      .pipe(
+        tap(data => {
+          const info = data.info;
+          this.store.dispatch(new Login({ info}))
+        })
+      ).subscribe(noop);
+
+      }else{
+        this.hotlist_status = false;
+        target.classList.remove('active');
+        this.search.saveTohotlist(id,this.hotlist_status)
+      .pipe(
+        tap(data => {
+          const info = data.info;
+          this.store.dispatch(new Login({ info}))
+        })
+      ).subscribe(noop);
+      }
+
+
+
+  }
 
 }

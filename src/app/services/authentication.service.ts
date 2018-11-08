@@ -333,6 +333,9 @@ export class AuthenticationService {
     message_list_by_user(id:string):Observable<any>{
       return this.http.post<any>(`${this.apiUri}/message_list_by_user`, {id});
     }
+    message_list():Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/message_list`, {});
+    }
 
 
 
