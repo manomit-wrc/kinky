@@ -336,8 +336,8 @@
                         <p *ngIf="opt.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> </p>
                         <p *ngIf="opt.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> </p>
                   </div>
-                  <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
-                    <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
+                  <div class="friends-icon-sec online-user-icon-sec"> <a href="/message-chat/{{opt._id}}" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
+                    <a href="javascript:void(0)" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
                 </div>
             <!--     <div class="hotlist-box">
                   <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>

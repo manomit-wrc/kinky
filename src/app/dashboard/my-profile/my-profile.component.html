@@ -351,29 +351,15 @@
                       <p *ngIf="opt.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> </p>
                       <p *ngIf="opt.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> </p>
                 </div>
-                <div *ngIf="chek_val.hasOwnProperty(opt._id)" class="friends-icon-sec online-user-icon-sec"> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
+                <div class="friends-icon-sec online-user-icon-sec"> <a href="/message-chat/{{opt._id}}" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
                   <a href="javascript:void(0)" (click)="saveTohotlist($event,opt._id)" class="user-timeline-left-icon-2 active"></a> </div>
-                  <div *ngIf="!chek_val.hasOwnProperty(opt._id)" class="friends-icon-sec online-user-icon-sec"> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
-                  <a href="javascript:void(0)" (click)="saveTohotlist($event,opt._id)" class="user-timeline-left-icon-2"></a> </div>
+                  
               </div>
-              
-          <!--     <div class="hotlist-box">
-                <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
-                  <div class="event-user-active">&nbsp;</div>
-                </div>
-                <div class="friends-sml-text online-user-sml-text">
-                  <h6><a href="#">Patrick</a></h6>
-                  <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
-                  <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
-                </div>
-                <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
-                  <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
-              </div> -->
               </a>
             </li>
 
           </ul>
-    <!--       <div id="loadMore3" class="more-setting-outer">More</div> -->
+    <!-- <div id="loadMore3" class="more-setting-outer">More</div> -->
         </div>
       </div>
     </div>
