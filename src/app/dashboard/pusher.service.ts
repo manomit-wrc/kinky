@@ -24,6 +24,8 @@ export class PusherService {
 
   checkLoggedin(user_id) {
     this.http.post(`${this.apiUri}/check-loggedin`, { user_id })
-      .subscribe(data => {});
+      .subscribe(data => {
+        console.log(data);
+      });
   }
 }
