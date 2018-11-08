@@ -100,6 +100,8 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit() {
 
+    
+
     this.search.hot_list()
   .subscribe (datas => {
    this.hot_list = datas.info;
@@ -444,6 +446,10 @@ saveTohotlist(e,id) {
         tap(data => {
           const info = data.info;
           this.store.dispatch(new Login({ info}))
+            this.search.hot_list()
+  .subscribe (datas => {
+   this.hot_list = datas.info;
+  });
         })
       ).subscribe(noop);
       }
