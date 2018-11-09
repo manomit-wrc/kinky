@@ -27,114 +27,25 @@
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <ul>
-            <li>
+            <li *ngFor="let message of messageList">
               <div class="message-bot-row-top">
-                <div class="msg-user-img"><a href="javascript:void(0)"><img src="assets/images/photo-image-1.jpg" alt=""></a>
-                  <h5><a href="#">kelly</a></h5>
+                <div class="msg-user-img"><a href="javascript:void(0)"><img src="{{message.to_user[0].avatar}}" alt=""></a>
+                  <h5><a href="/user-timeline/{{message._id}}">{{message.to_user[0].username}}</a></h5>
                 </div>
                 <div class="msg-top-text">
-                  <p><i class="fa fa-map-marker"></i><span>Mandaluyong City, Philippines</span></p>
-                  <p><i class="fa fa-mars"></i><span>31 Straight</span></p>
-                  <p><i class="fa fa-venus"></i><span>34 Bi-Cerious</span></p>
-                  <p><a href="#">#Couples #DiscreetMeets #FullSwap #Hookups </a></p>
+                  <p><i class="fa fa-map-marker"></i><span>{{message.to_user[0].state}}, {{message.to_user[0].country}}</span></p>
+                  <p><i class="fa fa-mars"></i><span>{{message.to_user[0].age}} {{message.to_user[0].sexuality}}</span></p>
+                  
+                  <p><a href="#">{{message.to_user[0].interested_in.toString()}}</a></p>
                 </div>
               </div>
               <div class="msg-area">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo conse</p>
+                <p>{{message.message_text}}</p>
               </div>
               <div class="msg-date">28 March, 2018</div>
-              <div class="msg-butn-area"> <a href="messages-chat.html"><i class="fa fa-envelope-o"></i> Answer</a> <a href="javascript:void(0)" class="msg-delete"><i class="fa fa-trash-o"></i>Delete</a> </div>
+              <div class="msg-butn-area"> <a href="/message-chat/{{message._id}}"><i class="fa fa-envelope-o"></i> Answer</a> <a href="javascript:void(0)" class="msg-delete"><i class="fa fa-trash-o"></i>Delete</a> </div>
             </li>
-            <li>
-              <div class="message-bot-row-top">
-                <div class="msg-user-img"><a href="javascript:void(0)"><img src="assets/images/photo-image-1.jpg" alt=""></a>
-                  <h5><a href="#">kelly</a></h5>
-                </div>
-                <div class="msg-top-text">
-                  <p><i class="fa fa-map-marker"></i><span>Mandaluyong City, Philippines</span></p>
-                  <p><i class="fa fa-mars"></i><span>31 Straight</span></p>
-                  <p><i class="fa fa-venus"></i><span>34 Bi-Cerious</span></p>
-                  <p><a href="#">#Couples #DiscreetMeets #FullSwap #Hookups </a></p>
-                </div>
-              </div>
-              <div class="msg-area">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo conse</p>
-              </div>
-              <div class="msg-date">28 March, 2018</div>
-              <div class="msg-butn-area"> <a href="messages-chat.html"><i class="fa fa-envelope-o"></i> Answer</a> <a href="javascript:void(0)" class="msg-delete"><i class="fa fa-trash-o"></i>Delete</a> </div>
-            </li>
-            <li>
-              <div class="message-bot-row-top">
-                <div class="msg-user-img"><a href="javascript:void(0)"><img src="assets/images/photo-image-1.jpg" alt=""></a>
-                  <h5><a href="#">kelly</a></h5>
-                </div>
-                <div class="msg-top-text">
-                  <p><i class="fa fa-map-marker"></i><span>Mandaluyong City, Philippines</span></p>
-                  <p><i class="fa fa-mars"></i><span>31 Straight</span></p>
-                  <p><i class="fa fa-venus"></i><span>34 Bi-Cerious</span></p>
-                  <p><a href="#">#Couples #DiscreetMeets #FullSwap #Hookups </a></p>
-                </div>
-              </div>
-              <div class="msg-area">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo conse</p>
-              </div>
-              <div class="msg-date">28 March, 2018</div>
-              <div class="msg-butn-area"> <a href="messages-chat.html"><i class="fa fa-envelope-o"></i> Answer</a> <a href="javascript:void(0)" class="msg-delete"><i class="fa fa-trash-o"></i>Delete</a> </div>
-            </li>
-            <li>
-              <div class="message-bot-row-top">
-                <div class="msg-user-img"><a href="javascript:void(0)"><img src="assets/images/photo-image-1.jpg" alt=""></a>
-                  <h5><a href="#">kelly</a></h5>
-                </div>
-                <div class="msg-top-text">
-                  <p><i class="fa fa-map-marker"></i><span>Mandaluyong City, Philippines</span></p>
-                  <p><i class="fa fa-mars"></i><span>31 Straight</span></p>
-                  <p><i class="fa fa-venus"></i><span>34 Bi-Cerious</span></p>
-                  <p><a href="#">#Couples #DiscreetMeets #FullSwap #Hookups </a></p>
-                </div>
-              </div>
-              <div class="msg-area">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo conse</p>
-              </div>
-              <div class="msg-date">28 March, 2018</div>
-              <div class="msg-butn-area"> <a href="messages-chat.html"><i class="fa fa-envelope-o"></i> Answer</a> <a href="javascript:void(0)" class="msg-delete"><i class="fa fa-trash-o"></i>Delete</a> </div>
-            </li>
-            <li>
-              <div class="message-bot-row-top">
-                <div class="msg-user-img"><a href="javascript:void(0)"><img src="assets/images/photo-image-1.jpg" alt=""></a>
-                  <h5><a href="#">kelly</a></h5>
-                </div>
-                <div class="msg-top-text">
-                  <p><i class="fa fa-map-marker"></i><span>Mandaluyong City, Philippines</span></p>
-                  <p><i class="fa fa-mars"></i><span>31 Straight</span></p>
-                  <p><i class="fa fa-venus"></i><span>34 Bi-Cerious</span></p>
-                  <p><a href="#">#Couples #DiscreetMeets #FullSwap #Hookups </a></p>
-                </div>
-              </div>
-              <div class="msg-area">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo conse</p>
-              </div>
-              <div class="msg-date">28 March, 2018</div>
-              <div class="msg-butn-area"> <a href="messages-chat.html"><i class="fa fa-envelope-o"></i> Answer</a> <a href="javascript:void(0)" class="msg-delete"><i class="fa fa-trash-o"></i>Delete</a> </div>
-            </li>
-            <li>
-              <div class="message-bot-row-top">
-                <div class="msg-user-img"><a href="javascript:void(0)"><img src="assets/images/photo-image-1.jpg" alt=""></a>
-                  <h5><a href="#">kelly</a></h5>
-                </div>
-                <div class="msg-top-text">
-                  <p><i class="fa fa-map-marker"></i><span>Mandaluyong City, Philippines</span></p>
-                  <p><i class="fa fa-mars"></i><span>31 Straight</span></p>
-                  <p><i class="fa fa-venus"></i><span>34 Bi-Cerious</span></p>
-                  <p><a href="#">#Couples #DiscreetMeets #FullSwap #Hookups </a></p>
-                </div>
-              </div>
-              <div class="msg-area">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo conse</p>
-              </div>
-              <div class="msg-date">28 March, 2018</div>
-              <div class="msg-butn-area"> <a href="messages-chat.html"><i class="fa fa-envelope-o"></i> Answer</a> <a href="javascript:void(0)" class="msg-delete"><i class="fa fa-trash-o"></i>Delete</a> </div>
-            </li>
+
           </ul>
           <div id="loadMore2" class="more-setting-outer">See More Messages</div>
         </div>

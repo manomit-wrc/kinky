@@ -13,6 +13,8 @@ import * as jwt_decode from 'jwt-decode';
 })
 export class MessageListComponent implements OnInit {
 
+  messageList: any;
+
   constructor(
     private router: ActivatedRoute,
     private auth: AuthenticationService,
@@ -22,8 +24,8 @@ export class MessageListComponent implements OnInit {
     this.auth.message_list()
     .pipe(
       tap(data => {
-
-
+        this.messageList = data.messageList;
+        
       })
     ).subscribe(noop);
   }
