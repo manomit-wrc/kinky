@@ -141,7 +141,7 @@
         <div class="profile-post-sec">
           <div class="profile-post-row">
             <ul>
-              <li *ngFor="let opt of post_result| slice:0:limit | orderBy: order :reverse">
+              <li *ngFor="let opt of post_result| slice: -limit | orderBy: order :reverse">
                 <div class="profile-post-img"><img [src]="opt.user.avatar" alt=""></div>
                 <div class="profile-post-text">
                   <div class="prof-text-top">
@@ -353,7 +353,7 @@
                 </div>
                 <div class="friends-icon-sec online-user-icon-sec"> <a href="/message-chat/{{opt._id}}" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
                   <a href="javascript:void(0)" (click)="saveTohotlist($event,opt._id)" class="user-timeline-left-icon-2 active"></a> </div>
-                  
+
               </div>
               </a>
             </li>

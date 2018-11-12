@@ -269,24 +269,11 @@
                         </a>
                     </ng-template>
                 </div>
-                <!-- <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
-                  <div class="friends-icon-sec"> <a href="javascript:void(0)" (click)="friend_remove(opt.from_user._id)" class="friends-cross-icon"><i class="fa fa-close"></i></a> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
-                </div> -->
+
               </div>
               <div class="row" *ngIf="opt.to_user.username && opt.to_user._id != session_id">
                   <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12" >
-                    <!--   <a href="/user-timeline/{{opt.to_user._id}}">
-                    <div class="friends-sml-img"><img [src]="opt.to_user.avatar" alt="">
-                      <div class="event-user-active">&nbsp;</div>
-                    </div>
-                    <div class="friends-sml-text">
-                      <h6>{{opt.to_user.username}}</h6>
-                      <p *ngIf="opt.to_user.gender=='C'"> <span><i class="fa fa-mars"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span> <span><i class="fa fa-venus"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality_female}}</span> </p>
-                        <p *ngIf="opt.to_user.gender=='M'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span></p>
-                        <p *ngIf="opt.to_user.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span> </p>
-                        <p *ngIf="opt.to_user.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span> </p>
-                    </div>
-                    </a> -->
+
                     <ng-container *ngIf=" current_id == opt.to_user._id; else internalBlock">
                       <a href="/my-profile">
                         <div class="friends-sml-img"><img [src]="opt.to_user.avatar" alt="">
@@ -317,9 +304,7 @@
                           </a>
                       </ng-template>
                   </div>
-                  <!-- <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
-                    <div class="friends-icon-sec"> <a href="javascript:void(0)" (click)="friend_remove(opt.to_user._id)" class="friends-cross-icon"><i class="fa fa-close"></i></a> <a href="javascript:void(0)" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
-                  </div> -->
+
                 </div>
               <div id="loadMore2" class="more-setting-outer"  *ngIf="i==5 && show == 6" (click)="show = friend_list.length">More</div>
             </li>
@@ -344,18 +329,7 @@
                   <div class="friends-icon-sec online-user-icon-sec"> <a href="/message-chat/{{opt._id}}" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
                     <a href="javascript:void(0)" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
                 </div>
-            <!--     <div class="hotlist-box">
-                  <div class="friends-sml-img"><a href="#"><img src="assets/images/photo-image-1.jpg" alt=""></a>
-                    <div class="event-user-active">&nbsp;</div>
-                  </div>
-                  <div class="friends-sml-text online-user-sml-text">
-                    <h6><a href="#">Patrick</a></h6>
-                    <p> <span><i class="fa fa-mars"></i> 31 Straight</span></p>
-                    <p><span><i class="fa fa-venus"></i> 25 Bi-Cerius</span> </p>
-                  </div>
-                  <div class="friends-icon-sec online-user-icon-sec"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
-                    <a href="#" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
-                </div> -->
+
                 </a>
               </li>
 

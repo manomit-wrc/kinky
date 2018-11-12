@@ -336,6 +336,9 @@ export class AuthenticationService {
     message_list():Observable<any> {
       return this.http.post<any>(`${this.apiUri}/message_list`, {});
     }
+    removeAllMesasage(id:string):Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/removeAllMesasage`, {id});
+    }
 
 
 
