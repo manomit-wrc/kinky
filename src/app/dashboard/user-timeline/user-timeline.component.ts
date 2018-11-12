@@ -22,6 +22,7 @@ import { ModalService } from '../modal-directives/modal.service';
 })
 export class UserTimelineComponent implements OnInit {
   from_users:any = [];
+  user_images:any;
   showComment:any = false;
   to_users:any = [];
   likes:any = 0;
@@ -85,6 +86,11 @@ export class UserTimelineComponent implements OnInit {
   post_result:any;
   imageSrc:any;
   limit:any = 10;
+  image_slide:any;
+  user_name:any;
+  comments:any;
+  post_id:any;
+  showButton = true;
   constructor(
     private router: ActivatedRoute,
     public search: SearchService,
@@ -455,7 +461,7 @@ export class UserTimelineComponent implements OnInit {
 
   onKey(e,id){
     if(e.keyCode =='13'){
-      alert(e.target.value + id);
+
       this.auth.post_comment(e.target.value,id)
       .subscribe(datas => {
         if(datas.code === 200){
@@ -467,6 +473,26 @@ export class UserTimelineComponent implements OnInit {
         }
       });
     }
+    }
+
+    onPost(e, id) {
+
+     if(e.target.parentNode.previousSibling.querySelector('.profile-input-text').value != ""){
+      this.auth.post_comment(e.target.parentNode.previousSibling.querySelector('.profile-input-text').value, id)
+      .subscribe(datas => {
+        if(datas.code === 200){
+          this.auth.post_list_by_id(id)
+          .subscribe(data => {
+            e.target.parentNode.previousSibling.querySelector('.profile-input-text').value = "";
+            this.comments = data.info[0].comments;
+          });
+        }
+      });
+     }else{
+      this.toastr.error("Please write a comment");
+     }
+
+
     }
 
    getAge(DOB) {
@@ -481,8 +507,18 @@ export class UserTimelineComponent implements OnInit {
         return age;
     }
 
-    openModal(id: string) {
-      this.modalService.open(id);
+    openModal(id: string, url: string) {
+
+      this.auth.post_details_by_url(url)
+      .subscribe(data => {
+        this.modalService.open(id);
+        this.image_slide = url;
+        this.post_id = data.info[0]._id;
+        this.user_name = data.info[0].user.username;
+        this.user_images = data.info[0].user.avatar;
+        this.comments = data.info[0].comments;
+
+      });
     }
     closeModal(id: string) {
       this.modalService.close(id);

@@ -164,7 +164,7 @@
                 </div>
                 <ul *ngIf="showComment">
                   <li *ngFor="let comment of opt.comments">
-                    <div class="profile-post-img"><img src="{{comment.comments_by.avatar}}" alt=""></div>
+                    <div class="profile-post-img"><img [src]="comment.comments_by.avatar" alt=""></div>
                     <div class="profile-post-text">
                       <div class="prof-text-top">
                         <h6><a href="javascript:void(0)">{{comment.comments_by.username}}</a></h6>

@@ -324,6 +324,9 @@ export class AuthenticationService {
     post_list_by_user(id):Observable<any>{
       return this.http.post<any>(`${this.apiUri}/post_list_by_user`, {id});
     }
+    post_list_by_id(id):Observable<any>{
+      return this.http.post<any>(`${this.apiUri}/post_list_by_id`, {id});
+    }
     noti():Observable<any>{
       return this.http.post<any>(`${this.apiUri}/noti`, {});
     }
@@ -338,6 +341,9 @@ export class AuthenticationService {
     }
     removeAllMesasage(id:string):Observable<any> {
       return this.http.post<any>(`${this.apiUri}/removeAllMesasage`, {id});
+    }
+    post_details_by_url(id:string):Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/post_details_by_url`, {id});
     }
 
 

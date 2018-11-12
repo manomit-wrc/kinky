@@ -3,11 +3,10 @@ import { ModalService } from './modal.service';
 
 @Component({
     selector: 'jw-modal',
-    template: 
+    template:
         `<div class="modal fade" id="image-pop" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
-           
                     <div class="modal-body">
                         <ng-content></ng-content>
                     </div>
@@ -57,12 +56,12 @@ export class ModalComponent implements OnInit, OnDestroy {
 
     // open modal
     open(): void {
-        
+
         this.element.style.display = 'block';
         this.element.querySelector("#image-pop").classList.add("in");
         this.element.querySelector("#image-pop").style.display = 'block';
         this.element.querySelector(".modal-backdrop").style.display = 'block';
-        
+
         document.body.classList.add('jw-modal-open');
     }
 
