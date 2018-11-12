@@ -100,7 +100,7 @@ export class UserTimelineComponent implements OnInit {
     this.imageSrc = decoded.avatar;
     this.pusherService.checkLoggedin(this.router.snapshot.params.user_id);
     this.pusherService.channel.bind("check-logged-in", data => {
-      console.log(data);
+      console.log('toi',data);
       if(data.user_id === this.router.snapshot.params.user_id) {
         if(data.status === 1) {
           this.active_status = true;

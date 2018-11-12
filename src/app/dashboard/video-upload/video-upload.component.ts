@@ -10,7 +10,7 @@ import { Login } from '../../auth/auth.actions';
 import { profileVideos } from '../../auth/auth.selectors';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
-
+import { postMasters } from '../dashboard.actions';
 @Component({
   selector: 'app-video-upload',
   templateUrl: './video-upload.component.html',
@@ -48,7 +48,7 @@ export class VideoUploadComponent implements OnInit {
     private http: HttpClient) {}
 
   ngOnInit() {
-    
+
     this.BarWidth = 0;
 
     this.selectedIndex = 0;
@@ -74,11 +74,11 @@ export class VideoUploadComponent implements OnInit {
 
 
     const fd = new FormData();
-    
+
     for(let i = 0; i < fileType.target.files.length; i++) {
 
-      
-      
+
+
       const file = fileType.target.files[i];
       if((file.size / 1000) <= 5000) {
         fd.append('videos', file);
@@ -92,10 +92,10 @@ export class VideoUploadComponent implements OnInit {
         this.lengthCount++;
         this.toastr.error(`${file.name} is more than 5 MB`)
       }
-      
+
     }
 
-    
+
 
     if(this.lengthCount !== fileType.target.files.length) {
       this.loading = true;
@@ -115,16 +115,16 @@ export class VideoUploadComponent implements OnInit {
             this.percentage = 0;
             this.loading = false;
           }, 2000)
-          
+
         }
         switch(event.type) {
           case HttpEventType.Sent:
             this.percentage = 10;
             this._success.next(this.percentage);
-            
+
             break;
           case 1:
-            
+
             this.percentage = Math.round(this.percentage) !== Math.round(event['loaded'] / event['total'] * 100);
             this._success.next(parseInt(this.percentage));
             if (Math.round(this.percentage) !== Math.round(event['loaded'] / event['total'] * 100)){
@@ -154,7 +154,7 @@ export class VideoUploadComponent implements OnInit {
     }
   }
   setPublicVideo(video, index) {
-    
+
     console.log(video);
     this.btnValue = 'Private';
     this.showSlider = true;
@@ -166,7 +166,7 @@ export class VideoUploadComponent implements OnInit {
   }
 
   setPrivateVideo(video, index) {
-    
+
     this.btnValue = 'Public';
     this.showSlider = true;
     this.video = video;
@@ -205,6 +205,18 @@ export class VideoUploadComponent implements OnInit {
           this.store.dispatch(new Login({ info }));
           //window.location.reload();
           this.toastr.success(`This video is now ${access}`);
+
+          this.auth.post('',imgUrl,'video')
+          .subscribe(datas => {
+
+            if(datas.code === 200) {
+              this.auth.post_list()
+              .subscribe(datas1 => {
+                const posts = datas1.info;
+                this.store.dispatch(new postMasters({ posts }));
+              });
+            }
+          });
 
         })
       ).subscribe(noop)

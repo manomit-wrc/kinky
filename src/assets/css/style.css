@@ -1503,11 +1503,11 @@ box-shadow: 5px 5px 5px -3px rgba(0,0,0,0.25); border-radius:100%;}
 /* .profile-hotlist-sec ul li{ width:100%; display:inline-block; vertical-align:top; margin:4px 0;} */
 
 .profile-hotlist-sec ul li {
-  width: 50% !important;
+  width: 100% !important;
   display: block;
   /* vertical-align: top; */
   margin: 4px 0;
-  float: left;
+  float: none;
 }
 
 .hotlist-box{ width:100%; padding:10px; background:#fff; border-radius:5px; margin:5px 0; display:inline-block; vertical-align:top; text-align:center; }
@@ -1579,7 +1579,7 @@ box-shadow: 5px 5px 5px -3px rgba(0,0,0,0.25); border-radius:100%;}
 }
 
 
-.user-timeline-left-btn{ background:none; border:1px solid #a2a2a2; border-radius:5px; padding:8px 12px; margin:0 1px; display:inline-block; vertical-align:middle; margin:2px;}
+.user-timeline-left-btn{ background:none; border:1px solid #a2a2a2; border-radius:5px; padding:8px 12px; margin:0 2px !important; display:inline-block; vertical-align:middle; margin:2px;}
 
 .user-timeline-left-btn:hover{ border:1px solid #872345;}
 
@@ -2250,4 +2250,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#18080a', end
 .profile-hotlist-sec .friends-icon-sec a.user-timeline-left-icon-2 {
     width: 40px;
     height: 40px;
+}
+
+.profile-hotlist-sec .friends-sml-text.online-user-sml-text {
+  width: 70%;
 }

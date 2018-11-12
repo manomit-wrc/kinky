@@ -10,7 +10,7 @@ import { Login } from '../../auth/auth.actions';
 import { profileImages } from '../../auth/auth.selectors';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
-
+import { postMasters } from '../dashboard.actions';
 
 @Component({
   selector: 'app-photo-upload',
@@ -79,11 +79,11 @@ export class PhotoUploadComponent implements OnInit {
 
   changeListener(fileType: any)  {
     const fd = new FormData();
-    
+
     for(let i = 0; i < fileType.target.files.length; i++) {
 
-      
-      
+
+
       const file = fileType.target.files[i];
       if((file.size / 1000) <= 5000) {
         fd.append('images', file);
@@ -97,7 +97,7 @@ export class PhotoUploadComponent implements OnInit {
         this.lengthCount++;
         this.toastr.error(`${file.name} is more than 5 MB`)
       }
-      
+
     }
 
     if(this.lengthCount !== fileType.target.files.length) {
@@ -118,16 +118,16 @@ export class PhotoUploadComponent implements OnInit {
             this.percentage = 0;
             this.loading = false;
           }, 2000)
-          
+
         }
         switch(event.type) {
           case HttpEventType.Sent:
             this.percentage = 10;
             this._success.next(this.percentage);
-            
+
             break;
           case 1:
-            
+
             this.percentage = Math.round(this.percentage) !== Math.round(event['loaded'] / event['total'] * 100);
             this._success.next(parseInt(this.percentage));
             if (Math.round(this.percentage) !== Math.round(event['loaded'] / event['total'] * 100)){
@@ -144,7 +144,7 @@ export class PhotoUploadComponent implements OnInit {
     });
     }
 
-    
+
 
   }
 
@@ -198,6 +198,18 @@ export class PhotoUploadComponent implements OnInit {
           this.store.dispatch(new Login({ info }));
           //window.location.reload();
           this.toastr.success(`This image is now ${access}`);
+
+          this.auth.post('',imgUrl,'image')
+          .subscribe(datas => {
+
+            if(datas.code === 200) {
+              this.auth.post_list()
+              .subscribe(datas1 => {
+                const posts = datas1.info;
+                this.store.dispatch(new postMasters({ posts }));
+              });
+            }
+          });
 
         })
       ).subscribe(noop)
