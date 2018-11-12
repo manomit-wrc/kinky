@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, noop, BehaviorSubject, pipe } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { noop } from 'rxjs';
 import { AuthenticationService } from '../../services';
-import { first, tap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import * as jwt_decode from 'jwt-decode';
+import { tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-message-list',

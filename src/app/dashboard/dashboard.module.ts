@@ -51,6 +51,8 @@ import { OrderModule } from 'ngx-order-pipe';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import { MessageChatComponent } from './message-chat/message-chat.component';
 import { MessageListComponent } from './message-list/message-list.component';
+import { ModalComponent } from './modal-directives/modal.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -72,6 +74,7 @@ import { MessageListComponent } from './message-list/message-list.component';
 
   ],
   declarations: [
+    ModalComponent,
     LayoutComponent,
     HeaderComponent,
     FooterComponent,

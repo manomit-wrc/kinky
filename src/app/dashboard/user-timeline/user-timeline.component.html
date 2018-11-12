@@ -186,7 +186,12 @@
           <!--<div class="downarrow-mobile downarrow-mobile1"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>-->
           <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Photos &amp; Videos</span></h4>
           <ul class="photo_video_show">
-           <li *ngFor="let img of publicImages;"><img [src]="img.url" [alt]="img.altTag" ></li>
+           <li *ngFor="let img of publicImages;">
+             <a href="javascript:void(0)" (click)="openModal('custom-modal-1')">
+                <img [src]="img.url" [alt]="img.altTag" >
+             </a>
+             
+            </li>
             <li *ngFor="let f of publicvideos | filterBy :{access: 'public'}"><video [src] = "f.url"  controls>Your browser does not support HTML5 video.</video></li>
           </ul>
         </div>
@@ -373,5 +378,51 @@
               <div class="useracitivity-date">20 Mart</div>
             </li>
           </ul>
+
+          <jw-modal id="custom-modal-1">
+                  <button type="button" class="close modal-cross" data-dismiss="modal" (click)="closeModal('custom-modal-1');">&times;</button>
+                  <div class="modal-body-inner">
+                    <div class="modal-left">
+                      <div class="modal-left-image-outer">
+                        <div class="owl-demo-pop owl-carousel">
+                          <div class="item"><img src="assets/images/popupphoto.jpg" alt=""></div>
+                          <div class="item"><img src="assets/images/popupphoto.jpg" alt=""></div>
+                          <div class="item"><img src="assets/images/popupphoto.jpg" alt=""></div>
+                        </div>
+                        <div class="modal-image-icon"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart-o"></i></a> </div>
+                      </div>
+                    </div>
+                    <div class="modal-right">
+                      <div class="moda-row">
+                        <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""> </div>
+                        <div class="modal-top-text-icon">
+                          <h5><a href="#">Totolo33</a></h5>
+                          <p><a href="#"><i class="fa fa-heart-o"></i><span>14 Likes</span></a></p>
+                        </div>
+                      </div>
+                      <div class="modal-row">
+                        <div class="profile-input-outer">
+                          <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
+                          <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+                      </div>
+                      <div class="modal-row text-center">
+                        <input type="submit" class="save-btn" value="Post">
+                      </div>
+                      <div class="modal-row">
+                        <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt="">
+                          <div class="event-user-active">&nbsp;</div>
+                        </div>
+                        <div class="profile-post-text">
+                          <div class="prof-text-top">
+                            <h6><a href="#">Shogunpro125 </a></h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                          </div>
+                        </div>
+                        <div class="useracitivity-date">4 Minutes ago</div>
+                      </div>
+                    </div>
+                  </div>
+            </jw-modal>
+                
         </div>
 

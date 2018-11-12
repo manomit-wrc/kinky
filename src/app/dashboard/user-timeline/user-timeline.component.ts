@@ -14,6 +14,7 @@ import { userDetails} from '../../auth/auth.selectors';
 import { Login, Settings } from '../../auth/auth.actions';
 import { AuthenticationService } from '../../services';
 import {postMasters} from '../../dashboard/dashboard.actions';
+import { ModalService } from '../modal-directives/modal.service';
 @Component({
   selector: 'app-user-timeline',
   templateUrl: './user-timeline.component.html',
@@ -91,7 +92,8 @@ export class UserTimelineComponent implements OnInit {
     private store: Store<AppState>,
     private pusherService: PusherService,
     private renderer: Renderer,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -478,5 +480,12 @@ export class UserTimelineComponent implements OnInit {
 
         return age;
     }
+
+    openModal(id: string) {
+      this.modalService.open(id);
+    }
+    closeModal(id: string) {
+      this.modalService.close(id);
+  }
 
 }
