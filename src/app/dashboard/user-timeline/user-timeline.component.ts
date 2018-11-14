@@ -23,7 +23,7 @@ import { ModalService } from '../modal-directives/modal.service';
 export class UserTimelineComponent implements OnInit {
   from_users:any = [];
   user_images:any;
-  showComment:any = false;
+  showComment:any;
   to_users:any = [];
   likes:any = 0;
   like_status:any = false;
@@ -450,14 +450,19 @@ export class UserTimelineComponent implements OnInit {
 
   }
 
-  showcom(length){
-
-    if(length!=0 && this.showComment!=true){
-   this.showComment = true;
-    }else{
-      this.showComment = false;
-    }
+  getUrl(userid){
+    return userid === this.current_id ? '/my-profile' : '/user-timeline/' + userid;
   }
+
+  showcom(length,index){
+
+
+    if(length!=0 && this.showComment!=index){
+  this.showComment = index;
+   }else{
+     this.showComment = index + 1;
+   }
+ }
 
   onKey(e,id){
     if(e.keyCode =='13'){

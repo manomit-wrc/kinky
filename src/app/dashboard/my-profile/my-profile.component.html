@@ -141,11 +141,11 @@
         <div class="profile-post-sec">
           <div class="profile-post-row">
             <ul>
-              <li *ngFor="let opt of post_result| slice: -limit | orderBy: order :reverse">
-                <div class="profile-post-img"><img [src]="opt.user.avatar" alt=""></div>
+              <li *ngFor="let opt of post_result | slice: -limit | orderBy: order :reverse;let i = index">
+                <div class="profile-post-img"><a href="{{getUrl(opt.user._id)}}"><img [src]="opt.user.avatar" alt=""></a></div>
                 <div class="profile-post-text">
                   <div class="prof-text-top">
-                    <h6><a href="#">{{opt.user.username}}</a></h6>
+                    <h6><a href="{{getUrl(opt.user._id)}}">{{opt.user.username}}</a></h6>
                     <p>{{opt.description}}</p>
                    <!--  <p><a href="#">lola_kemiron</a> likes your profile</p> -->
                     <div class="activity-list-img" *ngIf="opt.content">
@@ -157,12 +157,12 @@
                   <div *ngIf="opt.user._id == session_id" class="prof-text-bot">
                       <a href="javascript:void(0)" class="prof-like {{opt.like_class}}"> <span>{{opt.like_count}}
                         likes</span></a> <a href="javascript:void(0)" class="prof-comment" ><i class="fa fa-keyboard-o" aria-hidden="true"></i>
-                      <span (click)="showcom(opt.comments.length)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
+                      <span (click)="showcom(opt.comments.length,i)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
                   <div *ngIf="opt.user._id != session_id" class="prof-text-bot"> <a href="javascript:void(0)" class="prof-like {{opt.like_class}}" (click)="like_post(opt._id, opt.index, opt.like_class)"> <span>{{opt.like_count}}
                         likes</span></a> <a href="javascript:void(0)" class="prof-comment" ><i class="fa fa-keyboard-o" aria-hidden="true"></i>
-                      <span (click)="showcom(opt.comments.length)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
+                      <span (click)="showcom(opt.comments.length,i)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
                 </div>
-                <ul *ngIf="showComment">
+                <ul *ngIf="showComment == i" >
                   <li *ngFor="let comment of opt.comments">
                     <div class="profile-post-img"><img [src]="comment.comments_by.avatar" alt=""></div>
                     <div class="profile-post-text">
@@ -174,7 +174,7 @@
                     </div>
                   </li>
                 </ul>
-                <div class="profile-comment-box" *ngIf="opt.user._id != session_id">
+                <div class="profile-comment-box">
                   <div class="profile-comment-img"><img [src]="this.avatar" alt=""></div>
                   <div class="profile-input-outer">
                     <input class="profile-input-text"  placeholder="Whats in your mind..." type="text" (keydown)="onKey($event,opt._id)">
@@ -346,13 +346,14 @@
           <h5><i class="fa fa-heart-o"></i> <span>Hotlist</span></h5>
           <ul>
             <li *ngFor="let opt of hot_list">
-                <a href="/user-timeline/{{opt._id}}">
+
               <div class="hotlist-box">
-                <div class="friends-sml-img"><a href="javascript:void(0)"><img [src]="opt.avatar" alt=""></a>
+                  <a href="/user-timeline/{{opt._id}}">
+                <div class="friends-sml-img"><a href="/user-timeline/{{opt._id}}"><img [src]="opt.avatar" alt=""></a>
                   <div class="event-user-active">&nbsp;</div>
                 </div>
                 <div class="friends-sml-text online-user-sml-text">
-                  <h6><a href="javascript:void(0)">{{opt.username}}</a></h6>
+                  <h6><a href="/user-timeline/{{opt._id}}">{{opt.username}}</a></h6>
                   <p *ngIf="opt.gender=='C'"> <span><i class="fa fa-mars"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> <span><i class="fa fa-venus"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality_female}}</span> </p>
                       <p *ngIf="opt.gender=='M'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span></p>
                       <p *ngIf="opt.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> </p>
@@ -360,9 +361,9 @@
                 </div>
                 <div class="friends-icon-sec online-user-icon-sec"> <a href="/message-chat/{{opt._id}}" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
                   <a href="javascript:void(0)" (click)="saveTohotlist($event,opt._id)" class="user-timeline-left-icon-2 active"></a> </div>
-
+                </a>
               </div>
-              </a>
+
             </li>
 
           </ul>
@@ -376,7 +377,7 @@
 
 <modal #myModal>
    <modal-header>
-      <h1>Modal header</h1>
+      <h1>Select Image/Video for Post</h1>
   </modal-header>
   <modal-content>
    <!--  <li *ngFor="let img of fileArr;"><img class="upload-all" [src]="img.url" [alt]="img.altTag"></li> -->
@@ -396,7 +397,17 @@
                 <div class="photo-row photo-row1 profile-right-photo-vid-sec tab-photo">
                   <h4><img src="/assets/images/photo-icon-1.png" alt=""><span>Photos</span></h4>
                   <ul>
-                    <li *ngFor="let img of fileArr;"><img class="upload-all" [src]="img.url" (click)="content_click(img.url,'image',myModal)" [alt]="img.altTag"></li>
+                    <!-- <li *ngFor="let img of fileArr;"><img class="upload-all" [src]="img.url" (click)="content_click(img.url,'image',myModal)" [alt]="img.altTag"></li> -->
+                    <li *ngFor="let img of fileArr;">
+                        <label class="card">
+                            <input name="tabGalleryItem" type="radio">
+                            <div class="image">
+                              <img alt="" class="img-fluid rounded" [src]="img.url" (click)="content_click(img.url,'image',myModal)">
+                              <i class="fa fa-check"></i>
+                            </div>
+                          </label>
+                    </li>
+
                   </ul>
                 </div>
               </div>
@@ -407,8 +418,14 @@
               <ul>
                 <li *ngFor="let f of fileArrvid">
 
-                    <video [src] = "f.url" class="upload-all" (click)="content_click(f.url,'video',myModal)">Your browser does not support HTML5 video.</video>
-
+                    <!-- <video [src] = "f.url" class="upload-all" (click)="content_click(f.url,'video',myModal)">Your browser does not support HTML5 video.</video> -->
+                    <label class="card">
+                        <input name="tabGalleryItem" type="radio">
+                        <div class="video">
+                            <video [src] = "f.url" class="upload-all" (click)="content_click(f.url,'video',myModal)"></video>
+                          <i class="fa fa-check"></i>
+                        </div>
+                      </label>
                 </li>
               </ul>
             </div>
@@ -418,6 +435,11 @@
     </div>
   </modal-content>
   <modal-footer>
-      <button class="btn btn-primary" (click)="myModal.close()">close</button>
+          <div class="post-file" *ngIf="selectItem">
+              <div class="profile-input-outer">
+                  <input type="text" [(ngModel)]="file_caption" class="profile-input-text" placeholder="Add a caption...">
+                    </div>
+                    <button class="btn btn-primary" (click)="filePost(myModal)" [disabled]="post_data">Post</button>
+          </div>
   </modal-footer>
 </modal>

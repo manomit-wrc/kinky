@@ -2255,3 +2255,187 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#18080a', end
 .profile-hotlist-sec .friends-sml-text.online-user-sml-text {
   width: 70%;
 }
+
+.photo-row.photo-row1.profile-right-photo-vid-sec.tab-photo ul  {
+  height: 310px;
+  overflow: auto;
+}
+
+.profile-right-photo-vid-sec.tab-photo ul li .card, .profile-right-photo-vid-sec.tab-video ul li .card {
+ position: relative;
+}
+
+.profile-right-photo-vid-sec.tab-photo ul li .card input[type="radio"] {
+  position: absolute;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  visibility: hidden;
+}
+
+.profile-right-photo-vid-sec.tab-photo ul li .card .image, .profile-right-photo-vid-sec.tab-video ul li .card .video {
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-right-photo-vid-sec.tab-photo ul li label.card > input:checked + .image:before {
+  position: absolute;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  content: "";
+  max-width: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.profile-right-photo-vid-sec.tab-photo ul li label.card > input:checked + .image i.fa.fa-check {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 40px;
+  display: block;
+}
+
+.profile-right-photo-vid-sec.tab-photo ul li label.card .image i.fa.fa-check {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 40px;
+  display: none;
+}
+
+.modal-dialog.undefined .modal-content .modal-footer .btn-primary{ width:130px; height:35px; border:none; /*margin-left:5px;*/ text-align:center; background: rgba(29,9,12,1);
+  background: -moz-linear-gradient(left, rgba(29,9,12,1) 0%, rgba(133,35,53,1) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(29,9,12,1)), color-stop(100%, rgba(133,35,53,1)));
+  background: -webkit-linear-gradient(left, rgba(29,9,12,1) 0%, rgba(133,35,53,1) 100%);
+  background: -o-linear-gradient(left, rgba(29,9,12,1) 0%, rgba(133,35,53,1) 100%);
+  background: -ms-linear-gradient(left, rgba(29,9,12,1) 0%, rgba(133,35,53,1) 100%);
+  background: linear-gradient(to right, rgba(29,9,12,1) 0%, rgba(133,35,53,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d090c', endColorstr='#852335', GradientType=1 ); border-radius:5px; color:#fff; text-transform:capitalize;
+  font-weight:600; font-size:16px; border: 1px solid transparent;}
+
+  .modal-dialog.undefined .modal-content .modal-footer .btn-primary:hover{background: rgba(133,35,53,1);
+  background: -moz-linear-gradient(left, rgba(133,35,53,1) 0%, rgba(29,9,12,1) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(133,35,53,1)), color-stop(100%, rgba(29,9,12,1)));
+  background: -webkit-linear-gradient(left, rgba(133,35,53,1) 0%, rgba(29,9,12,1) 100%);
+  background: -o-linear-gradient(left, rgba(133,35,53,1) 0%, rgba(29,9,12,1) 100%);
+  background: -ms-linear-gradient(left, rgba(133,35,53,1) 0%, rgba(29,9,12,1) 100%);
+  background: linear-gradient(to right, rgba(133,35,53,1) 0%, rgba(29,9,12,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#852335', endColorstr='#1d090c', GradientType=1 );}
+
+
+  .profile-right-photo-vid-sec.tab-video ul li .card input[type="radio"] {
+    position: absolute;
+    z-index: 9999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    visibility: hidden;
+  }
+
+  .profile-right-photo-vid-sec.tab-video ul li label.card > input:checked + .image:before {
+    position: absolute;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    content: "";
+    max-width: 100%;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .profile-right-photo-vid-sec.tab-video ul li label.card > input:checked + .video i.fa.fa-check {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 40px;
+    display: block;
+  }
+
+  .profile-right-photo-vid-sec.tab-video ul li label.card .video i.fa.fa-check {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 40px;
+    display: none;
+  }
+
+  .post-file {
+    text-align: center;
+}
+
+.post-file .profile-input-outer {
+  width: 70%;
+  margin-right: 1%;
+}
+
+
+.modal-dialog.undefined .modal-header {
+  background: rgba(24,8,10,1);
+  background: -moz-linear-gradient(left, rgba(24,8,10,1) 0%, rgba(132,35,53,1) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(24,8,10,1)), color-stop(100%, rgba(132,35,53,1)));
+  background: -webkit-linear-gradient(left, rgba(24,8,10,1) 0%, rgba(132,35,53,1) 100%);
+  background: -o-linear-gradient(left, rgba(24,8,10,1) 0%, rgba(132,35,53,1) 100%);
+  background: -ms-linear-gradient(left, rgba(24,8,10,1) 0%, rgba(132,35,53,1) 100%);
+  background: linear-gradient(to right, rgba(24,8,10,1) 0%, rgba(132,35,53,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#18080a', endColorstr='#842335', GradientType=1 );
+  overflow: hidden;
+  border-bottom: 0 none;
+  border-top-left-radius: 8px;
+  -webkit-border-top-left-radius: 8px;
+  -moz-border-top-left-radius: 8px;
+  -ms-border-top-left-radius: 8px;
+  -o-border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  -webkit-border-top-right-radius: 8px;
+  -moz-border-top-right-radius: 8px;
+  -ms-border-top-right-radius: 8px;
+  -o-border-top-right-radius: 8px;
+  }
+
+  .modal-dialog.undefined .modal-header h1 {
+    color: #ffffff;
+  }
+
+  .modal-dialog.undefined .modal-header .close {
+    opacity: 1;
+  }
+
+  .modal-dialog.undefined .modal-header .close span {
+    color: #fff;
+  }
+
+  .modal-dialog.undefined .modal-body .personal-detail-tab-row {
+    border-bottom: 0 none;
+  }
+
+  .modal-dialog.undefined {
+    width: 980px;
+  }
+
+
+

@@ -135,11 +135,11 @@
         <div class="profile-post-sec">
           <div class="profile-post-row">
             <ul>
-              <li *ngFor="let opt of post_result| slice:0:limit | orderBy: order :reverse">
+              <li *ngFor="let opt of post_result| slice:0:limit | orderBy: order :reverse;let i = index">
                 <div class="profile-post-img"><img [src]="opt.user.avatar" alt=""></div>
                 <div class="profile-post-text">
                   <div class="prof-text-top">
-                    <h6><a href="#">{{opt.user.username}}</a></h6>
+                    <h6><a href="{{getUrl(opt.user._id)}}">{{opt.user.username}}</a></h6>
                     <p>{{opt.description}}</p>
                    <!--  <p><a href="#">lola_kemiron</a> likes your profile</p> -->
                     <div class="activity-list-img" *ngIf="opt.content">
@@ -151,10 +151,10 @@
                   <div *ngIf="opt.user._id == current_id" class="prof-text-bot">
                     <a href="javascript:void(0)" class="prof-like {{opt.like_class}}"> <span>{{opt.like_count}}
                       likes</span></a> <a href="javascript:void(0)" class="prof-comment " ><i class="fa fa-keyboard-o" aria-hidden="true"></i>
-                    <span (click)="showcom(opt.comments.length)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
+                    <span (click)="showcom(opt.comments.length,i)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
                 <div *ngIf="opt.user._id != current_id" class="prof-text-bot"> <a href="javascript:void(0)" class="prof-like {{opt.like_class}}" (click)="like_post(opt._id, opt.index, opt.like_class)"> <span>{{opt.like_count}}
                       likes</span></a> <a href="javascript:void(0)" class="prof-comment " ><i class="fa fa-keyboard-o" aria-hidden="true"></i>
-                    <span (click)="showcom(opt.comments.length)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
+                    <span (click)="showcom(opt.comments.length,i)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
                 </div>
                 <ul *ngIf="showComment">
                   <li *ngFor="let comment of opt.comments | orderBy: order :reverse">
@@ -168,7 +168,7 @@
                     </div>
                   </li>
                 </ul>
-                <div class="profile-comment-box" *ngIf="opt.user._id != current_id">
+                <div class="profile-comment-box">
                   <div class="profile-comment-img"><img [src]="imageSrc" alt=""></div>
                   <div class="profile-input-outer">
                     <input class="profile-input-text" placeholder="Whats in your mind..." type="text" (keydown)="onKey($event,opt._id)">

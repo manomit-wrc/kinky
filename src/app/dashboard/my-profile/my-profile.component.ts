@@ -26,7 +26,8 @@ declare var $: any;
 export class MyProfileComponent implements OnInit {
   private _success = new Subject<string>();
   show = 6;
-  showComment:any = false;
+  selectItem:any = false;
+  showComment:any;
   posts:any;
   content_type:any;
   tab: String = 'tab1';
@@ -88,6 +89,7 @@ export class MyProfileComponent implements OnInit {
   like_status:any = false;
   limit:any = 10;
   chek_val:any;
+  file_caption:any;
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -100,7 +102,7 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit() {
 
-    
+
 
     this.search.hot_list()
   .subscribe (datas => {
@@ -273,13 +275,18 @@ export class MyProfileComponent implements OnInit {
    this.limit += 10;
   }
 
-  showcom(length){
+  showcom(length,index){
 
-    if(length!=0 && this.showComment!=true){
-   this.showComment = true;
+
+     if(length!=0 && this.showComment!=index){
+   this.showComment = index;
     }else{
-      this.showComment = false;
+      this.showComment = index + 1;
     }
+  }
+
+  getUrl(userid){
+    return userid === this.session_id ? '/my-profile' : '/user-timeline/' + userid;
   }
 
   like_post(post_id, index, like_class){
@@ -351,10 +358,11 @@ displayTab(value) {
 content_click(url,type,myModal){
 localStorage.setItem("content",url);
 this.content_type = type;
-myModal.close();
+this.selectItem = true;
+// myModal.close();
 }
 
-post(){
+post() {
  // alert(localStorage.getItem("content"));
  if(this.post_description !=""){
    this.post_data = true;
@@ -425,8 +433,6 @@ loadAllPosts() {
 saveTohotlist(e,id) {
     let target = e.currentTarget;
 
-    //this.hotlist_status = ! this.hotlist_status;
-
       if(target.className === "user-timeline-left-icon-2") {
         this.hotlist_status = true;
         this.renderer.setElementClass(target, 'active', true);
@@ -456,6 +462,32 @@ saveTohotlist(e,id) {
 
 
 
+  }
+
+  filePost(myModal){
+
+    if(this.file_caption !=undefined){
+      this.post_data = true;
+     this.auth.post(this.file_caption,localStorage.getItem("content"),this.content_type)
+     .subscribe(data => {
+       localStorage.removeItem("content");
+       this.content_type = "";
+       if(data.code === 200) {
+         this.auth.post_list()
+         .subscribe(datas => {
+          myModal.close();
+           this.post_data = false;;
+           const posts = datas.info;
+           this.post_result = posts;
+           this.file_caption = "";
+           this.store.dispatch(new postMasters({ posts }));
+         });
+
+       }
+     });
+    }else{
+     this.toastr.error("Please write a caption.");
+    }
   }
 
 }
