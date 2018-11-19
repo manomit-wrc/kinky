@@ -90,6 +90,9 @@ export class MyProfileComponent implements OnInit {
   limit:any = 10;
   chek_val:any;
   file_caption:any;
+  post_visible:any = '1';
+  sexuality_visible:any ='1';
+  content_visible:any = '1';
   constructor(
     private auth: AuthenticationService,
     private router: Router,
@@ -99,6 +102,8 @@ export class MyProfileComponent implements OnInit {
     private toastr: ToastrService,
     private renderer: Renderer
   ) { }
+
+
 
   ngOnInit() {
 
@@ -462,6 +467,16 @@ saveTohotlist(e,id) {
 
 
 
+  }
+
+  filter_post(){
+    //alert(this.content_visible);
+    this.auth.post_list_by_filter(this.post_visible,this.sexuality_visible,this.content_visible)
+    .subscribe(datas => {
+      const posts = datas.info;
+      //this.post_result = posts;
+
+    });
   }
 
   filePost(myModal){

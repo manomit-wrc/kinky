@@ -2437,5 +2437,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#18080a', end
     width: 980px;
   }
 
+  .profile-post-row.post-comment {
+    background: transparent;
+  }
+
+  .profile-post-row.post-comment ul li {
+    background: #f4f4f4;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    margin-bottom: 6px;
+    padding: 20px 17px;
+  }
 
 

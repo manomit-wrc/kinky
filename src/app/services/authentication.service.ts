@@ -345,6 +345,9 @@ export class AuthenticationService {
     post_details_by_url(id:string):Observable<any> {
       return this.http.post<any>(`${this.apiUri}/post_details_by_url`, {id});
     }
+    post_list_by_filter(post_visible:string,sexuality_visible:string,content_visible:string):Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/post_list_by_filter`, {post_visible,sexuality_visible,content_visible});
+    }
 
 
 
