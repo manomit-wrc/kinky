@@ -206,7 +206,7 @@ export class VideoUploadComponent implements OnInit {
           //window.location.reload();
           this.toastr.success(`This video is now ${access}`);
 
-          this.auth.post('',imgUrl,'video')
+          this.auth.post('',imgUrl,'','','video')
           .subscribe(datas => {
 
             if(datas.code === 200) {

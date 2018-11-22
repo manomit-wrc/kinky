@@ -135,6 +135,7 @@
               </select>
             </div>
             <button class="profile-btn profile-setting-btn" (click)="filter_post()"><img src="assets/images/setting-icon.png" alt=""></button>
+            <img *ngIf="isLoadingForPost" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
           </div>
         </div>
         <div class="profile-post-sec">
@@ -148,7 +149,8 @@
                     <p>{{opt.description}}</p>
                    <!--  <p><a href="#">lola_kemiron</a> likes your profile</p> -->
                     <div class="activity-list-img" *ngIf="opt.content">
-                      <img [src]="opt.content" alt="" *ngIf="opt.content_type =='image'" (click)="myModal2.open();makeClick(opt.content)">
+                      <img [src]="opt.content" alt="" *ngIf="opt.content_type =='image'" id="image1_{{opt.org_content}}" (click)="myModal2.open();makeClick(opt.org_content);">
+
                       <video [src] = "opt.content"  *ngIf="opt.content_type =='video'" controls>Your browser does not support HTML5 video.</video>
 
                     </div>
@@ -401,7 +403,7 @@
                         <label class="card">
                             <input name="tabGalleryItem" type="radio">
                             <div class="image">
-                              <img alt="" class="img-fluid rounded" [src]="img.url" (click)="content_click(img.url,'image',myModal)">
+                              <img alt="" class="img-fluid rounded" [src]="img.url" (click)="content_click(img.url,img.org_url,img.isNude,'image',myModal)">
                               <i class="fa fa-check"></i>
                             </div>
                           </label>
@@ -421,7 +423,7 @@
                     <label class="card">
                         <input name="tabGalleryItem" type="radio">
                         <div class="video">
-                            <video [src] = "f.url" class="upload-all" (click)="content_click(f.url,'video',myModal)"></video>
+                            <video [src] = "f.url" class="upload-all" (click)="content_click(f.url,'','video',myModal)"></video>
                           <i class="fa fa-check"></i>
                         </div>
                       </label>
@@ -443,7 +445,7 @@
   </modal-footer>
 </modal>
 
-<modal #myModal2 (onOpen)="actionOnOpen()">
+<modal #myModal2>
   <modal-header>
      <h1>Show Image</h1>
  </modal-header>
@@ -456,13 +458,11 @@
 
          <div class="latest-personal-details-tab-bot">
              <div class="photo-row photo-row1 profile-right-photo-vid-sec tab-video">
-             <h4><img src="/assets/images/photo-icon-1.png" alt=""><span>Image</span></h4>
-             <ul>
-               <li>
-                 <a (click)="openM(myModal2)">Clickkkkk</a>
-                 <img [src]="myModal2" alt="">
-               </li>
-             </ul>
+
+
+
+                 <img [src]="this.org_url" alt="">
+
            </div>
 
        </div>

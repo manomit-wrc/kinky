@@ -189,7 +189,7 @@ export class PhotoUploadComponent implements OnInit {
 
 
 
-  moveToPrivate(imgUrl, access) {
+  moveToPrivate(imgUrl,orgUrl,isnude,access) {
     access = access === 'Private' ? 'Public' : 'Private';
     this.auth.moveToPrivate(imgUrl, access)
       .pipe(
@@ -199,7 +199,7 @@ export class PhotoUploadComponent implements OnInit {
           //window.location.reload();
           this.toastr.success(`This image is now ${access}`);
 
-          this.auth.post('',imgUrl,'image')
+          this.auth.post('',imgUrl,orgUrl,isnude,'image')
           .subscribe(datas => {
 
             if(datas.code === 200) {

@@ -4,6 +4,7 @@ import { first } from 'rxjs/operators';
 import { Component, OnInit,Renderer } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { debounceTime, tap } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { Store, select } from '@ngrx/store';
@@ -16,8 +17,11 @@ import { ToastrService } from 'ngx-toastr';
 import * as jwt_decode from 'jwt-decode';
 import {ModalModule} from "ngx-modal";
 import { Login } from '../../auth/auth.actions';
+import '../../../assets/js/nude.min';
 declare var $: any;
 
+declare var nude: any;
+nude.init();
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.component.html',
@@ -27,7 +31,9 @@ export class MyProfileComponent implements OnInit {
   private _success = new Subject<string>();
   show = 6;
   selectItem:any = false;
+  isLoadingForPost:any = false;
   showComment:any;
+  org_url:any;
   posts:any;
   content_type:any;
   tab: String = 'tab1';
@@ -100,7 +106,8 @@ export class MyProfileComponent implements OnInit {
     public search: SearchService,
     private store: Store<AppState>,
     private toastr: ToastrService,
-    private renderer: Renderer
+    private renderer: Renderer,
+    public sanitizer: DomSanitizer
   ) { }
 
 
@@ -264,6 +271,7 @@ export class MyProfileComponent implements OnInit {
                 .subscribe(datas => {
                   const posts = datas.info;
                   this.post_result = posts;
+
                   this.loadAllPosts();
                   this.store.dispatch(new postMasters({ posts }));
               });
@@ -271,6 +279,7 @@ export class MyProfileComponent implements OnInit {
       else {
         this.store.select(postAllMasters).subscribe(posts => {
           this.post_result = posts;
+
           this.loadAllPosts();
          });
       }
@@ -360,8 +369,10 @@ displayTab(value) {
 
 
 
-content_click(url,type,myModal){
+content_click(url,org_url,isNude,type,myModal){
 localStorage.setItem("content",url);
+localStorage.setItem("org_content",org_url);
+localStorage.setItem("isNude",isNude);
 this.content_type = type;
 this.selectItem = true;
 // myModal.close();
@@ -371,7 +382,7 @@ post() {
  // alert(localStorage.getItem("content"));
  if(this.post_description !=""){
    this.post_data = true;
-  this.auth.post(this.post_description,localStorage.getItem("content"),this.content_type)
+  this.auth.post(this.post_description,localStorage.getItem("content"),localStorage.getItem("org_content"),localStorage.getItem("isNude"),this.content_type)
   .subscribe(data => {
     localStorage.removeItem("content");
     this.content_type = "";
@@ -392,6 +403,11 @@ post() {
  }
 
 }
+
+makeClick(id){
+this.org_url = id;
+}
+
 
 onKey(e,id){
 if(e.keyCode =='13'){
@@ -470,11 +486,14 @@ saveTohotlist(e,id) {
   }
 
   filter_post(){
-    //alert(this.content_visible);
+    this.isLoadingForPost = true;
     this.auth.post_list_by_filter(this.post_visible,this.sexuality_visible,this.content_visible)
     .subscribe(datas => {
+      this.isLoadingForPost = false;
       const posts = datas.info;
-      //this.post_result = posts;
+      if( posts.length !==0 ){
+        this.post_result = posts;
+      }
 
     });
   }
@@ -482,8 +501,9 @@ saveTohotlist(e,id) {
   filePost(myModal){
 
     if(this.file_caption !=undefined){
+
       this.post_data = true;
-     this.auth.post(this.file_caption,localStorage.getItem("content"),this.content_type)
+     this.auth.post(this.file_caption,localStorage.getItem("content"),localStorage.getItem("org_content"),localStorage.getItem("isNude"),this.content_type)
      .subscribe(data => {
        localStorage.removeItem("content");
        this.content_type = "";

@@ -312,8 +312,9 @@ export class AuthenticationService {
       return this.http.post<any>(`${this.apiUri}/change-image-details`, {imageUrl, access, altTag});
     }
 
-    post(post_description:string,url:string,type:string):Observable<any>{
-      return this.http.post<any>(`${this.apiUri}/post_description`, {post_description, url, type});
+    post(post_description:string,url:string,org_url:string,isNude:string,type:string):Observable<any>{
+
+     return this.http.post<any>(`${this.apiUri}/post_description`, {post_description, url,org_url,isNude, type});
     }
     post_comment(comment:string,id:string):Observable<any>{
       return this.http.post<any>(`${this.apiUri}/post_comment`, {comment,id});
