@@ -522,9 +522,7 @@ export class UserTimelineComponent implements OnInit {
         this.comments = datas.info[0].comments;
         this.post_like_count = datas.info[0].like.length;
         this.userId = datas.info[0].user._id;
-        console.log('====================================');
-        console.log(datas.info[0].user._id);
-        console.log('====================================');
+
       });
     }
 

@@ -494,6 +494,8 @@ saveTohotlist(e,id) {
       if( posts.length !==0 ){
         this.post_result = posts;
         this.loadAllPosts();
+      }else{
+        this.post_result = [];
       }
 
     });
