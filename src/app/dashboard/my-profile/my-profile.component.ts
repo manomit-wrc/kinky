@@ -493,6 +493,7 @@ saveTohotlist(e,id) {
       const posts = datas.info;
       if( posts.length !==0 ){
         this.post_result = posts;
+        this.loadAllPosts();
       }
 
     });

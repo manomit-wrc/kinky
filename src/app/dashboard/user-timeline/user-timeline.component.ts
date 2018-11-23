@@ -21,10 +21,13 @@ import { ModalService } from '../modal-directives/modal.service';
   styleUrls: ['./user-timeline.component.css']
 })
 export class UserTimelineComponent implements OnInit {
+  userId:any;
   from_users:any = [];
   user_images:any;
   showComment:any;
   to_users:any = [];
+  selectedIndex:any;
+  post_like_count:any=0;
   likes:any = 0;
   like_status:any = false;
   username:any;
@@ -103,7 +106,7 @@ export class UserTimelineComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.selectedIndex = 0;
     const decoded = jwt_decode(localStorage.getItem('token'));
     this.imageSrc = decoded.avatar;
     this.pusherService.checkLoggedin(this.router.snapshot.params.user_id);
@@ -500,6 +503,51 @@ export class UserTimelineComponent implements OnInit {
 
     }
 
+    onPrev() {
+
+      this.selectedIndex = this.selectedIndex - 1;
+      if(this.selectedIndex < 0) {
+        this.selectedIndex = this.publicImages.length - 1;
+      }
+
+      const data = this.publicImages[this.selectedIndex];
+
+      this.image_slide = data.org_url;
+      this.auth.post_details_by_url(this.image_slide)
+      .subscribe(datas => {
+
+        this.post_id = datas.info[0]._id;
+        this.user_name = datas.info[0].user.username;
+        this.user_images = datas.info[0].user.avatar;
+        this.comments = datas.info[0].comments;
+        this.post_like_count = datas.info[0].like.length;
+        this.userId = datas.info[0].user._id;
+        console.log('====================================');
+        console.log(datas.info[0].user._id);
+        console.log('====================================');
+      });
+    }
+
+    onNext() {
+      this.selectedIndex = this.selectedIndex + 1;
+      if(this.selectedIndex > this.publicImages.length - 1) {
+        this.selectedIndex = 0;
+      }
+
+      const data = this.publicImages[this.selectedIndex];
+      this.image_slide = data.org_url;
+      this.auth.post_details_by_url(this.image_slide)
+      .subscribe(datas => {
+
+        this.post_id = datas.info[0]._id;
+        this.user_name = datas.info[0].user.username;
+        this.user_images = datas.info[0].user.avatar;
+        this.comments = datas.info[0].comments;
+        this.post_like_count = datas.info[0].like.length;
+        this.userId = datas.info[0].user._id;
+      });
+    }
+
    getAge(DOB) {
         var today = new Date();
         var birthDate = new Date(DOB);
@@ -512,12 +560,12 @@ export class UserTimelineComponent implements OnInit {
         return age;
     }
 
-    openModal(id: string, url: string) {
-
-      this.auth.post_details_by_url(url)
+    openModal(id: string, url: string,org_url:string,index:string) {
+      this.selectedIndex =index;
+      this.auth.post_details_by_url(org_url)
       .subscribe(data => {
         this.modalService.open(id);
-        this.image_slide = url;
+        this.image_slide = org_url;
         this.post_id = data.info[0]._id;
         this.user_name = data.info[0].user.username;
         this.user_images = data.info[0].user.avatar;

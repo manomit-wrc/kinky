@@ -149,6 +149,7 @@
                     <p>{{opt.description}}</p>
                    <!--  <p><a href="#">lola_kemiron</a> likes your profile</p> -->
                     <div class="activity-list-img" *ngIf="opt.content">
+
                       <img [src]="opt.content" alt="" *ngIf="opt.content_type =='image'" id="image1_{{opt.org_content}}" (click)="myModal2.open();makeClick(opt.org_content);">
 
                       <video [src] = "opt.content"  *ngIf="opt.content_type =='video'" controls>Your browser does not support HTML5 video.</video>

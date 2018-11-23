@@ -186,8 +186,8 @@
           <!--<div class="downarrow-mobile downarrow-mobile1"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>-->
           <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Photos &amp; Videos</span></h4>
           <ul class="photo_video_show">
-           <li *ngFor="let img of publicImages;">
-             <a href="javascript:void(0)" (click)="openModal('custom-modal-1',img.url)">
+           <li *ngFor="let img of publicImages;let i = index">
+             <a href="javascript:void(0)" (click)="openModal('custom-modal-1',img.url,img.org_url,i)">
                 <img [src]="img.url" [alt]="img.altTag" >
              </a>
 
@@ -358,12 +358,18 @@
                   <div class="modal-body-inner">
                     <div class="modal-left">
                       <div class="modal-left-image-outer">
-                        <div class="owl-demo-pop owl-carousel">
+                        <div class="owl-carousel">
                           <div class="item" ><img [src]="image_slide" alt=""></div>
+                          <div class="owl-controls clickable">
+                            <div class="owl-buttons">
+                              <div class="owl-prev" (click)="onPrev()"></div>
+                              <div class="owl-next" (click)="onNext()"></div>
+                            </div>
+                          </div>
                          <!--  <div class="item"><img src="assets/images/popupphoto.jpg" alt=""></div>
                           <div class="item"><img src="assets/images/popupphoto.jpg" alt=""></div> -->
                         </div>
-                        <div class="modal-image-icon"> <a href="#" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart-o"></i></a> </div>
+                        <div class="modal-image-icon"> <a href="/message-chat/{{userId}}" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> <a href="#" class="friends-cross-icon"><i class="fa fa-heart-o"></i></a> </div>
                       </div>
                     </div>
                     <div class="modal-right">
@@ -371,13 +377,13 @@
                         <div class="profile-post-img"><img [src]="user_images" alt=""> </div>
                         <div class="modal-top-text-icon">
                           <h5><a href="#">{{user_name}}</a></h5>
-                          <p><a href="#"><i class="fa fa-heart-o"></i><span>14 Likes</span></a></p>
+                          <p><a href="javascript:void(0)"><i class="fa fa-heart-o"></i><span>{{post_like_count}} Likes</span></a></p>
                         </div>
                       </div>
                       <div class="modal-row">
                         <div class="profile-input-outer">
                           <input class="profile-input-text" placeholder="Whats in your mind..." type="text">
-                          <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a> </div>
+                          <!-- <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png" alt=""></a>  --></div>
                       </div>
                       <div class="modal-row text-center">
                         <input  type="button" class="save-btn" value="Post"  (click)="onPost($event,post_id)">
