@@ -37,7 +37,7 @@ export class MessageChatComponent implements OnInit {
   }
 
   submit_message() {
-    this.auth.submit_message(this.session_id,this.message_text)
+    this.auth.submit_message(this.session_id,this.message_text,'','','')
     .pipe(
       tap(data => {
         if(data.code ===200){

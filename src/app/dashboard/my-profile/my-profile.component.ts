@@ -514,7 +514,7 @@ saveTohotlist(e,id) {
          this.auth.post_list()
          .subscribe(datas => {
           myModal.close();
-           this.post_data = false;;
+           this.post_data = false;
            const posts = datas.info;
            this.post_result = posts;
            this.file_caption = "";

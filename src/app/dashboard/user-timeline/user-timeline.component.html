@@ -102,32 +102,32 @@
         <div class="profile-left-form-sec">
           <div class="profile-form-row">
             <div class="profile-input-outer user-timeline-textinput-left">
-              <input class="profile-input-text" placeholder="Message Text..." type="text">
+              <input class="profile-input-text" [(ngModel)]="file_caption" placeholder="Message Text..." type="text">
             </div>
           </div>
           <div class="profile-form-row">
-            <button class="user-timeline-left-btn user-chat-btn"><img src="assets/images/usertimeline-icon-1.png" alt=""><span>Chat</span></button>
-            <button class="user-timeline-left-btn user-review-btn"><img src="assets/images/usertimeline-icon-2.png" alt=""><span>My Friends</span></button>
+            <button class="user-timeline-left-btn user-chat-btn" *ngIf="active_status"><img src="assets/images/usertimeline-icon-1.png" alt=""><span>Chat</span></button>
+            <button  class="user-timeline-left-btn user-review-btn accept-button" *ngIf="from_users.length=== 0 && to_users.length===0" (click)="request_send1($event,userid)"><img src="assets/images/usertimeline-icon-2.png" width="18" height="18" alt=""><span>My Friends</span></button>
+            <button  class="user-timeline-left-btn user-review-btn reject-button" *ngIf="from_users.length!== 0 || to_users.length!==0"(click)="request_send1($event,userid)"><img src="assets/images/substract.png" width="18" height="18" alt=""><span>My Friends</span></button>
             <button class="user-timeline-left-btn user-review-btn"><img src="assets/images/usertimeline-icon-2.png" alt=""><span>Review</span></button>
             <button class="user-timeline-left-btn"><img src="assets/images/usertimeline-icon-3.png" alt=""></button>
-            <button class="user-timeline-left-btn"><img src="assets/images/usertimeline-icon-4.png" alt=""></button>
-            <button class="save-btn usertimeline-send-btn">Send Message</button>
+            <button class="user-timeline-left-btn" (click)="myModal.open();"><img src="assets/images/usertimeline-icon-4.png" alt=""></button>
+            <button class="save-btn usertimeline-send-btn" (click)="filePost(myModal)">Send Message</button>
           </div>
           <div class="profile-form-row">
             <!--<button class="user-timeline-big-btn"><img src="assets/images/profile-btn-icon-2.png" alt=""><span>Content</span></button>
             <button class="user-timeline-big-btn"><img src="assets/images/profile-btn-icon-3.png" alt=""><span>assets/images</span></button>-->
             <div class="user-timeline-big-btn">
-              <select>
-                <option>Content</option>
-                <option>Safe content only</option>
-                <option>All including explicit</option>
+              <select [(ngModel)]="sexuality_visible" (ngModelChange)="onChange($event)">
+                <option [value]="1">All including explicit</option>
+                <option [value]="2">Safe content only</option>
               </select>
             </div>
             <div class="user-timeline-big-btn">
-              <select>
-                <option>assets/images</option>
-                <option>Large assets/images</option>
-                <option>Thumbnails only</option>
+              <select [(ngModel)]="content_visible" (ngModelChange)="onChange($event)">
+                <option [value]="1">Text/Images</option>
+                <option [value]="2">Only images</option>
+                <option [value]="3">Only text content</option>
               </select>
             </div>
           </div>
@@ -143,7 +143,9 @@
                     <p>{{opt.description}}</p>
                    <!--  <p><a href="#">lola_kemiron</a> likes your profile</p> -->
                     <div class="activity-list-img" *ngIf="opt.content">
-                      <img [src]="opt.content" alt="" *ngIf="opt.content_type =='image'">
+                        <a [href]="opt.org_content" [attr.data-lightbox]="i">
+                         <img [src]="opt.content" alt="" *ngIf="opt.content_type =='image'">
+                        </a>
                       <video [src] = "opt.content"  *ngIf="opt.content_type =='video'" controls>Your browser does not support HTML5 video.</video>
 
                     </div>
@@ -211,26 +213,26 @@
         <div class="profile-review-sec">
           <h5><img src="assets/images/star-icon.png" alt=""><span>Reviews</span></h5>
           <ul>
-            <li>
-              <div class="profile-post-img"><img src="assets/images/event-pic-6.jpg" alt="">
+            <li *ngFor="let rev of reviewList">
+              <div class="profile-post-img"><img [src]="rev.from_user.avatar" alt="">
                 <div class="event-user-active">&nbsp;</div>
               </div>
               <div class="profile-post-text">
                 <div class="prof-text-top">
-                  <h6><a href="#">lola_kemiron</a></h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                  <h6><a href="javascript:void(0)">{{rev.from_user.username}}</a></h6>
+                  <p [innerHTML]="rev.comment"></p>
                 </div>
               </div>
-              <div class="useracitivity-date">20 Mart</div>
+              <div class="useracitivity-date">{{rev.requested_add | date:'d MMM y'}}</div>
             </li>
           </ul>
         </div>
         <div class="profile-left-form-sec">
           <div class="profile-form-row">
             <div class="profile-input-outer user-timeline-textinput">
-              <input class="profile-input-text" placeholder="Have you meet? Leave a review..." type="text">
+              <input  class="profile-input-text" placeholder="Have you meet? Leave a review..." type="text">
             </div>
-            <input class="save-btn profile-input-btn" value="Post" type="text">
+            <input class="save-btn profile-input-btn" value="Post" type="button" (click)= "submitReview($event)">
           </div>
         </div>
         <div class="friends-tab-content profile-right-friends-sec">
@@ -326,7 +328,7 @@
                         <p *ngIf="opt.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> </p>
                         <p *ngIf="opt.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> </p>
                   </div>
-                  <div class="friends-icon-sec online-user-icon-sec"> <a href="/message-chat/{{opt._id}}" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
+                  <div *ngIf=" current_id != opt._id" class="friends-icon-sec online-user-icon-sec"> <a href="/message-chat/{{opt._id}}" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
                     <a href="javascript:void(0)" class="friends-cross-icon"><i class="fa fa-heart"></i></a> </div>
                 </div>
 
@@ -408,3 +410,71 @@
 
         </div>
 
+        <modal #myModal>
+          <modal-header>
+             <h1>Select Image/Video for Post</h1>
+         </modal-header>
+         <modal-content>
+          <!--  <li *ngFor="let img of fileArr;"><img class="upload-all" [src]="img.url" [alt]="img.altTag"></li> -->
+
+
+             <div class="row latest-personal-detail-outer tab-modals">
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                 <div class="latest-personal-details-tab-top">
+                   <ul class="form-tab">
+                     <li [ngClass]="{ 'pages_active': tab === 'tab1' }"><a [routerLink]="" (click)="displayTab('tab1')">Images </a></li>
+                     <li [ngClass]="{ 'pages_active': tab === 'tab2' }"><a [routerLink]="" (click)="displayTab('tab2')">Videos</a></li>
+                   </ul>
+                 </div>
+                 <div class="latest-personal-details-tab-bot">
+                   <div id="tab1" [ngStyle]="{'display': tab === 'tab1' ? 'block' : 'none'}">
+                     <div class="personal-detail-tab-row">
+                       <div class="photo-row photo-row1 profile-right-photo-vid-sec tab-photo">
+                         <h4><img src="/assets/images/photo-icon-1.png" alt=""><span>Photos</span></h4>
+                         <ul>
+                           <!-- <li *ngFor="let img of fileArr;"><img class="upload-all" [src]="img.url" (click)="content_click(img.url,'image',myModal)" [alt]="img.altTag"></li> -->
+                           <li *ngFor="let img of publicImages;">
+                               <label class="card">
+                                   <input name="tabGalleryItem" type="radio">
+                                   <div class="image">
+                                     <img alt="" class="img-fluid rounded" [src]="img.url" (click)="content_click(img.url,img.org_url,img.isNude,'image',myModal)">
+                                     <i class="fa fa-check"></i>
+                                   </div>
+                                 </label>
+                           </li>
+
+                         </ul>
+                       </div>
+                     </div>
+                   </div>
+                   <div id="tab2" [ngStyle]="{'display': tab === 'tab2' ? 'block' : 'none'}">
+                     <div class="photo-row photo-row1 profile-right-photo-vid-sec tab-video">
+                     <h4><img src="/assets/images/photo-icon-1.png" alt=""><span>Videos</span></h4>
+                     <ul>
+                       <li *ngFor="let f of publicvideos | filterBy :{access: 'public'}">
+
+                           <!-- <video [src] = "f.url" class="upload-all" (click)="content_click(f.url,'video',myModal)">Your browser does not support HTML5 video.</video> -->
+                           <label class="card">
+                               <input name="tabGalleryItem" type="radio">
+                               <div class="video">
+                                   <video [src] = "f.url" class="upload-all" (click)="content_click(f.url,'','video',myModal)"></video>
+                                 <i class="fa fa-check"></i>
+                               </div>
+                             </label>
+                       </li>
+                     </ul>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </modal-content>
+         <modal-footer>
+                 <div class="post-file" *ngIf="selectItem">
+                     <div class="profile-input-outer">
+                         <input type="text" [(ngModel)]="file_caption" class="profile-input-text" placeholder="Add a caption...">
+                           </div>
+                           <button class="btn btn-primary" (click)="filePost(myModal)" [disabled]="post_data">Send Message</button>
+                 </div>
+         </modal-footer>
+       </modal>

@@ -24,6 +24,7 @@
             ],
             "styles": [
               "./node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "./node_modules/lightbox2/dist/css/lightbox.min.css",
               "./node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
             ],
@@ -40,7 +41,8 @@
               "src/assets/js/jquery.slimscroll.js",
               "src/assets/js/function.js",
               "./node_modules/pusher-js/dist/web/pusher.min.js",
-              "src/assets/js/nude.min.js"
+              "src/assets/js/nude.min.js",
+              "./node_modules/lightbox2/dist/js/lightbox.min.js"
             ]
           },
           "configurations": {

@@ -9,33 +9,77 @@
         <div class="profile-left-top-box">
           <div class="profile-left-active">Active Now</div>
           <div class="profile-left-details-box">
-            <div class="profile-left-img"><img [src]="avatar" alt=""></div>
+            <div class="profile-left-img">
+              <img [src]="avatar" alt="">
+            </div>
             <div class="profile-top-text">
-              <h5><a href="javascript:void(0)">{{name}}</a></h5>
-              <p><i class="fa fa-map-marker"></i>{{address}}</p>
-              <p *ngIf="gender=='M'"><i class="fa fa-mars"></i>Male,{{age }}</p>
-              <p *ngIf="gender=='O'"><i class="fa fa-mars"></i>CD/TV/TS,{{age }}</p>
-              <p *ngIf="gender=='F'"><i class="fa fa-venus"></i>Female,{{age}}</p>
-              <p *ngIf="gender=='C'"><i class="fa fa-venus-mars" aria-hidden="true"></i>Male,Female,{{age}},{{age_female}}</p>
-              <p><a href="javascript:void(0)">Reviews 0</a> <strong>|</strong>
-                <a href="javascript:void(0)" *ngIf="email_verified"><span>Email Verified</span></a>
-                <a href="javascript:void(0)" (click)="verifyEmail()" *ngIf="!email_verified"><span style="color:#872345 !important;">Email
-                    Unverified</span></a>
-                <img *ngIf="isLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              <h5>
+                <a href="javascript:void(0)">{{name}}</a>
+              </h5>
+              <p>
+                <i class="fa fa-map-marker"></i>{{address}}</p>
+              <p *ngIf="gender=='M'">
+                <i class="fa fa-mars"></i>Male,{{age }}</p>
+              <p *ngIf="gender=='O'">
+                <i class="fa fa-mars"></i>CD/TV/TS,{{age }}</p>
+              <p *ngIf="gender=='F'">
+                <i class="fa fa-venus"></i>Female,{{age}}</p>
+              <p *ngIf="gender=='C'">
+                <i class="fa fa-venus-mars" aria-hidden="true"></i>Male,Female,{{age}},{{age_female}}</p>
+              <p>
+                <a href="javascript:void(0)">Reviews 0</a>
+                <strong>|</strong>
+                <a href="javascript:void(0)" *ngIf="email_verified">
+                  <span>Email Verified</span>
+                </a>
+                <a href="javascript:void(0)" (click)="verifyEmail()" *ngIf="!email_verified">
+                  <span style="color:#872345 !important;">Email Unverified
+                  </span>
+                </a>
+                <img *ngIf="isLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                />
               </p>
-              <p><em>Seeking {{this.seeking_for}}</em></p>
-              <p><a href="javascript:void(0)">{{interested_in}}</a></p>
+              <p>
+                <em>Seeking {{this.seeking_for}}</em>
+              </p>
+              <p>
+                <a href="javascript:void(0)">{{interested_in}}</a>
+              </p>
             </div>
           </div>
           <div class="profile-left-photouploadsec">
-            <div class="profile-photoupload"> <a href="/my-photo-upload"><strong><img src="assets/images/photo-pluse-icon.png"
-                    alt=""></strong><span>Add Photo</span></a> </div>
-            <div class="profile-photoupload"> <a href="/my-video-upload"><strong><img src="assets/images/photo-pluse-icon.png"
-                      alt=""></strong><span>Add Video</span></a> </div>
-            <div class="profile-edit-box"> <a href="/latest-personal-details"> <strong><i class="fa fa-pencil-square-o"
-                    aria-hidden="true"></i></strong> <span>Edit</span> </a> </div>
-            <div class="profile-edit-box profile-more-btn"> <a href="javascript:void(0)"> <strong><i class="fa fa-toggle-down"></i></strong>
-                <span>More</span> </a> </div>
+            <div class="profile-photoupload">
+              <a href="/my-photo-upload">
+                <strong>
+                  <img src="assets/images/photo-pluse-icon.png" alt="">
+                </strong>
+                <span>Add Photo</span>
+              </a>
+            </div>
+            <div class="profile-photoupload">
+              <a href="/my-video-upload">
+                <strong>
+                  <img src="assets/images/photo-pluse-icon.png" alt="">
+                </strong>
+                <span>Add Video</span>
+              </a>
+            </div>
+            <div class="profile-edit-box">
+              <a href="/latest-personal-details">
+                <strong>
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </strong>
+                <span>Edit</span>
+              </a>
+            </div>
+            <div class="profile-edit-box profile-more-btn">
+              <a href="javascript:void(0)">
+                <strong>
+                  <i class="fa fa-toggle-down"></i>
+                </strong>
+                <span>More</span>
+              </a>
+            </div>
             <div class="profile-more-box">
               <h5>Personal Details</h5>
               <!-- <ul class="profile-more-box-list-33 profile-more-box-list-50"> -->
@@ -87,7 +131,7 @@
                 <li>Travel</li>
                 <li>{{travel_arrangements}}</li>
                 <li *ngIf="gender=='C'">{{travel_arrangements}}</li>
-<!--                 <li>Paid Services</li>
+                <!--                 <li>Paid Services</li>
                 <li *ngIf="purpose=='HAVEFUN'">No </li>
                 <li *ngIf="purpose!='HAVEFUN'">Yes </li>
 
@@ -102,14 +146,24 @@
         <div class="profile-left-text-box">
           <h4>{{headline}}</h4>
           <p [innerHTML]="description"></p>
-          <p><a href="javascript:void(0)"><i class="fa fa-heart-o"></i><span>{{likes}} Likes</span></a></p>
+          <p>
+            <a href="javascript:void(0)">
+              <i class="fa fa-heart-o"></i>
+              <span>{{likes}} Likes</span>
+            </a>
+          </p>
         </div>
         <div class="profile-left-form-sec">
           <div class="profile-form-row">
             <div class="profile-input-outer">
               <input type="text" [(ngModel)]="post_description" class="profile-input-text" placeholder="Whats in your mind...">
-              <a href="javascript:void(0)" (click)="myModal.open()"><img src="assets/images/sml-plus-icon.png" alt=""></a> <a href="#"><img src="assets/images/smily-icon.png"
-                  alt=""></a> </div>
+              <a href="javascript:void(0)" (click)="myModal.open()">
+                <img src="assets/images/sml-plus-icon.png" alt="">
+              </a>
+              <a href="#">
+                <img src="assets/images/smily-icon.png" alt="">
+              </a>
+            </div>
             <input type="button" class="save-btn profile-input-btn" value="Post" (click)="post()" [disabled]="post_data">
           </div>
           <div class="profile-form-row">
@@ -134,280 +188,461 @@
                 <option [value]="3">Only text content</option>
               </select>
             </div>
-            <button class="profile-btn profile-setting-btn" (click)="filter_post()"><img src="assets/images/setting-icon.png" alt=""></button>
-            <img *ngIf="isLoadingForPost" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <button class="profile-btn profile-setting-btn" (click)="filter_post()">
+              <img src="assets/images/setting-icon.png" alt="">
+            </button>
+            <img *ngIf="isLoadingForPost" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+            />
           </div>
         </div>
         <div class="profile-post-sec">
           <div class="profile-post-row post-comment">
             <ul>
               <li *ngFor="let opt of post_result | slice: -limit | orderBy: order :reverse;let i = index">
-                <div class="profile-post-img"><a href="{{getUrl(opt.user._id)}}"><img [src]="opt.user.avatar" alt=""></a></div>
+                <div class="profile-post-img">
+                  <a href="{{getUrl(opt.user._id)}}">
+                    <img [src]="opt.user.avatar" alt="">
+                  </a>
+                </div>
                 <div class="profile-post-text">
                   <div class="prof-text-top">
-                    <h6><a href="{{getUrl(opt.user._id)}}">{{opt.user.username}}</a></h6>
+                    <h6>
+                      <a href="{{getUrl(opt.user._id)}}">{{opt.user.username}}</a>
+                    </h6>
                     <p>{{opt.description}}</p>
-                   <!--  <p><a href="#">lola_kemiron</a> likes your profile</p> -->
+                    <!--  <p><a href="#">lola_kemiron</a> likes your profile</p> -->
                     <div class="activity-list-img" *ngIf="opt.content">
+                      <a [href]="opt.org_content" [attr.data-lightbox]="i">
+                        <img [src]="opt.content" alt="" *ngIf="opt.content_type =='image'">
+                      </a>
 
-                      <img [src]="opt.content" alt="" *ngIf="opt.content_type =='image'" id="image1_{{opt.org_content}}" (click)="myModal2.open();makeClick(opt.org_content);">
-
-                      <video [src] = "opt.content"  *ngIf="opt.content_type =='video'" controls>Your browser does not support HTML5 video.</video>
+                      <video [src]="opt.content" *ngIf="opt.content_type =='video'" controls>Your browser does not support HTML5 video.</video>
 
                     </div>
                   </div>
                   <div *ngIf="opt.user._id == session_id" class="prof-text-bot">
-                      <a href="javascript:void(0)" class="prof-like {{opt.like_class}}"> <span>{{opt.like_count}}
-                        likes</span></a> <a href="javascript:void(0)" class="prof-comment" ><i class="fa fa-keyboard-o" aria-hidden="true"></i>
-                      <span (click)="showcom(opt.comments.length,i)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
-                  <div *ngIf="opt.user._id != session_id" class="prof-text-bot"> <a href="javascript:void(0)" class="prof-like {{opt.like_class}}" (click)="like_post(opt._id, opt.index, opt.like_class)"> <span>{{opt.like_count}}
-                        likes</span></a> <a href="javascript:void(0)" class="prof-comment" ><i class="fa fa-keyboard-o" aria-hidden="true"></i>
-                      <span (click)="showcom(opt.comments.length,i)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span></a> <span class="prof-date">{{opt.add_time | timeAgo}}</span> </div>
+                    <a href="javascript:void(0)" class="prof-like {{opt.like_class}}">
+                      <span>{{opt.like_count}} likes
+                      </span>
+                    </a>
+                    <a href="javascript:void(0)" class="prof-comment">
+                      <i class="fa fa-keyboard-o" aria-hidden="true"></i>
+                      <span (click)="showcom(opt.comments.length,i)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span>
+                    </a>
+                    <span class="prof-date">{{opt.add_time | timeAgo}}</span>
+                  </div>
+                  <div *ngIf="opt.user._id != session_id" class="prof-text-bot">
+                    <a href="javascript:void(0)" class="prof-like {{opt.like_class}}" (click)="like_post(opt._id, opt.index, opt.like_class)">
+                      <span>{{opt.like_count}} likes
+                      </span>
+                    </a>
+                    <a href="javascript:void(0)" class="prof-comment">
+                      <i class="fa fa-keyboard-o" aria-hidden="true"></i>
+                      <span (click)="showcom(opt.comments.length,i)">{{opt.comments.length !=0 ? opt.comments.length:'' }} Comment</span>
+                    </a>
+                    <span class="prof-date">{{opt.add_time | timeAgo}}</span>
+                  </div>
                 </div>
-                <ul *ngIf="showComment == i" >
+                <ul *ngIf="showComment == i">
                   <li *ngFor="let comment of opt.comments">
-                    <div class="profile-post-img"><img [src]="comment.comments_by.avatar" alt=""></div>
+                    <div class="profile-post-img">
+                      <img [src]="comment.comments_by.avatar" alt="">
+                    </div>
                     <div class="profile-post-text">
                       <div class="prof-text-top">
-                        <h6><a href="javascript:void(0)">{{comment.comments_by.username}}</a></h6>
+                        <h6>
+                          <a href="javascript:void(0)">{{comment.comments_by.username}}</a>
+                        </h6>
                         <p>{{comment.comment_text}} </p>
                       </div>
-                      <div class="prof-text-bot"><span class="prof-date">{{comment.add_time | timeAgo}}</span></div>
+                      <div class="prof-text-bot">
+                        <span class="prof-date">{{comment.add_time | timeAgo}}</span>
+                      </div>
                     </div>
                   </li>
                 </ul>
                 <div class="profile-comment-box">
-                  <div class="profile-comment-img"><img [src]="this.avatar" alt=""></div>
+                  <div class="profile-comment-img">
+                    <img [src]="this.avatar" alt="">
+                  </div>
                   <div class="profile-input-outer">
-                    <input class="profile-input-text"  placeholder="Whats in your mind..." type="text" (keydown)="onKey($event,opt._id)">
-                    <!-- <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> --> <a href="#"><img src="assets/images/smily-icon.png"
-                        alt=""></a> </div>
+                    <input class="profile-input-text" placeholder="Whats in your mind..." type="text" (keydown)="onKey($event,opt._id)">
+                    <!-- <a href="#"><img src="assets/images/sml-plus-icon.png" alt=""></a> -->
+                    <a href="#">
+                      <img src="assets/images/smily-icon.png" alt="">
+                    </a>
+                  </div>
                 </div>
               </li>
             </ul>
 
           </div>
-          <p><a href="javascript:void(0)" class="form-submit-btn loadmore-btn" id="loadMore-profile" (click)="loadmore()">Load More</a></p>
+          <p>
+            <a href="javascript:void(0)" class="form-submit-btn loadmore-btn" id="loadMore-profile" (click)="loadmore()">Load More</a>
+          </p>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="interested-sec">
-          <h5><img src="assets/images/star-icon.png" alt=""><span>May be you interested</span></h5>
+          <h5>
+            <img src="assets/images/star-icon.png" alt="">
+            <span>May be you interested</span>
+          </h5>
           <div class="interested-gallery-outer">
             <div class="owl-carousel">
-              <div><img src="assets/images/interest-img-1.jpg" alt="">
-                <p><a href="#">Supersw01</a></p>
+              <div>
+                <img src="assets/images/interest-img-1.jpg" alt="">
+                <p>
+                  <a href="#">Supersw01</a>
+                </p>
               </div>
-              <div><img src="assets/images/bot-profile-image-3.jpg" alt="">
-                <p><a href="#">Supersw01</a></p>
+              <div>
+                <img src="assets/images/bot-profile-image-3.jpg" alt="">
+                <p>
+                  <a href="#">Supersw01</a>
+                </p>
               </div>
-              <div><img src="assets/images/interest-img-1.jpg" alt="">
-                <p><a href="#">Supersw01</a></p>
+              <div>
+                <img src="assets/images/interest-img-1.jpg" alt="">
+                <p>
+                  <a href="#">Supersw01</a>
+                </p>
               </div>
-              <div><img src="assets/images/interest-img-1.jpg" alt="">
-                <p><a href="#">Supersw01</a></p>
+              <div>
+                <img src="assets/images/interest-img-1.jpg" alt="">
+                <p>
+                  <a href="#">Supersw01</a>
+                </p>
               </div>
-              <div><img src="assets/images/bot-profile-image-3.jpg" alt="">
-                <p><a href="#">Supersw01</a></p>
+              <div>
+                <img src="assets/images/bot-profile-image-3.jpg" alt="">
+                <p>
+                  <a href="#">Supersw01</a>
+                </p>
               </div>
-              <div><img src="assets/images/interest-img-1.jpg" alt="">
-                <p><a href="#">Supersw01</a></p>
+              <div>
+                <img src="assets/images/interest-img-1.jpg" alt="">
+                <p>
+                  <a href="#">Supersw01</a>
+                </p>
               </div>
             </div>
           </div>
           <div class="interested-icon-sec">
             <ul>
-              <li class="like-popup"><a href="#" class="interested-iocn-1"></a>
-                <div class="prof-pop-icon-sec"> <a href="#" class="profile-pop-icon-1"></a> <a href="#" class="profile-pop-icon-2"></a>
+              <li class="like-popup">
+                <a href="#" class="interested-iocn-1"></a>
+                <div class="prof-pop-icon-sec">
+                  <a href="#" class="profile-pop-icon-1"></a>
+                  <a href="#" class="profile-pop-icon-2"></a>
                 </div>
               </li>
-              <li><a href="#" class="interested-iocn-2"></a></li>
-              <li><a href="#" class="interested-iocn-3"></a></li>
+              <li>
+                <a href="#" class="interested-iocn-2"></a>
+              </li>
+              <li>
+                <a href="#" class="interested-iocn-3"></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="photo-row photo-row1 profile-right-photo-vid-sec">
           <!--<div class="downarrow-mobile downarrow-mobile1"><a href="javascript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a></div>-->
-          <h4><img src="assets/images/photo-icon-1.png" alt=""><span>Photos &amp; Videos</span></h4>
+          <h4>
+            <img src="assets/images/photo-icon-1.png" alt="">
+            <span>Photos &amp; Videos</span>
+          </h4>
           <ul>
-            <li *ngFor="let img of publicImages;"><img class="upload-all" [src]="img.url" [alt]="img.altTag"></li>
-            <li *ngFor="let f of publicvideos | filterBy :{access: 'public'}"><video class="upload-all" [src] = "f.url"  controls>Your browser does not support HTML5 video.</video></li>
+            <li *ngFor="let img of publicImages;">
+              <img class="upload-all" [src]="img.url" [alt]="img.altTag">
+            </li>
+            <li *ngFor="let f of publicvideos | filterBy :{access: 'public'}">
+              <video class="upload-all" [src]="f.url" controls>Your browser does not support HTML5 video.</video>
+            </li>
           </ul>
           <div class="addphoto-icon-sec">
             <!--<input class="uplod-btn" type="file">-->
-           <!--  <a href="photo-video.html"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add
+            <!--  <a href="photo-video.html"><strong><img src="assets/images/photo-pluse-icon.png" alt=""></strong><span>Add
                 Photo or Video</span></a> </div> -->
-        </div>
-        <div class="friends-tab-content profile-right-friends-sec">
-          <h5><i class="fa fa-handshake-o"></i> <span>Friends</span></h5>
-          <ul>
-            <li *ngFor="let opt of friend_list |slice:0:show let i=index">
-              <div class="row" *ngIf="opt.from_user.username && opt.from_user._id != session_id">
-                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12" >
+          </div>
+          <div class="friends-tab-content profile-right-friends-sec">
+            <h5>
+              <i class="fa fa-handshake-o"></i>
+              <span>Friends</span>
+            </h5>
+            <ul>
+              <li *ngFor="let opt of friend_list |slice:0:show let i=index">
+                <div class="row" *ngIf="opt.from_user.username && opt.from_user._id != session_id">
+                  <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
                     <a href="/user-timeline/{{opt.from_user._id}}">
-                  <div class="friends-sml-img"><img [src]="opt.from_user.avatar" alt="">
-                    <div class="event-user-active">&nbsp;</div>
-                  </div>
-                  <div class="friends-sml-text">
-                    <h6>{{opt.from_user.username}}</h6>
-                    <p *ngIf="opt.from_user.gender=='C'"> <span><i class="fa fa-mars"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> <span><i class="fa fa-venus"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality_female}}</span> </p>
-                      <p *ngIf="opt.from_user.gender=='M'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span></p>
-                      <p *ngIf="opt.from_user.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> </p>
-                      <p *ngIf="opt.from_user.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span> </p>
-                  </div>
-                  </a>
-                </div>
-                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
-                  <div class="friends-icon-sec"> <a href="javascript:void(0)" (click)="friend_remove(opt.from_user._id,opt.requested_id)" class="friends-cross-icon"><i class="fa fa-close"></i></a> <a href="/message-chat/{{opt.from_user._id}}" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a> </div>
-                </div>
-              </div>
-              <div class="row" *ngIf="opt.to_user.username && opt.to_user._id != session_id">
-                  <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12" >
-                      <a href="/user-timeline/{{opt.to_user._id}}">
-                    <div class="friends-sml-img"><img [src]="opt.to_user.avatar" alt="">
-                      <div class="event-user-active">&nbsp;</div>
-                    </div>
-                    <div class="friends-sml-text">
-                      <h6>{{opt.to_user.username}}</h6>
-                      <p *ngIf="opt.to_user.gender=='C'"> <span><i class="fa fa-mars"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span> <span><i class="fa fa-venus"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality_female}}</span> </p>
-                        <p *ngIf="opt.to_user.gender=='M'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span></p>
-                        <p *ngIf="opt.to_user.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span> </p>
-                        <p *ngIf="opt.to_user.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span> </p>
-                    </div>
+                      <div class="friends-sml-img">
+                        <img [src]="opt.from_user.avatar" alt="">
+                        <div class="event-user-active">&nbsp;</div>
+                      </div>
+                      <div class="friends-sml-text">
+                        <h6>{{opt.from_user.username}}</h6>
+                        <p *ngIf="opt.from_user.gender=='C'">
+                          <span>
+                            <i class="fa fa-mars"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span>
+                          <span>
+                            <i class="fa fa-venus"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality_female}}</span>
+                        </p>
+                        <p *ngIf="opt.from_user.gender=='M'">
+                          <span>
+                            <i class="fa fa-mars"></i>{{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span>
+                        </p>
+                        <p *ngIf="opt.from_user.gender=='F'">
+                          <span>
+                            <i class="fa fa-venus"></i> {{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span>
+                        </p>
+                        <p *ngIf="opt.from_user.gender=='O'">
+                          <span>
+                            <i class="fa fa-mars"></i>{{this.getAge(opt.from_user.mm +"/"+opt.from_user.dd +"/"+opt.from_user.yyyy )}} {{opt.from_user.sexuality}}</span>
+                        </p>
+                      </div>
                     </a>
                   </div>
                   <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
-                    <div class="friends-icon-sec"> <a href="javascript:void(0)" (click)="friend_remove(opt.to_user._id,opt.requested_id)" class="friends-cross-icon"><i class="fa fa-close"></i></a> <a href="/message-chat/{{opt.to_user._id}}"  class="friends-envelop-icon" ><i class="fa fa-envelope-o"></i></a> </div>
+                    <div class="friends-icon-sec">
+                      <a href="javascript:void(0)" (click)="friend_remove(opt.from_user._id,opt.requested_id)" class="friends-cross-icon">
+                        <i class="fa fa-close"></i>
+                      </a>
+                      <a href="/message-chat/{{opt.from_user._id}}" class="friends-envelop-icon">
+                        <i class="fa fa-envelope-o"></i>
+                      </a>
+                    </div>
                   </div>
                 </div>
-              <div id="loadMore2" class="more-setting-outer"  *ngIf="i==5 && show == 6" (click)="show = friend_list.length">More</div>
-            </li>
-          </ul>
+                <div class="row" *ngIf="opt.to_user.username && opt.to_user._id != session_id">
+                  <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
+                    <a href="/user-timeline/{{opt.to_user._id}}">
+                      <div class="friends-sml-img">
+                        <img [src]="opt.to_user.avatar" alt="">
+                        <div class="event-user-active">&nbsp;</div>
+                      </div>
+                      <div class="friends-sml-text">
+                        <h6>{{opt.to_user.username}}</h6>
+                        <p *ngIf="opt.to_user.gender=='C'">
+                          <span>
+                            <i class="fa fa-mars"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span>
+                          <span>
+                            <i class="fa fa-venus"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality_female}}</span>
+                        </p>
+                        <p *ngIf="opt.to_user.gender=='M'">
+                          <span>
+                            <i class="fa fa-mars"></i>{{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span>
+                        </p>
+                        <p *ngIf="opt.to_user.gender=='F'">
+                          <span>
+                            <i class="fa fa-venus"></i> {{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span>
+                        </p>
+                        <p *ngIf="opt.to_user.gender=='O'">
+                          <span>
+                            <i class="fa fa-mars"></i>{{this.getAge(opt.to_user.mm +"/"+opt.to_user.dd +"/"+opt.to_user.yyyy )}} {{opt.to_user.sexuality}}</span>
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12">
+                    <div class="friends-icon-sec">
+                      <a href="javascript:void(0)" (click)="friend_remove(opt.to_user._id,opt.requested_id)" class="friends-cross-icon">
+                        <i class="fa fa-close"></i>
+                      </a>
+                      <a href="/message-chat/{{opt.to_user._id}}" class="friends-envelop-icon">
+                        <i class="fa fa-envelope-o"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div id="loadMore2" class="more-setting-outer" *ngIf="i==5 && show == 6" (click)="show = friend_list.length">More</div>
+              </li>
+            </ul>
+
+          </div>
 
         </div>
-
-      </div>
-      <div class="photo-row photo-row1 profile-right-photo-vid-sec">
-        <div class="profile-party-sec">
-          <h5><img src="assets/images/common-icon-1.png" alt=""> <span>Parties</span></h5>
-          <div class="party-form"> You have no events </div>
-          <div class="addphoto-icon-sec"> <a href="events.html"><strong><img src="assets/images/photo-pluse-icon.png"
-                  alt=""></strong><span>Add Event</span></a> </div>
+        <div class="photo-row photo-row1 profile-right-photo-vid-sec">
+          <div class="profile-party-sec">
+            <h5>
+              <img src="assets/images/common-icon-1.png" alt="">
+              <span>Parties</span>
+            </h5>
+            <div class="party-form"> You have no events </div>
+            <div class="addphoto-icon-sec">
+              <a href="events.html">
+                <strong>
+                  <img src="assets/images/photo-pluse-icon.png" alt="">
+                </strong>
+                <span>Add Event</span>
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="photo-row photo-row1 profile-right-photo-vid-sec">
-        <div class="profile-review-sec">
-          <h5><img src="assets/images/star-icon.png" alt=""><span>Upcoming Parties and Events</span></h5>
-          <ul id="myList">
-            <li>
-              <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
-              <div class="profile-post-text">
-                <div class="prof-text-top">
-                  <h6><a href="#">LoveAngle2018</a></h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore</p>
+        <div class="photo-row photo-row1 profile-right-photo-vid-sec">
+          <div class="profile-review-sec">
+            <h5>
+              <img src="assets/images/star-icon.png" alt="">
+              <span>Upcoming Parties and Events</span>
+            </h5>
+            <ul id="myList">
+              <li>
+                <div class="profile-post-img">
+                  <img src="assets/images/photo-sliding-img.jpg" alt="">
                 </div>
-              </div>
-            </li>
-            <li>
-              <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
-              <div class="profile-post-text">
-                <div class="prof-text-top">
-                  <h6><a href="#">LoveAngle2018</a></h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore</p>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6>
+                      <a href="#">LoveAngle2018</a>
+                    </h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                      et dolore</p>
+                  </div>
                 </div>
-              </div>
-            </li>
-            <li>
-              <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
-              <div class="profile-post-text">
-                <div class="prof-text-top">
-                  <h6><a href="#">LoveAngle2018</a></h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore</p>
+              </li>
+              <li>
+                <div class="profile-post-img">
+                  <img src="assets/images/photo-sliding-img.jpg" alt="">
                 </div>
-              </div>
-            </li>
-            <li>
-              <div class="profile-post-img"><img src="assets/images/photo-sliding-img.jpg" alt=""></div>
-              <div class="profile-post-text">
-                <div class="prof-text-top">
-                  <h6><a href="#">LoveAngle2018</a></h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore</p>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6>
+                      <a href="#">LoveAngle2018</a>
+                    </h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                      et dolore</p>
+                  </div>
                 </div>
-              </div>
-            </li>
-          </ul>
-          <div id="loadMore" class="more-setting-outer">More</div>
+              </li>
+              <li>
+                <div class="profile-post-img">
+                  <img src="assets/images/photo-sliding-img.jpg" alt="">
+                </div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6>
+                      <a href="#">LoveAngle2018</a>
+                    </h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                      et dolore</p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="profile-post-img">
+                  <img src="assets/images/photo-sliding-img.jpg" alt="">
+                </div>
+                <div class="profile-post-text">
+                  <div class="prof-text-top">
+                    <h6>
+                      <a href="#">LoveAngle2018</a>
+                    </h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                      et dolore</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div id="loadMore" class="more-setting-outer">More</div>
+          </div>
         </div>
-      </div>
-      <div class="photo-row photo-row1 profile-right-photo-vid-sec">
-        <div class="profile-hotlist-sec">
-          <h5><i class="fa fa-heart-o"></i> <span>Hotlist</span></h5>
-          <ul>
-            <li *ngFor="let opt of hot_list">
+        <div class="photo-row photo-row1 profile-right-photo-vid-sec">
+          <div class="profile-hotlist-sec">
+            <h5>
+              <i class="fa fa-heart-o"></i>
+              <span>Hotlist</span>
+            </h5>
+            <ul>
+              <li *ngFor="let opt of hot_list">
 
-              <div class="hotlist-box">
+                <div class="hotlist-box">
                   <a href="/user-timeline/{{opt._id}}">
-                <div class="friends-sml-img"><a href="/user-timeline/{{opt._id}}"><img [src]="opt.avatar" alt=""></a>
-                  <div class="event-user-active">&nbsp;</div>
+                    <div class="friends-sml-img">
+                      <a href="/user-timeline/{{opt._id}}">
+                        <img [src]="opt.avatar" alt="">
+                      </a>
+                      <div class="event-user-active">&nbsp;</div>
+                    </div>
+                    <div class="friends-sml-text online-user-sml-text">
+                      <h6>
+                        <a href="/user-timeline/{{opt._id}}">{{opt.username}}</a>
+                      </h6>
+                      <p *ngIf="opt.gender=='C'">
+                        <span>
+                          <i class="fa fa-mars"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span>
+                        <span>
+                          <i class="fa fa-venus"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality_female}}</span>
+                      </p>
+                      <p *ngIf="opt.gender=='M'">
+                        <span>
+                          <i class="fa fa-mars"></i>{{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span>
+                      </p>
+                      <p *ngIf="opt.gender=='F'">
+                        <span>
+                          <i class="fa fa-venus"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span>
+                      </p>
+                      <p *ngIf="opt.gender=='O'">
+                        <span>
+                          <i class="fa fa-mars"></i>{{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span>
+                      </p>
+                    </div>
+                    <div class="friends-icon-sec online-user-icon-sec">
+                      <a href="/message-chat/{{opt._id}}" class="friends-envelop-icon">
+                        <i class="fa fa-envelope-o"></i>
+                      </a>
+                      <a href="javascript:void(0)" (click)="saveTohotlist($event,opt._id)" class="user-timeline-left-icon-2 active"></a>
+                    </div>
+                  </a>
                 </div>
-                <div class="friends-sml-text online-user-sml-text">
-                  <h6><a href="/user-timeline/{{opt._id}}">{{opt.username}}</a></h6>
-                  <p *ngIf="opt.gender=='C'"> <span><i class="fa fa-mars"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> <span><i class="fa fa-venus"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality_female}}</span> </p>
-                      <p *ngIf="opt.gender=='M'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span></p>
-                      <p *ngIf="opt.gender=='F'">  <span><i class="fa fa-venus"></i> {{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> </p>
-                      <p *ngIf="opt.gender=='O'"> <span><i class="fa fa-mars"></i>{{this.getAge(opt.mm +"/"+opt.dd +"/"+opt.yyyy )}} {{opt.sexuality}}</span> </p>
-                </div>
-                <div class="friends-icon-sec online-user-icon-sec"> <a href="/message-chat/{{opt._id}}" class="friends-envelop-icon"><i class="fa fa-envelope-o"></i></a>
-                  <a href="javascript:void(0)" (click)="saveTohotlist($event,opt._id)" class="user-timeline-left-icon-2 active"></a> </div>
-                </a>
-              </div>
 
-            </li>
+              </li>
 
-          </ul>
-    <!-- <div id="loadMore3" class="more-setting-outer">More</div> -->
+            </ul>
+            <!-- <div id="loadMore3" class="more-setting-outer">More</div> -->
+          </div>
         </div>
       </div>
+
     </div>
-
   </div>
-</div>
 
-<modal #myModal>
-   <modal-header>
+  <modal #myModal>
+    <modal-header>
       <h1>Select Image/Video for Post</h1>
-  </modal-header>
-  <modal-content>
-   <!--  <li *ngFor="let img of fileArr;"><img class="upload-all" [src]="img.url" [alt]="img.altTag"></li> -->
+    </modal-header>
+    <modal-content>
+      <!--  <li *ngFor="let img of fileArr;"><img class="upload-all" [src]="img.url" [alt]="img.altTag"></li> -->
 
 
       <div class="row latest-personal-detail-outer tab-modals">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="latest-personal-details-tab-top">
             <ul class="form-tab">
-              <li [ngClass]="{ 'pages_active': tab === 'tab1' }"><a [routerLink]="" (click)="displayTab('tab1')">Images </a></li>
-              <li [ngClass]="{ 'pages_active': tab === 'tab2' }"><a [routerLink]="" (click)="displayTab('tab2')">Videos</a></li>
+              <li [ngClass]="{ 'pages_active': tab === 'tab1' }">
+                <a [routerLink]="" (click)="displayTab('tab1')">Images </a>
+              </li>
+              <li [ngClass]="{ 'pages_active': tab === 'tab2' }">
+                <a [routerLink]="" (click)="displayTab('tab2')">Videos</a>
+              </li>
             </ul>
           </div>
           <div class="latest-personal-details-tab-bot">
             <div id="tab1" [ngStyle]="{'display': tab === 'tab1' ? 'block' : 'none'}">
               <div class="personal-detail-tab-row">
                 <div class="photo-row photo-row1 profile-right-photo-vid-sec tab-photo">
-                  <h4><img src="/assets/images/photo-icon-1.png" alt=""><span>Photos</span></h4>
+                  <h4>
+                    <img src="/assets/images/photo-icon-1.png" alt="">
+                    <span>Photos</span>
+                  </h4>
                   <ul>
                     <!-- <li *ngFor="let img of fileArr;"><img class="upload-all" [src]="img.url" (click)="content_click(img.url,'image',myModal)" [alt]="img.altTag"></li> -->
                     <li *ngFor="let img of fileArr;">
-                        <label class="card">
-                            <input name="tabGalleryItem" type="radio">
-                            <div class="image">
-                              <img alt="" class="img-fluid rounded" [src]="img.url" (click)="content_click(img.url,img.org_url,img.isNude,'image',myModal)">
-                              <i class="fa fa-check"></i>
-                            </div>
-                          </label>
+                      <label class="card">
+                        <input name="tabGalleryItem" type="radio">
+                        <div class="image">
+                          <img alt="" class="img-fluid rounded" [src]="img.url" (click)="content_click(img.url,img.org_url,img.isNude,'image',myModal)">
+                          <i class="fa fa-check"></i>
+                        </div>
+                      </label>
                     </li>
 
                   </ul>
@@ -416,59 +651,62 @@
             </div>
             <div id="tab2" [ngStyle]="{'display': tab === 'tab2' ? 'block' : 'none'}">
               <div class="photo-row photo-row1 profile-right-photo-vid-sec tab-video">
-              <h4><img src="/assets/images/photo-icon-1.png" alt=""><span>Videos</span></h4>
-              <ul>
-                <li *ngFor="let f of fileArrvid">
+                <h4>
+                  <img src="/assets/images/photo-icon-1.png" alt="">
+                  <span>Videos</span>
+                </h4>
+                <ul>
+                  <li *ngFor="let f of fileArrvid">
 
                     <!-- <video [src] = "f.url" class="upload-all" (click)="content_click(f.url,'video',myModal)">Your browser does not support HTML5 video.</video> -->
                     <label class="card">
-                        <input name="tabGalleryItem" type="radio">
-                        <div class="video">
-                            <video [src] = "f.url" class="upload-all" (click)="content_click(f.url,'','video',myModal)"></video>
-                          <i class="fa fa-check"></i>
-                        </div>
-                      </label>
-                </li>
-              </ul>
+                      <input name="tabGalleryItem" type="radio">
+                      <div class="video">
+                        <video [src]="f.url" class="upload-all" (click)="content_click(f.url,'','video',myModal)"></video>
+                        <i class="fa fa-check"></i>
+                      </div>
+                    </label>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </modal-content>
-  <modal-footer>
-          <div class="post-file" *ngIf="selectItem">
-              <div class="profile-input-outer">
-                  <input type="text" [(ngModel)]="file_caption" class="profile-input-text" placeholder="Add a caption...">
-                    </div>
-                    <button class="btn btn-primary" (click)="filePost(myModal)" [disabled]="post_data">Post</button>
+    </modal-content>
+    <modal-footer>
+      <div class="post-file" *ngIf="selectItem">
+        <div class="profile-input-outer">
+          <input type="text" [(ngModel)]="file_caption" class="profile-input-text" placeholder="Add a caption...">
+        </div>
+        <button class="btn btn-primary" (click)="filePost(myModal)" [disabled]="post_data">Post</button>
+      </div>
+    </modal-footer>
+  </modal>
+
+  <modal #myModal2>
+    <modal-header>
+      <h1>Show Image</h1>
+    </modal-header>
+    <modal-content>
+      <!--  <li *ngFor="let img of fileArr;"><img class="upload-all" [src]="img.url" [alt]="img.altTag"></li> -->
+
+
+      <div class="row latest-personal-detail-outer tab-modals">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+          <div class="latest-personal-details-tab-bot">
+            <div class="photo-row photo-row1 profile-right-photo-vid-sec tab-video">
+
+
+
+              <img [src]="this.org_url" alt="">
+
+            </div>
+
           </div>
-  </modal-footer>
-</modal>
+        </div>
+      </div>
+    </modal-content>
 
-<modal #myModal2>
-  <modal-header>
-     <h1>Show Image</h1>
- </modal-header>
- <modal-content>
-  <!--  <li *ngFor="let img of fileArr;"><img class="upload-all" [src]="img.url" [alt]="img.altTag"></li> -->
-
-
-     <div class="row latest-personal-detail-outer tab-modals">
-       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-         <div class="latest-personal-details-tab-bot">
-             <div class="photo-row photo-row1 profile-right-photo-vid-sec tab-video">
-
-
-
-                 <img [src]="this.org_url" alt="">
-
-           </div>
-
-       </div>
-     </div>
-   </div>
- </modal-content>
-
-</modal>
+  </modal>

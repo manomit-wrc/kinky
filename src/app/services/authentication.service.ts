@@ -331,8 +331,9 @@ export class AuthenticationService {
     noti():Observable<any>{
       return this.http.post<any>(`${this.apiUri}/noti`, {});
     }
-    submit_message(id:string,message:string):Observable<any>{
-      return this.http.post<any>(`${this.apiUri}/submit_message`, {id,message});
+    submit_message(id:string,message:string,content:string,org_content:string,content_type:string):Observable<any>{
+
+      return this.http.post<any>(`${this.apiUri}/submit_message`, {id,message,content,org_content,content_type});
     }
     message_list_by_user(id:string):Observable<any>{
       return this.http.post<any>(`${this.apiUri}/message_list_by_user`, {id});
@@ -346,8 +347,19 @@ export class AuthenticationService {
     post_details_by_url(id:string):Observable<any> {
       return this.http.post<any>(`${this.apiUri}/post_details_by_url`, {id});
     }
+    review_post(review:string,to_id:string):Observable<any> {
+
+      return this.http.post<any>(`${this.apiUri}/review_post`, {review,to_id});
+    }
+    review_list(to_id:string):Observable<any> {
+
+      return this.http.post<any>(`${this.apiUri}/review_list`, {to_id});
+    }
     post_list_by_filter(post_visible:string,sexuality_visible:string,content_visible:string):Observable<any> {
       return this.http.post<any>(`${this.apiUri}/post_list_by_filter`, {post_visible,sexuality_visible,content_visible});
+    }
+    user_post_list_by_filter(id:string,sexuality_visible:string,content_visible:string):Observable<any> {
+      return this.http.post<any>(`${this.apiUri}/user_post_list_by_filter`, {id,sexuality_visible,content_visible});
     }
 
 

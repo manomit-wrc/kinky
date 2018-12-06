@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Renderer } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { AppState } from '../../reducers';
 import { countUser, emailVerified } from '../../auth/auth.selectors';
@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private route: Router,
     private auth: AuthenticationService,
+    private renderer: Renderer,
     private avt: UserService,
     private store: Store<AppState>,
     private toastr: ToastrService,
@@ -72,6 +73,20 @@ export class HeaderComponent implements OnInit {
 
 
   }
+
+  onAnchorClick(event) {
+    var target = event.currentTarget;
+    if(target.parentElement.className.indexOf("photo-edit-icon-active") === -1) {
+      this.renderer.setElementClass(target.parentElement, "photo-edit-icon-active", true);
+      target.parentElement.nextSibling.style.display = "block";
+    }
+    else {
+      target.parentElement.classList.remove("photo-edit-icon-active");
+      target.parentElement.nextSibling.style.display = "none";
+    }
+
+  }
+
   verifyEmail(){
     this.isLoading = true;
     this.auth.verifyEmail()

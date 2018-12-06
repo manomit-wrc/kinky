@@ -7,14 +7,14 @@
           <!--<div class="msg-top-box">
             <div class="msg-top-number">31</div>
             <a href="#"><i class="fa fa-envelope-o msg-top-envp"></i> Inbox</a> </div>-->
-          <div class="msg-action-drop">
+       <!--    <div class="msg-action-drop">
             <select name="color_scheme" id="color_scheme">
               <option>Action</option>
               <option value="select-all-img-msg">Select All</option>
               <option value="read">Mark As Read</option>
               <option value="delete">Delete</option>
             </select>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -29,6 +29,13 @@
               <div class="msg-text-outer">
                 <div class="msg-text-row" >
                   <p>{{msg.message_text}}</p>
+                  <div class="activity-list-img" *ngIf="msg.content">
+
+                      <img [src]="msg.content" alt="" *ngIf="msg.content_type =='image'">
+
+                      <video [src] = "msg.content"  *ngIf="msg.content_type =='video'" controls>Your browser does not support HTML5 video.</video>
+
+                    </div>
                 </div>
 
               </div>
